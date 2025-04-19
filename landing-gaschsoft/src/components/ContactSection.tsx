@@ -22,7 +22,7 @@ function ContactSection() {
           Estamos listos para ayudarte a dar el siguiente paso.
         </p>
   
-        <a href="https://wa.me/50251232573" target="_blank" rel="noopener noreferrer"
+        <a href="https://wa.me/50251232754" target="_blank" rel="noopener noreferrer"
           style={{
             backgroundColor: '#25D366',
             color: 'white',
