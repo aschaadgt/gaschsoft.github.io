@@ -1,4 +1,9 @@
 /* ========== RESPONSIVE DESIGN ========== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Luego puedes tener tus medias queries, como las tienes */
 
 /* Tablets (pantallas medianas) */
 @media (max-width: 1024px) {
