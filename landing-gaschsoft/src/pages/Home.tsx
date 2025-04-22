@@ -4,14 +4,16 @@ import GallerySection from '../components/GallerySection';
 import ServicesSection from '../components/ServicesSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
+import ContactFormSection from '../components/ContactFormSection';
 
 function Home() {
   return (
     <>
       <Header />
+      <GallerySection /> 
       <HeroSection />
-      <GallerySection /> {/* Aquí está perfecto ya */}
       <ServicesSection />
+      <ContactFormSection />
       <ContactSection />
       <Footer />
     </>

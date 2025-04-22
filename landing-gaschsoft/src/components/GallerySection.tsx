@@ -1,6 +1,6 @@
 function GallerySection() {
   return (
-    <section className="bg-white py-16 flex justify-center">
+    <section className="bg-white py-6 flex justify-center">
       <div className="w-full px-4 flex flex-wrap gap-6 max-w-[1920px]">
         
         {/* Primer bloque */}

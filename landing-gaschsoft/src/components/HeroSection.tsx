@@ -19,11 +19,6 @@ function HeroSection() {
       </div>
 
       <div className="mt-16 hidden md:block">
-        <img
-          src="/hero-office.jpg"
-          alt="Oficina moderna"
-          className="rounded-xl mx-auto max-w-4xl shadow-lg"
-        />
       </div>
     </section>
   );

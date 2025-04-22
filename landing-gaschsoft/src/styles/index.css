@@ -3,10 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Luego puedes tener tus medias queries, como las tienes */
+  /* =================================
+   Reset para evitar scroll horizontal
+   ================================= */
+   html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
 
-/* Tablets (pantallas medianas) */
-@media (max-width: 1024px) {
+  /* Tablets (pantallas medianas) */
+  @media (max-width: 1024px) {
     header nav {
       gap: 1.5rem;
     }
