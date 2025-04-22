@@ -25,16 +25,12 @@ Set-Location $deployPath
 Write-Host "[Paso 2] Eliminando archivos viejos en la raíz..." -ForegroundColor Cyan
 Get-ChildItem -Exclude '.git', 'CNAME', 'landing-gaschsoft', 'Script Arbol.txt', 'deploy-gaschsoft.ps1', 'deploy-gaschsoft.bat' | Remove-Item -Recurse -Force
 
-# Paso 3: Copiar nuevo contenido desde dist/
+# Paso 3: Copiar nuevo contenido
 Write-Host "[Paso 3] Copiando archivos nuevos desde dist/..." -ForegroundColor Cyan
 Copy-Item -Path "$landingPath\dist\*" -Destination "$deployPath" -Recurse -Force
 
-# Paso 4: Eliminar imágenes innecesarias de la raíz (por si algo se filtró accidentalmente)
-Write-Host "[Paso 4] Limpiando imágenes innecesarias..." -ForegroundColor Cyan
-Get-ChildItem *.png, *.webp, *.jpg, *.jpeg -ErrorAction SilentlyContinue | Remove-Item -Force
-
-# Paso 5: Git Add, Commit, Push
-Write-Host "[Paso 5] Haciendo git add, commit y push..." -ForegroundColor Cyan
+# Paso 4: Git Add, Commit, Push
+Write-Host "[Paso 4] Haciendo git add, commit y push..." -ForegroundColor Cyan
 git add -A
 git commit -m "Deploy: Actualización automática del landing Gaschsoft" --allow-empty
 git push origin main
