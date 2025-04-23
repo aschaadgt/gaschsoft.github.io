@@ -18,21 +18,28 @@ npm run build
 # Esperar
 Start-Sleep -Seconds 2
 
-# Volver a la raíz
+# Volver a la raiz
 Set-Location $deployPath
 
 # Paso 2: Borrar archivos viejos (excepto los importantes)
-Write-Host "[Paso 2] Eliminando archivos viejos en la raíz..." -ForegroundColor Cyan
+Write-Host "[Paso 2] Eliminando archivos viejos en la raiz..." -ForegroundColor Cyan
 Get-ChildItem -Exclude '.git', 'CNAME', 'landing-gaschsoft', 'Script Arbol.txt', 'deploy-gaschsoft.ps1', 'deploy-gaschsoft.bat' | Remove-Item -Recurse -Force
 
 # Paso 3: Copiar nuevo contenido
 Write-Host "[Paso 3] Copiando archivos nuevos desde dist/..." -ForegroundColor Cyan
 Copy-Item -Path "$landingPath\dist\*" -Destination "$deployPath" -Recurse -Force
 
-# Paso 4: Git Add, Commit, Push
-Write-Host "[Paso 4] Haciendo git add, commit y push..." -ForegroundColor Cyan
+# Paso 4: Git Add
+Write-Host "[Paso 4] Preparando cambios para Git..." -ForegroundColor Cyan
 git add -A
-git commit -m "Deploy: Actualización automática del landing Gaschsoft" --allow-empty
+
+# Pedir mensaje de commit al usuario
+$commitMessage = Read-Host "Escribe el detalle del commit despues de 'Deploy:' (ejemplo: 'Actualizacion de servicios')"
+
+# Hacer el commit con el mensaje ingresado
+git commit -m "Deploy: $commitMessage" --allow-empty
+
+# Hacer push
 git push origin main
 
-Write-Host "[Éxito] Deploy completo y publicado en GitHub Pages!" -ForegroundColor Green
+Write-Host "[Exito] Deploy completo y publicado en GitHub Pages!" -ForegroundColor Green
