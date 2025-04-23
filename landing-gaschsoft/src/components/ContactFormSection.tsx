@@ -10,7 +10,7 @@ function ContactFormSection() {
     const formData = new FormData(form);
 
     try {
-      await fetch('https://formspree.io/f/{tu_form_id}', {
+      await fetch('https://formspree.io/f/mldbenal', {
         method: 'POST',
         body: formData,
         headers: {
