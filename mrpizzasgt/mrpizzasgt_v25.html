@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr Pizza GT | Pizzas & Crepas para Empresas y Pedidos Nocturnos</title>
+<link id="favicon" rel="icon" type="image/png" href="MR PIZZA LOGO-Ligth.png">
+
+<!--
+  ✅ Un solo HTML para 2 URLs:
+  - Público:   /mrpizzasgt
+  - Business: /mrpizzasgt/bussines   (tal cual lo escribiste)
+  Cómo funciona:
+  - Si el archivo se sirve en /mrpizzasgt/bussines, automáticamente muestra la vista BUSINESS.
+  - Si se abre localmente, podés cambiar de vista con los botones.
+-->
+
+<style>
+  :root{
+    /* Marca (logo rojo/negro/blanco) + tonos suaves */
+    --red:#c62828;
+    --red2:#b71c1c;
+    --ink:#0b0f14;
+    --muted:#5c6773;
+
+    --bg-grad-from:#fff5f4;
+    --bg-grad-to:#ffffff;
+    --bg:#ffffff;
+
+    --surface:#ffffff;
+    --surface2: rgba(255,255,255,.85);
+    --line: rgba(11,15,20,.10);
+
+    --ring: rgba(198,40,40,.25);
+    --shadow: 0 25px 60px rgba(2, 6, 23, .10);
+    --shadow-strong: 0 30px 80px rgba(2, 6, 23, .18);
+
+    --ctrl-border: rgba(2,6,23,.20);
+    --ctrl-bg: rgba(2,6,23,.04);
+    --ctrl-bg-hover: rgba(2,6,23,.08);
+
+    --danger:#ef4444;
+    --header-bg: rgba(255,255,255,.78);
+  }
+
+  :root[data-theme="dark"]{
+    --bg-grad-from:#0b111a;
+    --bg-grad-to:#0b111a;
+    --bg:#0b111a;
+    --ink:#e5e7eb;
+    --muted:#94a3b8;
+    --surface:#0f1a2b;
+    --surface2: rgba(15,26,43,.75);
+    --line: rgba(255,255,255,.10);
+    --shadow: 0 25px 60px rgba(0,0,0,.45);
+    --shadow-strong: 0 30px 80px rgba(0,0,0,.60);
+    --ring: rgba(198,40,40,.35);
+    --header-bg: rgba(11,17,26,.78);
+    --ctrl-border: rgba(255,255,255,.25);
+    --ctrl-bg: rgba(255,255,255,.06);
+    --ctrl-bg-hover: rgba(255,255,255,.12);
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    background: linear-gradient(180deg, var(--bg-grad-from), var(--bg-grad-to));
+    color: var(--ink);
+  }
+  a{ color: inherit; }
+  .container{ max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  header{
+    padding: 16px 0;
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: saturate(180%) blur(10px);
+  }
+  .row{ display:flex; align-items:center; gap:12px; }
+  .spacer{ flex:1; }
+
+  .brand{ display:flex; align-items:center; gap:10px; font-weight: 950; letter-spacing:-.3px; }
+  .brand img{ height: 42px; width:auto; display:block; }
+  .brand .title{ font-size: 18px; line-height:1; }
+  .brand .subtitle{ font-size: 12px; color: var(--muted); font-weight: 800; margin-top: 2px; }
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    font-weight: 900;
+    border: none;
+    border-radius: 999px;
+    padding: .62rem .95rem;
+    cursor: pointer;
+    gap: 8px;
+    text-decoration:none;
+    white-space:nowrap;
+    user-select:none;
+  }
+  .btn-outline{
+    background: var(--surface2);
+    color: var(--ink);
+    border: 2px solid var(--line);
+  }
+  .btn-outline:hover{ filter: brightness(0.98); }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--red), var(--red2));
+    color:#fff;
+    box-shadow: var(--shadow);
+  }
+  .btn-primary:hover{ transform: translateY(-1px); }
+  .btn-soft{
+    background: rgba(198,40,40,.10);
+    border: 2px solid rgba(198,40,40,.16);
+    color: var(--ink);
+  }
+
+  /* Switch de vista (Público / Business) */
+  .view-switch{
+    display:inline-flex;
+    background: var(--surface2);
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    overflow:hidden;
+    box-shadow: var(--shadow);
+  }
+  .view-switch button{
+    border: none;
+    background: transparent;
+    font-weight: 950;
+    padding: .55rem .8rem;
+    cursor:pointer;
+    color: var(--muted);
+  }
+  .view-switch button.active{
+    color: var(--ink);
+    background: rgba(198,40,40,.10);
+  }
+
+  /* Theme button */
+  .icon-btn{
+    border:none; background: transparent;
+    border-radius: 999px;
+    padding: .62rem .75rem;
+    cursor:pointer;
+    border: 2px solid var(--line);
+    background: var(--surface2);
+    box-shadow: var(--shadow);
+  }
+
+  /* HERO */
+  .hero{ padding: 26px 0 10px; text-align:center; }
+  .kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: rgba(198,40,40,.10);
+    border: 1px solid rgba(198,40,40,.18);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-weight: 950;
+    color: var(--ink);
+  }
+  .hero h1{
+    font-size: clamp(28px, 4.6vw, 48px);
+    margin: 10px 0 10px;
+    letter-spacing: -0.8px;
+    line-height: 1.05;
+  }
+  .hero p{
+    margin: 0 auto;
+    max-width: 820px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  .cta-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  /* Hero media / logo card */
+  .hero-media{
+    position: relative;
+    max-width: 860px;
+    margin: 18px auto 0;
+    border-radius: 22px;
+    overflow:hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .hero-media .inner{
+    display:grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  .hero-photo{
+    min-height: 280px;
+    background:
+      radial-gradient(900px 400px at 10% 10%, rgba(198,40,40,.18), transparent 60%),
+      radial-gradient(800px 380px at 70% 35%, rgba(0,0,0,.10), transparent 55%),
+      linear-gradient(135deg, rgba(255,255,255,.8), rgba(255,255,255,.35));
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-start;
+    padding: 18px;
+  }
+  .hero-photo .note{
+    background: rgba(255,255,255,.88);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 12px 14px;
+    text-align:left;
+    max-width: 380px;
+  }
+  .hero-photo .note strong{ display:block; }
+  .hero-photo .note span{ display:block; margin-top:4px; color: var(--muted); font-weight: 700; font-size: 13px; line-height:1.45; }
+
+  :root[data-theme="dark"] .hero-photo .note{
+    background: rgba(15,26,43,.88);
+  }
+
+  .hero-card{
+    border-left: 1px solid var(--line);
+    padding: 16px;
+    display:flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content:center;
+    background: rgba(255,255,255,.65);
+  }
+  :root[data-theme="dark"] .hero-card{ background: rgba(15,26,43,.65); }
+
+  .hero-card img{ width: 190px; height:auto; display:block; margin: 0 auto; }
+  .hero-card .mini{
+    text-align:center;
+    color: var(--muted);
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .hero-card .mini strong{ color: var(--ink); }
+
+  /* STATS */
+  .stats{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    max-width: 860px;
+    margin: 16px auto 0;
+    color: var(--ink);
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .stat{
+    display:flex; gap:8px; align-items:flex-start;
+    padding: 12px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+  }
+  .tick{ color: var(--red); font-weight: 950; }
+
+  /* SECTIONS */
+  .section{ max-width: 980px; margin: 56px auto; text-align:center; }
+  .section h2{ font-size: clamp(24px, 3.6vw, 36px); margin:0 0 10px; letter-spacing:-.4px; }
+  .section p{ color: var(--muted); font-size: 18px; margin:0 0 20px; line-height:1.65; }
+
+  .cols{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    text-align:left;
+  }
+  @media(min-width: 860px){
+    .cols{ grid-template-columns: repeat(3, 1fr); }
+  }
+  .card-mini{
+    padding: 18px;
+    border-radius: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card-mini .icon{ font-size: 42px; line-height:1; }
+  .card-mini h3{ margin: 0; font-size: 18px; letter-spacing: -.2px; }
+  .card-mini .desc{ margin:0; color: var(--muted); font-weight: 650; line-height:1.6; }
+
+  /* SERVICES */
+  .services-grid{ grid-template-columns: 1fr; }
+  @media(min-width: 680px){ .services-grid{ grid-template-columns: repeat(2, 1fr); } }
+  @media(min-width: 992px){ .services-grid{ grid-template-columns: repeat(3, 1fr); } }
+
+  .svc-badge{
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(198,40,40,.10);
+    border: 1px solid rgba(198,40,40,.16);
+    font-weight: 950;
+    font-size: 12px;
+    width: fit-content;
+  }
+
+  .service-card .btn{ margin-top:auto; border-radius: 14px; padding:.75rem 1rem; }
+
+  /* REVIEWS */
+  .review{
+    position:relative;
+    padding: 18px;
+    border-radius: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+  }
+  .review p{ margin:0; color: var(--muted); line-height:1.7; font-weight: 650; }
+  .review strong{ display:block; margin-top: 10px; color: var(--ink); }
+  .quote{
+    position:absolute;
+    right: 14px; top: 14px;
+    font-size: 28px;
+    color: rgba(198,40,40,.25);
+    font-weight: 950;
+  }
+
+  /* CTA BAND */
+  .cta-band{
+    max-width: 980px;
+    margin: 56px auto 0;
+    background: linear-gradient(135deg, rgba(198,40,40,.14), rgba(0,0,0,.04));
+    border: 1px solid rgba(198,40,40,.18);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    text-align:center;
+  }
+  .cta-band h3{ margin:0 0 6px; font-size: 22px; letter-spacing:-.2px; }
+  .cta-band p{ margin:0 0 14px; color: var(--muted); line-height:1.6; }
+
+  /* FOOTER */
+  .footer{
+    background: var(--surface2);
+    border-top: 1px solid var(--line);
+    margin-top: 60px;
+  }
+  .footer-top{
+    width: 100%;
+
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 240px));
+    justify-content: center;
+    justify-items: center;
+    align-items: start;
+    gap: 70px;
+    padding: 28px 0;
+    text-align:center;
+  }
+  .footer-col h4{
+    margin:0 0 8px;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .footer-col ul{ list-style:none; margin:0; padding:0; display:grid; gap: 8px; }
+  .footer-col a{ color: var(--ink); text-decoration:none; font-weight: 850; }
+  .footer-col a:hover{ text-decoration: underline; }
+
+  
+  
+  .social{
+    width: 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 10px;
+    margin: 18px auto 18px;
+    flex-wrap: wrap;
+  }
+  .social__link{
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    overflow:hidden;
+    border: 1px solid var(--line);
+    background: var(--surface2);
+    box-shadow: 0 12px 26px rgba(2,6,23,.08);
+    display:inline-flex; align-items:center; justify-content:center;
+  }
+  .social__link img{ width: 100%; height: 100%; object-fit: cover; display:block; }
+  .social__link:hover{ transform: translateY(-1px); }
+
+  .footer-bottom{
+    border-top: 1px solid var(--line);
+    text-align:center;
+    padding: 18px 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  
+  /* Floating Buttons */
+  .fab{
+    position: fixed; right: 16px; z-index: 1200;
+    width: clamp(56px, 7.2vw, 68px);
+    height: clamp(56px, 7.2vw, 68px);
+    border-radius: 50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    background: var(--surface2);
+    box-shadow: var(--shadow-strong);
+    border: 2px solid var(--line);
+    text-decoration:none;
+    overflow:hidden;
+  }
+  .fab img{ width: 100%; height: 100%; object-fit: cover; display:block; }
+  .fab--wa{ bottom: 16px; }
+  .fab--py{ bottom: calc(16px + clamp(56px, 7.2vw, 68px) + 10px); }
+  .fab--ue{ bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 2) + 20px); }
+  .hidden{ display:none !important; }
+
+  @media(max-width: 920px){
+    .stats{ grid-template-columns: 1fr; }
+    .hero-media .inner{ grid-template-columns: 1fr; }
+    .hero-card{ border-left:none; border-top: 1px solid var(--line); }
+  }
+
+    /* Responsive header controls */
+  @media(max-width: 720px){
+    header .row{ flex-wrap: wrap; justify-content: space-between; }
+    .spacer{ display:none; }
+    .brand{ width: 100%; justify-content: flex-start; }
+    /* keep view switch compact (no fixed width) */
+    .view-switch{
+      width: auto;
+      justify-content:center;
+      flex-wrap: nowrap;
+    }
+    .view-switch button{
+      flex: 0 0 auto;
+      width: auto;
+      white-space: nowrap;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+    .spacer{ display:none; }
+    .brand{ width: 100%; justify-content: flex-start; }
+    .view-switch{ width: auto; justify-content: center; }
+    .view-switch button{ flex: 1 1 0; text-align:center; }
+    #topCta{ width: 100%; justify-content:center; }
+  }
+
+
+  /* Menú (solo Público) */
+  .menu-wrap{
+    margin: 22px auto 0;
+    max-width: 980px;
+    text-align:left;
+  }
+  .menu-toggle{
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    padding: 14px 14px;
+    border-radius: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+    cursor:pointer;
+  }
+  .menu-toggle__left{ display:flex; align-items:center; gap: 12px; }
+  .menu-toggle__icon{ font-size: 22px; }
+  .menu-toggle__meta{
+    display:block;
+    color: var(--muted);
+    font-weight: 800;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .menu-toggle__chev{
+    font-size: 18px;
+    font-weight: 950;
+    color: var(--muted);
+    transition: transform .18s ease;
+  }
+  .menu-toggle[aria-expanded="true"] .menu-toggle__chev{ transform: rotate(180deg); }
+
+  .menu-panel{
+    margin-top: 12px;
+    padding: 14px;
+    border-radius: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+  }
+  .menu-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media(min-width: 680px){
+    .menu-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media(min-width: 1020px){
+    .menu-grid{ grid-template-columns: repeat(3, 1fr); }
+  }
+  .menu-item{
+    display:flex;
+    flex-direction: column;
+    border-radius: 18px;
+    overflow:hidden;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.80);
+  }
+  :root[data-theme="dark"] .menu-item{ background: rgba(15,26,43,.75); }
+
+  .menu-img{
+    width: 100%;
+    aspect-ratio: 16/10;
+    background:
+      radial-gradient(700px 260px at 25% 35%, rgba(198,40,40,.18), transparent 60%),
+      radial-gradient(700px 260px at 80% 55%, rgba(0,0,0,.10), transparent 60%),
+      rgba(255,255,255,.55);
+    border-bottom: 1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .menu-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display:block;
+  }
+  .menu-body{ padding: 12px 12px 14px; }
+  .menu-body h3{ margin: 0 0 6px; font-size: 16px; letter-spacing: -.2px; }
+  .menu-body p{ margin: 0 0 10px; color: var(--muted); font-size: 14px; line-height: 1.55; }
+  .menu-price{
+    display:inline-flex;
+    width: fit-content;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 950;
+    font-size: 12px;
+    background: rgba(198,40,40,.10);
+    border: 1px solid rgba(198,40,40,.16);
+  }
+  .menu-cta{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content:center;
+    margin-top: 14px;
+  }
+  .menu-note{
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-weight: 750;
+    font-size: 13px;
+    text-align:center;
+  }
+
+
+  /* Carrusel Público (Flayers) */
+  .promo-carousel{
+    padding: 18px 0 0;
+  }
+  .promo-carousel .carousel{
+    position: relative;
+    max-width: 980px;
+    margin: 0 auto;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .promo-carousel .carousel__viewport{ overflow: hidden; }
+  .promo-carousel .carousel__track{
+    display:flex;
+    transform: translateX(0%);
+    transition: transform .35s ease;
+    will-change: transform;
+  }
+  .promo-carousel .carousel__slide{ min-width:100%; }
+  .promo-carousel .carousel__slide img{
+    width:100%;
+    height: min(520px, 55vw);
+    max-height: 520px;
+    object-fit: cover;
+    display:block;
+  }
+  .promo-carousel .carousel__btn{
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    width: 42px; height: 42px;
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: rgba(255,255,255,.88);
+    box-shadow: 0 14px 30px rgba(2,6,23,.12);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 26px;
+    cursor:pointer;
+    user-select:none;
+    z-index: 2;
+  }
+  :root[data-theme="dark"] .promo-carousel .carousel__btn{ background: rgba(15,26,43,.88); }
+  .promo-carousel .carousel__btn--prev{ left: 12px; }
+  .promo-carousel .carousel__btn--next{ right: 12px; }
+
+  .promo-carousel .carousel__dots{
+    position:absolute;
+    left:0; right:0;
+    bottom: 12px;
+    display:flex;
+    justify-content:center;
+    gap: 8px;
+    z-index: 2;
+  }
+  .promo-carousel .carousel__dot{
+    width: 9px; height: 9px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(0,0,0,.10);
+    cursor:pointer;
+    padding:0;
+  }
+  :root[data-theme="dark"] .promo-carousel .carousel__dot{ background: rgba(255,255,255,.14); }
+  .promo-carousel .carousel__dot.is-active{
+    background: rgba(198,40,40,.75);
+    border-color: rgba(198,40,40,.55);
+    width: 22px;
+  }
+  @media(max-width: 720px){
+    .promo-carousel .carousel__btn{ width: 38px; height: 38px; font-size: 24px; }
+    .promo-carousel .carousel__slide img{ height: min(360px, 62vw); }
+  }
+
+
+  /* Header: botones Público/Business compactos (no ancho fijo) */
+  .view-switch{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+  .view-switch button{
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  @media(max-width: 720px){
+    .view-switch{ gap: 6px; }
+    .view-switch button{
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 999px;
+    }
+  }
+
+
+  @media(max-width: 520px){
+    header .row{ gap: 8px; }
+    .view-switch{ max-width: auto; width: auto; }
+  }
+
+
+  /* Animación ligera para botones flotantes */
+  @keyframes floaty {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+  }
+  @keyframes pulseRing {
+    0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.22); }
+    70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+  }
+  .fab{
+    animation: floaty 3.2s ease-in-out infinite;
+  }
+  .fab--py{ animation-delay: .15s; }
+  .fab--ue{ animation-delay: .3s; }
+  .fab--wa{ animation-delay: 0s; }
+  /* ring suave solo en hover para no distraer */
+  .fab:hover{
+    animation: floaty 3.2s ease-in-out infinite, pulseRing 1.3s ease-out infinite;
+  }
+
+
+  /* Fix final: View switch compacto en cualquier ancho */
+  .view-switch{ width: auto !important; }
+  .view-switch button{ width: auto !important; white-space: nowrap; }
+
+
+  /* Header layout: marca a la izquierda, switch a la derecha, sin expandirse */
+  header .row{
+    justify-content: space-between;
+  }
+  .brand{
+    justify-content: flex-start !important;
+    text-align: left;
+  }
+  .view-switch{
+    margin-left: auto !important;
+    width: fit-content !important;
+    flex: 0 0 auto !important;
+    justify-content: flex-end !important;
+  }
+  .view-switch button{
+    flex: 0 0 auto !important;
+    width: auto !important;
+    white-space: nowrap;
+  }
+  @media(max-width: 720px){
+    header .row{
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    .brand{
+      flex: 1 1 auto;
+      width: auto;
+    }
+  }
+
+</style>
+</head>
+
+<body>
+<header>
+  <div class="container row">
+    <div class="brand">
+      <!-- Pon estos PNG en la misma carpeta que este HTML, o ajustá rutas. -->
+      <img id="logoHeader" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT Logo">
+      <div>
+        <div class="title">Mr Pizza GT</div>
+        <div class="subtitle" id="subtitleHeader">Pizzas & Crepas • Guatemala</div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="view-switch" aria-label="Cambiar vista">
+      <button id="btnPublic" class="active" type="button">Público</button>
+      <button id="btnBiz" type="button">Business</button>
+    </div>
+
+    <button id="themeBtn" class="icon-btn" title="Tema"><span id="themeIcon">🖥️</span></button>
+</div>
+</header>
+
+<main>
+
+  <!-- ===================== CARRUSEL PROMOCIONES (SOLO PÚBLICO) ===================== -->
+  <section class="promo-carousel hidden" id="promoCarouselSection" aria-label="Promociones Público">
+    <div class="container">
+      <div class="carousel" data-promo-carousel>
+        <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Anterior" data-prev>‹</button>
+        <div class="carousel__viewport">
+          <div class="carousel__track" data-track>
+            <div class="carousel__slide"><img src="Flayer 1.png" alt="Flayer 1"></div>
+            <div class="carousel__slide"><img src="Flayer 2.png" alt="Flayer 2"></div>
+            <div class="carousel__slide"><img src="Flayer 3.png" alt="Flayer 3"></div>
+            <div class="carousel__slide"><img src="Flayer 4.png" alt="Flayer 4"></div>
+          </div>
+        </div>
+        <button class="carousel__btn carousel__btn--next" type="button" aria-label="Siguiente" data-next>›</button>
+
+        <div class="carousel__dots" role="tablist" aria-label="Puntos">
+          <button class="carousel__dot" type="button" aria-label="Ir al 1" data-dot="0"></button>
+          <button class="carousel__dot" type="button" aria-label="Ir al 2" data-dot="1"></button>
+          <button class="carousel__dot" type="button" aria-label="Ir al 3" data-dot="2"></button>
+          <button class="carousel__dot" type="button" aria-label="Ir al 4" data-dot="3"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HERO (común) ===================== -->
+  <section class="hero">
+    <div class="container">
+      <div class="kicker">🔥 Hecho para compartir • Sin complicarte</div>
+
+      <h1 id="heroTitle">
+        Pizzas y crepas que hacen que la gente diga: “¡qué buen convivio!”
+      </h1>
+
+      <p id="heroSub">
+        Dos rutas claras: <strong>eventos empresariales</strong> (bien pagados y bien organizados) o <strong>pedidos nocturnos</strong> para resolver el antojo.
+        Aquí no te perdés: siempre sabés qué hacer.
+      </p>
+
+      <div class="cta-row" id="heroCtaRow">
+        <a id="heroCta" class="btn btn-primary" href="#" target="_blank" rel="noopener">Escribirme por WhatsApp</a>
+        <a class="btn btn-soft" href="#servicios">Ver servicios</a>
+      </div>
+
+      <div class="hero-media">
+        <div class="inner">
+          <div class="hero-photo">
+            <div class="note" id="heroNote">
+              <strong>Lo que compras es tranquilidad.</strong>
+              <span>Orden, puntualidad y atención humana. Y sí: comida rica que se acaba rápido.</span>
+            </div>
+          </div>
+          <div class="hero-card" id="heroCard">
+            <img id="logoHero" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT">
+            <div class="mini" id="heroCardText">
+              <strong>Ruta rápida:</strong><br/>
+              Empresa → cotizar evento<br/>
+              Público → pedir de noche
+            </div>
+            <a id="heroCardCta" class="btn btn-primary" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+            <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats" id="statsRow">
+        <div class="stat"><span class="tick">✓</span> <span id="s1">Cotización clara y rápida</span></div>
+        <div class="stat"><span class="tick">✓</span> <span id="s2">Presentación limpia y ordenada</span></div>
+        <div class="stat"><span class="tick">✓</span> <span id="s3">Eventos privados y públicos</span></div>
+        <div class="stat"><span class="tick">✓</span> <span id="s4">Pedidos nocturnos disponibles</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROPUESTA DE VALOR ===================== -->
+  <section class="section" id="valor">
+    <div class="container">
+      <h2 id="valueTitle">Lo que te damos (sin palabras raras)</h2>
+      <p id="valueSub">Comida rica + organización + comunicación clara. Eso es lo que hace que un evento salga “pro”.</p>
+
+      <div class="cols">
+        <div class="card-mini">
+          <div class="icon">🧠</div>
+          <h3>Te quitamos carga mental</h3>
+          <p class="desc">Confirmamos, coordinamos y llegamos listos. Vos solo disfrutás el momento.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🕒</div>
+          <h3>Puntualidad y ritmo</h3>
+          <p class="desc">Sirviendo sin caos. La gente no se queda esperando y el flujo se siente ordenado.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🤝</div>
+          <h3>Trato humano</h3>
+          <p class="desc">Mensajes claros, cero vueltas. Te decimos lo que sí y lo que no, desde el inicio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICIOS (limitados y claros) ===================== -->
+  <section class="section" id="servicios" data-section="servicios">
+    <div class="container">
+      <h2 id="svcTitle">Servicios</h2>
+      <p id="svcSub">Pocos, claros y entendibles. Elegí uno y te guiamos.</p>
+
+      <div class="cols services-grid" id="svcGrid">
+        <article class="card-mini service-card">
+          <div class="svc-badge">🏢 Empresas</div>
+          <h3>Eventos corporativos</h3>
+          <p class="desc">Convivios, aniversarios, fechas especiales (madre/padre/navidad) y actividades de equipo.</p>
+          <a class="btn btn-primary" id="svcBizCta" href="#" target="_blank" rel="noopener">Cotizar evento</a>
+        </article>
+
+        <article class="card-mini service-card">
+          <div class="svc-badge">🌙 Público</div>
+          <h3>Pedidos nocturnos</h3>
+          <p class="desc">On demand por la noche. Ideal para antojo, amigos, partido o “hoy no cocino”.</p>
+          <a class="btn btn-primary" id="svcPubCta" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        </article>
+
+        <article class="card-mini service-card">
+          <div class="svc-badge">🎪 Eventos</div>
+          <h3>Privados y públicos</h3>
+          <p class="desc">Iglesias, conciertos, cumpleaños y reuniones. Te ayudamos a estimar cantidades.</p>
+          <a class="btn btn-primary" id="svcMixCta" href="#" target="_blank" rel="noopener">Coordinar evento</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== PAQUETES (COMERCIAL, CLARO) ===================== -->
+  <section class="section" id="paquetes">
+    <div class="container">
+      <h2>Paquetes listos (sin enredos)</h2>
+      <p>Ejemplos para que tengas una idea rápida. Cuando me escribís, lo ajustamos a tu gente, horario y lugar.</p>
+
+      <div class="cols services-grid">
+        <article class="card-mini service-card">
+          <div class="svc-badge">🏢 Empresa</div>
+          <h3>Convivio Esencial</h3>
+          <p class="desc">Perfecto para una actividad corta y ordenada. Ideal cuando querés “resolver bien” y sin estrés.</p>
+          <a class="btn btn-primary" id="pkgBiz1" href="#" target="_blank" rel="noopener">Cotizar este paquete</a>
+        </article>
+
+        <article class="card-mini service-card">
+          <div class="svc-badge">🏢 Empresa</div>
+          <h3>Convivio Full</h3>
+          <p class="desc">Para aniversarios y fechas fuertes. Más variedad y mejor experiencia para el equipo.</p>
+          <a class="btn btn-primary" id="pkgBiz2" href="#" target="_blank" rel="noopener">Cotizar Full</a>
+        </article>
+
+        <article class="card-mini service-card">
+          <div class="svc-badge">🌙 Público</div>
+          <h3>Noche Resuelta</h3>
+          <p class="desc">Antojo, amigos o partido. Pedís rápido y confirmamos disponibilidad al momento.</p>
+          <a class="btn btn-primary" id="pkgPub1" href="#" target="_blank" rel="noopener">Pedir ahora</a>
+        </article>
+      </div>
+
+      <div class="cta-band">
+        <h3>Fechas empresariales se llenan</h3>
+        <p>Si es convivio o actividad de empresa, escribime con tiempo para reservar tu espacio.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="pkgCta" href="#" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+          <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== SECCIÓN CONDICIONAL: BUSINESS ===================== -->
+  <section class="section" id="bizSection">
+    <div class="container">
+      <h2>Business: el convivio sale bien (y vos quedás bien)</h2>
+      <p>
+        Este servicio es ideal para empresas porque suele existir presupuesto anual para actividades del personal.
+        Nosotros lo convertimos en un evento ordenado, rico y sin estrés.
+      </p>
+
+      <div class="cols">
+        <div class="card-mini">
+          <div class="icon">📦</div>
+          <h3>Paquetes simples</h3>
+          <p class="desc">Te cotizamos por cantidad de personas y combinaciones. Sin listas infinitas.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🧼</div>
+          <h3>Presentación limpia</h3>
+          <p class="desc">Montaje y servicio cuidado. Se nota profesional.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">✅</div>
+          <h3>Confirmación y seguimiento</h3>
+          <p class="desc">Cerramos detalles antes del evento para que no hayan sorpresas.</p>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h3>¿Cotizamos tu actividad?</h3>
+        <p>Mandame fecha, hora, zona y cantidad de personas. Te respondo con propuesta clara.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="bizCta1" href="#" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+          <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECCIÓN CONDICIONAL: PÚBLICO ===================== -->
+  <section class="section" id="pubSection">
+    <div class="container">
+      <h2>Público: pedí en la noche sin complicarte</h2>
+      <p>
+        Cuando el antojo pega, lo resolvemos rápido. Vos escribís, confirmamos disponibilidad y listo.
+      </p>
+
+      <!-- ===================== MENÚ (SOLO PÚBLICO) ===================== -->
+      <div class="menu-wrap" id="menu">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menuPanel" id="menuToggle">
+          <span class="menu-toggle__left">
+            <span class="menu-toggle__icon">🍕</span>
+            <span>
+              <strong>Menú de Pizzas</strong>
+              <span class="menu-toggle__meta">Q85 • 8 porciones • 8 sabores</span>
+            </span>
+          </span>
+          <span class="menu-toggle__chev" aria-hidden="true">▾</span>
+        </button>
+
+        <div class="menu-panel" id="menuPanel" hidden>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-img"><img src="Hawaiana.png" alt="Pizza Hawaiana"></div>
+              <div class="menu-body">
+                <h3>Hawaiana</h3>
+                <p>Base de salsa de tomate, mozzarella, jamón y piña. La clásica dulce-salada.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img src="Peperoni.png" alt="Pizza Peperoni"></div>
+              <div class="menu-body">
+                <h3>Peperoni</h3>
+                <p>Salsa de tomate, mozzarella y pepperoni doradito. Simple y poderosa.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img src="Margarita Pesto.png" alt="Pizza Margarita Pesto"></div>
+              <div class="menu-body">
+                <h3>Margarita Pesto</h3>
+                <p>Salsa de tomate de la casa, con masa de la casa, mozzarella, tomate cherry y un pesto espectacular.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img src="Chapina.png" alt="Pizza Chapina"></div>
+              <div class="menu-body">
+                <h3>Chapina</h3>
+                <p>Pizza con masa de la casa, salsa de chile guaque con chorizo y longaniza.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img src="Carnes.png" alt="Pizza de Carnes"></div>
+              <div class="menu-body">
+                <h3>Carnes</h3>
+                <p>Salsa de tomate de la casa, masa de la casa, queso mozzarella, jamón, tocino y pepperoni.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img src="Tejana.png" alt="Pizza Tejana"></div>
+              <div class="menu-body">
+                <h3>Tejana</h3>
+                <p>Salsa de tomate, mozzarella, carne sazonada y un toque de jalapeño (nivel “rico”, no complicado).</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img src="Tocino.png" alt="Pizza de Tocino"></div>
+              <div class="menu-body">
+                <h3>Tocino</h3>
+                <p>Salsa de tomate, mozzarella y tocino crujiente. Favorita para compartir.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img src="Jamon.png" alt="Pizza de Jamón"></div>
+              <div class="menu-body">
+                <h3>Jamón</h3>
+                <p>Salsa de tomate de la casa, con queso mozzarella y jamón.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+              </div>
+            </article>
+          </div>
+
+          <div class="menu-cta">
+            <a class="btn btn-primary" id="menuCtaWa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+            <a class="btn btn-outline" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener">Pedir por PedidosYa</a>
+            <a class="btn btn-outline" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener">Pedir por Uber Eats</a>
+          </div>
+
+          <p class="menu-note">Tip: escribinos el sabor + cantidad + ubicación. Te confirmamos disponibilidad al momento.</p>
+        </div>
+      </div>
+
+
+      <div class="cols">
+        <div class="card-mini">
+          <div class="icon">💬</div>
+          <h3>Mensaje directo</h3>
+          <p class="desc">WhatsApp es lo más rápido para confirmar y coordinar.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🛵</div>
+          <h3>Domicilio nocturno</h3>
+          <p class="desc">Atención on demand por la noche (según disponibilidad del día).</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🍕</div>
+          <h3>Sabores que gustan</h3>
+          <p class="desc">Pizzas y crepas para compartir. Lo clásico siempre gana.</p>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h3>¿Pedimos hoy?</h3>
+        <p>Mandame: qué querés, cantidad y tu ubicación. Te confirmo al momento.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="pubCta1" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+          <a class="btn btn-outline" href="#servicios">Ver servicios</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRUEBA SOCIAL ===================== -->
+  <section class="section" id="confianza">
+    <div class="container">
+      <h2>Reseñas (prueba social que sí convence)</h2>
+      <p></p>
+
+      <div class="cols">
+        <article class="review">
+          <div class="quote">“</div>
+          <p>La actividad salió ordenada, sirvieron rápido y a la gente le encantó. Cero estrés para RRHH.</p>
+          <strong>— Cliente empresa</strong>
+        </article>
+        <article class="review">
+          <div class="quote">“</div>
+          <p>Pedí tarde y me confirmaron en minutos. La pizza llegó bien y estaba buenísima.</p>
+          <strong>— Cliente nocturno</strong>
+        </article>
+        <article class="review">
+          <div class="quote">“</div>
+          <p>Buen servicio en evento. Crepas top. Se nota el cuidado en los detalles.</p>
+          <strong>— Evento privado</strong>
+        </article>
+      </div>
+
+      <div class="cta-band" id="ctaBandFinal">
+        <h3>Listo: ahora solo falta que me escribás</h3>
+        <p>Te respondo con una ruta clara según lo que necesitás.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="ctaFinal" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-outline" href="#valor">Volver arriba</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp Floating Button -->
+  <a id="ueFab" class="fab fab--ue" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener" aria-label="Pedir por Uber Eats" title="Uber Eats">
+  <img src="ubereats.png" alt="Uber Eats" />
+</a>
+
+<a id="pyFab" class="fab fab--py" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener" aria-label="Pedir por PedidosYa" title="PedidosYa">
+  <img src="pedidosya.png" alt="PedidosYa" />
+</a>
+
+<a id="waFab" class="fab fab--wa" href="#" target="_blank" rel="noopener" aria-label="Escribirme por WhatsApp" title="WhatsApp">
+  <img src="whatsapp 64p original.png" alt="WhatsApp" />
+</a>
+</main>
+
+<footer class="footer">
+  <div class="container footer-top">
+    <nav class="footer-col">
+      <h4>Explora</h4>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#confianza">Reseñas</a></li>
+      </ul>
+    </nav>
+    
+    <nav class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a id="waFooter" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener">PedidosYa</a></li>
+</ul>
+
+      
+
+    </nav>
+
+  </div>
+
+  <div class="container">
+<div class="social">
+        <a class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg== target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="instagram.png" alt="Instagram" />
+        </a>
+        <a class="social__link" href="#" target="_blank" rel="noopener" aria-label="TikTok">
+          <img src="tiktok.png" alt="TikTok" />
+        </a>
+        <a class="social__link" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+          <img src="facebook.png" alt="Facebook" />
+        </a>
+              <a class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener" aria-label="Uber Eats">
+        <img src="ubereats.png" alt="Uber Eats" />
+      </a>
+<a class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener" aria-label="PedidosYa">
+          <img src="pedidosya.png" alt="PedidosYa" />
+        </a>
+      </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© 2026 <strong>GASCHSOFT</strong>. Todos los derechos reservados. I Hecho en Guatemala 🇬🇹</p>
+  </div>
+</footer>
+
+<script>
+  // =============================
+  // CONFIG: CAMBIÁ SOLO ESTO
+  // =============================
+  const CONFIG = {
+    // Número WhatsApp en formato internacional SIN "+"
+    waNumber: "50239151615",
+    // Nombre visible (por si lo querés reutilizar)
+    brand: "Mr Pizza GT",
+  };
+
+  // =============================
+  // Helpers
+  // =============================
+  function enc(x){ return encodeURIComponent(x); }
+  function waLink(message){
+    return "https://wa.me/" + CONFIG.waNumber + "?text=" + enc(message);
+  }
+
+  // Cambia logo/favicon según tema (claro/oscuro)
+  function updateBrandAssets(theme){
+    const t = theme || document.documentElement.getAttribute("data-theme") || "light";
+    const src = (t==="dark") ? "MR PIZZA LOGO_Dark.png" : "MR PIZZA LOGO-Ligth.png";
+
+    const headerLogo = document.getElementById("logoHeader");
+    const heroLogo   = document.getElementById("logoHero");
+    const favicon    = document.getElementById("favicon");
+
+    if(headerLogo) headerLogo.src = src;
+    if(heroLogo)   heroLogo.src = src;
+    if(favicon)    favicon.href = src;
+  }
+
+
+  // Mensajes por ruta
+  const MSG = {
+    public: "Hola! Vengo del canal web: Mr Pizza GT by GaschSoft. Quiero hacer un pedido nocturno. ¿Qué tienen disponible hoy?",
+    business: "Hola! Vengo del canal web: Mr Pizza GT by GaschSoft. Quiero cotizar un evento. Fecha, hora, zona y cantidad de personas: ____",
+    mixed: "Hola! Vengo del canal web: Mr Pizza GT by GaschSoft. Quiero coordinar un evento (privado/público). ¿Me apoyan con opciones y precios?"
+  };
+
+  // =============================
+  // Theme (igual al estilo del ejemplo)
+  // =============================
+  (function(){
+    const KEY="mrpizza_theme_mode";
+    const btn=document.getElementById("themeBtn");
+    const icon=document.getElementById("themeIcon");
+    const media=window.matchMedia("(prefers-color-scheme: dark)");
+    let mode=localStorage.getItem(KEY) || "system";
+
+    function currentTheme(){
+      return mode==="system" ? (media.matches ? "dark" : "light") : mode;
+    }
+    function renderTheme(){
+      const theme=currentTheme();
+      document.documentElement.setAttribute("data-theme", theme);
+      updateBrandAssets(theme);
+      icon.textContent = (mode==="system") ? "🖥️" : (mode==="light" ? "☀️" : "🌙");
+    }
+    btn.addEventListener("click", ()=>{
+      mode = (mode==="system") ? "light" : (mode==="light" ? "dark" : "system");
+      localStorage.setItem(KEY, mode);
+      renderTheme();
+    });
+    media.addEventListener("change", ()=>{ if(mode==="system") renderTheme(); });
+    renderTheme();
+  })();
+
+  // =============================
+  // Router simple: si URL contiene /bussines => vista BUSINESS
+  // =============================
+  const state = { view: "public" }; // "public" | "business"
+
+  function detectViewFromPath(){
+    const p = (location.pathname || "").toLowerCase();
+    // Mantengo "bussines" porque así lo pediste en la URL
+    if(p.includes("/bussines")) return "business";
+    return "public";
+  }
+
+  function setView(view){
+    state.view = view;
+
+    // botones
+    document.getElementById("btnPublic").classList.toggle("active", view==="public");
+    document.getElementById("btnBiz").classList.toggle("active", view==="business");
+
+    // secciones condicionales
+    document.getElementById("bizSection").classList.toggle("hidden", view!=="business");
+    document.getElementById("pubSection").classList.toggle("hidden", view!=="public");
+
+    // headline y copy
+    const heroTitle = document.getElementById("heroTitle");
+    const heroSub   = document.getElementById("heroSub");
+    const heroNote  = document.getElementById("heroNote");
+    const heroCard  = document.getElementById("heroCardText");
+    const subtitle  = document.getElementById("subtitleHeader");
+    const heroCtaRowEl = document.getElementById("heroCtaRow");
+    const heroMediaEl  = document.querySelector(".hero-media");
+    const statsRowEl2  = document.getElementById("statsRow");
+    const serviciosEl2 = document.getElementById("servicios");
+
+
+    // Público: elementos a ocultar (según limpieza)
+    const heroTitleEl = document.getElementById("heroTitle");
+    const heroSubEl   = document.getElementById("heroSub");
+    const heroCtaRow  = document.getElementById("heroCtaRow");
+    const heroNoteEl  = document.getElementById("heroNote");
+    const heroCardEl  = document.getElementById("heroCard");
+    const statsRowEl  = document.getElementById("statsRow");
+    const valorSec    = document.getElementById("valor");
+    const paquetesSec = document.getElementById("paquetes");
+    const serviciosSec= document.getElementById("servicios");
+    const checksSec   = document.getElementById("checks");
+    const ctaFinalBand= document.getElementById("ctaBandFinal");
+
+    const promoCarousel = document.getElementById("promoCarouselSection");
+
+    if(view==="business"){
+
+      // Business: asegurar visibles (si fueron ocultos en Público)
+      [heroCtaRowEl, heroMediaEl, statsRowEl2, serviciosEl2].forEach(el=>{ if(el) el.classList.remove("hidden"); });
+
+
+      // Business: mostrar todo
+      [heroTitleEl, heroSubEl, heroCtaRow, heroNoteEl, heroCardEl, statsRowEl, valorSec, paquetesSec, ctaFinalBand, serviciosSec, checksSec]
+        .forEach(el => { if(el) el.hidden = false; });
+
+      if(promoCarousel) promoCarousel.classList.add("hidden");
+      subtitle.textContent = "Business • Catering para empresas";
+      heroTitle.innerHTML = 'Pizzas y crepas para <span style="color:var(--red);">convivios empresariales</span> que salen perfectos';
+      heroSub.innerHTML = "Cerrá tu actividad con orden, puntualidad y comida rica. Ideal para RRHH, aniversarios, navidad y fechas especiales.";
+      heroNote.innerHTML = "<strong>Ruta empresa:</strong><span>Presupuesto anual + proveedor confiable = evento sin estrés.</span>";
+      heroCard.innerHTML = "<strong>Estás en Business.</strong><br/>Cotizá en 2 minutos por WhatsApp.";
+    } else {
+
+      // Público: ocultar botones bajo carrusel, cuadro de rol, checks y sección servicios
+      [heroCtaRowEl, heroMediaEl, statsRowEl2, serviciosEl2].forEach(el=>{ if(el) el.classList.add("hidden"); });
+
+
+      // Público: ocultar secciones/textos para que no se sature
+      [heroTitleEl, heroSubEl, heroCtaRow, heroNoteEl, heroCardEl, statsRowEl, valorSec, paquetesSec, ctaFinalBand, serviciosSec, checksSec]
+        .forEach(el => { if(el) el.hidden = true; });
+
+      if(promoCarousel) promoCarousel.classList.remove("hidden");
+      subtitle.textContent = "Público • Pedidos nocturnos";
+      heroTitle.textContent = "Pizza rica + crepas: la forma más fácil de salvar la noche";
+      heroSub.innerHTML = "Pedí por WhatsApp o por PedidosYa. Confirmamos rápido y listo: noche resuelta.";
+      heroNote.innerHTML = "<strong>Lo que compras es tranquilidad.</strong><span>Mensajes claros, confirmación rápida y comida rica para compartir.</span>";
+      heroCard.innerHTML = "<strong>Estás en Público.</strong><br/>Pedí de noche por WhatsApp y te confirmamos.";
+    }
+
+    // CTAs
+    const msgTop  = (view==="business") ? MSG.business : MSG.public;
+    const msgHero = msgTop;
+
+    const topCtaEl = document.getElementById("topCta");
+    if(topCtaEl) topCtaEl.href = waLink(msgTop);
+    document.getElementById("heroCta").href = waLink(msgHero);
+    document.getElementById("heroCardCta").href = waLink(msgHero);
+
+    document.getElementById("svcBizCta").href = waLink(MSG.business);
+    document.getElementById("svcPubCta").href = waLink(MSG.public);
+    document.getElementById("svcMixCta").href = waLink(MSG.mixed);
+
+    document.getElementById("bizCta1").href = waLink(MSG.business);
+    document.getElementById("pubCta1").href = waLink(MSG.public);
+
+    document.getElementById("ctaFinal").href = waLink(msgTop);
+    document.getElementById("waFab").href = waLink(msgTop);
+    document.getElementById("waFooter").href = waLink(msgTop);
+  }
+
+  // Botones manuales (útil cuando abrís local)
+  document.getElementById("btnPublic").addEventListener("click", ()=> setView("public"));
+  document.getElementById("btnBiz").addEventListener("click", ()=> setView("business"));
+
+  // Smooth scroll interno
+  (function(){
+    document.addEventListener("click", (e)=>{
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+      const id = a.getAttribute("href");
+      if(id.length < 2) return;
+      const el = document.querySelector(id);
+      if(!el) return;
+      e.preventDefault();
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  })();
+
+  // Año
+
+
+  // Promo carrusel (solo Público)
+  (function(){
+    const root = document.querySelector("[data-promo-carousel]");
+    if(!root) return;
+
+    const track = root.querySelector("[data-track]");
+    const prev  = root.querySelector("[data-prev]");
+    const next  = root.querySelector("[data-next]");
+    const dots  = Array.from(root.querySelectorAll("[data-dot]"));
+    const total = dots.length;
+    let idx = 0;
+
+    const render = ()=>{
+      track.style.transform = `translateX(-${idx*100}%)`;
+      dots.forEach((d,i)=> d.classList.toggle("is-active", i===idx));
+    };
+
+    const go = (n)=>{
+      idx = (n + total) % total;
+      render();
+    };
+
+    prev && prev.addEventListener("click", ()=> go(idx-1));
+    next && next.addEventListener("click", ()=> go(idx+1));
+    dots.forEach((d)=> d.addEventListener("click", ()=> go(parseInt(d.getAttribute("data-dot"),10)||0)));
+
+    // Auto-avance cada 5s (a la derecha)
+    setInterval(()=> go(idx+1), 5000);
+
+    render();
+  })();
+
+
+  // Menú desplegable (solo Público)
+  (function(){
+    const toggle = document.getElementById("menuToggle");
+    const panel  = document.getElementById("menuPanel");
+    if(!toggle || !panel) return;
+
+    toggle.addEventListener("click", ()=>{
+      const expanded = toggle.getAttribute("aria-expanded")==="true";
+      toggle.setAttribute("aria-expanded", expanded ? "false" : "true");
+      panel.hidden = expanded;
+    });
+  })();
+
+  // Boot
+  setView(detectViewFromPath());
+</script>
+</body>
+</html>
