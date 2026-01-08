@@ -764,6 +764,7 @@
   }
 
 </style>
+<link rel="preload" as="image" href="Flayer 1.webp">
 </head>
 
 <body>
@@ -771,7 +772,7 @@
   <div class="container row">
     <div class="brand">
       <!-- Pon estos PNG en la misma carpeta que este HTML, o ajustá rutas. -->
-      <img id="logoHeader" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT Logo">
+      <img loading="lazy" decoding="async" id="logoHeader" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT Logo">
       <div>
         <div class="title">Mr Pizza GT</div>
         <div class="subtitle" id="subtitleHeader">Pizzas & Crepas • Guatemala</div>
@@ -798,10 +799,10 @@
         <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Anterior" data-prev>‹</button>
         <div class="carousel__viewport">
           <div class="carousel__track" data-track>
-            <div class="carousel__slide"><img src="Flayer 1.png" alt="Flayer 1"></div>
-            <div class="carousel__slide"><img src="Flayer 2.png" alt="Flayer 2"></div>
-            <div class="carousel__slide"><img src="Flayer 3.png" alt="Flayer 3"></div>
-            <div class="carousel__slide"><img src="Flayer 4.png" alt="Flayer 4"></div>
+            <div class="carousel__slide"><img fetchpriority="high" decoding="sync" src="Flayer 1.webp" alt="Flayer 1"></div>
+            <div class="carousel__slide"><img loading="lazy" decoding="async" src="Flayer 2.webp" alt="Flayer 2"></div>
+            <div class="carousel__slide"><img loading="lazy" decoding="async" src="Flayer 3.webp" alt="Flayer 3"></div>
+            <div class="carousel__slide"><img loading="lazy" decoding="async" src="Flayer 4.webp" alt="Flayer 4"></div>
           </div>
         </div>
         <button class="carousel__btn carousel__btn--next" type="button" aria-label="Siguiente" data-next>›</button>
@@ -844,7 +845,7 @@
             </div>
           </div>
           <div class="hero-card" id="heroCard">
-            <img id="logoHero" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT">
+            <img loading="lazy" decoding="async" id="logoHero" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT">
             <div class="mini" id="heroCardText">
               <strong>Ruta rápida:</strong><br/>
               Empresa → cotizar evento<br/>
@@ -1016,7 +1017,7 @@
           <span class="menu-toggle__left">
             <span class="menu-toggle__icon">🍕</span>
             <span>
-              <strong class="menu-title">Menú de Pizzas</strong>
+              <strong class="menu-title">Nuestras Pizzas</strong>
               <span class="menu-toggle__meta">Q85 • 8 porciones • 8 sabores</span>
             </span>
           </span>
@@ -1026,7 +1027,7 @@
         <div class="menu-panel" id="menuPanel">
           <div class="menu-grid">
             <article class="menu-item">
-              <div class="menu-img"><img src="Hawaiana.png" alt="Pizza Hawaiana"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Hawaiana.webp" alt="Pizza Hawaiana"></div>
               <div class="menu-body">
                 <h3>Hawaiana</h3>
                 <p>Base de salsa de tomate, mozzarella, jamón y piña. La clásica dulce-salada.</p>
@@ -1035,7 +1036,7 @@
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Peperoni.png" alt="Pizza Peperoni"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Peperoni.webp" alt="Pizza Peperoni"></div>
               <div class="menu-body">
                 <h3>Peperoni</h3>
                 <p>Salsa de tomate, mozzarella y pepperoni doradito. Simple y poderosa.</p>
@@ -1044,7 +1045,7 @@
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Margarita Pesto.png" alt="Pizza Margarita Pesto"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Margarita Pesto.webp" alt="Pizza Margarita Pesto"></div>
               <div class="menu-body">
                 <h3>Margarita Pesto</h3>
                 <p>Salsa de tomate de la casa, con masa de la casa, mozzarella, tomate cherry y un pesto espectacular.</p>
@@ -1053,7 +1054,7 @@
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Chapina.png" alt="Pizza Chapina"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Chapina.webp" alt="Pizza Chapina"></div>
               <div class="menu-body">
                 <h3>Chapina</h3>
                 <p>Pizza con masa de la casa, salsa de chile guaque con chorizo y longaniza.</p>
@@ -1062,7 +1063,7 @@
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Carnes.png" alt="Pizza de Carnes"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Carnes.webp" alt="Pizza de Carnes"></div>
               <div class="menu-body">
                 <h3>Carnes</h3>
                 <p>Salsa de tomate de la casa, masa de la casa, queso mozzarella, jamón, tocino y pepperoni.</p>
@@ -1071,7 +1072,7 @@
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Tejana.png" alt="Pizza Tejana"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Tejana.webp" alt="Pizza Tejana"></div>
               <div class="menu-body">
                 <h3>Tejana</h3>
                 <p>Salsa de tomate, mozzarella, carne sazonada y un toque de jalapeño (nivel “rico”, no complicado).</p>
@@ -1080,7 +1081,7 @@
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Tocino.png" alt="Pizza de Tocino"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Tocino.webp" alt="Pizza de Tocino"></div>
               <div class="menu-body">
                 <h3>Tocino</h3>
                 <p>Salsa de tomate, mozzarella y tocino crujiente. Favorita para compartir.</p>
@@ -1089,7 +1090,7 @@
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Jamon.png" alt="Pizza de Jamón"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Jamon.webp" alt="Pizza de Jamón"></div>
               <div class="menu-body">
                 <h3>Jamón</h3>
                 <p>Salsa de tomate de la casa, con queso mozzarella y jamón.</p>
@@ -1174,15 +1175,15 @@
 
   <!-- WhatsApp Floating Button -->
   <a id="ueFab" class="fab fab--ue" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener" aria-label="Pedir por Uber Eats" title="Uber Eats">
-  <img src="ubereats.png" alt="Uber Eats" />
+  <img loading="lazy" decoding="async" src="ubereats.png" alt="Uber Eats" />
 </a>
 
 <a id="pyFab" class="fab fab--py" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener" aria-label="Pedir por PedidosYa" title="PedidosYa">
-  <img src="pedidosya.png" alt="PedidosYa" />
+  <img loading="lazy" decoding="async" src="pedidosya.png" alt="PedidosYa" />
 </a>
 
 <a id="waFab" class="fab fab--wa" href="#" target="_blank" rel="noopener" aria-label="Escribirme por WhatsApp" title="WhatsApp">
-  <img src="whatsapp 64p original.png" alt="WhatsApp" />
+  <img loading="lazy" decoding="async" src="whatsapp 64p original.png" alt="WhatsApp" />
 </a>
 </main>
 
@@ -1212,19 +1213,19 @@
   <div class="container">
 <div class="social">
         <a class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" target="_blank" rel="noopener" aria-label="Instagram">
-          <img src="instagram.png" alt="Instagram" />
+          <img loading="lazy" decoding="async" src="instagram.png" alt="Instagram" />
         </a>
         <a class="social__link" href="#" target="_blank" rel="noopener" aria-label="TikTok">
-          <img src="tiktok.png" alt="TikTok" />
+          <img loading="lazy" decoding="async" src="tiktok.png" alt="TikTok" />
         </a>
         <a class="social__link" href="#" target="_blank" rel="noopener" aria-label="Facebook">
-          <img src="facebook.png" alt="Facebook" />
+          <img loading="lazy" decoding="async" src="facebook.png" alt="Facebook" />
         </a>
               <a class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener" aria-label="Uber Eats">
-        <img src="ubereats.png" alt="Uber Eats" />
+        <img loading="lazy" decoding="async" src="ubereats.png" alt="Uber Eats" />
       </a>
 <a class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener" aria-label="PedidosYa">
-          <img src="pedidosya.png" alt="PedidosYa" />
+          <img loading="lazy" decoding="async" src="pedidosya.png" alt="PedidosYa" />
         </a>
       </div>
   </div>
