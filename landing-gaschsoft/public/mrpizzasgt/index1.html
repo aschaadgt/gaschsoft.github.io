@@ -6,15 +6,6 @@
 <title>Mr Pizza GT | Pizzas & Crepas para Empresas y Pedidos Nocturnos</title>
 <link id="favicon" rel="icon" type="image/png" href="MR PIZZA LOGO-Ligth.png">
 
-
-
-<!-- iOS / PWA (sin afectar el favicon dinámico de la pestaña) -->
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#b81f24">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Mr Pizza GT">
 <!--
   ✅ Un solo HTML para 2 URLs:
   - Público:   /mrpizzasgt
@@ -772,104 +763,6 @@
     opacity: .85;
   }
 
-
-  /* ====== Publico: carrito + cantidad en menu ====== */
-  .menu-item{ position:relative; }
-  .qty-controls{
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    margin-top:10px;
-    opacity:0;
-    transform: translateY(3px);
-    transition: opacity .15s ease, transform .15s ease;
-    pointer-events:none;
-  }
-  .menu-item:hover .qty-controls,
-  .menu-item:focus-within .qty-controls{
-    opacity:1;
-    transform: translateY(0);
-    pointer-events:auto;
-  }
-  /* If there is quantity, show only the number (no + / -) until hover */
-  .menu-item.has-qty .qty-controls{
-    opacity:1;
-    transform: translateY(0);
-    pointer-events:none;
-  }
-  .menu-item.has-qty .qty-controls .qty-btn{ display:none; }
-  .menu-item.has-qty:hover .qty-controls,
-  .menu-item.has-qty:focus-within .qty-controls{
-    pointer-events:auto;
-  }
-  .menu-item.has-qty:hover .qty-controls .qty-btn,
-  .menu-item.has-qty:focus-within .qty-controls .qty-btn{
-    display:inline-flex;
-  }
-  .qty-btn{
-    width:30px; height:30px;
-    border-radius:10px;
-    border:1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink);
-    font-weight:900;
-    line-height:1;
-    cursor:pointer;
-    display:inline-flex; align-items:center; justify-content:center;
-    user-select:none;
-    opacity:.75;
-  }
-  .qty-btn:hover{ opacity:1; background: rgba(184,31,36,.08); }
-  .qty-num{
-    min-width:22px;
-    text-align:center;
-    font-weight:900;
-    color: var(--ink);
-    opacity:.85;
-  }
-  .menu-orderbar{
-    display:flex;
-    justify-content:flex-start;
-    margin: 10px 0 12px;
-  }
-  .cart-chip{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 12px;
-    border:1px solid var(--line);
-    border-radius:14px;
-    background: var(--surface);
-    box-shadow: var(--shadow);
-  }
-  .cart-label{ font-weight:900; color: var(--ink); }
-  .cart-count{
-    min-width:26px;
-    height:26px;
-    border-radius:999px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:900;
-    background: rgba(184,31,36,.12);
-    color: var(--ink);
-    border: 1px solid rgba(184,31,36,.22);
-  }
-  .wa-badge{
-    margin-left:10px;
-    min-width:22px;
-    height:22px;
-    padding:0 6px;
-    border-radius:999px;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    font-weight:900;
-    background: var(--danger);
-    color:white;
-    border: 2px solid rgba(255,255,255,.65);
-  }
-  .btn.btn-primary.has-badge .wa-badge{ display:inline-flex; }
-
 </style>
 <link rel="preload" as="image" href="Flayer 1.webp">
 
@@ -887,14 +780,6 @@
 <meta name="twitter:title" content="Mr Pizza GT | Pizzas & Crepas">
 <meta name="twitter:description" content="Pedidos nocturnos y eventos empresariales sin complicarte.">
 <meta name="twitter:image" content="https://gaschsoft.com/mrpizzasgt/MR%20PIZZA%20LOGO-Ligth.png">
-
-
-<!-- Favicons / PWA -->
-
-<meta name="theme-color" content="#b81f24">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Mr Pizza GT">
 
 </head>
 
@@ -1137,7 +1022,7 @@
   <!-- ===================== SECCIÓN CONDICIONAL: PÚBLICO ===================== -->
   <section class="section" id="pubSection">
     <div class="container">
-      <h2>Público: pedí en la noche sin complicarte</h2>
+      <h2>Pedí en la noche sin complicarte</h2>
       <p>
         Cuando el antojo pega, lo resolvemos rápido. Vos escribís, confirmamos disponibilidad y listo.
       </p>
@@ -1163,11 +1048,6 @@
                 <h3>Hawaiana</h3>
                 <p>Base de salsa de tomate, mozzarella, jamón y piña. La clásica dulce-salada.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Hawaiana">
-                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Hawaiana">−</button>
-                  <span class="qty-num" aria-label="Cantidad Hawaiana">0</span>
-                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Hawaiana">+</button>
-                </div>
               </div>
             </article>
 
@@ -1177,11 +1057,6 @@
                 <h3>Peperoni</h3>
                 <p>Salsa de tomate, mozzarella y pepperoni doradito. Simple y poderosa.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Peperoni">
-                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Peperoni">−</button>
-                  <span class="qty-num" aria-label="Cantidad Peperoni">0</span>
-                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Peperoni">+</button>
-                </div>
               </div>
             </article>
 
@@ -1191,11 +1066,6 @@
                 <h3>Margarita Pesto</h3>
                 <p>Salsa de tomate de la casa, con masa de la casa, mozzarella, tomate cherry y un pesto espectacular.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Margarita Pesto">
-                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Margarita Pesto">−</button>
-                  <span class="qty-num" aria-label="Cantidad Margarita Pesto">0</span>
-                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Margarita Pesto">+</button>
-                </div>
               </div>
             </article>
 
@@ -1205,11 +1075,6 @@
                 <h3>Chapina</h3>
                 <p>Pizza con masa de la casa, salsa de chile guaque con chorizo y longaniza.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Chapina">
-                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Chapina">−</button>
-                  <span class="qty-num" aria-label="Cantidad Chapina">0</span>
-                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Chapina">+</button>
-                </div>
               </div>
             </article>
 
@@ -1219,11 +1084,6 @@
                 <h3>Carnes</h3>
                 <p>Salsa de tomate de la casa, masa de la casa, queso mozzarella, jamón, tocino y pepperoni.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Carnes">
-                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Carnes">−</button>
-                  <span class="qty-num" aria-label="Cantidad Carnes">0</span>
-                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Carnes">+</button>
-                </div>
               </div>
             </article>
 
@@ -1233,11 +1093,6 @@
                 <h3>Tejana</h3>
                 <p>Salsa de tomate, mozzarella, carne sazonada y un toque de jalapeño (nivel “rico”, no complicado).</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Tejana">
-                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Tejana">−</button>
-                  <span class="qty-num" aria-label="Cantidad Tejana">0</span>
-                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Tejana">+</button>
-                </div>
               </div>
             </article>
 
@@ -1247,11 +1102,6 @@
                 <h3>Tocino</h3>
                 <p>Salsa de tomate, mozzarella y tocino crujiente. Favorita para compartir.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Tocino">
-                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Tocino">−</button>
-                  <span class="qty-num" aria-label="Cantidad Tocino">0</span>
-                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Tocino">+</button>
-                </div>
               </div>
             </article>
 
@@ -1261,25 +1111,12 @@
                 <h3>Jamón</h3>
                 <p>Salsa de tomate de la casa, con queso mozzarella y jamón.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Jamón">
-                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Jamón">−</button>
-                  <span class="qty-num" aria-label="Cantidad Jamón">0</span>
-                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Jamón">+</button>
-                </div>
               </div>
             </article>
           </div>
 
-          
-          <div class="menu-orderbar">
-            <div class="cart-chip" id="cartChip" title="Carrito (total de pizzas)">
-              <img id="cartIcon" src="carrito-ligth.png" alt="Carrito" width="20" height="20">
-              <span class="cart-label">Carrito</span>
-              <span class="cart-count" id="cartCount">0</span>
-            </div>
-          </div>
           <div class="menu-cta">
-            <a class="btn btn-primary" id="menuCtaWa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp <span class="wa-badge" id="waBadge" aria-hidden="true">0</span></a>
+            <a class="btn btn-primary" id="menuCtaWa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
             <a class="btn btn-outline" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener">Pedir por PedidosYa</a>
             <a class="btn btn-outline" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener">Pedir por Uber Eats</a>
           </div>
@@ -1657,109 +1494,6 @@
 
   // Boot
   setView(detectViewFromPath());
-</script>
-<script>
-
-  /* ====== Publico: carrito + cantidades (menu de pizzas) ====== */
-  (function(){
-    const waBtn = document.getElementById("menuCtaWa");
-    const waBadge = document.getElementById("waBadge");
-    const cartCountEl = document.getElementById("cartCount");
-
-    if(!waBtn || !cartCountEl) return;
-
-    const PHONE = "50239151615";
-    const state = {}; // flavor -> qty
-
-    function totalCount(){
-      return Object.values(state).reduce((a,b)=>a+(b||0),0);
-    }
-
-    function buildMessage(){
-      const total = totalCount();
-      if(total<=0) return "";
-      const lines = [];
-      lines.push("Hola! Vengo del canal web: Mr Pizza GT by GaschSoft. Quiero hacer un pedido, deseo " + total + " pizzas los sabores son:");
-      Object.keys(state).forEach(flavor=>{
-        const q = state[flavor]||0;
-        if(q>0) lines.push("- " + q + " de " + flavor);
-      });
-      return lines.join("\n");
-    }
-
-    function render(){
-      const total = totalCount();
-      cartCountEl.textContent = String(total);
-
-      if(total>0){
-        waBtn.classList.add("has-badge");
-        if(waBadge){ waBadge.textContent = String(total); waBadge.setAttribute("aria-hidden","false"); }
-      }else{
-        waBtn.classList.remove("has-badge");
-        if(waBadge){ waBadge.textContent = "0"; waBadge.setAttribute("aria-hidden","true"); }
-      }
-
-      const msg = buildMessage();
-      waBtn.href = msg ? ("https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg)) : ("https://wa.me/" + PHONE);
-    }
-
-    function setQty(ctrl, flavor, qty){
-      const q = Math.max(0, qty|0);
-      state[flavor] = q;
-
-      const card = ctrl.closest(".menu-item");
-      if(card){
-        if(q>0) card.classList.add("has-qty");
-        else card.classList.remove("has-qty");
-      }
-
-      const num = ctrl.querySelector(".qty-num");
-      if(num) num.textContent = String(q);
-
-      render();
-    }
-
-    document.querySelectorAll(".qty-controls").forEach(ctrl=>{
-      const flavor = ctrl.getAttribute("data-flavor") || "Pizza";
-      state[flavor] = 0;
-
-      const minus = ctrl.querySelector(".qty-minus");
-      const plus  = ctrl.querySelector(".qty-plus");
-      const num   = ctrl.querySelector(".qty-num");
-      if(num) num.textContent = "0";
-
-      if(plus) plus.addEventListener("click", (e)=>{
-        e.preventDefault();
-        setQty(ctrl, flavor, (state[flavor]||0) + 1);
-      });
-      if(minus) minus.addEventListener("click", (e)=>{
-        e.preventDefault();
-        setQty(ctrl, flavor, (state[flavor]||0) - 1);
-      });
-    });
-
-    waBtn.addEventListener("click", (e)=>{
-      const total = totalCount();
-      if(total<=0){
-        e.preventDefault();
-        alert("Agregá al menos 1 pizza al carrito para armar el mensaje.");
-        return;
-      }
-      setTimeout(()=>{
-        Object.keys(state).forEach(k=>state[k]=0);
-        document.querySelectorAll(".qty-controls").forEach(ctrl=>{
-          const num = ctrl.querySelector(".qty-num");
-          if(num) num.textContent = "0";
-          const card = ctrl.closest(".menu-item");
-          if(card) card.classList.remove("has-qty");
-        });
-        render();
-      }, 150);
-    });
-
-    render();
-  })();
-
 </script>
 </body>
 </html>

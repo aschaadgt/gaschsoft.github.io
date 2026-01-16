@@ -1,0 +1,26 @@
+{
+  "name": "Mr Pizza GT",
+  "short_name": "Mr Pizza GT",
+  "start_url": "/mrpizzasgt/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#b81f24",
+  "icons": [
+    {
+      "src": "/mrpizzasgt/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/mrpizzasgt/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/mrpizzasgt/maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
