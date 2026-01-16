@@ -1440,11 +1440,14 @@
 
     const headerLogo = document.getElementById("logoHeader");
     const heroLogo   = document.getElementById("logoHero");
-    const favicon    = document.getElementById("favicon");
 
     if(headerLogo) headerLogo.src = src;
     if(heroLogo)   heroLogo.src = src;
-    if(favicon)    favicon.href = src;
+    const favicon = document.getElementById("favicon");
+    if(favicon) favicon.href = (t==="dark") ? "MR PIZZA LOGO_Dark.png" : "MR PIZZA LOGO-Ligth.png";
+    const cartIcon = document.getElementById("cartIcon");
+    if(cartIcon) cartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
+
   }
 
 
