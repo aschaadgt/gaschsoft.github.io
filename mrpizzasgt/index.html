@@ -477,10 +477,10 @@
     box-shadow: 0 8px 14px rgba(0,0,0,.16);
     border: 1px solid rgba(255,255,255,.85);
   }
-  @media(max-width: 720px){
+  @media(max-width: 520px){
     .mini-cart-fab{
-      right: 16px;
-      bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 3) + 30px);
+      right: 12px;
+      bottom: calc(16px + clamp(56px, 7.2vw, 68px) + 10px); /* arriba del FAB de WhatsApp en pantallas muy chicas */
     }
   }
 
