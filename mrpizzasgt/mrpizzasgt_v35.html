@@ -6,6 +6,15 @@
 <title>Mr Pizza GT | Pizzas & Crepas para Empresas y Pedidos Nocturnos</title>
 <link id="favicon" rel="icon" type="image/png" href="MR PIZZA LOGO-Ligth.png">
 
+
+
+<!-- iOS / PWA (sin afectar el favicon dinámico de la pestaña) -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#b81f24">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mr Pizza GT">
 <!--
   ✅ Un solo HTML para 2 URLs:
   - Público:   /mrpizzasgt
@@ -428,6 +437,53 @@
   .fab--wa{ bottom: 16px; }
   .fab--py{ bottom: calc(16px + clamp(56px, 7.2vw, 68px) + 10px); }
   .fab--ue{ bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 2) + 20px); }
+
+  /* Mini Carrito (badge flotante discreto) */
+  .mini-cart-fab{
+    position: fixed;
+    right: calc(16px + clamp(56px, 7.2vw, 68px) + 12px); /* a la izquierda del FAB de WhatsApp */
+    bottom: 16px;
+    z-index: 1201;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    text-decoration: none;
+    overflow: visible;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mini-cart-fab:focus-visible{
+    outline: 2px solid var(--line);
+    outline-offset: 3px;
+  }
+  .mini-cart-fab img{ width: 24px; height: 24px; object-fit: contain; display:block; }
+  .mini-cart-count{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 14px rgba(0,0,0,.16);
+    border: 1px solid rgba(255,255,255,.85);
+  }
+  @media(max-width: 520px){
+    .mini-cart-fab{
+      right: 12px;
+      bottom: calc(16px + clamp(56px, 7.2vw, 68px) + 10px); /* arriba del FAB de WhatsApp en pantallas muy chicas */
+    }
+  }
+
   .hidden{ display:none !important; }
 
   @media(max-width: 920px){
@@ -509,8 +565,11 @@
   }
   .menu-grid{
     display:grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media(max-width: 380px){
+    .menu-grid{ grid-template-columns: 1fr; }
   }
   @media(min-width: 680px){
     .menu-grid{ grid-template-columns: repeat(2, 1fr); }
@@ -678,6 +737,14 @@
   }
 
 
+  
+
+  /* Accesibilidad: respeta "reducir movimiento" */
+  @media (prefers-reduced-motion: reduce){
+    .fab{ animation: none !important; }
+    .promo-carousel .carousel__track{ transition: none !important; }
+  }
+
   /* Animación ligera para botones flotantes */
   @keyframes floaty {
     0%   { transform: translateY(0); }
@@ -736,7 +803,167 @@
     }
   }
 
+
+  /* Público: espacio entre menú y tarjetas informativas */
+  #publico .cols{ margin-top: 18px; }
+
+
+  @media(max-width: 680px){
+    .menu-item{ border-radius: 16px; }
+    .menu-body{ padding: 10px 10px 12px; }
+    .menu-body h4{ font-size: 14px; }
+    .menu-body p{ font-size: 12.5px; line-height: 1.35; }
+    .menu-meta{ font-size: 12px; }
+  }
+
+
+  /* Menú: título más premium */
+  .menu-title{
+    color: var(--accent);
+    font-weight: 800;
+    letter-spacing: .2px;
+  }
+  .menu-toggle__meta{
+    opacity: .85;
+  }
+
+
+  /* ====== Publico: carrito + cantidad en menu ====== */
+  .menu-item{ position:relative; }
+  .qty-controls{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    margin-top:10px;
+    opacity:0;
+    transform: translateY(3px);
+    transition: opacity .15s ease, transform .15s ease;
+    pointer-events:none;
+  }
+  .menu-item:hover .qty-controls,
+  .menu-item:focus-within .qty-controls{
+    opacity:1;
+    transform: translateY(0);
+    pointer-events:auto;
+  }
+  /* If there is quantity, show only the number (no + / -) until hover */
+  .menu-item.has-qty .qty-controls{
+    opacity:1;
+    transform: translateY(0);
+    pointer-events:none;
+  }
+  .menu-item.has-qty .qty-controls .qty-btn{ display:none; }
+  .menu-item.has-qty:hover .qty-controls,
+  .menu-item.has-qty:focus-within .qty-controls{
+    pointer-events:auto;
+  }
+  .menu-item.has-qty:hover .qty-controls .qty-btn,
+  .menu-item.has-qty:focus-within .qty-controls .qty-btn{
+    display:inline-flex;
+  }
+  .qty-btn{
+    width:30px; height:30px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-weight:900;
+    line-height:1;
+    cursor:pointer;
+    display:inline-flex; align-items:center; justify-content:center;
+    user-select:none;
+    opacity:.75;
+  }
+  .qty-btn:hover{ opacity:1; background: rgba(184,31,36,.08); }
+  .qty-num{
+    min-width:22px;
+    text-align:center;
+    font-weight:900;
+    color: var(--ink);
+    opacity:.85;
+  }
+  .menu-orderbar{
+    display:flex;
+    justify-content:flex-start;
+    margin: 10px 0 12px;
+  }
+  .cart-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .cart-label{ font-weight:900; color: var(--ink); }
+  .cart-count{
+    min-width:26px;
+    height:26px;
+    border-radius:999px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    background: rgba(184,31,36,.12);
+    color: var(--ink);
+    border: 1px solid rgba(184,31,36,.22);
+  }
+  .wa-badge{
+    margin-left:10px;
+    min-width:22px;
+    height:22px;
+    padding:0 6px;
+    border-radius:999px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:900;
+    background: var(--danger);
+    color:white;
+    border: 2px solid rgba(255,255,255,.65);
+  }
+  .btn.btn-primary.has-badge .wa-badge{ display:inline-flex; }
+
+  /* Fly-to-cart (feedback visual al sumar) */
+  .fly-dot{
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: #ef4444;
+    box-shadow: 0 10px 18px rgba(0,0,0,.22);
+    z-index: 2000;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
 </style>
+<link rel="preload" as="image" href="Flayer 1.webp">
+
+<!-- Open Graph / WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr Pizza GT | Pizzas & Crepas para Empresas y Pedidos Nocturnos">
+<meta property="og:description" content="Pizzas y crepas para pedidos nocturnos y convivios empresariales. Confirmamos rápido y entregamos sin complicarte.">
+<meta property="og:url" content="https://gaschsoft.com/mrpizzasgt/">
+<meta property="og:image" content="https://gaschsoft.com/mrpizzasgt/MR%20PIZZA%20LOGO-Ligth.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mr Pizza GT | Pizzas & Crepas">
+<meta name="twitter:description" content="Pedidos nocturnos y eventos empresariales sin complicarte.">
+<meta name="twitter:image" content="https://gaschsoft.com/mrpizzasgt/MR%20PIZZA%20LOGO-Ligth.png">
+
+
+<!-- Favicons / PWA -->
+
+<meta name="theme-color" content="#b81f24">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mr Pizza GT">
+
 </head>
 
 <body>
@@ -744,7 +971,7 @@
   <div class="container row">
     <div class="brand">
       <!-- Pon estos PNG en la misma carpeta que este HTML, o ajustá rutas. -->
-      <img id="logoHeader" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT Logo">
+      <img loading="lazy" decoding="async" id="logoHeader" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT Logo">
       <div>
         <div class="title">Mr Pizza GT</div>
         <div class="subtitle" id="subtitleHeader">Pizzas & Crepas • Guatemala</div>
@@ -771,10 +998,10 @@
         <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Anterior" data-prev>‹</button>
         <div class="carousel__viewport">
           <div class="carousel__track" data-track>
-            <div class="carousel__slide"><img src="Flayer 1.png" alt="Flayer 1"></div>
-            <div class="carousel__slide"><img src="Flayer 2.png" alt="Flayer 2"></div>
-            <div class="carousel__slide"><img src="Flayer 3.png" alt="Flayer 3"></div>
-            <div class="carousel__slide"><img src="Flayer 4.png" alt="Flayer 4"></div>
+            <div class="carousel__slide"><img fetchpriority="high" decoding="sync" src="Flayer 1.webp" alt="Flayer 1"></div>
+            <div class="carousel__slide"><img loading="lazy" decoding="async" src="Flayer 2.webp" alt="Flayer 2"></div>
+            <div class="carousel__slide"><img loading="lazy" decoding="async" src="Flayer 3.webp" alt="Flayer 3"></div>
+            <div class="carousel__slide"><img loading="lazy" decoding="async" src="Flayer 4.webp" alt="Flayer 4"></div>
           </div>
         </div>
         <button class="carousel__btn carousel__btn--next" type="button" aria-label="Siguiente" data-next>›</button>
@@ -817,7 +1044,7 @@
             </div>
           </div>
           <div class="hero-card" id="heroCard">
-            <img id="logoHero" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT">
+            <img loading="lazy" decoding="async" id="logoHero" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT">
             <div class="mini" id="heroCardText">
               <strong>Ruta rápida:</strong><br/>
               Empresa → cotizar evento<br/>
@@ -985,94 +1212,260 @@
 
       <!-- ===================== MENÚ (SOLO PÚBLICO) ===================== -->
       <div class="menu-wrap" id="menu">
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menuPanel" id="menuToggle">
+        <button class="menu-toggle" type="button" aria-expanded="true" aria-controls="menuPanel" id="menuToggle">
           <span class="menu-toggle__left">
             <span class="menu-toggle__icon">🍕</span>
             <span>
-              <strong>Menú de Pizzas</strong>
+              <strong class="menu-title">Nuestras pizzas</strong>
               <span class="menu-toggle__meta">Q85 • 8 porciones • 8 sabores</span>
             </span>
           </span>
           <span class="menu-toggle__chev" aria-hidden="true">▾</span>
         </button>
 
-        <div class="menu-panel" id="menuPanel" hidden>
+        <div class="menu-panel" id="menuPanel">
           <div class="menu-grid">
             <article class="menu-item">
-              <div class="menu-img"><img src="Hawaiana.png" alt="Pizza Hawaiana"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Hawaiana.webp" alt="Pizza Hawaiana"></div>
               <div class="menu-body">
                 <h3>Hawaiana</h3>
                 <p>Base de salsa de tomate, mozzarella, jamón y piña. La clásica dulce-salada.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Hawaiana" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Hawaiana">−</button>
+                  <span class="qty-num" aria-label="Cantidad Hawaiana">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Hawaiana">+</button>
+                </div>
               </div>
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Peperoni.png" alt="Pizza Peperoni"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Peperoni.webp" alt="Pizza Peperoni"></div>
               <div class="menu-body">
                 <h3>Peperoni</h3>
                 <p>Salsa de tomate, mozzarella y pepperoni doradito. Simple y poderosa.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Peperoni" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Peperoni">−</button>
+                  <span class="qty-num" aria-label="Cantidad Peperoni">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Peperoni">+</button>
+                </div>
               </div>
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Margarita Pesto.png" alt="Pizza Margarita Pesto"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Margarita Pesto.webp" alt="Pizza Margarita Pesto"></div>
               <div class="menu-body">
                 <h3>Margarita Pesto</h3>
                 <p>Salsa de tomate de la casa, con masa de la casa, mozzarella, tomate cherry y un pesto espectacular.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Margarita Pesto" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Margarita Pesto">−</button>
+                  <span class="qty-num" aria-label="Cantidad Margarita Pesto">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Margarita Pesto">+</button>
+                </div>
               </div>
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Chapina.png" alt="Pizza Chapina"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Chapina.webp" alt="Pizza Chapina"></div>
               <div class="menu-body">
                 <h3>Chapina</h3>
                 <p>Pizza con masa de la casa, salsa de chile guaque con chorizo y longaniza.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Chapina" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Chapina">−</button>
+                  <span class="qty-num" aria-label="Cantidad Chapina">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Chapina">+</button>
+                </div>
               </div>
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Carnes.png" alt="Pizza de Carnes"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Carnes.png" alt="Pizza de Carnes"></div>
               <div class="menu-body">
                 <h3>Carnes</h3>
                 <p>Salsa de tomate de la casa, masa de la casa, queso mozzarella, jamón, tocino y pepperoni.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Carnes" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Carnes">−</button>
+                  <span class="qty-num" aria-label="Cantidad Carnes">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Carnes">+</button>
+                </div>
               </div>
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Tejana.png" alt="Pizza Tejana"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Tejana.webp" alt="Pizza Tejana"></div>
               <div class="menu-body">
                 <h3>Tejana</h3>
                 <p>Salsa de tomate, mozzarella, carne sazonada y un toque de jalapeño (nivel “rico”, no complicado).</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Tejana" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Tejana">−</button>
+                  <span class="qty-num" aria-label="Cantidad Tejana">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Tejana">+</button>
+                </div>
               </div>
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Tocino.png" alt="Pizza de Tocino"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Tocino.webp" alt="Pizza de Tocino"></div>
               <div class="menu-body">
                 <h3>Tocino</h3>
                 <p>Salsa de tomate, mozzarella y tocino crujiente. Favorita para compartir.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Tocino" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Tocino">−</button>
+                  <span class="qty-num" aria-label="Cantidad Tocino">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Tocino">+</button>
+                </div>
               </div>
             </article>
 
             <article class="menu-item">
-              <div class="menu-img"><img src="Jamon.png" alt="Pizza de Jamón"></div>
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Jamon.webp" alt="Pizza de Jamón"></div>
               <div class="menu-body">
                 <h3>Jamón</h3>
                 <p>Salsa de tomate de la casa, con queso mozzarella y jamón.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Jamón" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Jamón">−</button>
+                  <span class="qty-num" aria-label="Cantidad Jamón">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Jamón">+</button>
+                </div>
               </div>
             </article>
           </div>
 
+          
+          <!-- ===== Entradas y Postres (NO desplegado por default) ===== -->
+          <div class="menu-wrap" id="menuExtras" style="margin-top:14px;">
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menuExtrasPanel" id="menuExtrasToggle">
+              <span class="menu-toggle__left">
+                <span class="menu-toggle__icon">🍓</span>
+                <span>
+                  <strong class="menu-title">Nuestras Entradas y Postres</strong>
+                  <span class="menu-toggle__meta">Nachos • Alitas • Crepas • Fresas</span>
+                </span>
+              </span>
+              <span class="menu-toggle__chev" aria-hidden="true">▾</span>
+            </button>
+
+            <div class="menu-panel" id="menuExtrasPanel" hidden>
+              <div class="menu-grid">
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Nachos.webp" alt="Nachos"></div>
+                  <div class="menu-body">
+                    <h3>Nachos con queso</h3>
+                    <p>Nachos crujientes con queso derretido y toppings (según disponibilidad).</p>
+                    <div class="menu-price">Q35</div>
+                    <div class="qty-controls" data-flavor="Nachos con queso" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Nachos con queso">−</button>
+                      <span class="qty-num" aria-label="Cantidad Nachos con queso">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Nachos con queso">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Alitas.webp" alt="Alitas"></div>
+                  <div class="menu-body">
+                    <h3>Alitas (porción)</h3>
+                    <p>Alitas doraditas con salsa a elegir (consulta opciones disponibles).</p>
+                    <div class="menu-price">Q35</div>
+                    <div class="qty-controls" data-flavor="Alitas (porción)" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Alitas (porción)">−</button>
+                      <span class="qty-num" aria-label="Cantidad Alitas (porción)">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Alitas (porción)">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Crepa-Fresas-Nutela.webp" alt="Crepa de fresas con Nutella"></div>
+                  <div class="menu-body">
+                    <h3>Crepa de fresas con Nutella</h3>
+                    <p>Crepa recién hecha con fresas frescas y Nutella.</p>
+                    <div class="menu-price">Q40</div>
+                    <div class="qty-controls" data-flavor="Crepa de fresas con Nutella" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Crepa de fresas con Nutella">−</button>
+                      <span class="qty-num" aria-label="Cantidad Crepa de fresas con Nutella">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Crepa de fresas con Nutella">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Crepa-Banano-Nutela.webp" alt="Crepa de banano con Nutella"></div>
+                  <div class="menu-body">
+                    <h3>Crepa de banano con Nutella</h3>
+                    <p>Crepa recién hecha con banano y Nutella. Dulce y contundente.</p>
+                    <div class="menu-price">Q40</div>
+                    <div class="qty-controls" data-flavor="Crepa de banano con Nutella" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Crepa de banano con Nutella">−</button>
+                      <span class="qty-num" aria-label="Cantidad Crepa de banano con Nutella">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Crepa de banano con Nutella">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Crepa-Fresa-Banano.webp" alt="Crepa de fresa y banano"></div>
+                  <div class="menu-body">
+                    <h3>Crepa de fresa y banano</h3>
+                    <p>Crepa con fresa y banano: el combo que nunca falla.</p>
+                    <div class="menu-price">Q40</div>
+                    <div class="qty-controls" data-flavor="Crepa de fresa y banano" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Crepa de fresa y banano">−</button>
+                      <span class="qty-num" aria-label="Cantidad Crepa de fresa y banano">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Crepa de fresa y banano">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Fresas-Con-Crema-Vaso.webp" alt="Fresas con crema en vaso"></div>
+                  <div class="menu-body">
+                    <h3>Vaso de fresas con crema</h3>
+                    <p>Fresas frescas con crema dulce servidas en vaso.</p>
+                    <div class="menu-price">Q35</div>
+                    <div class="qty-controls" data-flavor="Vaso de fresas con crema" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Vaso de fresas con crema">−</button>
+                      <span class="qty-num" aria-label="Cantidad Vaso de fresas con crema">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Vaso de fresas con crema">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Fresas-Con-Chocolate-Vaso.webp" alt="Fresas con chocolate en vaso"></div>
+                  <div class="menu-body">
+                    <h3>Vaso de fresas con chocolate</h3>
+                    <p>Fresas frescas bañadas con chocolate, servidas en vaso.</p>
+                    <div class="menu-price">Q35</div>
+                    <div class="qty-controls" data-flavor="Vaso de fresas con chocolate" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Vaso de fresas con chocolate">−</button>
+                      <span class="qty-num" aria-label="Cantidad Vaso de fresas con chocolate">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Vaso de fresas con chocolate">+</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <p class="menu-note" style="margin-top:10px;">Nota: salsas y detalles (si aplica) se confirman por WhatsApp.</p>
+            </div>
+          </div>
+
+          <div class="menu-orderbar">
+            <div class="cart-chip" id="cartChip" title="Carrito (total de items)">
+              <img id="cartIcon" src="carrito-ligth.png" alt="Carrito" width="20" height="20">
+              <span class="cart-label">Carrito</span>
+              <span class="cart-count" id="cartCount">0</span>
+            </div>
+          </div>
           <div class="menu-cta">
-            <a class="btn btn-primary" id="menuCtaWa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+            <a class="btn btn-primary" id="menuCtaWa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp <span class="wa-badge" id="waBadge" aria-hidden="true">0</span></a>
             <a class="btn btn-outline" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener">Pedir por PedidosYa</a>
             <a class="btn btn-outline" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener">Pedir por Uber Eats</a>
           </div>
@@ -1105,8 +1498,7 @@
         <p>Mandame: qué querés, cantidad y tu ubicación. Te confirmo al momento.</p>
         <div class="cta-row">
           <a class="btn btn-primary" id="pubCta1" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
-          <a class="btn btn-outline" href="#servicios">Ver servicios</a>
-        </div>
+</div>
       </div>
     </div>
   </section>
@@ -1146,17 +1538,24 @@
     </div>
   </section>
 
+
+  <!-- Mini Carrito (flotante, discreto) -->
+  <a id="miniCartFab" class="mini-cart-fab hidden" href="#" aria-label="Ver carrito" title="Ver carrito">
+    <img id="miniCartIcon" loading="lazy" decoding="async" src="carrito-ligth.png" alt="Carrito">
+    <span id="miniCartCount" class="mini-cart-count" aria-hidden="true">0</span>
+  </a>
+
   <!-- WhatsApp Floating Button -->
   <a id="ueFab" class="fab fab--ue" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener" aria-label="Pedir por Uber Eats" title="Uber Eats">
-  <img src="ubereats.png" alt="Uber Eats" />
+  <img loading="lazy" decoding="async" src="ubereats.png" alt="Uber Eats" />
 </a>
 
 <a id="pyFab" class="fab fab--py" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener" aria-label="Pedir por PedidosYa" title="PedidosYa">
-  <img src="pedidosya.png" alt="PedidosYa" />
+  <img loading="lazy" decoding="async" src="pedidosya.png" alt="PedidosYa" />
 </a>
 
 <a id="waFab" class="fab fab--wa" href="#" target="_blank" rel="noopener" aria-label="Escribirme por WhatsApp" title="WhatsApp">
-  <img src="whatsapp 64p original.png" alt="WhatsApp" />
+  <img loading="lazy" decoding="async" src="whatsapp 64p original.png" alt="WhatsApp" />
 </a>
 </main>
 
@@ -1185,20 +1584,20 @@
 
   <div class="container">
 <div class="social">
-        <a class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg== target="_blank" rel="noopener" aria-label="Instagram">
-          <img src="instagram.png" alt="Instagram" />
+        <a class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" target="_blank" rel="noopener" aria-label="Instagram">
+          <img loading="lazy" decoding="async" src="instagram.png" alt="Instagram" />
         </a>
         <a class="social__link" href="#" target="_blank" rel="noopener" aria-label="TikTok">
-          <img src="tiktok.png" alt="TikTok" />
+          <img loading="lazy" decoding="async" src="tiktok.png" alt="TikTok" />
         </a>
         <a class="social__link" href="#" target="_blank" rel="noopener" aria-label="Facebook">
-          <img src="facebook.png" alt="Facebook" />
+          <img loading="lazy" decoding="async" src="facebook.png" alt="Facebook" />
         </a>
               <a class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener" aria-label="Uber Eats">
-        <img src="ubereats.png" alt="Uber Eats" />
+        <img loading="lazy" decoding="async" src="ubereats.png" alt="Uber Eats" />
       </a>
 <a class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener" aria-label="PedidosYa">
-          <img src="pedidosya.png" alt="PedidosYa" />
+          <img loading="lazy" decoding="async" src="pedidosya.png" alt="PedidosYa" />
         </a>
       </div>
   </div>
@@ -1234,11 +1633,16 @@
 
     const headerLogo = document.getElementById("logoHeader");
     const heroLogo   = document.getElementById("logoHero");
-    const favicon    = document.getElementById("favicon");
 
     if(headerLogo) headerLogo.src = src;
     if(heroLogo)   heroLogo.src = src;
-    if(favicon)    favicon.href = src;
+    const favicon = document.getElementById("favicon");
+    if(favicon) favicon.href = (t==="dark") ? "MR PIZZA LOGO_Dark.png" : "MR PIZZA LOGO-Ligth.png";
+    const cartIcon = document.getElementById("cartIcon");
+    if(cartIcon) cartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
+    const miniCartIcon = document.getElementById("miniCartIcon");
+    if(miniCartIcon) miniCartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
+
   }
 
 
@@ -1396,7 +1800,8 @@
       const el = document.querySelector(id);
       if(!el) return;
       e.preventDefault();
-      el.scrollIntoView({behavior:"smooth", block:"start"});
+      const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"start"});
     });
   })();
 
@@ -1442,15 +1847,250 @@
     const panel  = document.getElementById("menuPanel");
     if(!toggle || !panel) return;
 
+    // Sincroniza estado inicial (en v31 el menú viene abierto por default)
+    const isExpandedInit = toggle.getAttribute("aria-expanded") === "true";
+    panel.hidden = !isExpandedInit;
+
     toggle.addEventListener("click", ()=>{
-      const expanded = toggle.getAttribute("aria-expanded")==="true";
-      toggle.setAttribute("aria-expanded", expanded ? "false" : "true");
-      panel.hidden = expanded;
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      const next = !expanded;
+      toggle.setAttribute("aria-expanded", String(next));
+      panel.hidden = !next;
+    });
+  })();
+
+  // Menú Entradas y Postres (solo Público) - NO desplegado por default
+  (function(){
+    const toggle = document.getElementById("menuExtrasToggle");
+    const panel  = document.getElementById("menuExtrasPanel");
+    if(!toggle || !panel) return;
+
+    // Estado inicial: cerrado
+    const isExpandedInit = toggle.getAttribute("aria-expanded") === "true";
+    panel.hidden = !isExpandedInit;
+
+    toggle.addEventListener("click", ()=>{
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      const next = !expanded;
+      toggle.setAttribute("aria-expanded", String(next));
+      panel.hidden = !next;
     });
   })();
 
   // Boot
   setView(detectViewFromPath());
+</script>
+<script>
+
+  /* ====== Publico: carrito + cantidades (menu de pizzas) ====== */
+  (function(){
+    const waBtn = document.getElementById("menuCtaWa");
+    const waBadge = document.getElementById("waBadge");
+    const cartCountEl = document.getElementById("cartCount");
+
+    // Mini carrito flotante (solo Publico)
+    const miniCartFab = document.getElementById("miniCartFab");
+    const miniCartCountEl = document.getElementById("miniCartCount");
+
+    const isBusinessPath = (()=>{
+      const p = (location && location.pathname ? location.pathname.toLowerCase() : '');
+      return p.includes('/business') || p.includes('/bussines');
+    })();
+
+    if(miniCartFab){
+      miniCartFab.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const target = document.getElementById('cartChip') || document.getElementById('menuCtaWa');
+        if(!target) return;
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        target.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'center'});
+      });
+    }
+
+    if(!waBtn || !cartCountEl) return;
+
+    const PHONE = "50239151615";
+    const state = {};      // itemName -> qty
+    const category = {};   // itemName -> "pizza" | "extra"
+
+    function totalCount(){
+      return Object.values(state).reduce((a,b)=>a+(b||0),0);
+    }
+
+    function totalBy(cat){
+      let t = 0;
+      Object.keys(state).forEach(k=>{ if(category[k]===cat) t += (state[k]||0); });
+      return t;
+    }
+
+    function buildMessage(){
+      const total = totalCount();
+      if(total<=0) return "";
+
+      const pizzas = totalBy("pizza");
+      const extras = totalBy("extra");
+
+      const lines = [];
+      lines.push("Hola! Vengo del canal web: Mr Pizza GT by GaschSoft.");
+
+      if(pizzas>0 && extras>0){
+        lines.push("Quiero hacer un pedido: " + pizzas + " pizzas y " + extras + " entradas/postres.");
+      }else if(pizzas>0){
+        lines.push("Quiero hacer un pedido, deseo " + pizzas + " pizzas los sabores son:");
+      }else{
+        lines.push("Quiero hacer un pedido, deseo " + extras + " entradas/postres:");
+      }
+
+      if(pizzas>0){
+        if(!(pizzas>0 && extras===0)){
+          // Si hay extras, mantenemos el encabezado anterior y listamos pizzas abajo.
+        }
+        if(pizzas>0 && extras>0) lines.push("Pizzas:");
+        Object.keys(state).forEach(item=>{
+          const q = state[item]||0;
+          if(q>0 && category[item]==="pizza") lines.push("- " + q + " de " + item);
+        });
+      }
+
+      if(extras>0){
+        if(pizzas>0) lines.push("Entradas y postres:");
+        Object.keys(state).forEach(item=>{
+          const q = state[item]||0;
+          if(q>0 && category[item]==="extra") lines.push("- " + q + " de " + item);
+        });
+      }
+
+      return lines.join("\n");
+    }
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function flyToCart(fromEl){
+      try{
+        if(reduceMotion) return;
+
+        // Solo en PUBLICO
+        const p = (location && location.pathname ? location.pathname.toLowerCase() : '');
+        if(p.includes('/business') || p.includes('/bussines')) return;
+
+        const target = document.getElementById('miniCartFab') || document.getElementById('cartChip') || document.getElementById('menuCtaWa') || document.getElementById('cartCount');
+        if(!fromEl || !target) return;
+
+        const a = fromEl.getBoundingClientRect();
+        const b = target.getBoundingClientRect();
+
+        const dot = document.createElement('div');
+        dot.className = 'fly-dot';
+
+        const size = 14;
+        const startX = a.left + a.width/2;
+        const startY = a.top + a.height/2;
+        const endX   = b.left + b.width/2;
+        const endY   = b.top + b.height/2;
+
+        // Posicion robusta con left/top (evita casos raros con transforms)
+        dot.style.left = (startX - size/2).toFixed(2) + 'px';
+        dot.style.top  = (startY - size/2).toFixed(2) + 'px';
+        dot.style.opacity = '1';
+        dot.style.transform = 'translate(0px, 0px) scale(1)';
+        dot.style.transition = 'transform 920ms cubic-bezier(.2,.8,.2,1), opacity 920ms ease';
+
+        document.body.appendChild(dot);
+
+        // Fuerza layout y anima en el siguiente frame
+        dot.getBoundingClientRect();
+        requestAnimationFrame(() => {
+          const dx = endX - startX;
+          const dy = endY - startY;
+          dot.style.transform = `translate(${dx}px, ${dy}px) scale(.7)`;
+          dot.style.opacity = '0.15';
+        });
+
+        window.setTimeout(()=>{ dot.remove(); }, 980);
+      }catch(e){ /* no-op */ }
+    }
+
+    function render(){
+      const total = totalCount();
+      cartCountEl.textContent = String(total);
+
+      if(total>0){
+        waBtn.classList.add("has-badge");
+        if(waBadge){ waBadge.textContent = String(total); waBadge.setAttribute("aria-hidden","false"); }
+      }else{
+        waBtn.classList.remove("has-badge");
+        if(waBadge){ waBadge.textContent = "0"; waBadge.setAttribute("aria-hidden","true"); }
+      }
+
+      
+
+      // Mini carrito flotante
+      if(miniCartCountEl) miniCartCountEl.textContent = String(total);
+      if(miniCartFab) miniCartFab.classList.toggle('hidden', isBusinessPath || total<=0);
+
+      const msg = buildMessage();
+      waBtn.href = msg ? ("https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg)) : ("https://wa.me/" + PHONE);
+    }
+
+    function setQty(ctrl, itemName, qty){
+      const q = Math.max(0, qty|0);
+      state[itemName] = q;
+
+      const card = ctrl.closest(".menu-item");
+      if(card){
+        if(q>0) card.classList.add("has-qty");
+        else card.classList.remove("has-qty");
+      }
+
+      const num = ctrl.querySelector(".qty-num");
+      if(num) num.textContent = String(q);
+
+      render();
+    }
+
+    document.querySelectorAll(".qty-controls").forEach(ctrl=>{
+      const itemName = ctrl.getAttribute("data-flavor") || "Item";
+      const cat = (ctrl.getAttribute("data-category") || "pizza").toLowerCase();
+      state[itemName] = 0;
+      category[itemName] = (cat === "extra") ? "extra" : "pizza";
+
+      const minus = ctrl.querySelector(".qty-minus");
+      const plus  = ctrl.querySelector(".qty-plus");
+      const num   = ctrl.querySelector(".qty-num");
+      if(num) num.textContent = "0";
+
+      if(plus) plus.addEventListener("click", (e)=>{
+        e.preventDefault();
+        setQty(ctrl, itemName, (state[itemName]||0) + 1);
+        flyToCart(e.currentTarget || plus);
+      });
+      if(minus) minus.addEventListener("click", (e)=>{
+        e.preventDefault();
+        setQty(ctrl, itemName, (state[itemName]||0) - 1);
+      });
+    });
+
+    waBtn.addEventListener("click", (e)=>{
+      const total = totalCount();
+      if(total<=0){
+        e.preventDefault();
+        alert("Agregá al menos 1 item al carrito para armar el mensaje.");
+        return;
+      }
+      setTimeout(()=>{
+        Object.keys(state).forEach(k=>state[k]=0);
+        document.querySelectorAll(".qty-controls").forEach(ctrl=>{
+          const num = ctrl.querySelector(".qty-num");
+          if(num) num.textContent = "0";
+          const card = ctrl.closest(".menu-item");
+          if(card) card.classList.remove("has-qty");
+        });
+        render();
+      }, 150);
+    });
+
+    render();
+  })();
+
 </script>
 </body>
 </html>
