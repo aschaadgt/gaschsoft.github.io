@@ -477,10 +477,10 @@
     box-shadow: 0 8px 14px rgba(0,0,0,.16);
     border: 1px solid rgba(255,255,255,.85);
   }
-  @media(max-width: 720px){
+  @media(max-width: 520px){
     .mini-cart-fab{
-      right: 16px;
-      bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 3) + 30px);
+      right: 12px;
+      bottom: calc(16px + clamp(56px, 7.2vw, 68px) + 10px); /* arriba del FAB de WhatsApp en pantallas muy chicas */
     }
   }
 
@@ -948,173 +948,6 @@
     will-change: transform, opacity;
   }
 
-  /* =====================
-     Modal Publico (datos pedido WhatsApp)
-     ===================== */
-  .modal-overlay{
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 18px;
-    z-index: 1600;
-    background: rgba(2, 6, 23, .55);
-    backdrop-filter: blur(8px) saturate(140%);
-  }
-  :root[data-theme="dark"] .modal-overlay{ background: rgba(0,0,0,.62); }
-  .modal-overlay.is-open{ display: flex; }
-
-  .modal{
-    /* un poco mas compacto (~10%) */
-    width: min(342px, 100%);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    box-shadow: var(--shadow-strong);
-    position: relative;
-    padding: 11px;
-  }
-  .modal-x{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
-    border: 2px solid var(--line);
-    background: var(--surface2);
-    color: var(--ink);
-    cursor: pointer;
-    font-weight: 950;
-  }
-  .modal-x:hover{ filter: brightness(0.98); }
-
-  .modal-head{ padding: 5px 5px 9px; }
-  .modal-kicker{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: rgba(198,40,40,.10);
-    border: 1px solid rgba(198,40,40,.18);
-    font-weight: 950;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .modal-title{ margin: 0 0 6px; letter-spacing: -.4px; }
-  .modal-sub{ margin: 0; color: var(--muted); line-height: 1.55; font-weight: 650; font-size: 13px; }
-
-  .modal-form{ padding: 0 6px 6px; display: grid; gap: 10px; }
-  .field label{ display:block; font-weight: 900; margin: 0 0 6px; }
-  .field input, .field textarea, .field select{
-    width: 100%;
-    border-radius: 12px;
-    border: 2px solid var(--line);
-    background: var(--surface2);
-    padding: 10px 12px;
-    color: var(--ink);
-    outline: none;
-    font-weight: 750;
-  }
-  .field select{ appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 38px; }
-  .field select{ cursor: pointer; transition: border-color 140ms ease, filter 140ms ease; }
-  .field select:hover{ border-color: rgba(198,40,40,.25); filter: brightness(0.99); }
-  .field .select-wrap{ position: relative; }
-  .field .select-wrap:after{
-    content: "▾";
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: 950;
-    color: var(--muted);
-    pointer-events: none;
-  }
-  .field input:focus, .field textarea:focus, .field select:focus{ box-shadow: 0 0 0 6px var(--ring); border-color: rgba(198,40,40,.35); }
-  .field textarea{ resize: vertical; min-height: 76px; }
-
-  .field-error{
-    margin-top: 6px;
-    min-height: 16px;
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--danger);
-    opacity: 0;
-    transform: translateY(-2px);
-    transition: opacity 160ms ease, transform 160ms ease;
-  }
-  .field-error.is-show{ opacity: 1; transform: translateY(0px); }
-
-  .modal-actions{ display:flex; gap: 10px; justify-content:flex-end; align-items:center; padding-top: 4px; }
-  .send-btn{
-    position: relative;
-    width: 46px;
-    height: 46px;
-    border-radius: 999px;
-    border: 2px solid var(--line);
-    background: var(--surface2);
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow);
-  }
-  .send-btn:hover{ transform: translateY(-1px); }
-  .send-btn:after{
-    content: "Enviar pedido";
-    position: absolute;
-    left: 50%;
-    top: calc(100% + 8px);
-    transform: translateX(-50%);
-    padding: 5px 8px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink);
-    font-weight: 900;
-    font-size: 11px;
-    line-height: 1;
-    white-space: nowrap;
-    box-shadow: var(--shadow);
-    z-index: 5;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 140ms ease;
-}
-  .send-btn:hover:after{ opacity: 1; }
-  .send-icon{ width: 20px; height: 20px; object-fit: contain; }
-
-  /* Toast (notificacion discreta) */
-  .toast-host{ position: fixed; top: 16px; right: 16px; z-index: 2500; display: grid; gap: 10px; }
-  .toast{
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--danger);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    padding: 10px 12px;
-    min-width: 220px;
-    max-width: min(360px, calc(100vw - 32px));
-    font-weight: 900;
-    color: var(--ink);
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 160ms ease, transform 160ms ease;
-  }
-  .toast.is-show{ opacity: 1; transform: translateY(0px); }
-
-
-  /* Modal (Publico): bloquear scroll del fondo mientras esta abierto */
-  body.modal-lock{
-    position: fixed;
-    width: 100%;
-    overflow: hidden;
-  }
-  .modal-overlay{
-    overscroll-behavior: contain;
-  }
 </style>
 <link rel="preload" as="image" href="Flayer 1.webp">
 
@@ -1776,59 +1609,6 @@
   </div>
 </footer>
 
-<!-- ===================== MODAL PUBLICO: DATOS PARA PEDIDO WHATSAPP ===================== -->
-<div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
-
-<div class="modal-overlay" id="orderModal" aria-hidden="true">
-  <div class="modal" role="dialog" aria-modal="false" aria-labelledby="orderModalTitle">
-    <button class="modal-x" type="button" id="orderModalClose" aria-label="Cerrar">✕</button>
-
-    <div class="modal-head">
-      <div class="modal-kicker">Pedido por WhatsApp</div>
-      <h3 class="modal-title" id="orderModalTitle">Tus datos para confirmar</h3>
-      <p class="modal-sub">Esto nos ayuda a personalizar el mensaje y facturarte más rápido.</p>
-    </div>
-
-    <form id="orderForm" class="modal-form" autocomplete="on">
-      <div class="field">
-        <label for="ordName">Nombre</label>
-        <input id="ordName" name="name" type="text" placeholder="Ejemplo: Andre Morales" required />
-        <div class="field-error" id="errName" aria-live="polite"></div>
-      </div>
-
-      <div class="field">
-        <label for="ordNit">NIT</label>
-        <input id="ordNit" name="nit" type="text" placeholder="Enviamos tu factura por WhatsApp" inputmode="text" />
-      </div>
-
-      <div class="field">
-        <label for="ordAddress">Dirección</label>
-        <textarea id="ordAddress" name="address" rows="3" placeholder="Ejemplo: Zona 4, Colonia ____ , 2da avenida 10-20, referencia: frente a ____" required></textarea>
-        <div class="field-error" id="errAddress" aria-live="polite"></div>
-      </div>
-
-      <div class="field">
-        <label for="ordPay">Método de pago</label>
-        <div class="select-wrap">
-          <select id="ordPay" name="pay" required>
-            <option value="" selected disabled>Elegí una opción…</option>
-            <option value="Link de Pago">Link de Pago (Visa/Mastercard)</option>
-            <option value="Efectivo">Efectivo</option>
-          </select>
-        </div>
-        <div class="field-error" id="errPay" aria-live="polite"></div>
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn btn-outline" type="button" id="orderModalCancel">Cancelar</button>
-        <button class="send-btn" type="submit" id="orderModalSend" aria-label="Enviar pedido">
-          <img id="sendMsgIcon" class="send-icon" src="enviar-mensaje.png" alt="" loading="lazy" decoding="async" />
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-
 <script>
   // =============================
   // CONFIG: CAMBIÁ SOLO ESTO
@@ -1864,10 +1644,6 @@
     if(cartIcon) cartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
     const miniCartIcon = document.getElementById("miniCartIcon");
     if(miniCartIcon) miniCartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
-
-    // Icono del boton "Enviar pedido" del modal (Publico)
-    const sendMsgIcon = document.getElementById("sendMsgIcon");
-    if(sendMsgIcon) sendMsgIcon.src = (t==="dark") ? "enviar-mensaje-dark.png" : "enviar-mensaje.png";
 
   }
 
@@ -2114,22 +1890,6 @@
     const waBadge = document.getElementById("waBadge");
     const cartCountEl = document.getElementById("cartCount");
 
-    // Modal Publico (datos antes de ir a WhatsApp)
-    const orderModal = document.getElementById('orderModal');
-    const orderClose = document.getElementById('orderModalClose');
-    const orderCancel = document.getElementById('orderModalCancel');
-    const orderForm = document.getElementById('orderForm');
-    const ordName = document.getElementById('ordName');
-    const ordNit = document.getElementById('ordNit');
-    const ordAddress = document.getElementById('ordAddress');
-    const ordPay = document.getElementById('ordPay');
-
-    const errName = document.getElementById('errName');
-    const errAddress = document.getElementById('errAddress');
-    const errPay = document.getElementById('errPay');
-
-    const toastHost = document.getElementById('toastHost');
-
     // Mini carrito flotante (solo Publico)
     const miniCartFab = document.getElementById("miniCartFab");
     const miniCartCountEl = document.getElementById("miniCartCount");
@@ -2154,8 +1914,6 @@
     const PHONE = "50239151615";
     const state = {};      // itemName -> qty
     const category = {};   // itemName -> "pizza" | "extra"
-    const priceMap = {};   // itemName -> price (Q)
-
 
     function totalCount(){
       return Object.values(state).reduce((a,b)=>a+(b||0),0);
@@ -2165,15 +1923,6 @@
       let t = 0;
       Object.keys(state).forEach(k=>{ if(category[k]===cat) t += (state[k]||0); });
       return t;
-    }
-
-    function totalAmount(){
-      let total = 0;
-      Object.keys(state).forEach(k=>{
-        const q = state[k]||0;
-        if(q>0) total += q * (priceMap[k]||0);
-      });
-      return total;
     }
 
     function buildMessage(){
@@ -2189,9 +1938,9 @@
       if(pizzas>0 && extras>0){
         lines.push("Quiero hacer un pedido: " + pizzas + " pizzas y " + extras + " entradas/postres.");
       }else if(pizzas>0){
-        lines.push("Quiero hacer un pedido, deseo " + pizzas + " pizzas.");
+        lines.push("Quiero hacer un pedido, deseo " + pizzas + " pizzas los sabores son:");
       }else{
-        lines.push("Quiero hacer un pedido, deseo " + extras + " entradas/postres.");
+        lines.push("Quiero hacer un pedido, deseo " + extras + " entradas/postres:");
       }
 
       if(pizzas>0){
@@ -2215,115 +1964,6 @@
 
       return lines.join("\n");
     }
-
-    function buildFinalOrderMessage(opts){
-      const name = cleanText(opts && opts.name);
-      const nit = cleanText(opts && opts.nit) || 'CF';
-      const address = cleanText(opts && opts.address);
-      const pay = cleanText(opts && opts.pay);
-
-      const pizzas = totalBy("pizza");
-      const extras = totalBy("extra");
-      const amount = totalAmount();
-
-      const lines = [];
-      lines.push("Hola! Vengo del canal web: Mr Pizza GT by GaschSoft.");
-      lines.push("");
-
-      lines.push("Quiero hacer un pedido.");
-      lines.push("");
-
-      // Datos del cliente (para facturación/entrega)
-      lines.push("Datos del cliente:");
-      lines.push("Nombre: " + name);
-      lines.push("NIT: " + nit);
-      lines.push("Método de pago: " + pay);
-      lines.push("Dirección: " + address);
-      lines.push("");
-
-      // Detalle
-      if(pizzas>0){
-        lines.push("Pizzas:");
-        Object.keys(state).forEach(item=>{
-          const q = state[item]||0;
-          if(q>0 && category[item]==="pizza") lines.push("- " + q + " de " + item);
-        });
-      }
-      if(extras>0){
-        if(pizzas>0) lines.push("");
-        lines.push("Entradas y postres:");
-        Object.keys(state).forEach(item=>{
-          const q = state[item]||0;
-          if(q>0 && category[item]==="extra") lines.push("- " + q + " de " + item);
-        });
-      }
-
-      lines.push("");
-      lines.push("Total de la orden: Q" + amount);
-      lines.push("");
-      lines.push("Confirmo que deseo el pedido.");
-      lines.push("En este chat puedo compartir mi ubicación actual para coordinar la entrega y que me confirmen el tiempo estimado.");
-      return lines.join("\n");
-    }
-
-    function cleanText(x){
-      return String(x||"").replace(/\s+/g,' ').trim();
-    }
-
-    // Toast discreto (arriba derecha)
-    function showToast(text){
-      if(!toastHost) return;
-      const el = document.createElement('div');
-      el.className = 'toast';
-      el.textContent = text;
-      toastHost.appendChild(el);
-      requestAnimationFrame(()=> el.classList.add('is-show'));
-      window.setTimeout(()=>{
-        el.classList.remove('is-show');
-        window.setTimeout(()=> el.remove(), 220);
-      }, 2200);
-    }
-
-    // Error bajo el campo (3s)
-    function fieldError(el, msg){
-      if(!el) return;
-      el.textContent = msg;
-      el.classList.add('is-show');
-      window.setTimeout(()=>{
-        el.classList.remove('is-show');
-        window.setTimeout(()=>{ if(el.textContent === msg) el.textContent = ''; }, 180);
-      }, 3000);
-    }    function openOrderModal(){
-      if(!orderModal) return;
-      // Bloquea scroll del fondo (sin cerrar con click fuera)
-      try{
-        const y = window.scrollY || document.documentElement.scrollTop || 0;
-        document.body.dataset.scrollY = String(y);
-        document.body.style.top = (-y) + 'px';
-        document.body.classList.add('modal-lock');
-      }catch(e){}
-      orderModal.classList.add('is-open');
-      orderModal.setAttribute('aria-hidden','false');
-      // foco al primer campo
-      setTimeout(()=>{ try{ ordName && ordName.focus(); }catch(e){} }, 0);
-    }
-
-        function closeOrderModal(){
-      if(!orderModal) return;
-      orderModal.classList.remove('is-open');
-      orderModal.setAttribute('aria-hidden','true');
-      // Restaura scroll del fondo
-      try{
-        const y = parseInt(document.body.dataset.scrollY || '0', 10) || 0;
-        document.body.classList.remove('modal-lock');
-        document.body.style.top = '';
-        window.scrollTo(0, y);
-      }catch(e){}
-    }
-
-    // Cierres del modal
-    if(orderClose) orderClose.addEventListener('click', closeOrderModal);
-    if(orderCancel) orderCancel.addEventListener('click', closeOrderModal);
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function flyToCart(fromEl){
@@ -2409,21 +2049,11 @@
       render();
     }
 
-    function parsePriceFromCtrl(ctrl){
-      const card = ctrl.closest('.menu-item');
-      if(!card) return 0;
-      const priceEl = card.querySelector('.menu-price');
-      const t = priceEl ? priceEl.textContent : '';
-      const m = t && t.match(/Q\s*([0-9]+)/i);
-      return m ? parseInt(m[1],10) : 0;
-    }
-
     document.querySelectorAll(".qty-controls").forEach(ctrl=>{
       const itemName = ctrl.getAttribute("data-flavor") || "Item";
       const cat = (ctrl.getAttribute("data-category") || "pizza").toLowerCase();
       state[itemName] = 0;
       category[itemName] = (cat === "extra") ? "extra" : "pizza";
-      priceMap[itemName] = parsePriceFromCtrl(ctrl);
 
       const minus = ctrl.querySelector(".qty-minus");
       const plus  = ctrl.querySelector(".qty-plus");
@@ -2445,47 +2075,10 @@
       const total = totalCount();
       if(total<=0){
         e.preventDefault();
-        showToast("Agregá al menos 1 item al carrito");
+        alert("Agregá al menos 1 item al carrito para armar el mensaje.");
         return;
       }
-
-      // En PUBLICO: antes de abrir WhatsApp, pedimos datos en un modal
-      e.preventDefault();
-      openOrderModal();
-    });
-
-    if(orderForm){
-      orderForm.addEventListener('submit', (e)=>{
-        e.preventDefault();
-
-        const total = totalCount();
-        if(total<=0){
-          showToast('Agregá al menos 1 item al carrito');
-          closeOrderModal();
-          return;
-        }
-
-        const name = cleanText(ordName ? ordName.value : '');
-        const nitRaw = cleanText(ordNit ? ordNit.value : '');
-        const nit = nitRaw ? nitRaw : 'CF';
-        const address = cleanText(ordAddress ? ordAddress.value : '');
-
-        const pay = cleanText(ordPay ? ordPay.value : '');
-
-        // Validación discreta (sin alerts)
-        let ok = true;
-        if(!name){ fieldError(errName, 'Ingresá tu nombre'); ok = false; }
-        if(!address){ fieldError(errAddress, 'Ingresá tu dirección'); ok = false; }
-        if(!pay){ fieldError(errPay, 'Elegí una opción'); ok = false; }
-        if(!ok) return;
-
-        const msg = buildFinalOrderMessage({ name, nit, address, pay });
-        const url = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
-
-        // Abre WhatsApp
-        window.open(url, '_blank', 'noopener');
-
-        // Reset del carrito (igual que antes, pero despues de enviar)
+      setTimeout(()=>{
         Object.keys(state).forEach(k=>state[k]=0);
         document.querySelectorAll(".qty-controls").forEach(ctrl=>{
           const num = ctrl.querySelector(".qty-num");
@@ -2494,12 +2087,8 @@
           if(card) card.classList.remove("has-qty");
         });
         render();
-
-        // Limpia el formulario y cierra
-        try{ orderForm.reset(); }catch(err){}
-        closeOrderModal();
-      });
-    }
+      }, 150);
+    });
 
     render();
   })();
