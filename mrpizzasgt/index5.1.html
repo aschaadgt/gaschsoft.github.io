@@ -2506,41 +2506,5 @@
   })();
 
 </script>
-<!-- iOS/PWA recover: avoid occasional blank screen when returning from external apps (e.g., WhatsApp) -->
-<script>
-(function () {
-  // Force a repaint/reflow in a very small, low-risk way.
-  function forceRepaint() {
-    try {
-      // Toggle a trivial transform to trigger GPU repaint
-      const el = document.documentElement;
-      const prev = el.style.webkitTransform;
-      el.style.webkitTransform = 'translateZ(0)';
-      // Also nudge scroll by 1px and back (works on iOS Safari/PWA)
-      const x = window.pageXOffset || 0;
-      const y = window.pageYOffset || 0;
-      window.scrollTo(x, y + 1);
-      window.scrollTo(x, y);
-      requestAnimationFrame(function () {
-        el.style.webkitTransform = prev || '';
-      });
-    } catch (e) { /* no-op */ }
-  }
-
-  // When returning from bfcache (back-forward cache) or restoring the page
-  window.addEventListener('pageshow', function (e) {
-    // Some iOS PWAs resume with a white screen; a repaint usually fixes it.
-    // Run on next tick so layout is ready.
-    setTimeout(forceRepaint, 30);
-  });
-
-  // When app becomes visible again (coming back from WhatsApp)
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) {
-      setTimeout(forceRepaint, 30);
-    }
-  });
-})();
-</script>
 </body>
 </html>
