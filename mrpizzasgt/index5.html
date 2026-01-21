@@ -1017,8 +1017,6 @@
     color: var(--ink);
     outline: none;
     font-weight: 750;
-    /* iOS: evita el zoom automatico al enfocar (requiere >= 16px) */
-    font-size: 16px;
   }
   .field select{ appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 38px; }
   .field select{ cursor: pointer; transition: border-color 140ms ease, filter 140ms ease; }
@@ -2306,7 +2304,8 @@
       }catch(e){}
       orderModal.classList.add('is-open');
       orderModal.setAttribute('aria-hidden','false');
-      // No forzamos focus (en iOS puede disparar zoom al enfocar inputs)
+      // foco al primer campo
+      setTimeout(()=>{ try{ ordName && ordName.focus(); }catch(e){} }, 0);
     }
 
         function closeOrderModal(){
