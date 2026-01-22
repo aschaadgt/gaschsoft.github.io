@@ -1058,19 +1058,19 @@
     border: 1px solid var(--line);
     box-shadow: var(--shadow-strong);
     background: var(--surface);
-    min-height: 320px;
+    min-height: 414px;
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
+    grid-template-columns: 2.7fr minmax(380px, 460px);
   }
   @media (max-width: 860px){
     .biz-hero{ grid-template-columns: 1fr; min-height: 420px; }
   }
   .biz-hero__media{
     position: relative;
-    min-height: 320px;
+    min-height: 414px;
   }
   @media (max-width: 860px){
-    .biz-hero__media{ min-height: 230px; }
+    .biz-hero__media{ min-height: 265px; }
   }
   .biz-hero__media img{
     width: 100%;
@@ -1080,10 +1080,10 @@
   }
 
   /* HERO carousel (Empresas) */
-  #bizSection .container{ max-width: 1400px; width: min(1400px, calc(100% - 48px)); margin: 0 auto; }
-  .biz-hero{ grid-template-columns: 1.9fr 1.1fr; }
+  #bizSection .container{ max-width: 1750px; width: min(1750px, calc(100% - 48px)); margin: 0 auto; }
+  .biz-hero{ grid-template-columns: 2.7fr minmax(380px, 460px); }
   @media (max-width: 860px){
-    .biz-hero{ grid-template-columns: 1fr; }
+    .biz-hero{ grid-template-columns: 2.7fr minmax(380px, 460px); }
     .biz-hero__content{ padding: 18px 16px; }
   }
   @media (max-width: 520px){
@@ -1092,8 +1092,8 @@
     .biz-carousel__btn{ width: 38px; height: 38px; }
   }
 
-  .biz-hero__media{ min-height: 360px; }
-  @media (max-width: 860px){ .biz-hero__media{ min-height: 250px; } }
+  .biz-hero__media{ min-height: 414px; }
+  @media (max-width: 860px){ .biz-hero__media{ min-height: 288px; } }
   .kicker-center{ width: 100%; text-align: center; }
 
   .biz-carousel{
@@ -1369,6 +1369,39 @@
   .modal-overlay{
     overscroll-behavior: contain;
   }
+
+/* ===== v54.1 Empresas: modal compacto ===== */
+#bizModal .modal{
+  padding: 12px;
+  border-radius: 16px;
+}
+#bizModal .modal-head{
+  padding: 6px 6px 10px;
+}
+#bizModal .modal-title{
+  font-size: 18px;
+}
+#bizModal .modal-sub{
+  font-size: 13px;
+}
+#bizModal .modal-form{
+  gap: 10px;
+}
+#bizModal .field label{
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+#bizModal .field input,
+#bizModal .field textarea,
+#bizModal .field select{
+  padding: 8px 10px;
+  font-size: 15px;
+}
+#bizModal .modal-actions{
+  padding-top: 6px;
+  gap: 8px;
+}
+
 </style>
 <link rel="preload" as="image" href="Flayer 1.webp">
 

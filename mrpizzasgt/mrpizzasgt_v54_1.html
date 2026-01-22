@@ -1081,7 +1081,7 @@
 
   /* HERO carousel (Empresas) */
   #bizSection .container{ max-width: 1400px; width: min(1400px, calc(100% - 48px)); margin: 0 auto; }
-  .biz-hero{ grid-template-columns: 1.9fr 1.1fr; }
+  .biz-hero{ grid-template-columns: 1fr minmax(420px, 520px); }
   @media (max-width: 860px){
     .biz-hero{ grid-template-columns: 1fr; }
     .biz-hero__content{ padding: 18px 16px; }
@@ -1369,6 +1369,39 @@
   .modal-overlay{
     overscroll-behavior: contain;
   }
+
+/* ===== v54.1 Empresas: modal compacto ===== */
+#bizModal .modal{
+  padding: 12px;
+  border-radius: 16px;
+}
+#bizModal .modal-head{
+  padding: 6px 6px 10px;
+}
+#bizModal .modal-title{
+  font-size: 18px;
+}
+#bizModal .modal-sub{
+  font-size: 13px;
+}
+#bizModal .modal-form{
+  gap: 10px;
+}
+#bizModal .field label{
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+#bizModal .field input,
+#bizModal .field textarea,
+#bizModal .field select{
+  padding: 8px 10px;
+  font-size: 15px;
+}
+#bizModal .modal-actions{
+  padding-top: 6px;
+  gap: 8px;
+}
+
 </style>
 <link rel="preload" as="image" href="Flayer 1.webp">
 
