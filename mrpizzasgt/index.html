@@ -7,6 +7,7 @@
 <link id="favicon" rel="icon" type="image/png" href="MR PIZZA LOGO-Ligth.png">
 
 
+
 <!-- iOS / PWA (sin afectar el favicon dinámico de la pestaña) -->
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
@@ -517,6 +518,7 @@
     #topCta{ width: 100%; justify-content:center; }
   }
 
+
   /* Menú (solo Público) */
   .menu-wrap{
     margin: 22px auto 0;
@@ -629,6 +631,7 @@
     text-align:center;
   }
 
+
   /* Carrusel Público (Flayers) */
   .promo-carousel{
     padding: 18px 0 0;
@@ -705,6 +708,7 @@
     .promo-carousel .carousel__slide img{ height: min(360px, 62vw); }
   }
 
+
   /* Header: botones Público/Business compactos (no ancho fijo) */
   .view-switch{
     display:flex;
@@ -726,10 +730,12 @@
     }
   }
 
+
   @media(max-width: 520px){
     header .row{ gap: 8px; }
     .view-switch{ max-width: auto; width: auto; }
   }
+
 
   
 
@@ -761,9 +767,11 @@
     animation: floaty 3.2s ease-in-out infinite, pulseRing 1.3s ease-out infinite;
   }
 
+
   /* Fix final: View switch compacto en cualquier ancho */
   .view-switch{ width: auto !important; }
   .view-switch button{ width: auto !important; white-space: nowrap; }
+
 
   /* Header layout: marca a la izquierda, switch a la derecha, sin expandirse */
   header .row{
@@ -795,8 +803,10 @@
     }
   }
 
+
   /* Público: espacio entre menú y tarjetas informativas */
   #publico .cols{ margin-top: 18px; }
+
 
   @media(max-width: 680px){
     .menu-item{ border-radius: 16px; }
@@ -805,6 +815,7 @@
     .menu-body p{ font-size: 12.5px; line-height: 1.35; }
     .menu-meta{ font-size: 12px; }
   }
+
 
   /* Menú: título más premium */
   .menu-title{
@@ -815,6 +826,7 @@
   .menu-toggle__meta{
     opacity: .85;
   }
+
 
   /* ====== Publico: carrito + cantidad en menu ====== */
   .menu-item{ position:relative; }
@@ -921,6 +933,7 @@
     70%{ transform: scale(1.14); box-shadow: 0 0 0 10px rgba(255,59,48,0); }
     100%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,0); }
   }
+
 
   /* Fly-to-cart (feedback visual al sumar) */
   .fly-dot{
@@ -1068,7 +1081,7 @@
 
   /* HERO carousel (Empresas) */
   #bizSection .container{ max-width: 1400px; width: min(1400px, calc(100% - 48px)); margin: 0 auto; }
-  .biz-hero{ grid-template-columns: 1fr minmax(420px, 520px); }
+  .biz-hero{ grid-template-columns: 1.9fr 1.1fr; }
   @media (max-width: 860px){
     .biz-hero{ grid-template-columns: 1fr; }
     .biz-hero__content{ padding: 18px 16px; }
@@ -1083,59 +1096,6 @@
   @media (max-width: 860px){ .biz-hero__media{ min-height: 250px; } }
   .kicker-center{ width: 100%; text-align: center; }
 
-  /* =====================
-     Empresas v54_6 (Hero separado: carrusel arriba + tarjeta abajo)
-     Objetivo: Carrusel con mismas dimensiones/posición que el carrusel de Público.
-     ===================== */
-  #bizSection.section{ margin-top: 28px; }
-  @media (max-width: 860px){ #bizSection.section{ margin-top: 18px; } }
-  #bizSection .biz-hero{
-    display:block;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    overflow: visible;
-    min-height: unset;
-  }
-  /* Carrusel como "tarjeta" igual a .promo-carousel .carousel (Público) */
-  #bizSection .biz-hero__media{
-    max-width: 1200px;
-    margin: 0 auto;
-    border-radius: 22px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    box-shadow: var(--shadow);
-    min-height: 499px;
-  }
-  @media (max-width: 860px){
-    #bizSection .biz-hero__media{ min-height: 250px; }
-  }
-
-  /* Caja de cotización separada, centrada abajo */
-  #bizSection .biz-hero__content{
-    max-width: 380px;
-    margin: 14px auto 0;
-    border-radius: 22px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    box-shadow: var(--shadow);
-    text-align: center;
-    /* conservar padding y centrado existentes */
-    padding: 16px 18px;
-
-  }
-
-  /* Compactar tarjeta (solo /business) */
-  #bizSection .kicker{ padding: 6px 10px; font-size: 13px; }
-  #bizSection .biz-h1{ font-size: 28px; }
-  @media (max-width: 520px){ #bizSection .biz-h1{ font-size: 24px; } }
-  #bizSection .biz-sub{ font-size: 14px; font-weight: 650; }
-  #bizSection .biz-cta{ margin-top: 12px; }
-  #bizSection .biz-cta .btn{ padding: 12px 16px; font-size: 15px; }
-
-  #bizSection .biz-cta{ justify-content: center; }
-  #bizSection .biz-trust{ justify-content: center; }
   .biz-carousel{
     position:absolute;
     inset:0;
@@ -1399,6 +1359,7 @@
   }
   .toast.is-show{ opacity: 1; transform: translateY(0px); }
 
+
   /* Modal (Publico): bloquear scroll del fondo mientras esta abierto */
   body.modal-lock{
     position: fixed;
@@ -1408,39 +1369,6 @@
   .modal-overlay{
     overscroll-behavior: contain;
   }
-
-/* ===== v54.1 Empresas: modal compacto ===== */
-#bizModal .modal{
-  padding: 12px;
-  border-radius: 16px;
-}
-#bizModal .modal-head{
-  padding: 6px 6px 10px;
-}
-#bizModal .modal-title{
-  font-size: 8px;
-}
-#bizModal .modal-sub{
-  font-size: 13px;
-}
-#bizModal .modal-form{
-  gap: 10px;
-}
-#bizModal .field label{
-  font-size: 13px;
-  margin-bottom: 4px;
-}
-#bizModal .field input,
-#bizModal .field textarea,
-#bizModal .field select{
-  padding: 8px 10px;
-  font-size: 15px;
-}
-#bizModal .modal-actions{
-  padding-top: 6px;
-  gap: 8px;
-}
-
 </style>
 <link rel="preload" as="image" href="Flayer 1.webp">
 
@@ -1458,6 +1386,7 @@
 <meta name="twitter:title" content="Mr Pizza GT | Pizzas & Crepas">
 <meta name="twitter:description" content="Pedidos nocturnos y eventos empresariales sin complicarte.">
 <meta name="twitter:image" content="https://gaschsoft.com/mrpizzasgt/MR%20PIZZA%20LOGO-Ligth.png">
+
 
 <!-- Favicons / PWA -->
 
@@ -1624,6 +1553,7 @@
     </div>
   </section>
 
+
   <!-- ===================== PAQUETES (COMERCIAL, CLARO) ===================== -->
   <section class="section" id="paquetes">
     <div class="container">
@@ -1664,6 +1594,7 @@
     </div>
   </section>
 
+
   <!-- ===================== SECCIÓN CONDICIONAL: EMPRESAS ===================== -->
   <section class="section" id="bizSection">
     <div class="container">
@@ -1694,7 +1625,13 @@
             <button class="btn btn-primary" id="bizQuoteBtn" type="button">Cotizá tu evento</button>
             <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
           </div>
-</div>
+
+          <div class="biz-trust" role="list">
+            <div class="biz-trust__item" role="listitem">✓ Confirmación por WhatsApp o correo</div>
+            <div class="biz-trust__item" role="listitem">✓ Logística y horarios coordinados</div>
+            <div class="biz-trust__item" role="listitem">✓ Contacto responsable + ubicación exacta</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1963,6 +1900,7 @@
         </div>
       </div>
 
+
       <div class="cols">
         <div class="card-mini">
           <div class="icon">💬</div>
@@ -2025,6 +1963,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- Mini Carrito (flotante, discreto) -->
   <a id="miniCartFab" class="mini-cart-fab hidden" href="#" aria-label="Ver carrito" title="Ver carrito">
@@ -2199,6 +2138,7 @@
                 </div>
                 <input id="bizKids" name="kids" type="number" min="0" inputmode="numeric" placeholder="0" required>
                 <div class="field-error" id="bizErrKids" aria-live="polite"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -2232,6 +2172,7 @@
                 </div>
                 <input id="bizServe" name="serve" type="time" required>
                 <div class="field-error" id="bizErrServe" aria-live="polite"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -2322,6 +2263,7 @@
     if(sendMsgIcon) sendMsgIcon.src = (t==="dark") ? "enviar-mensaje-dark.png" : "enviar-mensaje.png";
 
   }
+
 
   // Mensajes por ruta
   const MSG = {
@@ -2421,6 +2363,7 @@
       const serviciosEl2 = document.getElementById("servicios");
       [heroCtaRowEl, heroMediaEl, statsRowEl2, serviciosEl2].forEach(el=>{ if(el) el.classList.add("hidden"); });
 
+
       // Público: ocultar secciones/textos para que no se sature
       // (OJO: mantenemos esto tal cual porque Público está "cerrado / estable")
       [heroTitleEl, heroSubEl, heroCtaRow, heroNoteEl, heroCardEl, statsRowEl, valorSec, paquetesSec, ctaFinalBand, serviciosSec, checksSec]
@@ -2485,6 +2428,7 @@
 
   // Año
 
+
   // Promo carrusel (solo Público)
   (function(){
     const root = document.querySelector("[data-promo-carousel]");
@@ -2516,6 +2460,7 @@
 
     render();
   })();
+
 
   // Menú desplegable (solo Público)
   (function(){
@@ -2605,6 +2550,7 @@
     const state = {};      // itemName -> qty
     const category = {};   // itemName -> "pizza" | "extra"
     const priceMap = {};   // itemName -> price (Q)
+
 
     function totalCount(){
       return Object.values(state).reduce((a,b)=>a+(b||0),0);
