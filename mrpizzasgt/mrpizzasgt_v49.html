@@ -948,92 +948,332 @@
     will-change: transform, opacity;
   }
 
-  /* ====== Modal Cotizacion (Empresas) ====== */
-  .modal{
+  /* =====================
+     Modal Publico (datos pedido WhatsApp)
+     ===================== */
+  .modal-overlay{
     position: fixed;
     inset: 0;
-    z-index: 2005;
-    display: grid;
-    place-items: center;
+    display: none;
+    align-items: center;
+    justify-content: center;
     padding: 18px;
+    z-index: 1600;
+    background: rgba(2, 6, 23, .55);
+    backdrop-filter: blur(8px) saturate(140%);
   }
-  .modal[hidden]{ display:none; }
-  .modal__backdrop{
-    position:absolute;
-    inset:0;
-    background: rgba(2,6,23,.50);
-    backdrop-filter: blur(4px);
-  }
-  :root[data-theme="dark"] .modal__backdrop{ background: rgba(0,0,0,.62); }
+  :root[data-theme="dark"] .modal-overlay{ background: rgba(0,0,0,.62); }
+  .modal-overlay.is-open{ display: flex; }
 
-  .modal__panel{
-    position: relative;
-    width: min(720px, 100%);
-    max-height: min(86vh, 760px);
-    overflow: auto;
-    border-radius: 22px;
+  .modal{
+    /* un poco mas compacto (~10%) */
+    width: min(342px, 100%);
     background: var(--surface);
     border: 1px solid var(--line);
+    border-radius: 18px;
     box-shadow: var(--shadow-strong);
-    padding: 16px;
+    position: relative;
+    padding: 11px;
   }
-  .modal__head{
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
-    gap: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--line);
-  }
-  .modal__head h3{ margin: 0; font-size: 18px; letter-spacing: -.2px; }
-  .modal__x{
-    width: 42px; height: 42px;
+  .modal-x{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
     border-radius: 999px;
-    border: 1px solid var(--line);
+    border: 2px solid var(--line);
     background: var(--surface2);
     color: var(--ink);
-    font-size: 22px;
+    cursor: pointer;
     font-weight: 950;
-    cursor:pointer;
   }
-  .modal__x:hover{ filter: brightness(.98); }
-  .modal__sub{ margin: 10px 0 12px; color: var(--muted); font-weight: 700; line-height: 1.55; }
+  .modal-x:hover{ filter: brightness(0.98); }
 
-  .modal__form .fgrid{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
+  .modal-head{ padding: 5px 5px 9px; }
+  .modal-kicker{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(198,40,40,.10);
+    border: 1px solid rgba(198,40,40,.18);
+    font-weight: 950;
+    color: var(--ink);
+    margin-bottom: 10px;
   }
-  @media(min-width: 680px){
-    .modal__form .fgrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .modal__form .f--full{ grid-column: 1 / -1; }
-  }
+  .modal-title{ margin: 0 0 6px; letter-spacing: -.4px; }
+  .modal-sub{ margin: 0; color: var(--muted); line-height: 1.55; font-weight: 650; font-size: 13px; }
 
-  .f{ display:flex; flex-direction: column; gap: 6px; }
-  .f span{ font-weight: 900; color: var(--ink); font-size: 13px; }
-  .f input, .f select{
+  .modal-form{ padding: 0 6px 6px; display: grid; gap: 10px; }
+  .field label{ display:block; font-weight: 900; margin: 0 0 6px; }
+  .field input, .field textarea, .field select{
     width: 100%;
-    padding: 12px 12px;
-    border-radius: 14px;
-    border: 1px solid var(--ctrl-border);
-    background: var(--ctrl-bg);
+    border-radius: 12px;
+    border: 2px solid var(--line);
+    background: var(--surface2);
+    padding: 10px 12px;
     color: var(--ink);
     outline: none;
     font-weight: 750;
+    /* iOS: evita el zoom automatico al enfocar (requiere >= 16px) */
+    font-size: 16px;
   }
-  .f input:focus, .f select:focus{
-    border-color: rgba(198,40,40,.55);
-    box-shadow: 0 0 0 4px var(--ring);
+  .field select{ appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 38px; }
+  .field select{ cursor: pointer; transition: border-color 140ms ease, filter 140ms ease; }
+  .field select:hover{ border-color: rgba(198,40,40,.25); filter: brightness(0.99); }
+  .field .select-wrap{ position: relative; }
+  .field .select-wrap:after{
+    content: "▾";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 950;
+    color: var(--muted);
+    pointer-events: none;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{ box-shadow: 0 0 0 6px var(--ring); border-color: rgba(198,40,40,.35); }
+  .field textarea{ resize: vertical; min-height: 76px; }
+
+  .field-error{
+    margin-top: 6px;
+    min-height: 16px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--danger);
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity 160ms ease, transform 160ms ease;
   }
 
-  .modal__actions{
+  /* =====================
+     Empresas v1 (Hero + Modal)
+     ===================== */
+  .biz-hero{
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-strong);
+    background: var(--surface);
+    min-height: 320px;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+  }
+  @media (max-width: 860px){
+    .biz-hero{ grid-template-columns: 1fr; min-height: 420px; }
+  }
+  .biz-hero__media{
+    position: relative;
+    min-height: 320px;
+  }
+  @media (max-width: 860px){
+    .biz-hero__media{ min-height: 230px; }
+  }
+  .biz-hero__media img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display:block;
+  }
+
+  /* HERO carousel (Empresas) */
+  #bizSection .container{ max-width: 1200px; }
+  .biz-hero{ grid-template-columns: 1.6fr 1fr; }
+  .biz-hero__media{ min-height: 360px; }
+  @media (max-width: 860px){ .biz-hero__media{ min-height: 250px; } }
+  .kicker-center{ width: 100%; text-align: center; }
+
+  .biz-carousel{
+    position:absolute;
+    inset:0;
+  }
+  .biz-carousel img{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition: opacity .6s ease;
+  }
+  .biz-carousel img:first-child{ opacity:1; }
+  .biz-carousel img.is-active{ opacity:1; }
+  @media (prefers-reduced-motion: reduce){
+    .biz-carousel img{ transition:none; }
+  }
+
+  .biz-hero__shade{
+    position:absolute;
+    inset:0;
+    background: linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.08));
+  }
+  @media (max-width: 860px){
+    .biz-hero__shade{ background: linear-gradient(180deg, rgba(0,0,0,.56), rgba(0,0,0,.10)); }
+  }
+  :root[data-theme="dark"] .biz-hero__shade{
+    background: linear-gradient(90deg, rgba(0,0,0,.62), rgba(0,0,0,.12));
+  }
+  .biz-hero__content{
+    position: relative;
+    padding: 22px;
     display:flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+  .biz-h1{ margin: 0; letter-spacing: -.7px; line-height: 1.08; }
+  .biz-sub{ margin: 0; color: var(--muted); font-weight: 650; line-height: 1.6; }
+  .biz-accent{ color: var(--danger); }
+  .biz-cta{ margin-top: 4px; }
+  .biz-trust{ display:flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 6px; }
+  .biz-trust__item{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface2);
+    font-weight: 800;
+    color: var(--ink);
+    font-size: 13px;
+  }
+  .biz-band{ border-radius: 18px; }
+
+  /* Modal Empresas */
+  .biz-modal-overlay{
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    z-index: 1650;
+    background: rgba(2, 6, 23, .55);
+    backdrop-filter: blur(9px) saturate(140%);
+  }
+  :root[data-theme="dark"] .biz-modal-overlay{ background: rgba(0,0,0,.64); }
+  .biz-modal-overlay.is-open{ display:flex; }
+  .biz-modal{
+    width: min(720px, 100%);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: var(--shadow-strong);
+    position: relative;
+    padding: 16px;
+  }
+  .biz-modal-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  @media (max-width: 720px){
+    .biz-modal{ padding: 12px; }
+    .biz-modal-grid{ grid-template-columns: 1fr; }
+  }
+  .biz-field{
+    display:flex;
     gap: 10px;
+    align-items: flex-start;
+  }
+  .biz-ico{
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--surface2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex: 0 0 auto;
+  }
+  .biz-ico img{ width: 18px; height: 18px; object-fit: contain; }
+  .biz-field .field{ flex: 1 1 auto; }
+  .biz-actions{
+    display:flex;
+    gap: 10px;
+    justify-content: flex-end;
     margin-top: 14px;
     flex-wrap: wrap;
   }
+  .btn-icon{
+    display:inline-flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .btn-icon img{ width: 18px; height: 18px; object-fit: contain; }
+  .field-error.is-show{ opacity: 1; transform: translateY(0px); }
 
+  .modal-actions{ display:flex; gap: 10px; justify-content:flex-end; align-items:center; padding-top: 4px; }
+  .send-btn{
+    position: relative;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: var(--surface2);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+  }
+  .send-btn:hover{ transform: translateY(-1px); }
+  .send-btn:after{
+    content: "Enviar pedido";
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 8px);
+    transform: translateX(-50%);
+    padding: 5px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-weight: 900;
+    font-size: 11px;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 140ms ease;
+}
+  .send-btn:hover:after{ opacity: 1; }
+  .send-icon{ width: 20px; height: 20px; object-fit: contain; }
+
+  /* Toast (notificacion discreta) */
+  .toast-host{ position: fixed; top: 16px; right: 16px; z-index: 2500; display: grid; gap: 10px; }
+  .toast{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--danger);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 10px 12px;
+    min-width: 220px;
+    max-width: min(360px, calc(100vw - 32px));
+    font-weight: 900;
+    color: var(--ink);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+  .toast.is-show{ opacity: 1; transform: translateY(0px); }
+
+
+  /* Modal (Publico): bloquear scroll del fondo mientras esta abierto */
+  body.modal-lock{
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+  }
+  .modal-overlay{
+    overscroll-behavior: contain;
+  }
 </style>
 <link rel="preload" as="image" href="Flayer 1.webp">
 
@@ -1113,7 +1353,7 @@
   </section>
 
   <!-- ===================== HERO (común) ===================== -->
-  <section class="hero">
+  <section class="hero" id="heroCommon">
     <div class="container">
       <div class="kicker">🔥 Hecho para compartir • Sin complicarte</div>
 
@@ -1260,127 +1500,43 @@
   </section>
 
 
-  <!-- ===================== SECCIÓN CONDICIONAL: BUSINESS ===================== -->
+  <!-- ===================== SECCIÓN CONDICIONAL: EMPRESAS ===================== -->
   <section class="section" id="bizSection">
     <div class="container">
-      <h2>Business: el convivio sale bien (y vos quedás bien)</h2>
-      <p>
-        Este servicio es ideal para empresas porque suele existir presupuesto anual para actividades del personal.
-        Nosotros lo convertimos en un evento ordenado, rico y sin estrés.
-      </p>
+      <!-- HERO EMPRESAS (nuevo) -->
+      <div class="biz-hero" aria-label="Catering empresarial">
+        <div class="biz-hero__media" aria-hidden="true">
+          <div class="biz-carousel" id="bizHeroCarousel">
+            <img loading="eager" decoding="sync" src="Fotosempresa/FotoCatering.png" alt="Catering empresarial Mr Pizza GT">
+            <img loading="lazy" decoding="async" src="Fotosempresa/FotoCatering2.png" alt="Catering empresarial Mr Pizza GT">
+            <img loading="lazy" decoding="async" src="Fotosempresa/FotoCatering3.png" alt="Catering empresarial Mr Pizza GT">
+            <img loading="lazy" decoding="async" src="Fotosempresa/FotoCatering4.png" alt="Catering empresarial Mr Pizza GT">
+          </div>
+          <div class="biz-hero__shade"></div>
+        </div>
 
-      <div class="cols">
-        <div class="card-mini">
-          <div class="icon">📦</div>
-          <h3>Paquetes simples</h3>
-          <p class="desc">Te cotizamos por cantidad de personas y combinaciones. Sin listas infinitas.</p>
-        </div>
-        <div class="card-mini">
-          <div class="icon">🧼</div>
-          <h3>Presentación limpia</h3>
-          <p class="desc">Montaje y servicio cuidado. Se nota profesional.</p>
-        </div>
-        <div class="card-mini">
-          <div class="icon">✅</div>
-          <h3>Confirmación y seguimiento</h3>
-          <p class="desc">Cerramos detalles antes del evento para que no hayan sorpresas.</p>
-        </div>
-      </div>
+        <div class="biz-hero__content">
+          <div class="kicker kicker-center">🍽️ Catering & Pizza Bar corporativo</div>
+          <h2 class="biz-h1">Convivios corporativos que se ven y se sienten <span class="biz-accent">pro</span></h2>
+          <p class="biz-sub">
+            Puntualidad, orden y comida rica para actividades de RRHH, aniversarios y fechas especiales.
+            Te damos una cotización clara y lo coordinamos sin vueltas.
+          </p>
 
-      <div class="cta-band">
-        <h3>¿Cotizamos tu actividad?</h3>
-        <p>Mandame fecha, hora, zona y cantidad de personas. Te respondo con propuesta clara.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" id="bizCta1" href="#">Cotizá tu evento</a>
-          <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
+          <div class="cta-row biz-cta">
+            <button class="btn btn-primary" id="bizQuoteBtn" type="button">Cotizá tu evento</button>
+            <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
+          </div>
+
+          <div class="biz-trust" role="list">
+            <div class="biz-trust__item" role="listitem">✓ Confirmación por WhatsApp o correo</div>
+            <div class="biz-trust__item" role="listitem">✓ Logística y horarios coordinados</div>
+            <div class="biz-trust__item" role="listitem">✓ Contacto responsable + ubicación exacta</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ===================== MODAL COTIZACION (SOLO EMPRESAS) ===================== -->
-  <div class="modal" id="bizModal" role="dialog" aria-modal="true" aria-labelledby="bizModalTitle" hidden>
-    <div class="modal__backdrop" data-modal-close></div>
-    <div class="modal__panel" role="document">
-      <div class="modal__head">
-        <h3 id="bizModalTitle">Cotizá tu evento</h3>
-        <button class="modal__x" type="button" aria-label="Cerrar" data-modal-close>×</button>
-      </div>
-
-      <p class="modal__sub">Llená lo básico y te armamos una propuesta clara por WhatsApp.</p>
-
-      <form id="bizForm" class="modal__form">
-        <div class="fgrid">
-          <label class="f">
-            <span>Tipo de evento</span>
-            <select name="tipoEvento" required>
-              <option value="">Seleccioná…</option>
-              <option>Convivio / Actividad RRHH</option>
-              <option>Aniversario</option>
-              <option>Navidad / Fin de año</option>
-              <option>Cumpleaños</option>
-              <option>Evento iglesia</option>
-              <option>Otro</option>
-            </select>
-          </label>
-
-          <label class="f">
-            <span>Empresa</span>
-            <input name="empresa" type="text" placeholder="Nombre de la empresa" required />
-          </label>
-
-          <label class="f">
-            <span>Adultos</span>
-            <input name="adultos" type="number" min="0" step="1" inputmode="numeric" placeholder="0" required />
-          </label>
-
-          <label class="f">
-            <span>Niños</span>
-            <input name="ninos" type="number" min="0" step="1" inputmode="numeric" placeholder="0" required />
-          </label>
-
-          <label class="f">
-            <span>Fecha del evento</span>
-            <input name="fecha" type="date" required />
-          </label>
-
-          <label class="f">
-            <span>Inicio del evento</span>
-            <input name="horaInicio" type="time" required />
-          </label>
-
-          <label class="f">
-            <span>Inicio de servicio de alimentos</span>
-            <input name="horaServicio" type="time" required />
-          </label>
-
-          <label class="f f--full">
-            <span>Ubicación</span>
-            <input name="ubicacion" type="text" placeholder="Zona, dirección o referencia" required />
-          </label>
-
-          <label class="f">
-            <span>Teléfono / contacto</span>
-            <input name="telefono" type="tel" placeholder="Ej: 5XXX-XXXX" required />
-          </label>
-
-          <label class="f">
-            <span>Envío</span>
-            <select name="envio" required>
-              <option value="">Seleccioná…</option>
-              <option>Con envío / domicilio</option>
-              <option>Pickup / lo recogemos</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="modal__actions">
-          <button class="btn btn-outline" type="button" data-modal-close>Cancelar</button>
-          <button class="btn btn-primary" type="submit">Armar mensaje y abrir WhatsApp</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- ===================== SECCIÓN CONDICIONAL: PÚBLICO ===================== -->
   <section class="section" id="pubSection">
@@ -1779,6 +1935,195 @@
   </div>
 </footer>
 
+<!-- ===================== MODAL PUBLICO: DATOS PARA PEDIDO WHATSAPP ===================== -->
+<div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
+
+<div class="modal-overlay" id="orderModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="false" aria-labelledby="orderModalTitle">
+    <button class="modal-x" type="button" id="orderModalClose" aria-label="Cerrar">✕</button>
+
+    <div class="modal-head">
+      <div class="modal-kicker">Pedido por WhatsApp</div>
+      <h3 class="modal-title" id="orderModalTitle">Tus datos para confirmar</h3>
+      <p class="modal-sub">Esto nos ayuda a personalizar el mensaje y facturarte más rápido.</p>
+    </div>
+
+    <form id="orderForm" class="modal-form" autocomplete="on">
+      <div class="field">
+        <label for="ordName">Nombre</label>
+        <input id="ordName" name="name" type="text" placeholder="Ejemplo: Andre Morales" required />
+        <div class="field-error" id="errName" aria-live="polite"></div>
+      </div>
+
+      <div class="field">
+        <label for="ordNit">NIT</label>
+        <input id="ordNit" name="nit" type="text" placeholder="Enviamos tu factura por WhatsApp" inputmode="text" />
+      </div>
+
+      <div class="field">
+        <label for="ordAddress">Dirección</label>
+        <textarea id="ordAddress" name="address" rows="3" placeholder="Ejemplo: Zona 4, Colonia ____ , 2da avenida 10-20, referencia: frente a ____" required></textarea>
+        <div class="field-error" id="errAddress" aria-live="polite"></div>
+      </div>
+
+      <div class="field">
+        <label for="ordPay">Método de pago</label>
+        <div class="select-wrap">
+          <select id="ordPay" name="pay" required>
+            <option value="" selected disabled>Elegí una opción…</option>
+            <option value="Link de Pago">Link de Pago (Visa/Mastercard)</option>
+            <option value="Efectivo">Efectivo</option>
+          </select>
+        </div>
+        <div class="field-error" id="errPay" aria-live="polite"></div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-outline" type="button" id="orderModalCancel">Cancelar</button>
+        <button class="send-btn" type="submit" id="orderModalSend" aria-label="Enviar pedido">
+          <img id="sendMsgIcon" class="send-icon" src="enviar-mensaje.png" alt="" loading="lazy" decoding="async" />
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== MODAL EMPRESAS: COTIZAR EVENTO ===================== -->
+<div class="biz-modal-overlay" id="bizModal" aria-hidden="true">
+  <div class="biz-modal" role="dialog" aria-modal="false" aria-labelledby="bizModalTitle">
+    <button class="modal-x" type="button" id="bizModalClose" aria-label="Cerrar">✕</button>
+
+    <div class="modal-head" style="padding: 8px 8px 4px;">
+      <div class="modal-kicker">Empresas • Cotización</div>
+      <h3 class="modal-title" id="bizModalTitle" style="margin:0 0 6px;">Cotizá tu evento</h3>
+      <p class="modal-sub" style="margin:0;">Completá lo básico y elegí cómo enviarlo: WhatsApp o correo.</p>
+    </div>
+
+    <form id="bizForm" class="modal-form" autocomplete="on" style="padding: 0 8px 6px;">
+      <div class="biz-modal-grid">
+
+        <div class="biz-field">
+          <div class="biz-ico"><img id="icoEventType" src="Logotipos/organizador.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="field">
+            <label for="bizType">Tipo de evento</label>
+            <input id="bizType" name="type" type="text" placeholder="Ej: Convivio RRHH / Aniversario / Navidad" required>
+            <div class="field-error" id="bizErrType" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="biz-field">
+          <div class="biz-ico"><img id="icoCompany" src="Logotipos/corporacion.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="field">
+            <label for="bizCompany">Empresa</label>
+            <input id="bizCompany" name="company" type="text" placeholder="Ej: Mi Empresa S.A." required>
+            <div class="field-error" id="bizErrCompany" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="biz-field">
+          <div class="biz-ico"><img id="icoPeople" src="Logotipos/personas.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="field">
+            <label>Cantidad de personas</label>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div>
+                <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+                  <img id="icoAdults" src="Logotipos/pareja.png" alt="" loading="lazy" decoding="async" style="width:16px; height:16px; object-fit:contain; opacity:.95;">
+                  <span style="font-weight:900; font-size:13px; color:var(--muted);">Adultos</span>
+                </div>
+                <input id="bizAdults" name="adults" type="number" min="0" inputmode="numeric" placeholder="0" required>
+                <div class="field-error" id="bizErrAdults" aria-live="polite"></div>
+              </div>
+              <div>
+                <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+                  <img id="icoKids" src="Logotipos/chico.png" alt="" loading="lazy" decoding="async" style="width:16px; height:16px; object-fit:contain; opacity:.95;">
+                  <span style="font-weight:900; font-size:13px; color:var(--muted);">Niños</span>
+                </div>
+                <input id="bizKids" name="kids" type="number" min="0" inputmode="numeric" placeholder="0" required>
+                <div class="field-error" id="bizErrKids" aria-live="polite"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="biz-field">
+          <div class="biz-ico"><img id="icoDate" src="Logotipos/calendario.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="field">
+            <label for="bizDate">Fecha</label>
+            <input id="bizDate" name="date" type="date" required>
+            <div class="field-error" id="bizErrDate" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="biz-field">
+          <div class="biz-ico"><img id="icoTime" src="Logotipos/reloj.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="field">
+            <label>Horario</label>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div>
+                <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+                  <img id="icoStartEvent" src="Logotipos/calendar.png" alt="" loading="lazy" decoding="async" style="width:16px; height:16px; object-fit:contain; opacity:.95;">
+                  <span style="font-weight:900; font-size:13px; color:var(--muted);">Inicio evento</span>
+                </div>
+                <input id="bizStart" name="start" type="time" required>
+                <div class="field-error" id="bizErrStart" aria-live="polite"></div>
+              </div>
+              <div>
+                <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+                  <img id="icoServe" src="Logotipos/tenedor.png" alt="" loading="lazy" decoding="async" style="width:16px; height:16px; object-fit:contain; opacity:.95;">
+                  <span style="font-weight:900; font-size:13px; color:var(--muted);">Inicio servicio</span>
+                </div>
+                <input id="bizServe" name="serve" type="time" required>
+                <div class="field-error" id="bizErrServe" aria-live="polite"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="biz-field">
+          <div class="biz-ico"><img id="icoLoc" src="Logotipos/marcador-de-posicion.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="field">
+            <label for="bizLocation">Ubicación</label>
+            <textarea id="bizLocation" name="location" rows="2" placeholder="Ej: Zona 10, edificio ___, salón ___, referencia: ____" required></textarea>
+            <div class="field-error" id="bizErrLocation" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="biz-field">
+          <div class="biz-ico"><img id="icoPhone" src="Logotipos/Telefono.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="field">
+            <label for="bizPhone">Teléfono / contacto</label>
+            <input id="bizPhone" name="phone" type="tel" inputmode="tel" placeholder="Ej: +502 5555-5555" required>
+            <div class="field-error" id="bizErrPhone" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="biz-field">
+          <div class="biz-ico"><img id="icoMail" src="Logotipos/correo-electronico.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="field">
+            <label for="bizEmail">Correo</label>
+            <input id="bizEmail" name="email" type="email" placeholder="Ej: nombre@empresa.com" required>
+            <div class="field-error" id="bizErrEmail" aria-live="polite"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="biz-actions">
+        <button class="btn btn-outline" type="button" id="bizModalCancel">Cancelar</button>
+        <button class="btn btn-outline btn-icon" type="button" id="bizSendEmail">
+          <img src="Logotipos/Logo gmail.png" alt="" loading="lazy" decoding="async">
+          <img src="Logotipos/Logo outlook.png" alt="" loading="lazy" decoding="async">
+          Enviar por correo
+        </button>
+        <button class="btn btn-primary btn-icon" type="button" id="bizSendWa">
+          <img src="Logotipos/Logo-whatsapp.png" alt="" loading="lazy" decoding="async">
+          Enviar por WhatsApp
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
   // =============================
   // CONFIG: CAMBIÁ SOLO ESTO
@@ -1814,6 +2159,10 @@
     if(cartIcon) cartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
     const miniCartIcon = document.getElementById("miniCartIcon");
     if(miniCartIcon) miniCartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
+
+    // Icono del boton "Enviar pedido" del modal (Publico)
+    const sendMsgIcon = document.getElementById("sendMsgIcon");
+    if(sendMsgIcon) sendMsgIcon.src = (t==="dark") ? "enviar-mensaje-dark.png" : "enviar-mensaje.png";
 
   }
 
@@ -1854,13 +2203,13 @@
   })();
 
   // =============================
-  // Router simple: si URL contiene /business (o /bussines legacy) => vista EMPRESAS
+  // Router simple: si URL contiene /bussines => vista BUSINESS
   // =============================
   const state = { view: "public" }; // "public" | "business"
 
   function detectViewFromPath(){
     const p = (location.pathname || "").toLowerCase();
-    // Soporta la ruta correcta /business y la legacy /bussines
+    // Soportar /business (correcto) y /bussines (legacy)
     if(p.includes("/business") || p.includes("/bussines")) return "business";
     return "public";
   }
@@ -1876,59 +2225,55 @@
     document.getElementById("bizSection").classList.toggle("hidden", view!=="business");
     document.getElementById("pubSection").classList.toggle("hidden", view!=="public");
 
-    // headline y copy
+    // UI base
+    const subtitle      = document.getElementById("subtitleHeader");
+    const promoCarousel = document.getElementById("promoCarouselSection");
+
+    // Secciones comunes
+    const heroCommon = document.getElementById("heroCommon");
+    const valorSec   = document.getElementById("valor");
+    const serviciosSec = document.getElementById("servicios");
+    const paquetesSec  = document.getElementById("paquetes");
+
+    // Público: elementos a ocultar (según la versión estable)
     const heroTitle = document.getElementById("heroTitle");
     const heroSub   = document.getElementById("heroSub");
     const heroNote  = document.getElementById("heroNote");
     const heroCard  = document.getElementById("heroCardText");
-    const subtitle  = document.getElementById("subtitleHeader");
-    const heroCtaRowEl = document.getElementById("heroCtaRow");
-    const heroMediaEl  = document.querySelector(".hero-media");
-    const statsRowEl2  = document.getElementById("statsRow");
-    const serviciosEl2 = document.getElementById("servicios");
 
-
-    // Público: elementos a ocultar (según limpieza)
     const heroTitleEl = document.getElementById("heroTitle");
     const heroSubEl   = document.getElementById("heroSub");
     const heroCtaRow  = document.getElementById("heroCtaRow");
     const heroNoteEl  = document.getElementById("heroNote");
     const heroCardEl  = document.getElementById("heroCard");
     const statsRowEl  = document.getElementById("statsRow");
-    const valorSec    = document.getElementById("valor");
-    const paquetesSec = document.getElementById("paquetes");
-    const serviciosSec= document.getElementById("servicios");
     const checksSec   = document.getElementById("checks");
     const ctaFinalBand= document.getElementById("ctaBandFinal");
 
-    const promoCarousel = document.getElementById("promoCarouselSection");
-
     if(view==="business"){
-
-      // Business: asegurar visibles (si fueron ocultos en Público)
-      [heroCtaRowEl, heroMediaEl, statsRowEl2, serviciosEl2].forEach(el=>{ if(el) el.classList.remove("hidden"); });
-
-
-      // Business: mostrar todo
-      [heroTitleEl, heroSubEl, heroCtaRow, heroNoteEl, heroCardEl, statsRowEl, valorSec, paquetesSec, ctaFinalBand, serviciosSec, checksSec]
-        .forEach(el => { if(el) el.hidden = false; });
-
+      // Empresas: nuevo embudo. Ocultamos el resto para no mezclar contenidos.
       if(promoCarousel) promoCarousel.classList.add("hidden");
-      subtitle.textContent = "Empresas • Eventos y convivios";
-      // Texto hero de Empresas (INTOCABLE en tu spec)
-      heroTitle.textContent = "Pizzas y crepas para convivios empresariales que salen perfectos";
-      heroSub.textContent = "Cerrá tu actividad con orden, puntualidad y comida rica. Ideal para RRHH, aniversarios, navidad y fechas especiales.";
-      heroNote.innerHTML = "<strong>Lo que comprás es tranquilidad.</strong><span>Orden, puntualidad y atención humana. Y sí: comida rica que se acaba rápido.</span>";
-      heroCard.innerHTML = "<strong>Ruta empresa:</strong><br/>Cotizá tu evento en 2 minutos.";
+      if(heroCommon) heroCommon.classList.add("hidden");
+      [valorSec, serviciosSec, paquetesSec].forEach(el=>{ if(el) el.classList.add("hidden"); });
+      if(subtitle) subtitle.textContent = "Empresas • Catering empresarial";
     } else {
 
       // Público: ocultar botones bajo carrusel, cuadro de rol, checks y sección servicios
+      const heroCtaRowEl = document.getElementById("heroCtaRow");
+      const heroMediaEl  = document.querySelector(".hero-media");
+      const statsRowEl2  = document.getElementById("statsRow");
+      const serviciosEl2 = document.getElementById("servicios");
       [heroCtaRowEl, heroMediaEl, statsRowEl2, serviciosEl2].forEach(el=>{ if(el) el.classList.add("hidden"); });
 
 
       // Público: ocultar secciones/textos para que no se sature
+      // (OJO: mantenemos esto tal cual porque Público está "cerrado / estable")
       [heroTitleEl, heroSubEl, heroCtaRow, heroNoteEl, heroCardEl, statsRowEl, valorSec, paquetesSec, ctaFinalBand, serviciosSec, checksSec]
         .forEach(el => { if(el) el.hidden = true; });
+
+      // Asegurar que lo ocultado para Empresas regrese en Público
+      if(heroCommon) heroCommon.classList.remove("hidden");
+      [valorSec, serviciosSec, paquetesSec].forEach(el=>{ if(el) el.classList.remove("hidden"); });
 
       if(promoCarousel) promoCarousel.classList.remove("hidden");
       subtitle.textContent = "Público • Pedidos nocturnos";
@@ -1947,12 +2292,17 @@
     document.getElementById("heroCta").href = waLink(msgHero);
     document.getElementById("heroCardCta").href = waLink(msgHero);
 
-    document.getElementById("svcBizCta").href = waLink(MSG.business);
-    document.getElementById("svcPubCta").href = waLink(MSG.public);
-    document.getElementById("svcMixCta").href = waLink(MSG.mixed);
+    const svcBiz = document.getElementById("svcBizCta");
+    const svcPub = document.getElementById("svcPubCta");
+    const svcMix = document.getElementById("svcMixCta");
+    if(svcBiz) svcBiz.href = waLink(MSG.business);
+    if(svcPub) svcPub.href = waLink(MSG.public);
+    if(svcMix) svcMix.href = waLink(MSG.mixed);
 
-    document.getElementById("bizCta1").href = waLink(MSG.business);
-    document.getElementById("pubCta1").href = waLink(MSG.public);
+    const bizCta1 = document.getElementById("bizCta1");
+    const pubCta1 = document.getElementById("pubCta1");
+    if(bizCta1) bizCta1.href = waLink(MSG.business);
+    if(pubCta1) pubCta1.href = waLink(MSG.public);
 
     document.getElementById("ctaFinal").href = waLink(msgTop);
     document.getElementById("waFab").href = waLink(msgTop);
@@ -2052,117 +2402,6 @@
 
   // Boot
   setView(detectViewFromPath());
-
-  // =============================
-  // Empresas: Modal de cotizacion (v38)
-  // - Inicia cerrado
-  // - Abre solo con click
-  // - Cierra con: X, Cancelar, click fuera, ESC
-  // - No bloquea el scroll de la pagina (sin overflow hidden)
-  // =============================
-  (function(){
-    const modal = document.getElementById('bizModal');
-    const openBtn = document.getElementById('bizCta1');
-    const form = document.getElementById('bizForm');
-    if(!modal || !openBtn || !form) return;
-
-    const focusableSel = 'input, select, textarea, button, a[href], [tabindex]:not([tabindex="-1"])';
-    let lastFocus = null;
-
-    function isOpen(){ return !modal.hidden; }
-
-    function openModal(){
-      if(isOpen()) return;
-      lastFocus = document.activeElement;
-      modal.hidden = false;
-
-      // foco al primer campo
-      const first = modal.querySelector('select, input');
-      if(first) setTimeout(()=> first.focus({preventScroll:true}), 0);
-
-      document.addEventListener('keydown', onKeydown);
-    }
-
-    function closeModal(){
-      if(!isOpen()) return;
-      modal.hidden = true;
-      document.removeEventListener('keydown', onKeydown);
-      if(lastFocus && typeof lastFocus.focus === 'function'){
-        setTimeout(()=> lastFocus.focus({preventScroll:true}), 0);
-      }
-    }
-
-    function onKeydown(e){
-      if(e.key === 'Escape') closeModal();
-
-      // trap basico de tab para que no se "escape" el foco
-      if(e.key === 'Tab' && isOpen()){
-        const items = Array.from(modal.querySelectorAll(focusableSel))
-          .filter(el=> !el.hasAttribute('disabled') && el.offsetParent !== null);
-        if(items.length === 0) return;
-        const first = items[0];
-        const last = items[items.length - 1];
-        if(e.shiftKey && document.activeElement === first){
-          e.preventDefault();
-          last.focus();
-        }else if(!e.shiftKey && document.activeElement === last){
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    }
-
-    // Abre solo desde Empresas
-    openBtn.addEventListener('click', (e)=>{
-      e.preventDefault();
-      openModal();
-    });
-
-    // Cierres
-    modal.querySelectorAll('[data-modal-close]').forEach(el=>{
-      el.addEventListener('click', (e)=>{
-        e.preventDefault();
-        closeModal();
-      });
-    });
-
-    // Submit => arma mensaje y abre WhatsApp
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const fd = new FormData(form);
-
-      const tipo = (fd.get('tipoEvento')||'').toString().trim();
-      const empresa = (fd.get('empresa')||'').toString().trim();
-      const adultos = (fd.get('adultos')||'0').toString().trim();
-      const ninos = (fd.get('ninos')||'0').toString().trim();
-      const fecha = (fd.get('fecha')||'').toString().trim();
-      const hIni = (fd.get('horaInicio')||'').toString().trim();
-      const hServ = (fd.get('horaServicio')||'').toString().trim();
-      const ubic = (fd.get('ubicacion')||'').toString().trim();
-      const tel = (fd.get('telefono')||'').toString().trim();
-      const envio = (fd.get('envio')||'').toString().trim();
-
-      const lines = [];
-      lines.push('Hola! Vengo del canal web: Mr Pizza GT by GaschSoft.');
-      lines.push('Quiero cotizar un evento.');
-      lines.push('');
-      lines.push('Empresa: ' + empresa);
-      lines.push('Tipo de evento: ' + tipo);
-      lines.push('Personas: ' + adultos + ' adultos, ' + ninos + ' niños');
-      lines.push('Fecha: ' + fecha);
-      lines.push('Horario: inicio ' + hIni + ' • servicio ' + hServ);
-      lines.push('Ubicación: ' + ubic);
-      lines.push('Envío: ' + envio);
-      lines.push('Contacto: ' + tel);
-
-      const msg = lines.join('\n');
-      window.open(waLink(msg), '_blank', 'noopener');
-      closeModal();
-    });
-
-    // Estado inicial: cerrado
-    modal.hidden = true;
-  })();
 </script>
 <script>
 
@@ -2171,6 +2410,22 @@
     const waBtn = document.getElementById("menuCtaWa");
     const waBadge = document.getElementById("waBadge");
     const cartCountEl = document.getElementById("cartCount");
+
+    // Modal Publico (datos antes de ir a WhatsApp)
+    const orderModal = document.getElementById('orderModal');
+    const orderClose = document.getElementById('orderModalClose');
+    const orderCancel = document.getElementById('orderModalCancel');
+    const orderForm = document.getElementById('orderForm');
+    const ordName = document.getElementById('ordName');
+    const ordNit = document.getElementById('ordNit');
+    const ordAddress = document.getElementById('ordAddress');
+    const ordPay = document.getElementById('ordPay');
+
+    const errName = document.getElementById('errName');
+    const errAddress = document.getElementById('errAddress');
+    const errPay = document.getElementById('errPay');
+
+    const toastHost = document.getElementById('toastHost');
 
     // Mini carrito flotante (solo Publico)
     const miniCartFab = document.getElementById("miniCartFab");
@@ -2196,6 +2451,8 @@
     const PHONE = "50239151615";
     const state = {};      // itemName -> qty
     const category = {};   // itemName -> "pizza" | "extra"
+    const priceMap = {};   // itemName -> price (Q)
+
 
     function totalCount(){
       return Object.values(state).reduce((a,b)=>a+(b||0),0);
@@ -2205,6 +2462,15 @@
       let t = 0;
       Object.keys(state).forEach(k=>{ if(category[k]===cat) t += (state[k]||0); });
       return t;
+    }
+
+    function totalAmount(){
+      let total = 0;
+      Object.keys(state).forEach(k=>{
+        const q = state[k]||0;
+        if(q>0) total += q * (priceMap[k]||0);
+      });
+      return total;
     }
 
     function buildMessage(){
@@ -2220,9 +2486,9 @@
       if(pizzas>0 && extras>0){
         lines.push("Quiero hacer un pedido: " + pizzas + " pizzas y " + extras + " entradas/postres.");
       }else if(pizzas>0){
-        lines.push("Quiero hacer un pedido, deseo " + pizzas + " pizzas los sabores son:");
+        lines.push("Quiero hacer un pedido, deseo " + pizzas + " pizzas.");
       }else{
-        lines.push("Quiero hacer un pedido, deseo " + extras + " entradas/postres:");
+        lines.push("Quiero hacer un pedido, deseo " + extras + " entradas/postres.");
       }
 
       if(pizzas>0){
@@ -2246,6 +2512,288 @@
 
       return lines.join("\n");
     }
+
+    function buildFinalOrderMessage(opts){
+      const name = cleanText(opts && opts.name);
+      const nit = cleanText(opts && opts.nit) || 'CF';
+      const address = cleanText(opts && opts.address);
+      const pay = cleanText(opts && opts.pay);
+
+      const pizzas = totalBy("pizza");
+      const extras = totalBy("extra");
+      const amount = totalAmount();
+
+      const lines = [];
+      lines.push("Hola! Vengo del canal web: Mr Pizza GT by GaschSoft.");
+      lines.push("");
+
+      lines.push("Quiero hacer un pedido.");
+      lines.push("");
+
+      // Datos del cliente (para facturación/entrega)
+      lines.push("Datos del cliente:");
+      lines.push("Nombre: " + name);
+      lines.push("NIT: " + nit);
+      lines.push("Método de pago: " + pay);
+      lines.push("Dirección: " + address);
+      lines.push("");
+
+      // Detalle
+      if(pizzas>0){
+        lines.push("Pizzas:");
+        Object.keys(state).forEach(item=>{
+          const q = state[item]||0;
+          if(q>0 && category[item]==="pizza") lines.push("- " + q + " de " + item);
+        });
+      }
+      if(extras>0){
+        if(pizzas>0) lines.push("");
+        lines.push("Entradas y postres:");
+        Object.keys(state).forEach(item=>{
+          const q = state[item]||0;
+          if(q>0 && category[item]==="extra") lines.push("- " + q + " de " + item);
+        });
+      }
+
+      lines.push("");
+      lines.push("Total de la orden: Q" + amount);
+      lines.push("");
+      lines.push("Confirmo que deseo el pedido.");
+      lines.push("En este chat puedo compartir mi ubicación actual para coordinar la entrega y que me confirmen el tiempo estimado.");
+      return lines.join("\n");
+    }
+
+    function cleanText(x){
+      return String(x||"").replace(/\s+/g,' ').trim();
+    }
+
+    // Toast discreto (arriba derecha)
+    function showToast(text){
+      if(!toastHost) return;
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.textContent = text;
+      toastHost.appendChild(el);
+      requestAnimationFrame(()=> el.classList.add('is-show'));
+      window.setTimeout(()=>{
+        el.classList.remove('is-show');
+        window.setTimeout(()=> el.remove(), 220);
+      }, 2200);
+    }
+
+    // Error bajo el campo (3s)
+    function fieldError(el, msg){
+      if(!el) return;
+      el.textContent = msg;
+      el.classList.add('is-show');
+      window.setTimeout(()=>{
+        el.classList.remove('is-show');
+        window.setTimeout(()=>{ if(el.textContent === msg) el.textContent = ''; }, 180);
+      }, 3000);
+    }    function openOrderModal(){
+      if(!orderModal) return;
+      // Bloquea scroll del fondo (sin cerrar con click fuera)
+      try{
+        const y = window.scrollY || document.documentElement.scrollTop || 0;
+        document.body.dataset.scrollY = String(y);
+        document.body.style.top = (-y) + 'px';
+        document.body.classList.add('modal-lock');
+      }catch(e){}
+      orderModal.classList.add('is-open');
+      orderModal.setAttribute('aria-hidden','false');
+      // No forzamos focus (en iOS puede disparar zoom al enfocar inputs)
+    }
+
+        function closeOrderModal(){
+      if(!orderModal) return;
+      orderModal.classList.remove('is-open');
+      orderModal.setAttribute('aria-hidden','true');
+      // Restaura scroll del fondo
+      try{
+        const y = parseInt(document.body.dataset.scrollY || '0', 10) || 0;
+        document.body.classList.remove('modal-lock');
+        document.body.style.top = '';
+        window.scrollTo(0, y);
+      }catch(e){}
+    }
+
+    // Cierres del modal
+    if(orderClose) orderClose.addEventListener('click', closeOrderModal);
+    if(orderCancel) orderCancel.addEventListener('click', closeOrderModal);
+
+    // =============================
+    // HERO EMPRESAS: carrusel de imagenes (sin librerias)
+    // =============================
+    (function initBizHeroCarousel(){
+      const wrap = document.getElementById('bizHeroCarousel');
+      if(!wrap) return;
+      const slides = Array.from(wrap.querySelectorAll('img'));
+      if(slides.length <= 1) return;
+
+      // Estado inicial
+      slides.forEach((img, idx)=> img.classList.toggle('is-active', idx === 0));
+
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(reduce) return;
+
+      let i = 0;
+      setInterval(()=>{
+        slides[i].classList.remove('is-active');
+        i = (i + 1) % slides.length;
+        slides[i].classList.add('is-active');
+      }, 4500);
+    })();
+
+
+    // =============================
+    // MODAL EMPRESAS (Cotizar evento)
+    // =============================
+    const bizModal = document.getElementById('bizModal');
+    const bizClose = document.getElementById('bizModalClose');
+    const bizCancel = document.getElementById('bizModalCancel');
+    const bizQuoteBtn = document.getElementById('bizQuoteBtn');
+    const bizQuoteBtn2 = document.getElementById('bizQuoteBtn2');
+
+    const bizForm = document.getElementById('bizForm');
+    const bizSendWa = document.getElementById('bizSendWa');
+    const bizSendEmail = document.getElementById('bizSendEmail');
+
+    function updateBizIcons(theme){
+      const t = theme || document.documentElement.getAttribute('data-theme') || 'light';
+      const isDark = t === 'dark';
+      const m = {
+        icoEventType: isDark ? 'Logotipos/organizador-dark.png' : 'Logotipos/organizador.png',
+        icoPeople:    isDark ? 'Logotipos/personas-dark.png' : 'Logotipos/personas.png',
+        icoAdults:    isDark ? 'Logotipos/pareja-dark.png' : 'Logotipos/pareja.png',
+        icoKids:      isDark ? 'Logotipos/chico-dark.png' : 'Logotipos/chico.png',
+        icoDate:      isDark ? 'Logotipos/calendario-dark.png' : 'Logotipos/calendario.png',
+        icoTime:      isDark ? 'Logotipos/reloj-dark.png' : 'Logotipos/reloj.png',
+        icoStartEvent:isDark ? 'Logotipos/calendar-dark.png' : 'Logotipos/calendar.png',
+        icoServe:     isDark ? 'Logotipos/tenedor-dark.png' : 'Logotipos/tenedor.png',
+        icoLoc:       isDark ? 'Logotipos/marcador-de-posicion-dark.png' : 'Logotipos/marcador-de-posicion.png',
+        icoPhone:     isDark ? 'Logotipos/Telefono-dark.png' : 'Logotipos/Telefono.png',
+        icoCompany:   isDark ? 'Logotipos/corporacion-dark.png' : 'Logotipos/corporacion.png',
+        icoMail:      isDark ? 'Logotipos/correo-electronico-dark.png' : 'Logotipos/correo-electronico.png'
+      };
+      Object.keys(m).forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.src = m[id];
+      });
+    }
+
+    function openBizModal(){
+      if(!bizModal) return;
+      updateBizIcons();
+      // Bloquea scroll del fondo (sin cerrar con click fuera)
+      try{
+        const y = window.scrollY || document.documentElement.scrollTop || 0;
+        document.body.dataset.scrollY = String(y);
+        document.body.style.top = (-y) + 'px';
+        document.body.classList.add('modal-lock');
+      }catch(e){}
+      bizModal.classList.add('is-open');
+      bizModal.setAttribute('aria-hidden','false');
+    }
+
+    function closeBizModal(){
+      if(!bizModal) return;
+      bizModal.classList.remove('is-open');
+      bizModal.setAttribute('aria-hidden','true');
+      try{
+        const y = parseInt(document.body.dataset.scrollY || '0', 10) || 0;
+        document.body.classList.remove('modal-lock');
+        document.body.style.top = '';
+        window.scrollTo(0, y);
+      }catch(e){}
+    }
+
+    if(bizClose) bizClose.addEventListener('click', closeBizModal);
+    if(bizCancel) bizCancel.addEventListener('click', closeBizModal);
+    if(bizQuoteBtn) bizQuoteBtn.addEventListener('click', openBizModal);
+    if(bizQuoteBtn2) bizQuoteBtn2.addEventListener('click', openBizModal);
+
+    function bizVal(idErr, ok, msg){
+      const el = document.getElementById(idErr);
+      if(ok) return true;
+      fieldError(el, msg);
+      return false;
+    }
+
+    function buildBizMessage(d){
+      const lines = [];
+      lines.push('Hola! Vengo del canal web: Mr Pizza GT by GaschSoft.');
+      lines.push('');
+      lines.push('Quiero cotizar un evento.');
+      lines.push('');
+      lines.push('Datos del evento:');
+      lines.push('Tipo de evento: ' + d.type);
+      lines.push('Empresa: ' + d.company);
+      lines.push('Personas: ' + d.adults + ' adultos, ' + d.kids + ' niños');
+      lines.push('Fecha: ' + d.date);
+      lines.push('Horario: Inicio evento ' + d.start + ' • Inicio servicio ' + d.serve);
+      lines.push('Ubicación: ' + d.location);
+      lines.push('Contacto: ' + d.phone);
+      lines.push('Correo: ' + d.email);
+      lines.push('');
+      lines.push('¿Me confirmás disponibilidad y una cotización estimada? Gracias.');
+      return lines.join('\n');
+    }
+
+    function collectBizData(){
+      const d = {
+        type: cleanText(document.getElementById('bizType')?.value),
+        company: cleanText(document.getElementById('bizCompany')?.value),
+        adults: cleanText(document.getElementById('bizAdults')?.value),
+        kids: cleanText(document.getElementById('bizKids')?.value),
+        date: cleanText(document.getElementById('bizDate')?.value),
+        start: cleanText(document.getElementById('bizStart')?.value),
+        serve: cleanText(document.getElementById('bizServe')?.value),
+        location: cleanText(document.getElementById('bizLocation')?.value),
+        phone: cleanText(document.getElementById('bizPhone')?.value),
+        email: cleanText(document.getElementById('bizEmail')?.value)
+      };
+      return d;
+    }
+
+    function validateBiz(d){
+      const a = parseInt(d.adults||'0',10) || 0;
+      const k = parseInt(d.kids||'0',10) || 0;
+      const total = a + k;
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email || '');
+      return (
+        bizVal('bizErrType', !!d.type, 'Ingresá el tipo de evento') &&
+        bizVal('bizErrCompany', !!d.company, 'Ingresá el nombre de la empresa') &&
+        bizVal('bizErrAdults', d.adults !== '' && d.adults !== null, 'Colocá adultos') &&
+        bizVal('bizErrKids', d.kids !== '' && d.kids !== null, 'Colocá niños') &&
+        bizVal('bizErrAdults', a >= 0, 'Adultos inválido') &&
+        bizVal('bizErrKids', k >= 0, 'Niños inválido') &&
+        bizVal('bizErrAdults', total > 0, 'Colocá al menos 1 persona') &&
+        bizVal('bizErrDate', !!d.date, 'Elegí una fecha') &&
+        bizVal('bizErrStart', !!d.start, 'Elegí hora de inicio') &&
+        bizVal('bizErrServe', !!d.serve, 'Elegí hora de servicio') &&
+        bizVal('bizErrLocation', !!d.location, 'Ingresá la ubicación') &&
+        bizVal('bizErrPhone', !!d.phone, 'Ingresá un teléfono') &&
+        bizVal('bizErrEmail', emailOk, 'Ingresá un correo válido')
+      );
+    }
+
+    if(bizSendWa) bizSendWa.addEventListener('click', ()=>{
+      const d = collectBizData();
+      if(!validateBiz(d)) return;
+      const msg = buildBizMessage(d);
+      window.open(waLink(msg), '_blank', 'noopener');
+      closeBizModal();
+    });
+
+    if(bizSendEmail) bizSendEmail.addEventListener('click', ()=>{
+      const d = collectBizData();
+      if(!validateBiz(d)) return;
+      showToast('Correo dummy enviado');
+      closeBizModal();
+    });
+
+    // Si el usuario presiona Enter en un campo, no enviar por default
+    if(bizForm) bizForm.addEventListener('submit', (e)=>{ e.preventDefault(); });
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function flyToCart(fromEl){
@@ -2331,11 +2879,21 @@
       render();
     }
 
+    function parsePriceFromCtrl(ctrl){
+      const card = ctrl.closest('.menu-item');
+      if(!card) return 0;
+      const priceEl = card.querySelector('.menu-price');
+      const t = priceEl ? priceEl.textContent : '';
+      const m = t && t.match(/Q\s*([0-9]+)/i);
+      return m ? parseInt(m[1],10) : 0;
+    }
+
     document.querySelectorAll(".qty-controls").forEach(ctrl=>{
       const itemName = ctrl.getAttribute("data-flavor") || "Item";
       const cat = (ctrl.getAttribute("data-category") || "pizza").toLowerCase();
       state[itemName] = 0;
       category[itemName] = (cat === "extra") ? "extra" : "pizza";
+      priceMap[itemName] = parsePriceFromCtrl(ctrl);
 
       const minus = ctrl.querySelector(".qty-minus");
       const plus  = ctrl.querySelector(".qty-plus");
@@ -2357,10 +2915,47 @@
       const total = totalCount();
       if(total<=0){
         e.preventDefault();
-        alert("Agregá al menos 1 item al carrito para armar el mensaje.");
+        showToast("Agregá al menos 1 item al carrito");
         return;
       }
-      setTimeout(()=>{
+
+      // En PUBLICO: antes de abrir WhatsApp, pedimos datos en un modal
+      e.preventDefault();
+      openOrderModal();
+    });
+
+    if(orderForm){
+      orderForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+
+        const total = totalCount();
+        if(total<=0){
+          showToast('Agregá al menos 1 item al carrito');
+          closeOrderModal();
+          return;
+        }
+
+        const name = cleanText(ordName ? ordName.value : '');
+        const nitRaw = cleanText(ordNit ? ordNit.value : '');
+        const nit = nitRaw ? nitRaw : 'CF';
+        const address = cleanText(ordAddress ? ordAddress.value : '');
+
+        const pay = cleanText(ordPay ? ordPay.value : '');
+
+        // Validación discreta (sin alerts)
+        let ok = true;
+        if(!name){ fieldError(errName, 'Ingresá tu nombre'); ok = false; }
+        if(!address){ fieldError(errAddress, 'Ingresá tu dirección'); ok = false; }
+        if(!pay){ fieldError(errPay, 'Elegí una opción'); ok = false; }
+        if(!ok) return;
+
+        const msg = buildFinalOrderMessage({ name, nit, address, pay });
+        const url = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
+
+        // Abre WhatsApp
+        window.open(url, '_blank', 'noopener');
+
+        // Reset del carrito (igual que antes, pero despues de enviar)
         Object.keys(state).forEach(k=>state[k]=0);
         document.querySelectorAll(".qty-controls").forEach(ctrl=>{
           const num = ctrl.querySelector(".qty-num");
@@ -2369,12 +2964,52 @@
           if(card) card.classList.remove("has-qty");
         });
         render();
-      }, 150);
-    });
+
+        // Limpia el formulario y cierra
+        try{ orderForm.reset(); }catch(err){}
+        closeOrderModal();
+      });
+    }
 
     render();
   })();
 
+</script>
+<!-- iOS/PWA recover: avoid occasional blank screen when returning from external apps (e.g., WhatsApp) -->
+<script>
+(function () {
+  // Force a repaint/reflow in a very small, low-risk way.
+  function forceRepaint() {
+    try {
+      // Toggle a trivial transform to trigger GPU repaint
+      const el = document.documentElement;
+      const prev = el.style.webkitTransform;
+      el.style.webkitTransform = 'translateZ(0)';
+      // Also nudge scroll by 1px and back (works on iOS Safari/PWA)
+      const x = window.pageXOffset || 0;
+      const y = window.pageYOffset || 0;
+      window.scrollTo(x, y + 1);
+      window.scrollTo(x, y);
+      requestAnimationFrame(function () {
+        el.style.webkitTransform = prev || '';
+      });
+    } catch (e) { /* no-op */ }
+  }
+
+  // When returning from bfcache (back-forward cache) or restoring the page
+  window.addEventListener('pageshow', function (e) {
+    // Some iOS PWAs resume with a white screen; a repaint usually fixes it.
+    // Run on next tick so layout is ready.
+    setTimeout(forceRepaint, 30);
+  });
+
+  // When app becomes visible again (coming back from WhatsApp)
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      setTimeout(forceRepaint, 30);
+    }
+  });
+})();
 </script>
 </body>
 </html>
