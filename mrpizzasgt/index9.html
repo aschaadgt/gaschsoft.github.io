@@ -523,42 +523,6 @@
     }
   }
 
-  /* CTA flotante "Cotizá" (solo /business) */
-  .cotiza-fab{
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    z-index: 1202;
-    padding: 14px 18px;
-    border-radius: 999px;
-    font-weight: 900;
-    letter-spacing: .2px;
-    text-decoration: none;
-    background:  #d30133;
-    color: #fff;
-    box-shadow: var(--shadow-strong);
-    border: 2px solid rgba(255,255,255,.10);
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .cotiza-fab:hover{
-    animation: floaty 3.2s ease-in-out infinite, pulseRingCotiza 1.3s ease-out infinite;
-  }
-.cotiza-fab:active{ transform: translateY(1px); }
-  .cotiza-fab:focus-visible{
-    outline: 3px solid var(--ring);
-    outline-offset: 3px;
-  }
-  @media(max-width: 480px){
-    .cotiza-fab{
-      right: 12px;
-      bottom: 14px;
-      padding: 16px 20px;
-      font-size: 16px;
-    }
-  }
-
-
   .hidden{ display:none !important; }
 
   @media(max-width: 920px){
@@ -823,12 +787,7 @@
   }
   @keyframes pulseRing {
     0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.22); }
-    @keyframes pulseRingCotiza {
-    0%   { box-shadow: 0 0 0 0 rgba(179,18,23,.22); }
-    70%  { box-shadow: 0 0 0 10px rgba(179,18,23,0); }
-    100% { box-shadow: 0 0 0 0 rgba(179,18,23,0); }
-  }
-  70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+    70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
     100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
   }
   .fab{
@@ -2240,6 +2199,7 @@
 <ul class="promo-bullets"><li>Recetas propias: masa y salsa</li><li>Ingredientes de primera</li><li>Consistencia en cada porción</li></ul>
 </div>
 </article>
+
 </div>
 </div>
 </div>
@@ -2559,7 +2519,7 @@
 </a>
 <a aria-label="Escribirme por WhatsApp" class="fab fab--wa" href="#" id="waFab" rel="noopener" target="_blank" title="WhatsApp">
 <img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp 64p original.png"/>
-</a><a aria-label="Cotizá tu evento" class="cotiza-fab" href="#" id="cotizaFab" style="display:none;" title="Cotizá">Cotizá</a>
+</a>
 </main>
 <footer class="footer">
 <div class="container footer-top">
@@ -2876,30 +2836,7 @@
     return "public";
   }
 
-  
-  // =============================
-  // Floating CTAs: Público (UE/PY/WA) vs Empresas (Cotizá)
-  // =============================
-  function setFloatingCTAsForView(isBusinessView){
-    const ueFab = document.getElementById("ueFab");
-    const pyFab = document.getElementById("pyFab");
-    const waFab = document.getElementById("waFab");
-    const cotizaFab = document.getElementById("cotizaFab");
-
-    if(isBusinessView){
-      if(ueFab) ueFab.style.display = "none";
-      if(pyFab) pyFab.style.display = "none";
-      if(waFab) waFab.style.display = "none";
-      if(cotizaFab) cotizaFab.style.display = "";
-    }else{
-      if(ueFab) ueFab.style.display = "";
-      if(pyFab) pyFab.style.display = "";
-      if(waFab) waFab.style.display = "";
-      if(cotizaFab) cotizaFab.style.display = "none";
-    }
-  }
-
-function setView(view){
+  function setView(view){
     state.view = view;
 
     // botones
@@ -2966,9 +2903,6 @@ function setView(view){
       heroNote.innerHTML = "<strong>Lo que compras es tranquilidad.</strong><span>Mensajes claros, confirmación rápida y comida rica para compartir.</span>";
       heroCard.innerHTML = "<strong>Estás en Público.</strong><br/>Pedí de noche por WhatsApp y te confirmamos.";
     }
-
-    // Floating CTAs (solo se ven según vista)
-    setFloatingCTAsForView(view==="business");
 
     // CTAs
     const msgTop  = (view==="business") ? MSG.business : MSG.public;
@@ -3087,17 +3021,6 @@ function setView(view){
 
   // Boot
   setView(detectViewFromPath());
-
-    // CTA flotante Cotizá: reutiliza el mismo flujo del botón principal de cotización
-    const cotizaFab = document.getElementById("cotizaFab");
-    if(cotizaFab){
-      cotizaFab.addEventListener("click", (e)=>{
-        e.preventDefault();
-        const btn = document.getElementById("bizQuoteBtn");
-        if(btn) btn.click();
-      });
-    }
-
 </script>
 <script>
 
@@ -3446,14 +3369,6 @@ if(document.readyState === 'loading'){
     const bizQuoteBtn2 = document.getElementById('bizQuoteBtn2');
 
     const bizForm = document.getElementById('bizForm');
-    const bizDateEl = document.getElementById('bizDate');
-    if(bizDateEl){
-      // iOS a veces deja seleccionar pasado aunque exista min; lo corregimos al vuelo
-      bizDateEl.addEventListener('change', ()=>{ enforceBizDateRange(true); });
-      bizDateEl.addEventListener('input', ()=>{ enforceBizDateRange(false); });
-      bizDateEl.addEventListener('blur', ()=>{ enforceBizDateRange(true); });
-    }
-
     const bizSendWa = document.getElementById('bizSendWa');
     const bizSendEmail = document.getElementById('bizSendEmail');
 
@@ -3513,39 +3428,10 @@ if(document.readyState === 'loading'){
       }
     }
 
-    // Enforce rango de fecha en móvil (iOS/Android) incluso si el date picker deja seleccionar pasado
-    function enforceBizDateRange(showMsg){
-      const dateEl = document.getElementById('bizDate');
-      const errEl = document.getElementById('bizErrDate');
-      if(!dateEl) return true;
-
-      const v = cleanText(dateEl.value);       // YYYY-MM-DD
-      const minStr = cleanText(dateEl.min);    // YYYY-MM-DD
-      const maxStr = cleanText(dateEl.max);    // YYYY-MM-DD
-
-      // Si está vacío, que lo valide el required normal
-      if(!v) return false;
-
-      // Comparación lexicográfica funciona para YYYY-MM-DD
-      if(minStr && v < minStr){
-        dateEl.value = minStr;
-        if(showMsg) fieldError(errEl, 'La fecha no puede ser anterior a hoy');
-        return false;
-      }
-      if(maxStr && v > maxStr){
-        dateEl.value = maxStr;
-        if(showMsg) fieldError(errEl, 'La fecha no puede ser mayor a 100 días');
-        return false;
-      }
-      return true;
-    }
-
     function openBizModal(){
       if(!bizModal) return;
       updateBizIcons();
       setBizDateBounds();
-      // Normaliza si el picker dejó una fecha fuera de rango (móvil)
-      enforceBizDateRange(false);
       // Bloquea scroll del fondo (sin cerrar con click fuera)
       try{
         const y = window.scrollY || document.documentElement.scrollTop || 0;
@@ -3622,8 +3508,7 @@ if(document.readyState === 'loading'){
         company: cleanText(document.getElementById('bizCompany')?.value),
         adults: cleanText(document.getElementById('bizAdults')?.value),
         kids: cleanText(document.getElementById('bizKids')?.value),
-        dateRaw: cleanText(document.getElementById('bizDate')?.value),
-        date: formatDateGT(cleanText(document.getElementById('bizDate')?.value)),
+        date: formatDateGT(document.getElementById('bizDate')?.value),
         start: cleanText(document.getElementById('bizStart')?.value),
         serve: cleanText(document.getElementById('bizServe')?.value),
         location: cleanText(document.getElementById('bizLocation')?.value),
@@ -3647,8 +3532,7 @@ if(document.readyState === 'loading'){
         bizVal('bizErrAdults', a >= 0, 'Adultos inválido') &&
         bizVal('bizErrKids', k >= 0, 'Niños inválido') &&
         bizVal('bizErrAdults', total > 0, 'Colocá al menos 1 persona') &&
-        bizVal('bizErrDate', !!(d.dateRaw||d.date), 'Elegí una fecha') &&
-        bizVal('bizErrDate', enforceBizDateRange(true), 'La fecha no puede ser anterior a hoy') &&
+        bizVal('bizErrDate', !!d.date, 'Elegí una fecha') &&
         bizVal('bizErrStart', !!d.start, 'Elegí hora de inicio') &&
         bizVal('bizErrServe', !!d.serve, 'Elegí hora de servicio') &&
         bizVal('bizErrProducts', (d.products && d.products.length>0), 'Seleccioná al menos un producto') &&
