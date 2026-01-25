@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
@@ -1284,7 +1285,7 @@
   @media (max-width: 520px){
     .biz-modal-overlay{ padding: 12px; }
     .biz-modal{ border-radius: 16px; padding: 10px; }
-    .biz-modal-grid{ gap: 8px; margin-top: 6px; }
+    .biz-modal-grid{ gap: 10px; margin-top: 8px; }
     .biz-ico{ width: 30px; height: 30px; border-radius: 10px; }
     .biz-ico img{ width: 16px; height: 16px; }
     .biz-modal .modal-kicker{ font-size: 12px; }
@@ -1396,6 +1397,22 @@
   }
   .toast.is-show{ opacity: 1; transform: translateY(0px); }
 
+  /* Barra de progreso (tiempo) en la notificación */
+  .toast{ position: relative; overflow: hidden; }
+  .toast::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    height:3px;
+    width:100%;
+    background: var(--danger);
+    transform-origin: left;
+    transform: scaleX(1);
+    transition: transform var(--toast-ms, 2200ms) linear;
+  }
+  .toast.is-show::after{ transform: scaleX(0); }
+
   /* Modal (Publico): bloquear scroll del fondo mientras esta abierto */
   body.modal-lock{
     position: fixed;
@@ -1458,7 +1475,7 @@
   }
   @media (max-width: 560px){
     #bizModal .biz-modal{ padding: 12px; }
-    #bizModal .biz-modal-grid{ gap: 6px; }
+    #bizModal .biz-modal-grid{ gap: 8px; }
   }
 
 
@@ -1534,39 +1551,95 @@
   }
   #bizModal .biz-field-products .biz-check{ font-size: 12px; }
 
-  /* v54_15: Modal Empresas - columnas independientes para eliminar huecos (solo #bizModal) */
-  #bizModal .biz-modal-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px; /* separación entre columnas */
+
+/* v54_15: Modal Empresas sin huecos (dos columnas independientes) */
+#bizModal .biz-modal-grid{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+}
+#bizModal .biz-col{
+  flex:1 1 0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-width:0;
+}
+@media (max-width: 860px){
+  #bizModal .biz-modal-grid{ display:block; }
+  #bizModal .biz-col{ gap:10px; }
+}
+
+/* v54_17: Compactar altura del modal (reducir espacio vacío antes de botones) */
+#bizModal .biz-actions{ margin-top: -30px; } /* baja el hueco entre el grid y los CTAs */
+
+
+  /* ===== v54_16: Ajustes de tema para pickers date/time (iOS/Chrome) — SOLO MODAL EMPRESAS ===== */
+  html[data-theme="dark"] #bizModal input[type="date"],
+  html[data-theme="dark"] #bizModal input[type="time"]{
+    color-scheme: dark;
   }
-  #bizModal .biz-col{
-    display: flex;
-    flex-direction: column;
-    gap: 8px; /* separación vertical dentro de cada columna */
-    min-width: 0;
-  }
-  @media (max-width: 520px){
-    #bizModal .biz-modal-grid{ grid-template-columns: 1fr; gap: 10px; }
-    #bizModal .biz-col{ gap: 8px; }
-  }
-  #bizModal #bizEmail{
-  position: relative;
-  top: -14px;
+  html[data-theme="dark"] #bizModal input[type="date"]::-webkit-calendar-picker-indicator,
+  html[data-theme="dark"] #bizModal input[type="time"]::-webkit-calendar-picker-indicator{
+    filter: invert(1);
+    opacity: .85;
   }
 
-  /* Ajuste fino: subir Correo (label + input) 14px */
+ /* Ajuste fino: subir FECHA (label + input) 14px */
+#bizModal .biz-field .field label[for="bizDate"]{
+  position: relative;
+  top: -4px;
+}
+#bizModal #bizDate{
+  position: relative;
+  top: -4px;
+}
+#bizModal #bizErrDate{
+  position: relative;
+  top: -4px;
+} 
+
+ /* Ajuste fino: subir PDORDUCTO (label + input) 14px XXXXX*/ 
+#bizModal .biz-field-products .field{
+  position: relative;
+  top: -8px;
+}
+#bizModal #bizErrProducts{
+  position: relative;
+  top: -8px;
+}
+
+ /* Ajuste fino: subir UBICACION (label + input) 14px */
+#bizModal .biz-field .field label[for="bizLocation"]{
+  position: relative;
+  top: -30px;
+}
+#bizModal #bizLocation{
+  position: relative;
+  top: -30px;
+}
+#bizModal #bizErrLocation{
+  position: relative;
+  top: -30px;
+}
+
+/* Ajuste fino: subir Correo (label + input) 14px */
 #bizModal .biz-field .field label[for="bizEmail"]{
   position: relative;
-  top: -14px;
+  top: -40px;
 }
 #bizModal #bizEmail{
   position: relative;
-  top: -14px;
+  top: -40px;
 }
 #bizModal #bizErrEmail{
   position: relative;
-  top: -14px;
+  top: -40px;
+}
+
+#bizModal .biz-field:has(#bizEmail) .biz-ico{
+  position: relative;
+  top: -40px;
 }
 
 
@@ -2103,14 +2176,14 @@
 </a>
 <!-- WhatsApp Floating Button -->
 <a aria-label="Pedir por Uber Eats" class="fab fab--ue" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" id="ueFab" rel="noopener" target="_blank" title="Uber Eats">
-<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
-</a>
+<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png">
+</img></a>
 <a aria-label="Pedir por PedidosYa" class="fab fab--py" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" id="pyFab" rel="noopener" target="_blank" title="PedidosYa">
-<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
-</a>
+<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png">
+</img></a>
 <a aria-label="Escribirme por WhatsApp" class="fab fab--wa" href="#" id="waFab" rel="noopener" target="_blank" title="WhatsApp">
-<img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp 64p original.png"/>
-</a>
+<img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp 64p original.png">
+</img></a>
 </main>
 <footer class="footer">
 <div class="container footer-top">
@@ -2132,20 +2205,20 @@
 <div class="container">
 <div class="social">
 <a aria-label="Instagram" class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" rel="noopener" target="_blank">
-<img alt="Instagram" decoding="async" loading="lazy" src="instagram.png"/>
-</a>
+<img alt="Instagram" decoding="async" loading="lazy" src="instagram.png">
+</img></a>
 <a aria-label="TikTok" class="social__link" href="#" rel="noopener" target="_blank">
-<img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png"/>
-</a>
+<img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png">
+</img></a>
 <a aria-label="Facebook" class="social__link" href="#" rel="noopener" target="_blank">
-<img alt="Facebook" decoding="async" loading="lazy" src="facebook.png"/>
-</a>
+<img alt="Facebook" decoding="async" loading="lazy" src="facebook.png">
+</img></a>
 <a aria-label="Uber Eats" class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" rel="noopener" target="_blank">
-<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
-</a>
+<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png">
+</img></a>
 <a aria-label="PedidosYa" class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">
-<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
-</a>
+<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png">
+</img></a>
 </div>
 </div>
 <div class="container footer-bottom">
@@ -2191,8 +2264,8 @@
 <div class="modal-actions">
 <button class="btn btn-outline" id="orderModalCancel" type="button">Cancelar</button>
 <button aria-label="Enviar pedido" class="send-btn" id="orderModalSend" type="submit">
-<img alt="" class="send-icon" decoding="async" id="sendMsgIcon" loading="lazy" src="enviar-mensaje.png"/>
-</button>
+<img alt="" class="send-icon" decoding="async" id="sendMsgIcon" loading="lazy" src="enviar-mensaje.png">
+</img></button>
 </div>
 </form>
 </div>
@@ -2207,11 +2280,31 @@
 <p class="modal-sub" style="margin:0;">Completá lo básico y elegí cómo enviarlo: WhatsApp o correo.</p>
 </div>
 <form autocomplete="on" class="modal-form" id="bizForm" style="padding: 0 8px 6px;">
-<div class="biz-modal-grid"><div class="biz-col biz-col--left"><div class="biz-field">
+<div class="biz-modal-grid">
+
+
+
+
+
+
+
+
+
+<div class="biz-col biz-col-left"><div class="biz-field">
 <div class="biz-ico"><img alt="" decoding="async" id="icoEventType" loading="lazy" src="Logotipos/organizador.png"/></div>
 <div class="field">
 <label for="bizType">Tipo de evento</label>
-<input id="bizType" name="type" placeholder="Ej: Convivio RRHH / Aniversario / Navidad" required="" type="text"/>
+<select id="bizType" name="type" required>
+<option value="" disabled selected>Seleccioná el tipo de evento…</option>
+<option>Convivio corporativo</option>
+<option>Aniversario</option>
+<option>Fin de año / Navidad</option>
+<option>Cumpleaños</option>
+<option>Graduación</option>
+<option>Reunión de equipo</option>
+<option>Lanzamiento / inauguración</option>
+<option>Otros</option>
+</select>
 <div aria-live="polite" class="field-error" id="bizErrType"></div>
 </div>
 </div><div class="biz-field">
@@ -2238,13 +2331,13 @@
 </div>
 </div>
 </div><div class="biz-field">
-<div class="biz-ico"><img alt="" decoding="async" id="icoTime" loading="lazy" src="Logotipos/calendar.png"/></div>
+<div class="biz-ico"><img alt="" decoding="async" id="icoTime" loading="lazy" src="Logotipos/reloj.png"/></div>
 <div class="field">
 <label>Horario</label>
 <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
 <div>
 <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
-<img alt="" decoding="async" id="icoStartEvent" loading="lazy" src="Logotipos/reloj.png" style="width:16px; height:16px; object-fit:contain; opacity:.95;"/>
+<img alt="" decoding="async" id="icoStartEvent" loading="lazy" src="Logotipos/calendar.png" style="width:16px; height:16px; object-fit:contain; opacity:.95;"/>
 <span style="font-weight:900; font-size:13px; color:var(--muted);">Inicio evento</span>
 </div>
 <input id="bizStart" name="start" required="" type="time"/>
@@ -2267,7 +2360,7 @@
 <input id="bizPhone" inputmode="tel" name="phone" placeholder="Ej: +502 5555-5555" required="" type="tel"/>
 <div aria-live="polite" class="field-error" id="bizErrPhone"></div>
 </div>
-</div></div><div class="biz-col biz-col--right"><div class="biz-field">
+</div></div><div class="biz-col biz-col-right"><div class="biz-field">
 <div class="biz-ico"><img alt="" decoding="async" id="icoCompany" loading="lazy" src="Logotipos/corporacion.png"/></div>
 <div class="field">
 <label for="bizCompany">Empresa</label>
@@ -2292,6 +2385,7 @@
 <label class="biz-check"><input id="bizProdBebidas" type="checkbox" value="Bebidas"/> <span>Bebidas</span></label>
 <label class="biz-check"><input id="bizProdToldos" type="checkbox" value="Toldos"/> <span>Toldos</span></label>
 </div>
+<div aria-live="polite" class="field-error" id="bizErrProducts"></div>
 </div>
 </div><div class="biz-field">
 <div class="biz-ico"><img alt="" decoding="async" id="icoLoc" loading="lazy" src="Logotipos/marcador-de-posicion.png"/></div>
@@ -2311,13 +2405,13 @@
 <div class="biz-actions">
 <button class="btn btn-outline" id="bizModalCancel" type="button">Cancelar</button>
 <button class="btn btn-outline btn-icon" id="bizSendEmail" type="button">
+<span>Enviar por correo</span>
 <img alt="" decoding="async" loading="lazy" src="Logotipos/Logo gmail.png"/>
 <img alt="" decoding="async" loading="lazy" src="Logotipos/Logo outlook.png"/>
-          Enviar por correo
         </button>
 <button class="btn btn-primary btn-icon" id="bizSendWa" type="button">
+<span>Enviar por WhatsApp</span>
 <img alt="" decoding="async" loading="lazy" src="Logotipos/Logo whatsapp.png"/>
-          Enviar por WhatsApp
         </button>
 </div>
 </form>
@@ -2363,6 +2457,9 @@
     const sendMsgIcon = document.getElementById("sendMsgIcon");
     if(sendMsgIcon) sendMsgIcon.src = (t==="dark") ? "enviar-mensaje-dark.png" : "enviar-mensaje.png";
 
+
+    // Mantener iconos del modal Empresas sincronizados con el tema
+    if(typeof updateBizIcons === "function") updateBizIcons(t);
   }
 
   // Mensajes por ruta
@@ -2761,18 +2858,36 @@
       return String(x||"").replace(/\s+/g,' ').trim();
     }
 
+
+    function formatDateGT(yyyyMmDd){
+      const s = cleanText(yyyyMmDd);
+      // Espera "YYYY-MM-DD" (valor típico de input[type="date"])
+      const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+      if(!m) return s;
+      const yyyy = m[1], mm = m[2], dd = m[3];
+      return dd + "/" + mm + "/" + yyyy;
+    }
+
     // Toast discreto (arriba derecha)
-    function showToast(text){
+    function showToast(text, ms){
       if(!toastHost) return;
+      ms = Number(ms);
+      if(!isFinite(ms) || ms <= 0) ms = 2200;
+
       const el = document.createElement('div');
       el.className = 'toast';
       el.textContent = text;
+
+      // Barra de progreso sincronizada con el tiempo de vida del toast
+      el.style.setProperty('--toast-ms', ms + 'ms');
+
       toastHost.appendChild(el);
       requestAnimationFrame(()=> el.classList.add('is-show'));
+
       window.setTimeout(()=>{
         el.classList.remove('is-show');
         window.setTimeout(()=> el.remove(), 220);
-      }, 2200);
+      }, ms);
     }
 
     // Error bajo el campo (3s)
@@ -2901,8 +3016,8 @@
         icoKids:      isDark ? 'Logotipos/chico-dark.png' : 'Logotipos/chico.png',
         icoDate:      isDark ? 'Logotipos/calendario-dark.png' : 'Logotipos/calendario.png',
         icoProducts:  isDark ? 'Logotipos/productos-dark.png' : 'Logotipos/productos.png',
-        icoTime:      isDark ? 'Logotipos/calendar-dark.png' : 'Logotipos/calendar.png', //------------------
-        icoStartEvent:isDark ? 'Logotipos/reloj-dark.png' : 'Logotipos/reloj.png',
+        icoTime:      isDark ? 'Logotipos/reloj-dark.png' : 'Logotipos/reloj.png',
+        icoStartEvent:isDark ? 'Logotipos/calendar-dark.png' : 'Logotipos/calendar.png',
         icoServe:     isDark ? 'Logotipos/tenedor-dark.png' : 'Logotipos/tenedor.png',
         icoLoc:       isDark ? 'Logotipos/marcador-de-posicion-dark.png' : 'Logotipos/marcador-de-posicion.png',
         icoPhone:     isDark ? 'Logotipos/Telefono-dark.png' : 'Logotipos/Telefono.png',
@@ -2915,9 +3030,42 @@
       });
     }
 
+    window.updateBizIcons = updateBizIcons;
+
+    // v55_2 — Limitar fecha de cotizacion (SOLO modal Empresas)
+    function setBizDateBounds(){
+      const dateEl = document.getElementById('bizDate');
+      if(!dateEl) return;
+      const today = new Date();
+      // Normalizar a fecha local (00:00)
+      const localMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const maxDate = new Date(localMidnight);
+      maxDate.setDate(maxDate.getDate() + 100);
+
+      const toYMD = (d)=>{
+        const y = d.getFullYear();
+        const m = String(d.getMonth()+1).padStart(2,'0');
+        const day = String(d.getDate()).padStart(2,'0');
+        return `${y}-${m}-${day}`;
+      };
+
+      const minStr = toYMD(localMidnight);
+      const maxStr = toYMD(maxDate);
+
+      dateEl.min = minStr;
+      dateEl.max = maxStr;
+
+      // Si el valor actual esta fuera de rango, ajustarlo (sin romper UX)
+      if(dateEl.value){
+        if(dateEl.value < minStr) dateEl.value = minStr;
+        if(dateEl.value > maxStr) dateEl.value = maxStr;
+      }
+    }
+
     function openBizModal(){
       if(!bizModal) return;
       updateBizIcons();
+      setBizDateBounds();
       // Bloquea scroll del fondo (sin cerrar con click fuera)
       try{
         const y = window.scrollY || document.documentElement.scrollTop || 0;
@@ -2945,6 +3093,20 @@
     if(bizCancel) bizCancel.addEventListener('click', closeBizModal);
     if(bizQuoteBtn) bizQuoteBtn.addEventListener('click', openBizModal);
     if(bizQuoteBtn2) bizQuoteBtn2.addEventListener('click', openBizModal);
+    // v55_1 — Toast al agregar productos (SOLO modal Empresas)
+    (function(){
+      const cbs = document.querySelectorAll('#bizModal .biz-products input[type="checkbox"]');
+      if(!cbs || !cbs.length) return;
+      cbs.forEach(cb=>{
+        cb.addEventListener('change', (e)=>{
+          const t = e.target;
+          if(t && t.checked){
+            showToast(`Se ha añadido ${t.value} a la cotización`);
+          }
+        });
+      });
+    })();
+
 
     function bizVal(idErr, ok, msg){
       const el = document.getElementById(idErr);
@@ -2980,7 +3142,7 @@
         company: cleanText(document.getElementById('bizCompany')?.value),
         adults: cleanText(document.getElementById('bizAdults')?.value),
         kids: cleanText(document.getElementById('bizKids')?.value),
-        date: cleanText(document.getElementById('bizDate')?.value),
+        date: formatDateGT(document.getElementById('bizDate')?.value),
         start: cleanText(document.getElementById('bizStart')?.value),
         serve: cleanText(document.getElementById('bizServe')?.value),
         location: cleanText(document.getElementById('bizLocation')?.value),
@@ -3007,6 +3169,7 @@
         bizVal('bizErrDate', !!d.date, 'Elegí una fecha') &&
         bizVal('bizErrStart', !!d.start, 'Elegí hora de inicio') &&
         bizVal('bizErrServe', !!d.serve, 'Elegí hora de servicio') &&
+        bizVal('bizErrProducts', (d.products && d.products.length>0), 'Seleccioná al menos un producto') &&
         bizVal('bizErrLocation', !!d.location, 'Ingresá la ubicación') &&
         bizVal('bizErrPhone', !!d.phone, 'Ingresá un teléfono') &&
         bizVal('bizErrEmail', emailOk, 'Ingresá un correo válido')

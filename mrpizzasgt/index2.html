@@ -437,53 +437,6 @@
   .fab--wa{ bottom: 16px; }
   .fab--py{ bottom: calc(16px + clamp(56px, 7.2vw, 68px) + 10px); }
   .fab--ue{ bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 2) + 20px); }
-
-  /* Mini Carrito (badge flotante discreto) */
-  .mini-cart-fab{
-    position: fixed;
-    right: calc(16px + clamp(56px, 7.2vw, 68px) + 12px); /* a la izquierda del FAB de WhatsApp */
-    bottom: 16px;
-    z-index: 1201;
-    width: 44px;
-    height: 44px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    text-decoration: none;
-    overflow: visible;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .mini-cart-fab:focus-visible{
-    outline: 2px solid var(--line);
-    outline-offset: 3px;
-  }
-  .mini-cart-fab img{ width: 24px; height: 24px; object-fit: contain; display:block; }
-  .mini-cart-count{
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px;
-    background: #ef4444;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 800;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 14px rgba(0,0,0,.16);
-    border: 1px solid rgba(255,255,255,.85);
-  }
-  @media(max-width: 720px){
-    .mini-cart-fab{
-      right: 16px;
-      bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 3) + 30px);
-    }
-  }
-
   .hidden{ display:none !important; }
 
   @media(max-width: 920px){
@@ -737,14 +690,6 @@
   }
 
 
-  
-
-  /* Accesibilidad: respeta "reducir movimiento" */
-  @media (prefers-reduced-motion: reduce){
-    .fab{ animation: none !important; }
-    .promo-carousel .carousel__track{ transition: none !important; }
-  }
-
   /* Animación ligera para botones flotantes */
   @keyframes floaty {
     0%   { transform: translateY(0); }
@@ -924,199 +869,7 @@
     border: 2px solid rgba(255,255,255,.65);
   }
   .btn.btn-primary.has-badge .wa-badge{ display:inline-flex; }
-  .wa-badge.pulse{
-    animation: waPulse 1.15s ease-in-out infinite;
-    transform-origin: center;
-  }
-  @keyframes waPulse{
-    0%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,.55); }
-    70%{ transform: scale(1.14); box-shadow: 0 0 0 10px rgba(255,59,48,0); }
-    100%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,0); }
-  }
 
-
-  /* Fly-to-cart (feedback visual al sumar) */
-  .fly-dot{
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    border-radius: 999px;
-    background: #ef4444;
-    box-shadow: 0 10px 18px rgba(0,0,0,.22);
-    z-index: 2000;
-    pointer-events: none;
-    will-change: transform, opacity;
-  }
-
-  /* =====================
-     Modal Publico (datos pedido WhatsApp)
-     ===================== */
-  .modal-overlay{
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 18px;
-    z-index: 1600;
-    background: rgba(2, 6, 23, .55);
-    backdrop-filter: blur(8px) saturate(140%);
-  }
-  :root[data-theme="dark"] .modal-overlay{ background: rgba(0,0,0,.62); }
-  .modal-overlay.is-open{ display: flex; }
-
-  .modal{
-    /* un poco mas compacto (~10%) */
-    width: min(342px, 100%);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    box-shadow: var(--shadow-strong);
-    position: relative;
-    padding: 11px;
-  }
-  .modal-x{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
-    border: 2px solid var(--line);
-    background: var(--surface2);
-    color: var(--ink);
-    cursor: pointer;
-    font-weight: 950;
-  }
-  .modal-x:hover{ filter: brightness(0.98); }
-
-  .modal-head{ padding: 5px 5px 9px; }
-  .modal-kicker{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: rgba(198,40,40,.10);
-    border: 1px solid rgba(198,40,40,.18);
-    font-weight: 950;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .modal-title{ margin: 0 0 6px; letter-spacing: -.4px; }
-  .modal-sub{ margin: 0; color: var(--muted); line-height: 1.55; font-weight: 650; font-size: 13px; }
-
-  .modal-form{ padding: 0 6px 6px; display: grid; gap: 10px; }
-  .field label{ display:block; font-weight: 900; margin: 0 0 6px; }
-  .field input, .field textarea, .field select{
-    width: 100%;
-    border-radius: 12px;
-    border: 2px solid var(--line);
-    background: var(--surface2);
-    padding: 10px 12px;
-    color: var(--ink);
-    outline: none;
-    font-weight: 750;
-    /* iOS: evita el zoom automatico al enfocar (requiere >= 16px) */
-    font-size: 16px;
-  }
-  .field select{ appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 38px; }
-  .field select{ cursor: pointer; transition: border-color 140ms ease, filter 140ms ease; }
-  .field select:hover{ border-color: rgba(198,40,40,.25); filter: brightness(0.99); }
-  .field .select-wrap{ position: relative; }
-  .field .select-wrap:after{
-    content: "▾";
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: 950;
-    color: var(--muted);
-    pointer-events: none;
-  }
-  .field input:focus, .field textarea:focus, .field select:focus{ box-shadow: 0 0 0 6px var(--ring); border-color: rgba(198,40,40,.35); }
-  .field textarea{ resize: vertical; min-height: 76px; }
-
-  .field-error{
-    margin-top: 6px;
-    min-height: 16px;
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--danger);
-    opacity: 0;
-    transform: translateY(-2px);
-    transition: opacity 160ms ease, transform 160ms ease;
-  }
-  .field-error.is-show{ opacity: 1; transform: translateY(0px); }
-
-  .modal-actions{ display:flex; gap: 10px; justify-content:flex-end; align-items:center; padding-top: 4px; }
-  .send-btn{
-    position: relative;
-    width: 46px;
-    height: 46px;
-    border-radius: 999px;
-    border: 2px solid var(--line);
-    background: var(--surface2);
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow);
-  }
-  .send-btn:hover{ transform: translateY(-1px); }
-  .send-btn:after{
-    content: "Enviar pedido";
-    position: absolute;
-    left: 50%;
-    top: calc(100% + 8px);
-    transform: translateX(-50%);
-    padding: 5px 8px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink);
-    font-weight: 900;
-    font-size: 11px;
-    line-height: 1;
-    white-space: nowrap;
-    box-shadow: var(--shadow);
-    z-index: 5;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 140ms ease;
-}
-  .send-btn:hover:after{ opacity: 1; }
-  .send-icon{ width: 20px; height: 20px; object-fit: contain; }
-
-  /* Toast (notificacion discreta) */
-  .toast-host{ position: fixed; top: 16px; right: 16px; z-index: 2500; display: grid; gap: 10px; }
-  .toast{
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--danger);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    padding: 10px 12px;
-    min-width: 220px;
-    max-width: min(360px, calc(100vw - 32px));
-    font-weight: 900;
-    color: var(--ink);
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 160ms ease, transform 160ms ease;
-  }
-  .toast.is-show{ opacity: 1; transform: translateY(0px); }
-
-
-  /* Modal (Publico): bloquear scroll del fondo mientras esta abierto */
-  body.modal-lock{
-    position: fixed;
-    width: 100%;
-    overflow: hidden;
-  }
-  .modal-overlay{
-    overscroll-behavior: contain;
-  }
 </style>
 <link rel="preload" as="image" href="Flayer 1.webp">
 
@@ -1391,11 +1144,11 @@
 
       <!-- ===================== MENÚ (SOLO PÚBLICO) ===================== -->
       <div class="menu-wrap" id="menu">
-        <button class="menu-toggle" type="button" aria-expanded="true" aria-controls="menuPanel" id="menuToggle">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menuPanel" id="menuToggle">
           <span class="menu-toggle__left">
             <span class="menu-toggle__icon">🍕</span>
             <span>
-              <strong class="menu-title">Nuestras pizzas</strong>
+              <strong class="menu-title">Menú de Pizzas</strong>
               <span class="menu-toggle__meta">Q85 • 8 porciones • 8 sabores</span>
             </span>
           </span>
@@ -1410,7 +1163,7 @@
                 <h3>Hawaiana</h3>
                 <p>Base de salsa de tomate, mozzarella, jamón y piña. La clásica dulce-salada.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Hawaiana" data-category="pizza">
+                <div class="qty-controls" data-flavor="Hawaiana">
                   <button class="qty-btn qty-minus" type="button" aria-label="Restar Hawaiana">−</button>
                   <span class="qty-num" aria-label="Cantidad Hawaiana">0</span>
                   <button class="qty-btn qty-plus" type="button" aria-label="Sumar Hawaiana">+</button>
@@ -1424,7 +1177,7 @@
                 <h3>Peperoni</h3>
                 <p>Salsa de tomate, mozzarella y pepperoni doradito. Simple y poderosa.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Peperoni" data-category="pizza">
+                <div class="qty-controls" data-flavor="Peperoni">
                   <button class="qty-btn qty-minus" type="button" aria-label="Restar Peperoni">−</button>
                   <span class="qty-num" aria-label="Cantidad Peperoni">0</span>
                   <button class="qty-btn qty-plus" type="button" aria-label="Sumar Peperoni">+</button>
@@ -1438,7 +1191,7 @@
                 <h3>Margarita Pesto</h3>
                 <p>Salsa de tomate de la casa, con masa de la casa, mozzarella, tomate cherry y un pesto espectacular.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Margarita Pesto" data-category="pizza">
+                <div class="qty-controls" data-flavor="Margarita Pesto">
                   <button class="qty-btn qty-minus" type="button" aria-label="Restar Margarita Pesto">−</button>
                   <span class="qty-num" aria-label="Cantidad Margarita Pesto">0</span>
                   <button class="qty-btn qty-plus" type="button" aria-label="Sumar Margarita Pesto">+</button>
@@ -1452,7 +1205,7 @@
                 <h3>Chapina</h3>
                 <p>Pizza con masa de la casa, salsa de chile guaque con chorizo y longaniza.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Chapina" data-category="pizza">
+                <div class="qty-controls" data-flavor="Chapina">
                   <button class="qty-btn qty-minus" type="button" aria-label="Restar Chapina">−</button>
                   <span class="qty-num" aria-label="Cantidad Chapina">0</span>
                   <button class="qty-btn qty-plus" type="button" aria-label="Sumar Chapina">+</button>
@@ -1466,7 +1219,7 @@
                 <h3>Carnes</h3>
                 <p>Salsa de tomate de la casa, masa de la casa, queso mozzarella, jamón, tocino y pepperoni.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Carnes" data-category="pizza">
+                <div class="qty-controls" data-flavor="Carnes">
                   <button class="qty-btn qty-minus" type="button" aria-label="Restar Carnes">−</button>
                   <span class="qty-num" aria-label="Cantidad Carnes">0</span>
                   <button class="qty-btn qty-plus" type="button" aria-label="Sumar Carnes">+</button>
@@ -1480,7 +1233,7 @@
                 <h3>Tejana</h3>
                 <p>Salsa de tomate, mozzarella, carne sazonada y un toque de jalapeño (nivel “rico”, no complicado).</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Tejana" data-category="pizza">
+                <div class="qty-controls" data-flavor="Tejana">
                   <button class="qty-btn qty-minus" type="button" aria-label="Restar Tejana">−</button>
                   <span class="qty-num" aria-label="Cantidad Tejana">0</span>
                   <button class="qty-btn qty-plus" type="button" aria-label="Sumar Tejana">+</button>
@@ -1494,7 +1247,7 @@
                 <h3>Tocino</h3>
                 <p>Salsa de tomate, mozzarella y tocino crujiente. Favorita para compartir.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Tocino" data-category="pizza">
+                <div class="qty-controls" data-flavor="Tocino">
                   <button class="qty-btn qty-minus" type="button" aria-label="Restar Tocino">−</button>
                   <span class="qty-num" aria-label="Cantidad Tocino">0</span>
                   <button class="qty-btn qty-plus" type="button" aria-label="Sumar Tocino">+</button>
@@ -1508,7 +1261,7 @@
                 <h3>Jamón</h3>
                 <p>Salsa de tomate de la casa, con queso mozzarella y jamón.</p>
                 <div class="menu-price">Q85 • 8 porciones</div>
-                <div class="qty-controls" data-flavor="Jamón" data-category="pizza">
+                <div class="qty-controls" data-flavor="Jamón">
                   <button class="qty-btn qty-minus" type="button" aria-label="Restar Jamón">−</button>
                   <span class="qty-num" aria-label="Cantidad Jamón">0</span>
                   <button class="qty-btn qty-plus" type="button" aria-label="Sumar Jamón">+</button>
@@ -1518,121 +1271,11 @@
           </div>
 
           
-          <!-- ===== Entradas y Postres (NO desplegado por default) ===== -->
-          <div class="menu-wrap" id="menuExtras" style="margin-top:14px;">
-            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menuExtrasPanel" id="menuExtrasToggle">
-              <span class="menu-toggle__left">
-                <span class="menu-toggle__icon">🍓</span>
-                <span>
-                  <strong class="menu-title">Nuestras Entradas y Postres</strong>
-                  <span class="menu-toggle__meta">Nachos • Alitas • Crepas • Fresas</span>
-                </span>
-              </span>
-              <span class="menu-toggle__chev" aria-hidden="true">▾</span>
-            </button>
-
-            <div class="menu-panel" id="menuExtrasPanel" hidden>
-              <div class="menu-grid">
-                <article class="menu-item">
-                  <div class="menu-img"><img loading="lazy" decoding="async" src="Nachos.webp" alt="Nachos"></div>
-                  <div class="menu-body">
-                    <h3>Nachos con queso</h3>
-                    <p>Nachos crujientes con queso derretido y toppings (según disponibilidad).</p>
-                    <div class="menu-price">Q35</div>
-                    <div class="qty-controls" data-flavor="Nachos con queso" data-category="extra">
-                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Nachos con queso">−</button>
-                      <span class="qty-num" aria-label="Cantidad Nachos con queso">0</span>
-                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Nachos con queso">+</button>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="menu-item">
-                  <div class="menu-img"><img loading="lazy" decoding="async" src="Alitas.webp" alt="Alitas"></div>
-                  <div class="menu-body">
-                    <h3>Alitas (porción)</h3>
-                    <p>Alitas doraditas con salsa a elegir (consulta opciones disponibles).</p>
-                    <div class="menu-price">Q35</div>
-                    <div class="qty-controls" data-flavor="Alitas (porción)" data-category="extra">
-                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Alitas (porción)">−</button>
-                      <span class="qty-num" aria-label="Cantidad Alitas (porción)">0</span>
-                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Alitas (porción)">+</button>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="menu-item">
-                  <div class="menu-img"><img loading="lazy" decoding="async" src="Crepa-Fresas-Nutela.webp" alt="Crepa de fresas con Nutella"></div>
-                  <div class="menu-body">
-                    <h3>Crepa de fresas con Nutella</h3>
-                    <p>Crepa recién hecha con fresas frescas y Nutella.</p>
-                    <div class="menu-price">Q40</div>
-                    <div class="qty-controls" data-flavor="Crepa de fresas con Nutella" data-category="extra">
-                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Crepa de fresas con Nutella">−</button>
-                      <span class="qty-num" aria-label="Cantidad Crepa de fresas con Nutella">0</span>
-                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Crepa de fresas con Nutella">+</button>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="menu-item">
-                  <div class="menu-img"><img loading="lazy" decoding="async" src="Crepa-Banano-Nutela.webp" alt="Crepa de banano con Nutella"></div>
-                  <div class="menu-body">
-                    <h3>Crepa de banano con Nutella</h3>
-                    <p>Crepa recién hecha con banano y Nutella. Dulce y contundente.</p>
-                    <div class="menu-price">Q40</div>
-                    <div class="qty-controls" data-flavor="Crepa de banano con Nutella" data-category="extra">
-                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Crepa de banano con Nutella">−</button>
-                      <span class="qty-num" aria-label="Cantidad Crepa de banano con Nutella">0</span>
-                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Crepa de banano con Nutella">+</button>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="menu-item">
-                  <div class="menu-img"><img loading="lazy" decoding="async" src="Crepa-Fresa-Banano.webp" alt="Crepa de fresa y banano"></div>
-                  <div class="menu-body">
-                    <h3>Crepa de fresa y banano</h3>
-                    <p>Crepa con fresa y banano: el combo que nunca falla.</p>
-                    <div class="menu-price">Q40</div>
-                    <div class="qty-controls" data-flavor="Crepa de fresa y banano" data-category="extra">
-                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Crepa de fresa y banano">−</button>
-                      <span class="qty-num" aria-label="Cantidad Crepa de fresa y banano">0</span>
-                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Crepa de fresa y banano">+</button>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="menu-item">
-                  <div class="menu-img"><img loading="lazy" decoding="async" src="Fresas-Con-Crema-Vaso.webp" alt="Fresas con crema en vaso"></div>
-                  <div class="menu-body">
-                    <h3>Vaso de fresas con crema</h3>
-                    <p>Fresas frescas con crema dulce servidas en vaso.</p>
-                    <div class="menu-price">Q35</div>
-                    <div class="qty-controls" data-flavor="Vaso de fresas con crema" data-category="extra">
-                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Vaso de fresas con crema">−</button>
-                      <span class="qty-num" aria-label="Cantidad Vaso de fresas con crema">0</span>
-                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Vaso de fresas con crema">+</button>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="menu-item">
-                  <div class="menu-img"><img loading="lazy" decoding="async" src="Fresas-Con-Chocolate-Vaso.webp" alt="Fresas con chocolate en vaso"></div>
-                  <div class="menu-body">
-                    <h3>Vaso de fresas con chocolate</h3>
-                    <p>Fresas frescas bañadas con chocolate, servidas en vaso.</p>
-                    <div class="menu-price">Q35</div>
-                    <div class="qty-controls" data-flavor="Vaso de fresas con chocolate" data-category="extra">
-                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Vaso de fresas con chocolate">−</button>
-                      <span class="qty-num" aria-label="Cantidad Vaso de fresas con chocolate">0</span>
-                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Vaso de fresas con chocolate">+</button>
-                    </div>
-                  </div>
-                </article>
-              </div>
-
-              <p class="menu-note" style="margin-top:10px;">Nota: salsas y detalles (si aplica) se confirman por WhatsApp.</p>
+          <div class="menu-orderbar">
+            <div class="cart-chip" id="cartChip" title="Carrito (total de pizzas)">
+              <img id="cartIcon" src="carrito-ligth.png" alt="Carrito" width="20" height="20">
+              <span class="cart-label">Carrito</span>
+              <span class="cart-count" id="cartCount">0</span>
             </div>
           </div>
           <div class="menu-cta">
@@ -1709,13 +1352,6 @@
     </div>
   </section>
 
-
-  <!-- Mini Carrito (flotante, discreto) -->
-  <a id="miniCartFab" class="mini-cart-fab hidden" href="#" aria-label="Ver carrito" title="Ver carrito">
-    <img id="miniCartIcon" loading="lazy" decoding="async" src="carrito-ligth.png" alt="Carrito">
-    <span id="miniCartCount" class="mini-cart-count" aria-hidden="true">0</span>
-  </a>
-
   <!-- WhatsApp Floating Button -->
   <a id="ueFab" class="fab fab--ue" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener" aria-label="Pedir por Uber Eats" title="Uber Eats">
   <img loading="lazy" decoding="async" src="ubereats.png" alt="Uber Eats" />
@@ -1778,59 +1414,6 @@
   </div>
 </footer>
 
-<!-- ===================== MODAL PUBLICO: DATOS PARA PEDIDO WHATSAPP ===================== -->
-<div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
-
-<div class="modal-overlay" id="orderModal" aria-hidden="true">
-  <div class="modal" role="dialog" aria-modal="false" aria-labelledby="orderModalTitle">
-    <button class="modal-x" type="button" id="orderModalClose" aria-label="Cerrar">✕</button>
-
-    <div class="modal-head">
-      <div class="modal-kicker">Pedido por WhatsApp</div>
-      <h3 class="modal-title" id="orderModalTitle">Tus datos para confirmar</h3>
-      <p class="modal-sub">Esto nos ayuda a personalizar el mensaje y facturarte más rápido.</p>
-    </div>
-
-    <form id="orderForm" class="modal-form" autocomplete="on">
-      <div class="field">
-        <label for="ordName">Nombre</label>
-        <input id="ordName" name="name" type="text" placeholder="Ejemplo: Andre Morales" required />
-        <div class="field-error" id="errName" aria-live="polite"></div>
-      </div>
-
-      <div class="field">
-        <label for="ordNit">NIT</label>
-        <input id="ordNit" name="nit" type="text" placeholder="Enviamos tu factura por WhatsApp" inputmode="text" />
-      </div>
-
-      <div class="field">
-        <label for="ordAddress">Dirección</label>
-        <textarea id="ordAddress" name="address" rows="3" placeholder="Ejemplo: Zona 4, Colonia ____ , 2da avenida 10-20, referencia: frente a ____" required></textarea>
-        <div class="field-error" id="errAddress" aria-live="polite"></div>
-      </div>
-
-      <div class="field">
-        <label for="ordPay">Método de pago</label>
-        <div class="select-wrap">
-          <select id="ordPay" name="pay" required>
-            <option value="" selected disabled>Elegí una opción…</option>
-            <option value="Link de Pago">Link de Pago (Visa/Mastercard)</option>
-            <option value="Efectivo">Efectivo</option>
-          </select>
-        </div>
-        <div class="field-error" id="errPay" aria-live="polite"></div>
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn btn-outline" type="button" id="orderModalCancel">Cancelar</button>
-        <button class="send-btn" type="submit" id="orderModalSend" aria-label="Enviar pedido">
-          <img id="sendMsgIcon" class="send-icon" src="enviar-mensaje.png" alt="" loading="lazy" decoding="async" />
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-
 <script>
   // =============================
   // CONFIG: CAMBIÁ SOLO ESTO
@@ -1857,20 +1440,11 @@
 
     const headerLogo = document.getElementById("logoHeader");
     const heroLogo   = document.getElementById("logoHero");
+    const favicon    = document.getElementById("favicon");
 
     if(headerLogo) headerLogo.src = src;
     if(heroLogo)   heroLogo.src = src;
-    const favicon = document.getElementById("favicon");
-    if(favicon) favicon.href = (t==="dark") ? "MR PIZZA LOGO_Dark.png" : "MR PIZZA LOGO-Ligth.png";
-    const cartIcon = document.getElementById("cartIcon");
-    if(cartIcon) cartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
-    const miniCartIcon = document.getElementById("miniCartIcon");
-    if(miniCartIcon) miniCartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
-
-    // Icono del boton "Enviar pedido" del modal (Publico)
-    const sendMsgIcon = document.getElementById("sendMsgIcon");
-    if(sendMsgIcon) sendMsgIcon.src = (t==="dark") ? "enviar-mensaje-dark.png" : "enviar-mensaje.png";
-
+    if(favicon)    favicon.href = src;
   }
 
 
@@ -2028,8 +1602,7 @@
       const el = document.querySelector(id);
       if(!el) return;
       e.preventDefault();
-      const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      el.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"start"});
+      el.scrollIntoView({behavior:"smooth", block:"start"});
     });
   })();
 
@@ -2075,33 +1648,10 @@
     const panel  = document.getElementById("menuPanel");
     if(!toggle || !panel) return;
 
-    // Sincroniza estado inicial (en v31 el menú viene abierto por default)
-    const isExpandedInit = toggle.getAttribute("aria-expanded") === "true";
-    panel.hidden = !isExpandedInit;
-
     toggle.addEventListener("click", ()=>{
-      const expanded = toggle.getAttribute("aria-expanded") === "true";
-      const next = !expanded;
-      toggle.setAttribute("aria-expanded", String(next));
-      panel.hidden = !next;
-    });
-  })();
-
-  // Menú Entradas y Postres (solo Público) - NO desplegado por default
-  (function(){
-    const toggle = document.getElementById("menuExtrasToggle");
-    const panel  = document.getElementById("menuExtrasPanel");
-    if(!toggle || !panel) return;
-
-    // Estado inicial: cerrado
-    const isExpandedInit = toggle.getAttribute("aria-expanded") === "true";
-    panel.hidden = !isExpandedInit;
-
-    toggle.addEventListener("click", ()=>{
-      const expanded = toggle.getAttribute("aria-expanded") === "true";
-      const next = !expanded;
-      toggle.setAttribute("aria-expanded", String(next));
-      panel.hidden = !next;
+      const expanded = toggle.getAttribute("aria-expanded")==="true";
+      toggle.setAttribute("aria-expanded", expanded ? "false" : "true");
+      panel.hidden = expanded;
     });
   })();
 
@@ -2116,287 +1666,46 @@
     const waBadge = document.getElementById("waBadge");
     const cartCountEl = document.getElementById("cartCount");
 
-    // Modal Publico (datos antes de ir a WhatsApp)
-    const orderModal = document.getElementById('orderModal');
-    const orderClose = document.getElementById('orderModalClose');
-    const orderCancel = document.getElementById('orderModalCancel');
-    const orderForm = document.getElementById('orderForm');
-    const ordName = document.getElementById('ordName');
-    const ordNit = document.getElementById('ordNit');
-    const ordAddress = document.getElementById('ordAddress');
-    const ordPay = document.getElementById('ordPay');
-
-    const errName = document.getElementById('errName');
-    const errAddress = document.getElementById('errAddress');
-    const errPay = document.getElementById('errPay');
-
-    const toastHost = document.getElementById('toastHost');
-
-    // Mini carrito flotante (solo Publico)
-    const miniCartFab = document.getElementById("miniCartFab");
-    const miniCartCountEl = document.getElementById("miniCartCount");
-
-    const isBusinessPath = (()=>{
-      const p = (location && location.pathname ? location.pathname.toLowerCase() : '');
-      return p.includes('/business') || p.includes('/bussines');
-    })();
-
-    if(miniCartFab){
-      miniCartFab.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const target = document.getElementById('cartChip') || document.getElementById('menuCtaWa');
-        if(!target) return;
-        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        target.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'center'});
-      });
-    }
-
-    if(!waBtn) return;
+    if(!waBtn || !cartCountEl) return;
 
     const PHONE = "50239151615";
-    const state = {};      // itemName -> qty
-    const category = {};   // itemName -> "pizza" | "extra"
-    const priceMap = {};   // itemName -> price (Q)
-
+    const state = {}; // flavor -> qty
 
     function totalCount(){
       return Object.values(state).reduce((a,b)=>a+(b||0),0);
     }
 
-    function totalBy(cat){
-      let t = 0;
-      Object.keys(state).forEach(k=>{ if(category[k]===cat) t += (state[k]||0); });
-      return t;
-    }
-
-    function totalAmount(){
-      let total = 0;
-      Object.keys(state).forEach(k=>{
-        const q = state[k]||0;
-        if(q>0) total += q * (priceMap[k]||0);
-      });
-      return total;
-    }
-
     function buildMessage(){
       const total = totalCount();
       if(total<=0) return "";
-
-      const pizzas = totalBy("pizza");
-      const extras = totalBy("extra");
-
       const lines = [];
-      lines.push("Hola! Vengo del canal web: Mr Pizza GT by GaschSoft.");
-
-      if(pizzas>0 && extras>0){
-        lines.push("Quiero hacer un pedido: " + pizzas + " pizzas y " + extras + " entradas/postres.");
-      }else if(pizzas>0){
-        lines.push("Quiero hacer un pedido, deseo " + pizzas + " pizzas.");
-      }else{
-        lines.push("Quiero hacer un pedido, deseo " + extras + " entradas/postres.");
-      }
-
-      if(pizzas>0){
-        if(!(pizzas>0 && extras===0)){
-          // Si hay extras, mantenemos el encabezado anterior y listamos pizzas abajo.
-        }
-        if(pizzas>0 && extras>0) lines.push("Pizzas:");
-        Object.keys(state).forEach(item=>{
-          const q = state[item]||0;
-          if(q>0 && category[item]==="pizza") lines.push("- " + q + " de " + item);
-        });
-      }
-
-      if(extras>0){
-        if(pizzas>0) lines.push("Entradas y postres:");
-        Object.keys(state).forEach(item=>{
-          const q = state[item]||0;
-          if(q>0 && category[item]==="extra") lines.push("- " + q + " de " + item);
-        });
-      }
-
+      lines.push("Hola! Vengo del canal web: Mr Pizza GT by GaschSoft. Quiero hacer un pedido, deseo " + total + " pizzas los sabores son:");
+      Object.keys(state).forEach(flavor=>{
+        const q = state[flavor]||0;
+        if(q>0) lines.push("- " + q + " de " + flavor);
+      });
       return lines.join("\n");
-    }
-
-    function buildFinalOrderMessage(opts){
-      const name = cleanText(opts && opts.name);
-      const nit = cleanText(opts && opts.nit) || 'CF';
-      const address = cleanText(opts && opts.address);
-      const pay = cleanText(opts && opts.pay);
-
-      const pizzas = totalBy("pizza");
-      const extras = totalBy("extra");
-      const amount = totalAmount();
-
-      const lines = [];
-      lines.push("Hola! Vengo del canal web: Mr Pizza GT by GaschSoft.");
-      lines.push("");
-
-      lines.push("Quiero hacer un pedido.");
-      lines.push("");
-
-      // Datos del cliente (para facturación/entrega)
-      lines.push("Datos del cliente:");
-      lines.push("Nombre: " + name);
-      lines.push("NIT: " + nit);
-      lines.push("Método de pago: " + pay);
-      lines.push("Dirección: " + address);
-      lines.push("");
-
-      // Detalle
-      if(pizzas>0){
-        lines.push("Pizzas:");
-        Object.keys(state).forEach(item=>{
-          const q = state[item]||0;
-          if(q>0 && category[item]==="pizza") lines.push("- " + q + " de " + item);
-        });
-      }
-      if(extras>0){
-        if(pizzas>0) lines.push("");
-        lines.push("Entradas y postres:");
-        Object.keys(state).forEach(item=>{
-          const q = state[item]||0;
-          if(q>0 && category[item]==="extra") lines.push("- " + q + " de " + item);
-        });
-      }
-
-      lines.push("");
-      lines.push("Total de la orden: Q" + amount);
-      lines.push("");
-      lines.push("Confirmo que deseo el pedido.");
-      lines.push("En este chat puedo compartir mi ubicación actual para coordinar la entrega y que me confirmen el tiempo estimado.");
-      return lines.join("\n");
-    }
-
-    function cleanText(x){
-      return String(x||"").replace(/\s+/g,' ').trim();
-    }
-
-    // Toast discreto (arriba derecha)
-    function showToast(text){
-      if(!toastHost) return;
-      const el = document.createElement('div');
-      el.className = 'toast';
-      el.textContent = text;
-      toastHost.appendChild(el);
-      requestAnimationFrame(()=> el.classList.add('is-show'));
-      window.setTimeout(()=>{
-        el.classList.remove('is-show');
-        window.setTimeout(()=> el.remove(), 220);
-      }, 2200);
-    }
-
-    // Error bajo el campo (3s)
-    function fieldError(el, msg){
-      if(!el) return;
-      el.textContent = msg;
-      el.classList.add('is-show');
-      window.setTimeout(()=>{
-        el.classList.remove('is-show');
-        window.setTimeout(()=>{ if(el.textContent === msg) el.textContent = ''; }, 180);
-      }, 3000);
-    }    function openOrderModal(){
-      if(!orderModal) return;
-      // Bloquea scroll del fondo (sin cerrar con click fuera)
-      try{
-        const y = window.scrollY || document.documentElement.scrollTop || 0;
-        document.body.dataset.scrollY = String(y);
-        document.body.style.top = (-y) + 'px';
-        document.body.classList.add('modal-lock');
-      }catch(e){}
-      orderModal.classList.add('is-open');
-      orderModal.setAttribute('aria-hidden','false');
-      // No forzamos focus (en iOS puede disparar zoom al enfocar inputs)
-    }
-
-        function closeOrderModal(){
-      if(!orderModal) return;
-      orderModal.classList.remove('is-open');
-      orderModal.setAttribute('aria-hidden','true');
-      // Restaura scroll del fondo
-      try{
-        const y = parseInt(document.body.dataset.scrollY || '0', 10) || 0;
-        document.body.classList.remove('modal-lock');
-        document.body.style.top = '';
-        window.scrollTo(0, y);
-      }catch(e){}
-    }
-
-    // Cierres del modal
-    if(orderClose) orderClose.addEventListener('click', closeOrderModal);
-    if(orderCancel) orderCancel.addEventListener('click', closeOrderModal);
-    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function flyToCart(fromEl){
-      try{
-        if(reduceMotion) return;
-
-        // Solo en PUBLICO
-        const p = (location && location.pathname ? location.pathname.toLowerCase() : '');
-        if(p.includes('/business') || p.includes('/bussines')) return;
-
-        const target = document.getElementById('miniCartFab') || document.getElementById('cartChip') || document.getElementById('menuCtaWa') || document.getElementById('cartCount');
-        if(!fromEl || !target) return;
-
-        const a = fromEl.getBoundingClientRect();
-        const b = target.getBoundingClientRect();
-
-        const dot = document.createElement('div');
-        dot.className = 'fly-dot';
-
-        const size = 14;
-        const startX = a.left + a.width/2;
-        const startY = a.top + a.height/2;
-        const endX   = b.left + b.width/2;
-        const endY   = b.top + b.height/2;
-
-        // Posicion robusta con left/top (evita casos raros con transforms)
-        dot.style.left = (startX - size/2).toFixed(2) + 'px';
-        dot.style.top  = (startY - size/2).toFixed(2) + 'px';
-        dot.style.opacity = '1';
-        dot.style.transform = 'translate(0px, 0px) scale(1)';
-        dot.style.transition = 'transform 920ms cubic-bezier(.2,.8,.2,1), opacity 920ms ease';
-
-        document.body.appendChild(dot);
-
-        // Fuerza layout y anima en el siguiente frame
-        dot.getBoundingClientRect();
-        requestAnimationFrame(() => {
-          const dx = endX - startX;
-          const dy = endY - startY;
-          dot.style.transform = `translate(${dx}px, ${dy}px) scale(.7)`;
-          dot.style.opacity = '0.15';
-        });
-
-        window.setTimeout(()=>{ dot.remove(); }, 980);
-      }catch(e){ /* no-op */ }
     }
 
     function render(){
       const total = totalCount();
-      if(cartCountEl) cartCountEl.textContent = String(total);
+      cartCountEl.textContent = String(total);
 
       if(total>0){
         waBtn.classList.add("has-badge");
-        if(waBadge){ waBadge.textContent = String(total); waBadge.setAttribute("aria-hidden","false"); waBadge.classList.add('pulse'); }
+        if(waBadge){ waBadge.textContent = String(total); waBadge.setAttribute("aria-hidden","false"); }
       }else{
         waBtn.classList.remove("has-badge");
-        if(waBadge){ waBadge.textContent = "0"; waBadge.setAttribute("aria-hidden","true"); waBadge.classList.remove('pulse'); }
+        if(waBadge){ waBadge.textContent = "0"; waBadge.setAttribute("aria-hidden","true"); }
       }
-
-      
-
-      // Mini carrito flotante
-      if(miniCartCountEl) miniCartCountEl.textContent = String(total);
-      if(miniCartFab) miniCartFab.classList.toggle('hidden', isBusinessPath || total<=0);
 
       const msg = buildMessage();
       waBtn.href = msg ? ("https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg)) : ("https://wa.me/" + PHONE);
     }
 
-    function setQty(ctrl, itemName, qty){
+    function setQty(ctrl, flavor, qty){
       const q = Math.max(0, qty|0);
-      state[itemName] = q;
+      state[flavor] = q;
 
       const card = ctrl.closest(".menu-item");
       if(card){
@@ -2410,21 +1719,9 @@
       render();
     }
 
-    function parsePriceFromCtrl(ctrl){
-      const card = ctrl.closest('.menu-item');
-      if(!card) return 0;
-      const priceEl = card.querySelector('.menu-price');
-      const t = priceEl ? priceEl.textContent : '';
-      const m = t && t.match(/Q\s*([0-9]+)/i);
-      return m ? parseInt(m[1],10) : 0;
-    }
-
     document.querySelectorAll(".qty-controls").forEach(ctrl=>{
-      const itemName = ctrl.getAttribute("data-flavor") || "Item";
-      const cat = (ctrl.getAttribute("data-category") || "pizza").toLowerCase();
-      state[itemName] = 0;
-      category[itemName] = (cat === "extra") ? "extra" : "pizza";
-      priceMap[itemName] = parsePriceFromCtrl(ctrl);
+      const flavor = ctrl.getAttribute("data-flavor") || "Pizza";
+      state[flavor] = 0;
 
       const minus = ctrl.querySelector(".qty-minus");
       const plus  = ctrl.querySelector(".qty-plus");
@@ -2433,12 +1730,11 @@
 
       if(plus) plus.addEventListener("click", (e)=>{
         e.preventDefault();
-        setQty(ctrl, itemName, (state[itemName]||0) + 1);
-        flyToCart(e.currentTarget || plus);
+        setQty(ctrl, flavor, (state[flavor]||0) + 1);
       });
       if(minus) minus.addEventListener("click", (e)=>{
         e.preventDefault();
-        setQty(ctrl, itemName, (state[itemName]||0) - 1);
+        setQty(ctrl, flavor, (state[flavor]||0) - 1);
       });
     });
 
@@ -2446,47 +1742,10 @@
       const total = totalCount();
       if(total<=0){
         e.preventDefault();
-        showToast("Agregá al menos 1 item al carrito");
+        alert("Agregá al menos 1 pizza al carrito para armar el mensaje.");
         return;
       }
-
-      // En PUBLICO: antes de abrir WhatsApp, pedimos datos en un modal
-      e.preventDefault();
-      openOrderModal();
-    });
-
-    if(orderForm){
-      orderForm.addEventListener('submit', (e)=>{
-        e.preventDefault();
-
-        const total = totalCount();
-        if(total<=0){
-          showToast('Agregá al menos 1 item al carrito');
-          closeOrderModal();
-          return;
-        }
-
-        const name = cleanText(ordName ? ordName.value : '');
-        const nitRaw = cleanText(ordNit ? ordNit.value : '');
-        const nit = nitRaw ? nitRaw : 'CF';
-        const address = cleanText(ordAddress ? ordAddress.value : '');
-
-        const pay = cleanText(ordPay ? ordPay.value : '');
-
-        // Validación discreta (sin alerts)
-        let ok = true;
-        if(!name){ fieldError(errName, 'Ingresá tu nombre'); ok = false; }
-        if(!address){ fieldError(errAddress, 'Ingresá tu dirección'); ok = false; }
-        if(!pay){ fieldError(errPay, 'Elegí una opción'); ok = false; }
-        if(!ok) return;
-
-        const msg = buildFinalOrderMessage({ name, nit, address, pay });
-        const url = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
-
-        // Abre WhatsApp
-        window.open(url, '_blank', 'noopener');
-
-        // Reset del carrito (igual que antes, pero despues de enviar)
+      setTimeout(()=>{
         Object.keys(state).forEach(k=>state[k]=0);
         document.querySelectorAll(".qty-controls").forEach(ctrl=>{
           const num = ctrl.querySelector(".qty-num");
@@ -2495,52 +1754,12 @@
           if(card) card.classList.remove("has-qty");
         });
         render();
-
-        // Limpia el formulario y cierra
-        try{ orderForm.reset(); }catch(err){}
-        closeOrderModal();
-      });
-    }
+      }, 150);
+    });
 
     render();
   })();
 
-</script>
-<!-- iOS/PWA recover: avoid occasional blank screen when returning from external apps (e.g., WhatsApp) -->
-<script>
-(function () {
-  // Force a repaint/reflow in a very small, low-risk way.
-  function forceRepaint() {
-    try {
-      // Toggle a trivial transform to trigger GPU repaint
-      const el = document.documentElement;
-      const prev = el.style.webkitTransform;
-      el.style.webkitTransform = 'translateZ(0)';
-      // Also nudge scroll by 1px and back (works on iOS Safari/PWA)
-      const x = window.pageXOffset || 0;
-      const y = window.pageYOffset || 0;
-      window.scrollTo(x, y + 1);
-      window.scrollTo(x, y);
-      requestAnimationFrame(function () {
-        el.style.webkitTransform = prev || '';
-      });
-    } catch (e) { /* no-op */ }
-  }
-
-  // When returning from bfcache (back-forward cache) or restoring the page
-  window.addEventListener('pageshow', function (e) {
-    // Some iOS PWAs resume with a white screen; a repaint usually fixes it.
-    // Run on next tick so layout is ready.
-    setTimeout(forceRepaint, 30);
-  });
-
-  // When app becomes visible again (coming back from WhatsApp)
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) {
-      setTimeout(forceRepaint, 30);
-    }
-  });
-})();
 </script>
 </body>
 </html>

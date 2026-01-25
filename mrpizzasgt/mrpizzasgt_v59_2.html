@@ -1709,7 +1709,7 @@
   text-align: center;
   max-width: 900px;
   margin: 10px auto 18px;
-  
+  opacity: .92;
 }
 
 .promo-list{
@@ -1765,7 +1765,7 @@
 }
 .promo-copy p{
   margin: 0 0 10px;
-  
+  opacity: .92;
 }
 .promo-note{
   margin-top: 2px;
@@ -1858,62 +1858,46 @@
   flex-direction: column;
   justify-content: center;
   gap: 8px;
-  color: #fff;
+  color: rgba(255,255,255,.95);
 }
 
 .promo-banner--left .promo-panel{
   padding-right: 22px;
-  text-align: left;
 }
 
 .promo-banner--right .promo-panel{
   margin-left: auto;
-  text-align: right;
+  text-align: left;
   padding-left: 22px;
-}
-
-
-.promo-banner--center .promo-panel{
-  margin: 0 auto;
-  text-align: center;
-  align-items: center;
 }
 
 .promo-panel h3{
   margin: 0;
-  font-size: 1.22rem;
-  font-weight: 800;
-  letter-spacing: .2px;
+  font-size: 1.08rem;
 }
 
 .promo-panel p{
   margin: 0;
-  font-size: 1.02rem;
-  font-weight: 600;
-  line-height: 1.35;
-  color: #fff;
+  opacity: .93;
 }
 
 .promo-bullets{
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
+  margin: 6px 0 0;
+  padding-left: 18px;
+  opacity: .92;
 }
 .promo-bullets li{
-  margin: 4px 0;
-  font-size: .98rem;
-  font-weight: 700;
-  color: #fff;
+  margin: 2px 0;
 }
-.promo-bullets li::before{
-  content: "• ";
-  font-weight: 900;
-}
-
 
 @media (max-width: 980px){
-  .promo-banner{ min-height: 240px; }
-  .promo-panel{ max-width: 100%; }
+  .promo-banner{
+    min-height: 240px;
+  }
+  .promo-panel{
+    max-width: 100%;
+    text-align: left;
+  }
 }
 
 @media (max-width: 520px){
@@ -2136,72 +2120,109 @@
 <div class="biz-hero__shade"></div>
 </div>
 <div class="biz-hero__content biz-hero__content--cta">
-<div class="cta-row biz-cta biz-cta--hero">
-<button class="btn btn-primary" id="bizQuoteBtn" type="button">Cotizá tu evento</button>
-<a class="btn btn-outline" href="#confianza">Ver reseñas</a>
-</div>
+  <div class="cta-row biz-cta biz-cta--hero">
+    <button class="btn btn-primary" id="bizQuoteBtn" type="button">Cotizá tu evento</button>
+    <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
+  </div>
 </div>
 </div>
 <!-- BENEFICIOS B2B (4 cards) -->
-<div aria-label="Beneficios para empresas" class="biz-features">
-<div class="kicker kicker-center">Hecho para eventos corporativos</div>
-<p class="biz-features__title">Sabor, orden y experiencia para que tu equipo solo se enfoque en disfrutar.</p>
-<div class="biz-features-grid">
-<div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">📲</div>
-<h3>1) Contanos tu evento</h3>
-<p class="desc">Completá el formulario con fecha, cantidad de personas y ubicación.</p>
-</div>
-<div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">📄</div>
-<h3>2) Recibí tu cotización</h3>
-<p class="desc">Te enviamos una propuesta clara según tus necesidades y presupuesto.</p>
-</div>
-<div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">📅</div>
-<h3>3) Confirmá y reservá</h3>
-<p class="desc">Ajustamos detalles y reservamos la fecha con tu confirmación.</p>
-</div>
-<div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">✅</div>
-<h3>4) Nosotros lo ejecutamos</h3>
-<p class="desc">Llegamos, montamos y servimos para que tu equipo solo disfrute.</p>
-</div>
-</div>
-</div>
-<!-- PROMOS B2B (variante: banners con texto sobre imagen) -->
-<div aria-label="Promocionales de servicio corporativo" class="biz-promos biz-promos--banners">
-<div class="promo-banners">
-<article class="promo-banner promo-banner--right reveal" data-reveal-delay="0">
-<img alt="Servicio de pizza en eventos" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo1.webp"/>
-<span aria-hidden="true" class="promo-tint"></span>
-<div class="promo-panel">
-<h3>🍕 Pizza Bar en vivo</h3>
-<p>Servicio en vivo para mantener el ritmo: rápido, caliente y sin filas eternas.</p>
-<ul class="promo-bullets"><li>Ejecución para eventos masivos</li><li>Presentación ordenada y profesional</li><li>Pizzas recién hechas al momento</li></ul>
-</div>
-</article>
-<article class="promo-banner promo-banner--left reveal" data-reveal-delay="60">
-<img alt="Logística y montaje para eventos" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo2.webp"/>
-<span aria-hidden="true" class="promo-tint"></span>
-<div class="promo-panel">
-<h3>🧾 Logística sin fricción</h3>
-<p>Coordinación clara con RRHH y proveedores. Llegamos listos, montamos rápido y cuidamos cada detalle.</p>
-<ul class="promo-bullets"><li>Comunicación simple y directa</li><li>Montaje ágil y puntual</li><li>Operación limpia durante el evento</li></ul>
-</div>
-</article>
-<article class="promo-banner promo-banner--center reveal" data-reveal-delay="120">
-<img alt="Ingredientes y calidad de producto" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo3.webp"/>
-<span aria-hidden="true" class="promo-tint"></span>
-<div class="promo-panel">
-<h3>🥇 Calidad con sello propio</h3>
-<p>Masa, salsa e ingredientes desarrollados por nosotros para un toque original y consistente.</p>
-<ul class="promo-bullets"><li>Recetas propias: masa y salsa</li><li>Ingredientes de primera</li><li>Consistencia en cada porción</li></ul>
-</div>
-</article>
+<div class="biz-features" aria-label="Beneficios para empresas">
+  <div class="kicker kicker-center">Hecho para eventos corporativos</div>
+  <p class="biz-features__title">Sabor, orden y experiencia para que tu equipo solo se enfoque en disfrutar.</p>
 
+  <div class="biz-features-grid">
+    <div class="card-mini biz-card">
+      <div class="icon" aria-hidden="true">🏟️</div>
+      <h3>Eventos masivos</h3>
+      <p class="desc">Operamos logística para grandes grupos: montaje, tiempos y flujo sin caos.</p>
+    </div>
+
+    <div class="card-mini biz-card">
+      <div class="icon" aria-hidden="true">🍕</div>
+      <h3>Calidad del producto</h3>
+      <p class="desc">Pizzas recién hechas, ingredientes de primera y consistencia en cada porción.</p>
+    </div>
+
+    <div class="card-mini biz-card">
+      <div class="icon" aria-hidden="true">🤝</div>
+      <h3>Atención excelente</h3>
+      <p class="desc">Comunicación clara, trato cálido y respuesta rápida antes y durante el evento.</p>
+    </div>
+
+    <div class="card-mini biz-card">
+      <div class="icon" aria-hidden="true">🧑‍🍳</div>
+      <h3>Receta original</h3>
+      <p class="desc">Desarrollamos nuestras masas, salsas e ingredientes para un toque único.</p>
+    </div>
+  </div>
 </div>
+
+<!-- PROMOS B2B (variante: banners con texto sobre imagen) -->
+<div class="biz-promos biz-promos--banners" aria-label="Promocionales de servicio corporativo">
+  <div class="kicker kicker-center">Catering que se ve y se siente profesional</div>
+  <p class="biz-promos__title">Una experiencia rica, ordenada y “corporate-friendly” — sin que tu equipo cargue el estrés.</p>
+
+  <div class="promo-banners">
+    <article class="promo-banner promo-banner--left reveal" data-reveal-delay="0">
+      <img src="Fotosempresa/FotoPromo1.png" alt="Servicio de pizza en eventos" loading="lazy" decoding="async"/>
+      <span class="promo-tint" aria-hidden="true"></span>
+      <div class="promo-panel">
+        <h3>🍕 Pizza Bar en vivo</h3>
+        <p>Horneamos y servimos al momento para mantener el flow: rápido, caliente y sin filas eternas.</p>
+        <ul class="promo-bullets">
+          <li>Ritmo constante en eventos grandes</li>
+          <li>Presentación profesional</li>
+          <li>Sabor recién hecho</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="promo-banner promo-banner--right reveal" data-reveal-delay="60">
+      <img src="Fotosempresa/FotoPromo2.png" alt="Logística y montaje para eventos" loading="lazy" decoding="async"/>
+      <span class="promo-tint" aria-hidden="true"></span>
+      <div class="promo-panel">
+        <h3>🧾 Logística sin fricción</h3>
+        <p>Coordinación clara con RRHH y proveedores. Llegamos listos, montamos rápido y cuidamos los detalles.</p>
+        <ul class="promo-bullets">
+          <li>Comunicación simple y directa</li>
+          <li>Montaje ágil</li>
+          <li>Ejecución limpia</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="promo-banner promo-banner--left reveal" data-reveal-delay="120">
+      <img src="Fotosempresa/FotoPromo3.png" alt="Ingredientes y calidad de producto" loading="lazy" decoding="async"/>
+      <span class="promo-tint" aria-hidden="true"></span>
+      <div class="promo-panel">
+        <h3>🥇 Calidad que se nota</h3>
+        <p>Ingredientes de primera y consistencia en cada porción, incluso cuando el evento se pone serio.</p>
+        <ul class="promo-bullets">
+          <li>Recetas propias: masa y salsa</li>
+          <li>Porciones parejas</li>
+          <li>Control de calidad</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="promo-banner promo-banner--right reveal" data-reveal-delay="180">
+      <img src="Fotosempresa/FotoPromo4.png" alt="Atención cálida y eficiente" loading="lazy" decoding="async"/>
+      <span class="promo-tint" aria-hidden="true"></span>
+      <div class="promo-panel">
+        <h3>🤝 Atención cálida y eficiente</h3>
+        <p>Trato amable, respuesta rápida y servicio con energía. Lo corporativo también puede sentirse humano.</p>
+        <ul class="promo-bullets">
+          <li>Equipo atento</li>
+          <li>Resolución rápida</li>
+          <li>Experiencia memorable</li>
+        </ul>
+      </div>
+    </article>
+  </div>
 </div>
+
+
 </div>
 </section>
 <!-- ===================== SECCIÓN CONDICIONAL: PÚBLICO ===================== -->
@@ -2512,14 +2533,14 @@
 </a>
 <!-- WhatsApp Floating Button -->
 <a aria-label="Pedir por Uber Eats" class="fab fab--ue" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" id="ueFab" rel="noopener" target="_blank" title="Uber Eats">
-<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
-</a>
+<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png">
+</img></a>
 <a aria-label="Pedir por PedidosYa" class="fab fab--py" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" id="pyFab" rel="noopener" target="_blank" title="PedidosYa">
-<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
-</a>
+<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png">
+</img></a>
 <a aria-label="Escribirme por WhatsApp" class="fab fab--wa" href="#" id="waFab" rel="noopener" target="_blank" title="WhatsApp">
-<img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp 64p original.png"/>
-</a>
+<img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp 64p original.png">
+</img></a>
 </main>
 <footer class="footer">
 <div class="container footer-top">
@@ -2541,20 +2562,20 @@
 <div class="container">
 <div class="social">
 <a aria-label="Instagram" class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" rel="noopener" target="_blank">
-<img alt="Instagram" decoding="async" loading="lazy" src="instagram.png"/>
-</a>
+<img alt="Instagram" decoding="async" loading="lazy" src="instagram.png">
+</img></a>
 <a aria-label="TikTok" class="social__link" href="#" rel="noopener" target="_blank">
-<img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png"/>
-</a>
+<img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png">
+</img></a>
 <a aria-label="Facebook" class="social__link" href="#" rel="noopener" target="_blank">
-<img alt="Facebook" decoding="async" loading="lazy" src="facebook.png"/>
-</a>
+<img alt="Facebook" decoding="async" loading="lazy" src="facebook.png">
+</img></a>
 <a aria-label="Uber Eats" class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" rel="noopener" target="_blank">
-<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
-</a>
+<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png">
+</img></a>
 <a aria-label="PedidosYa" class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">
-<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
-</a>
+<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png">
+</img></a>
 </div>
 </div>
 <div class="container footer-bottom">
@@ -2600,8 +2621,8 @@
 <div class="modal-actions">
 <button class="btn btn-outline" id="orderModalCancel" type="button">Cancelar</button>
 <button aria-label="Enviar pedido" class="send-btn" id="orderModalSend" type="submit">
-<img alt="" class="send-icon" decoding="async" id="sendMsgIcon" loading="lazy" src="enviar-mensaje.png"/>
-</button>
+<img alt="" class="send-icon" decoding="async" id="sendMsgIcon" loading="lazy" src="enviar-mensaje.png">
+</img></button>
 </div>
 </form>
 </div>
@@ -2617,12 +2638,21 @@
 </div>
 <form autocomplete="on" class="modal-form" id="bizForm" style="padding: 0 8px 6px;">
 <div class="biz-modal-grid">
+
+
+
+
+
+
+
+
+
 <div class="biz-col biz-col-left"><div class="biz-field">
 <div class="biz-ico"><img alt="" decoding="async" id="icoEventType" loading="lazy" src="Logotipos/organizador.png"/></div>
 <div class="field">
 <label for="bizType">Tipo de evento</label>
-<select id="bizType" name="type" required="">
-<option disabled="" selected="" value="">Seleccioná el tipo de evento…</option>
+<select id="bizType" name="type" required>
+<option value="" disabled selected>Seleccioná el tipo de evento…</option>
 <option>Convivio corporativo</option>
 <option>Aniversario</option>
 <option>Fin de año / Navidad</option>
@@ -2735,11 +2765,11 @@
 <span>Enviar por correo</span>
 <img alt="" decoding="async" loading="lazy" src="Logotipos/Logo gmail.png"/>
 <img alt="" decoding="async" loading="lazy" src="Logotipos/Logo outlook.png"/>
-</button>
+        </button>
 <button class="btn btn-primary btn-icon" id="bizSendWa" type="button">
 <span>Enviar por WhatsApp</span>
 <img alt="" decoding="async" loading="lazy" src="Logotipos/Logo whatsapp.png"/>
-</button>
+        </button>
 </div>
 </form>
 </div>
