@@ -1971,6 +1971,68 @@
   }
 }
 
+
+/* PUBLICO – Titulos de menu en modo oscuro */
+/* removed body.dark-mode rule */
+html[data-theme="dark"] .menu-title,
+body.dark-mode .menu-section-title,
+body.dark-mode h2.menu-title,
+body.dark-mode h2.menu-section-title{
+  color: #ffffff !important;
+}
+
+
+/* PUBLICO – Titulos de menu en modo oscuro (selector correcto por data-theme) */
+html[data-theme="dark"] .menu-title,
+html[data-theme="dark"] .menu-section-title,
+html[data-theme="dark"] h2.menu-title,
+html[data-theme="dark"] h2.menu-section-title,
+:root[data-theme="dark"] .menu-title,
+:root[data-theme="dark"] .menu-section-title{
+  color: #ffffff !important;
+}
+
+
+  /* FOOTER (v59_14) - institucional */
+  .footer-brand{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    padding: 30px 0 10px;
+    text-align:center;
+  }
+  .footer-brand__logo img{
+    height: 46px;
+    width: auto;
+    display:block;
+    filter: drop-shadow(0 10px 18px rgba(2,6,23,.10));
+  }
+  .footer-brand__tagline{
+    margin:0;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .footer-links-inline{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items:center;
+    gap: 10px;
+    padding: 6px 0 10px;
+    text-align:center;
+    font-size: 13px;
+  }
+  .footer-links-inline a{
+    color: var(--ink);
+    text-decoration:none;
+    font-weight: 850;
+  }
+  .footer-links-inline a:hover{ text-decoration: underline; }
+  .footer-links-inline .sep{ opacity:.35; }
+
 </style>
 <link as="image" href="Flayer 1.webp" rel="preload"/>
 <!-- Open Graph / WhatsApp -->
@@ -2191,7 +2253,7 @@
 <!-- BENEFICIOS B2B (4 cards) -->
 <div aria-label="Beneficios para empresas" class="biz-features">
 <div class="kicker kicker-center">Hecho para eventos corporativos</div>
-<p class="biz-features__title">De la cotización a la ejecución, sin complicaciones.</p>
+<p class="biz-features__title">Sabor, orden y experiencia para que tu equipo solo se enfoque en disfrutar.</p>
 <div class="biz-features-grid">
 <div class="card-mini biz-card">
 <div aria-hidden="true" class="icon">📲</div>
@@ -2567,44 +2629,51 @@
 </a><a aria-label="Cotizá tu evento" class="cotiza-fab" href="#" id="cotizaFab" style="display:none;" title="Cotizá">Cotizá</a>
 </main>
 <footer class="footer">
-<div class="container footer-top">
-<nav class="footer-col">
-<h4>Explora</h4>
-<ul>
-<li><a href="#servicios">Servicios</a></li>
-<li><a href="#confianza">Reseñas</a></li>
-</ul>
-</nav>
-<nav class="footer-col">
-<h4>Contacto</h4>
-<ul>
-<li><a href="#" id="waFooter" rel="noopener" target="_blank">WhatsApp</a></li>
-<li><a href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">PedidosYa</a></li>
-</ul>
-</nav>
-</div>
-<div class="container">
-<div class="social">
-<a aria-label="Instagram" class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" rel="noopener" target="_blank">
-<img alt="Instagram" decoding="async" loading="lazy" src="instagram.png"/>
-</a>
-<a aria-label="TikTok" class="social__link" href="#" rel="noopener" target="_blank">
-<img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png"/>
-</a>
-<a aria-label="Facebook" class="social__link" href="#" rel="noopener" target="_blank">
-<img alt="Facebook" decoding="async" loading="lazy" src="facebook.png"/>
-</a>
-<a aria-label="Uber Eats" class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" rel="noopener" target="_blank">
-<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
-</a>
-<a aria-label="PedidosYa" class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">
-<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
-</a>
-</div>
-</div>
-<div class="container footer-bottom">
-<p>© 2026 <strong>GASCHSOFT</strong>. Todos los derechos reservados. I Hecho en Guatemala 🇬🇹</p>
-</div>
+  <div class="container footer-brand">
+    <a class="footer-brand__logo" href="/mrpizzasgt/" aria-label="Ir a inicio">
+      <img id="logoFooter" alt="MR Pizza GT" decoding="async" loading="lazy" src="MR PIZZA LOGO-Ligth.png"/>
+    </a>
+    <p class="footer-brand__tagline">Soluciones gastronomicas para eventos corporativos.</p>
+  </div>
+
+  <div class="container footer-links-inline" aria-label="Enlaces del sitio">
+    <a href="Subpaginas/preguntas.html">Preguntas frecuentes</a>
+    <span class="sep">|</span>
+    <a href="Subpaginas/quienes-somos.html">Quienes somos</a>
+    <span class="sep">|</span>
+    <a href="Subpaginas/contacto.html">Contacto</a>
+    <span class="sep">|</span>
+    <a href="Subpaginas/terminos.html">Términos de uso</a>
+    <span class="sep">|</span>
+    <a href="Subpaginas/privacidad.html">Política de privacidad</a>
+  </div>
+
+  <div class="container">
+    <div class="social" aria-label="Redes sociales">
+      <a aria-label="WhatsApp" class="social__link" href="#" id="waFooter" rel="noopener" target="_blank">
+        <img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp.png"/>
+      </a>
+      <a aria-label="Instagram" class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" rel="noopener" target="_blank">
+        <img alt="Instagram" decoding="async" loading="lazy" src="instagram.png"/>
+      </a>
+      <a aria-label="TikTok" class="social__link" href="#" rel="noopener" target="_blank">
+        <img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png"/>
+      </a>
+      <a aria-label="Facebook" class="social__link" href="#" rel="noopener" target="_blank">
+        <img alt="Facebook" decoding="async" loading="lazy" src="facebook.png"/>
+      </a>
+      <a aria-label="Uber Eats" class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" rel="noopener" target="_blank">
+        <img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
+      </a>
+      <a aria-label="PedidosYa" class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">
+        <img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
+      </a>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© <span id="year"></span> <strong>MR Pizza GT</strong> by <strong>GaschSoft</strong>. Todos los derechos reservados. Hecho en Guatemala 🇬🇹</p>
+  </div>
 </footer>
 <!-- ===================== MODAL PUBLICO: DATOS PARA PEDIDO WHATSAPP ===================== -->
 <div aria-atomic="true" aria-live="polite" class="toast-host" id="toastHost"></div>
@@ -2815,9 +2884,10 @@
 
     const headerLogo = document.getElementById("logoHeader");
     const heroLogo   = document.getElementById("logoHero");
-
+    const footerLogo = document.getElementById("logoFooter");
     if(headerLogo) headerLogo.src = src;
     if(heroLogo)   heroLogo.src = src;
+    if(footerLogo) footerLogo.src = src;
     const favicon = document.getElementById("favicon");
     if(favicon) favicon.href = (t==="dark") ? "MR PIZZA LOGO_Dark.png" : "MR PIZZA LOGO-Ligth.png";
     const cartIcon = document.getElementById("cartIcon");
@@ -2867,6 +2937,12 @@
     });
     media.addEventListener("change", ()=>{ if(mode==="system") renderTheme(); });
     renderTheme();
+  })();
+
+  // Year en footer
+  (function(){
+    const y=document.getElementById('year');
+    if(y) y.textContent = new Date().getFullYear();
   })();
 
   // =============================

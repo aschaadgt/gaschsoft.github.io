@@ -318,7 +318,7 @@
     gap: 16px;
   }
   /* Pantallas muy pequeñas: 1 columna para evitar que se apriete */
-  @media(max-width: 420px){
+  @media(max-width: 340px){
     .biz-features-grid{ grid-template-columns: 1fr; }
   }
   @media(min-width: 680px){
@@ -522,6 +522,42 @@
       bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 3) + 30px);
     }
   }
+
+  /* CTA flotante "Cotizá" (solo /business) */
+  .cotiza-fab{
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1202;
+    padding: 14px 18px;
+    border-radius: 999px;
+    font-weight: 900;
+    letter-spacing: .2px;
+    text-decoration: none;
+    background:  #d30133;
+    color: #fff;
+    box-shadow: var(--shadow-strong);
+    border: 2px solid rgba(255,255,255,.10);
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .cotiza-fab:hover{
+    animation: floaty 3.2s ease-in-out infinite, pulseRingCotiza 1.3s ease-out infinite;
+  }
+.cotiza-fab:active{ transform: translateY(1px); }
+  .cotiza-fab:focus-visible{
+    outline: 3px solid var(--ring);
+    outline-offset: 3px;
+  }
+  @media(max-width: 480px){
+    .cotiza-fab{
+      right: 12px;
+      bottom: 14px;
+      padding: 16px 20px;
+      font-size: 16px;
+    }
+  }
+
 
   .hidden{ display:none !important; }
 
@@ -787,7 +823,12 @@
   }
   @keyframes pulseRing {
     0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.22); }
-    70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+    @keyframes pulseRingCotiza {
+    0%   { box-shadow: 0 0 0 0 rgba(179,18,23,.22); }
+    70%  { box-shadow: 0 0 0 10px rgba(179,18,23,0); }
+    100% { box-shadow: 0 0 0 0 rgba(179,18,23,0); }
+  }
+  70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
     100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
   }
   .fab{
@@ -1527,6 +1568,11 @@
   #bizModal .biz-modal .field textarea{
     min-height: 64px;
   }
+
+  #bizModal .biz-modal .field input[type="time"]{
+    width: 100%;
+    min-width: 0; /* evita overflow/traslape en iOS */
+  }
   @media (max-width: 560px){
     #bizModal .biz-modal{ padding: 12px; }
     #bizModal .biz-modal-grid{ gap: 8px; }
@@ -1925,6 +1971,68 @@
   }
 }
 
+
+/* PUBLICO – Titulos de menu en modo oscuro */
+/* removed body.dark-mode rule */
+html[data-theme="dark"] .menu-title,
+body.dark-mode .menu-section-title,
+body.dark-mode h2.menu-title,
+body.dark-mode h2.menu-section-title{
+  color: #ffffff !important;
+}
+
+
+/* PUBLICO – Titulos de menu en modo oscuro (selector correcto por data-theme) */
+html[data-theme="dark"] .menu-title,
+html[data-theme="dark"] .menu-section-title,
+html[data-theme="dark"] h2.menu-title,
+html[data-theme="dark"] h2.menu-section-title,
+:root[data-theme="dark"] .menu-title,
+:root[data-theme="dark"] .menu-section-title{
+  color: #ffffff !important;
+}
+
+
+  /* FOOTER (v59_14) - institucional */
+  .footer-brand{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    padding: 30px 0 10px;
+    text-align:center;
+  }
+  .footer-brand__logo img{
+    height: 46px;
+    width: auto;
+    display:block;
+    filter: drop-shadow(0 10px 18px rgba(2,6,23,.10));
+  }
+  .footer-brand__tagline{
+    margin:0;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .footer-links-inline{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items:center;
+    gap: 10px;
+    padding: 6px 0 10px;
+    text-align:center;
+    font-size: 13px;
+  }
+  .footer-links-inline a{
+    color: var(--ink);
+    text-decoration:none;
+    font-weight: 850;
+  }
+  .footer-links-inline a:hover{ text-decoration: underline; }
+  .footer-links-inline .sep{ opacity:.35; }
+
 </style>
 <link as="image" href="Flayer 1.webp" rel="preload"/>
 <!-- Open Graph / WhatsApp -->
@@ -2148,34 +2256,32 @@
 <p class="biz-features__title">Sabor, orden y experiencia para que tu equipo solo se enfoque en disfrutar.</p>
 <div class="biz-features-grid">
 <div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">🏟️</div>
-<h3>Eventos masivos</h3>
-<p class="desc">Operamos logística para grandes grupos: montaje, tiempos y flujo sin caos.</p>
+<div aria-hidden="true" class="icon">📲</div>
+<h3>1) Contanos tu evento</h3>
+<p class="desc">Completá el formulario con fecha, cantidad de personas y ubicación.</p>
 </div>
 <div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">🍕</div>
-<h3>Calidad del producto</h3>
-<p class="desc">Pizzas recién hechas, ingredientes de primera y consistencia en cada porción.</p>
+<div aria-hidden="true" class="icon">📄</div>
+<h3>2) Recibí tu cotización</h3>
+<p class="desc">Te enviamos una propuesta clara según tus necesidades y presupuesto.</p>
 </div>
 <div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">🤝</div>
-<h3>Atención excelente</h3>
-<p class="desc">Comunicación clara, trato cálido y respuesta rápida antes y durante el evento.</p>
+<div aria-hidden="true" class="icon">📅</div>
+<h3>3) Confirmá y reservá</h3>
+<p class="desc">Ajustamos detalles y reservamos la fecha con tu confirmación.</p>
 </div>
 <div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">🧑‍🍳</div>
-<h3>Receta original</h3>
-<p class="desc">Desarrollamos nuestras masas, salsas e ingredientes para un toque único.</p>
+<div aria-hidden="true" class="icon">✅</div>
+<h3>4) Nosotros lo ejecutamos</h3>
+<p class="desc">Llegamos, montamos y servimos para que tu equipo solo disfrute.</p>
 </div>
 </div>
 </div>
 <!-- PROMOS B2B (variante: banners con texto sobre imagen) -->
 <div aria-label="Promocionales de servicio corporativo" class="biz-promos biz-promos--banners">
-<div class="kicker kicker-center">Catering que se ve y se siente profesional</div>
-<p class="biz-promos__title">Una experiencia rica, ordenada y “corporate-friendly” — sin que tu equipo cargue el estrés.</p>
 <div class="promo-banners">
 <article class="promo-banner promo-banner--right reveal" data-reveal-delay="0">
-<img alt="Servicio de pizza en eventos" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo1.png"/>
+<img alt="Servicio de pizza en eventos" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo1.webp"/>
 <span aria-hidden="true" class="promo-tint"></span>
 <div class="promo-panel">
 <h3>🍕 Pizza Bar en vivo</h3>
@@ -2184,7 +2290,7 @@
 </div>
 </article>
 <article class="promo-banner promo-banner--left reveal" data-reveal-delay="60">
-<img alt="Logística y montaje para eventos" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo2.png"/>
+<img alt="Logística y montaje para eventos" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo2.webp"/>
 <span aria-hidden="true" class="promo-tint"></span>
 <div class="promo-panel">
 <h3>🧾 Logística sin fricción</h3>
@@ -2193,7 +2299,7 @@
 </div>
 </article>
 <article class="promo-banner promo-banner--center reveal" data-reveal-delay="120">
-<img alt="Ingredientes y calidad de producto" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo3.png"/>
+<img alt="Ingredientes y calidad de producto" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo3.webp"/>
 <span aria-hidden="true" class="promo-tint"></span>
 <div class="promo-panel">
 <h3>🥇 Calidad con sello propio</h3>
@@ -2201,7 +2307,6 @@
 <ul class="promo-bullets"><li>Recetas propias: masa y salsa</li><li>Ingredientes de primera</li><li>Consistencia en cada porción</li></ul>
 </div>
 </article>
-
 </div>
 </div>
 </div>
@@ -2521,47 +2626,54 @@
 </a>
 <a aria-label="Escribirme por WhatsApp" class="fab fab--wa" href="#" id="waFab" rel="noopener" target="_blank" title="WhatsApp">
 <img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp 64p original.png"/>
-</a>
+</a><a aria-label="Cotizá tu evento" class="cotiza-fab" href="#" id="cotizaFab" style="display:none;" title="Cotizá">Cotizá</a>
 </main>
 <footer class="footer">
-<div class="container footer-top">
-<nav class="footer-col">
-<h4>Explora</h4>
-<ul>
-<li><a href="#servicios">Servicios</a></li>
-<li><a href="#confianza">Reseñas</a></li>
-</ul>
-</nav>
-<nav class="footer-col">
-<h4>Contacto</h4>
-<ul>
-<li><a href="#" id="waFooter" rel="noopener" target="_blank">WhatsApp</a></li>
-<li><a href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">PedidosYa</a></li>
-</ul>
-</nav>
-</div>
-<div class="container">
-<div class="social">
-<a aria-label="Instagram" class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" rel="noopener" target="_blank">
-<img alt="Instagram" decoding="async" loading="lazy" src="instagram.png"/>
-</a>
-<a aria-label="TikTok" class="social__link" href="#" rel="noopener" target="_blank">
-<img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png"/>
-</a>
-<a aria-label="Facebook" class="social__link" href="#" rel="noopener" target="_blank">
-<img alt="Facebook" decoding="async" loading="lazy" src="facebook.png"/>
-</a>
-<a aria-label="Uber Eats" class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" rel="noopener" target="_blank">
-<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
-</a>
-<a aria-label="PedidosYa" class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">
-<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
-</a>
-</div>
-</div>
-<div class="container footer-bottom">
-<p>© 2026 <strong>GASCHSOFT</strong>. Todos los derechos reservados. I Hecho en Guatemala 🇬🇹</p>
-</div>
+  <div class="container footer-brand">
+    <a class="footer-brand__logo" href="/mrpizzasgt/" aria-label="Ir a inicio">
+      <img id="logoFooter" alt="MR Pizza GT" decoding="async" loading="lazy" src="MR PIZZA LOGO-Ligth.png"/>
+    </a>
+    <p class="footer-brand__tagline">Soluciones gastronomicas para eventos corporativos.</p>
+  </div>
+
+  <div class="container footer-links-inline" aria-label="Enlaces del sitio">
+    <a href="/mrpizzasgt/faq.html">Preguntas frecuentes</a>
+    <span class="sep">|</span>
+    <a href="/mrpizzasgt/about.html">Quienes somos</a>
+    <span class="sep">|</span>
+    <a href="/mrpizzasgt/contact.html">Contacto</a>
+    <span class="sep">|</span>
+    <a href="/mrpizzasgt/terms.html">Terminos de uso</a>
+    <span class="sep">|</span>
+    <a href="/mrpizzasgt/privacy.html">Politica de privacidad</a>
+  </div>
+
+  <div class="container">
+    <div class="social" aria-label="Redes sociales">
+      <a aria-label="WhatsApp" class="social__link" href="#" id="waFooter" rel="noopener" target="_blank">
+        <img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp.png"/>
+      </a>
+      <a aria-label="Instagram" class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" rel="noopener" target="_blank">
+        <img alt="Instagram" decoding="async" loading="lazy" src="instagram.png"/>
+      </a>
+      <a aria-label="TikTok" class="social__link" href="#" rel="noopener" target="_blank">
+        <img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png"/>
+      </a>
+      <a aria-label="Facebook" class="social__link" href="#" rel="noopener" target="_blank">
+        <img alt="Facebook" decoding="async" loading="lazy" src="facebook.png"/>
+      </a>
+      <a aria-label="Uber Eats" class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" rel="noopener" target="_blank">
+        <img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
+      </a>
+      <a aria-label="PedidosYa" class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">
+        <img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
+      </a>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© <span id="year"></span> <strong>MR Pizza GT</strong> by <strong>GaschSoft</strong>. Todos los derechos reservados. Hecho en Guatemala 🇬🇹</p>
+  </div>
 </footer>
 <!-- ===================== MODAL PUBLICO: DATOS PARA PEDIDO WHATSAPP ===================== -->
 <div aria-atomic="true" aria-live="polite" class="toast-host" id="toastHost"></div>
@@ -2663,7 +2775,7 @@
 <div class="biz-ico"><img alt="" decoding="async" id="icoTime" loading="lazy" src="Logotipos/reloj.png"/></div>
 <div class="field">
 <label>Horario</label>
-<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+<div style="display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px;">
 <div>
 <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
 <img alt="" decoding="async" id="icoStartEvent" loading="lazy" src="Logotipos/calendar.png" style="width:16px; height:16px; object-fit:contain; opacity:.95;"/>
@@ -2772,9 +2884,10 @@
 
     const headerLogo = document.getElementById("logoHeader");
     const heroLogo   = document.getElementById("logoHero");
-
+    const footerLogo = document.getElementById("logoFooter");
     if(headerLogo) headerLogo.src = src;
     if(heroLogo)   heroLogo.src = src;
+    if(footerLogo) footerLogo.src = src;
     const favicon = document.getElementById("favicon");
     if(favicon) favicon.href = (t==="dark") ? "MR PIZZA LOGO_Dark.png" : "MR PIZZA LOGO-Ligth.png";
     const cartIcon = document.getElementById("cartIcon");
@@ -2826,6 +2939,12 @@
     renderTheme();
   })();
 
+  // Year en footer
+  (function(){
+    const y=document.getElementById('year');
+    if(y) y.textContent = new Date().getFullYear();
+  })();
+
   // =============================
   // Router simple: si URL contiene /bussines => vista BUSINESS
   // =============================
@@ -2838,7 +2957,30 @@
     return "public";
   }
 
-  function setView(view){
+  
+  // =============================
+  // Floating CTAs: Público (UE/PY/WA) vs Empresas (Cotizá)
+  // =============================
+  function setFloatingCTAsForView(isBusinessView){
+    const ueFab = document.getElementById("ueFab");
+    const pyFab = document.getElementById("pyFab");
+    const waFab = document.getElementById("waFab");
+    const cotizaFab = document.getElementById("cotizaFab");
+
+    if(isBusinessView){
+      if(ueFab) ueFab.style.display = "none";
+      if(pyFab) pyFab.style.display = "none";
+      if(waFab) waFab.style.display = "none";
+      if(cotizaFab) cotizaFab.style.display = "";
+    }else{
+      if(ueFab) ueFab.style.display = "";
+      if(pyFab) pyFab.style.display = "";
+      if(waFab) waFab.style.display = "";
+      if(cotizaFab) cotizaFab.style.display = "none";
+    }
+  }
+
+function setView(view){
     state.view = view;
 
     // botones
@@ -2905,6 +3047,9 @@
       heroNote.innerHTML = "<strong>Lo que compras es tranquilidad.</strong><span>Mensajes claros, confirmación rápida y comida rica para compartir.</span>";
       heroCard.innerHTML = "<strong>Estás en Público.</strong><br/>Pedí de noche por WhatsApp y te confirmamos.";
     }
+
+    // Floating CTAs (solo se ven según vista)
+    setFloatingCTAsForView(view==="business");
 
     // CTAs
     const msgTop  = (view==="business") ? MSG.business : MSG.public;
@@ -3023,6 +3168,17 @@
 
   // Boot
   setView(detectViewFromPath());
+
+    // CTA flotante Cotizá: reutiliza el mismo flujo del botón principal de cotización
+    const cotizaFab = document.getElementById("cotizaFab");
+    if(cotizaFab){
+      cotizaFab.addEventListener("click", (e)=>{
+        e.preventDefault();
+        const btn = document.getElementById("bizQuoteBtn");
+        if(btn) btn.click();
+      });
+    }
+
 </script>
 <script>
 
@@ -3371,6 +3527,27 @@ if(document.readyState === 'loading'){
     const bizQuoteBtn2 = document.getElementById('bizQuoteBtn2');
 
     const bizForm = document.getElementById('bizForm');
+    const bizDateEl = document.getElementById('bizDate');
+    if(bizDateEl){
+      // iOS a veces deja seleccionar pasado aunque exista min; lo corregimos al vuelo
+      bizDateEl.addEventListener('change', ()=>{ enforceBizDateRange(true); });
+      bizDateEl.addEventListener('input', ()=>{ enforceBizDateRange(false); });
+      bizDateEl.addEventListener('blur', ()=>{ enforceBizDateRange(true); });
+    
+    const bizStartEl = document.getElementById('bizStart');
+    const bizServeEl = document.getElementById('bizServe');
+    if(bizStartEl && bizServeEl){
+      const check = (show)=>{ enforceBizTimeOrder(!!show); };
+      bizStartEl.addEventListener('change', ()=>{ check(true); });
+      bizStartEl.addEventListener('input', ()=>{ check(false); });
+      bizStartEl.addEventListener('blur', ()=>{ check(true); });
+
+      bizServeEl.addEventListener('change', ()=>{ check(true); });
+      bizServeEl.addEventListener('input', ()=>{ check(false); });
+      bizServeEl.addEventListener('blur', ()=>{ check(true); });
+    }
+}
+
     const bizSendWa = document.getElementById('bizSendWa');
     const bizSendEmail = document.getElementById('bizSendEmail');
 
@@ -3430,10 +3607,78 @@ if(document.readyState === 'loading'){
       }
     }
 
+    // Enforce rango de fecha en móvil (iOS/Android) incluso si el date picker deja seleccionar pasado
+    function enforceBizDateRange(showMsg){
+      const dateEl = document.getElementById('bizDate');
+      const errEl = document.getElementById('bizErrDate');
+      if(!dateEl) return true;
+
+      const v = cleanText(dateEl.value);       // YYYY-MM-DD
+      const minStr = cleanText(dateEl.min);    // YYYY-MM-DD
+      const maxStr = cleanText(dateEl.max);    // YYYY-MM-DD
+
+      // Si está vacío, que lo valide el required normal
+      if(!v) return false;
+
+      const RESET_DELAY_MS = 650;
+
+      // Comparación lexicográfica funciona para YYYY-MM-DD
+      if(minStr && v < minStr){
+        if(showMsg) fieldError(errEl, 'La fecha no puede ser anterior a hoy');
+        // Dejar que el usuario vea el mensaje y luego corregir
+        window.setTimeout(()=>{ 
+          // Si aún está fuera de rango, corrige
+          const cur = cleanText(dateEl.value);
+          if(cur && cur < minStr) dateEl.value = minStr;
+        }, RESET_DELAY_MS);
+        return false;
+      }
+      if(maxStr && v > maxStr){
+        if(showMsg) fieldError(errEl, 'La fecha no puede ser mayor a 100 días');
+        window.setTimeout(()=>{ 
+          const cur = cleanText(dateEl.value);
+          if(cur && cur > maxStr) dateEl.value = maxStr;
+        }, RESET_DELAY_MS);
+        return false;
+      }
+      return true;
+    }
+
+
+    // Validar orden de horas: servicio debe ser despues del inicio del evento
+    function enforceBizTimeOrder(showMsg){
+      const startEl = document.getElementById('bizStart');
+      const serveEl = document.getElementById('bizServe');
+      const errServe = document.getElementById('bizErrServe');
+      if(!startEl || !serveEl) return true;
+
+      const start = cleanText(startEl.value); // HH:MM
+      const serve = cleanText(serveEl.value); // HH:MM
+
+      if(!start || !serve) return false;
+
+      const RESET_DELAY_MS = 650;
+
+      // Lexicografico funciona para HH:MM
+      if(serve <= start){
+        if(showMsg) fieldError(errServe, 'La hora de servicio debe ser después del inicio del evento');
+        // Deja ver el mensaje y luego limpia para que elijan de nuevo
+        window.setTimeout(()=>{
+          const s2 = cleanText(startEl.value);
+          const v2 = cleanText(serveEl.value);
+          if(s2 && v2 && v2 <= s2) serveEl.value = '';
+        }, RESET_DELAY_MS);
+        return false;
+      }
+      return true;
+    }
+
     function openBizModal(){
       if(!bizModal) return;
       updateBizIcons();
       setBizDateBounds();
+      // Normaliza si el picker dejó una fecha fuera de rango (móvil)
+      enforceBizDateRange(false);
       // Bloquea scroll del fondo (sin cerrar con click fuera)
       try{
         const y = window.scrollY || document.documentElement.scrollTop || 0;
@@ -3510,7 +3755,8 @@ if(document.readyState === 'loading'){
         company: cleanText(document.getElementById('bizCompany')?.value),
         adults: cleanText(document.getElementById('bizAdults')?.value),
         kids: cleanText(document.getElementById('bizKids')?.value),
-        date: formatDateGT(document.getElementById('bizDate')?.value),
+        dateRaw: cleanText(document.getElementById('bizDate')?.value),
+        date: formatDateGT(cleanText(document.getElementById('bizDate')?.value)),
         start: cleanText(document.getElementById('bizStart')?.value),
         serve: cleanText(document.getElementById('bizServe')?.value),
         location: cleanText(document.getElementById('bizLocation')?.value),
@@ -3534,9 +3780,11 @@ if(document.readyState === 'loading'){
         bizVal('bizErrAdults', a >= 0, 'Adultos inválido') &&
         bizVal('bizErrKids', k >= 0, 'Niños inválido') &&
         bizVal('bizErrAdults', total > 0, 'Colocá al menos 1 persona') &&
-        bizVal('bizErrDate', !!d.date, 'Elegí una fecha') &&
+        bizVal('bizErrDate', !!(d.dateRaw||d.date), 'Elegí una fecha') &&
+        bizVal('bizErrDate', enforceBizDateRange(true), 'La fecha no puede ser anterior a hoy') &&
         bizVal('bizErrStart', !!d.start, 'Elegí hora de inicio') &&
         bizVal('bizErrServe', !!d.serve, 'Elegí hora de servicio') &&
+        bizVal('bizErrServe', enforceBizTimeOrder(true), 'La hora de servicio debe ser después del inicio del evento') &&
         bizVal('bizErrProducts', (d.products && d.products.length>0), 'Seleccioná al menos un producto') &&
         bizVal('bizErrLocation', !!d.location, 'Ingresá la ubicación') &&
         bizVal('bizErrPhone', !!d.phone, 'Ingresá un teléfono') &&

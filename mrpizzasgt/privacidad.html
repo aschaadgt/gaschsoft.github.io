@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Política de privacidad | MR Pizza GT</title>
+<link href="MR PIZZA LOGO-Ligth.png" id="favicon" rel="icon" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="site.webmanifest" rel="manifest"/>
+<meta content="#b81f24" name="theme-color"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="Mr Pizza GT" name="apple-mobile-web-app-title"/>
+<style>
+
+  :root{
+    /* Marca (logo rojo/negro/blanco) + tonos suaves */
+    --red:#c62828;
+    --red2:#b71c1c;
+    --ink:#0b0f14;
+    --muted:#5c6773;
+
+    --bg-grad-from:#fff5f4;
+    --bg-grad-to:#ffffff;
+    --bg:#ffffff;
+
+    --surface:#ffffff;
+    --surface2: rgba(255,255,255,.85);
+    --line: rgba(11,15,20,.10);
+
+    --ring: rgba(198,40,40,.25);
+    --shadow: 0 25px 60px rgba(2, 6, 23, .10);
+    --shadow-strong: 0 30px 80px rgba(2, 6, 23, .18);
+
+    --ctrl-border: rgba(2,6,23,.20);
+    --ctrl-bg: rgba(2,6,23,.04);
+    --ctrl-bg-hover: rgba(2,6,23,.08);
+
+    --danger:#ef4444;
+    --header-bg: rgba(255,255,255,.78);
+  }
+
+  :root[data-theme="dark"]{
+    --bg-grad-from:#0b111a;
+    --bg-grad-to:#0b111a;
+    --bg:#0b111a;
+    --ink:#e5e7eb;
+    --muted:#94a3b8;
+    --surface:#0f1a2b;
+    --surface2: rgba(15,26,43,.75);
+    --line: rgba(255,255,255,.10);
+    --shadow: 0 25px 60px rgba(0,0,0,.45);
+    --shadow-strong: 0 30px 80px rgba(0,0,0,.60);
+    --ring: rgba(198,40,40,.35);
+    --header-bg: rgba(11,17,26,.78);
+    --ctrl-border: rgba(255,255,255,.25);
+    --ctrl-bg: rgba(255,255,255,.06);
+    --ctrl-bg-hover: rgba(255,255,255,.12);
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    background: linear-gradient(180deg, var(--bg-grad-from), var(--bg-grad-to));
+    color: var(--ink);
+  }
+  a{ color: inherit; }
+  .container{ max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  header{
+    padding: 16px 0;
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: saturate(180%) blur(10px);
+  }
+  .row{ display:flex; align-items:center; gap:12px; }
+  .spacer{ flex:1; }
+
+  .brand{ display:flex; align-items:center; gap:10px; font-weight: 950; letter-spacing:-.3px; }
+  .brand img{ height: 42px; width:auto; display:block; }
+  .brand .title{ font-size: 18px; line-height:1; }
+  .brand .subtitle{ font-size: 12px; color: var(--muted); font-weight: 800; margin-top: 2px; }
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    font-weight: 900;
+    border: none;
+    border-radius: 999px;
+    padding: .62rem .95rem;
+    cursor: pointer;
+    gap: 8px;
+    text-decoration:none;
+    white-space:nowrap;
+    user-select:none;
+  }
+  .btn-outline{
+    background: var(--surface2);
+    color: var(--ink);
+    border: 2px solid var(--line);
+  }
+  .btn-outline:hover{ filter: brightness(0.98); }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--red), var(--red2));
+    color:#fff;
+    box-shadow: var(--shadow);
+  }
+  .btn-primary:hover{ transform: translateY(-1px); }
+  .btn-soft{
+    background: rgba(198,40,40,.10);
+    border: 2px solid rgba(198,40,40,.16);
+    color: var(--ink);
+  }
+
+  /* Switch de vista (Público / Business) */
+  .view-switch{
+    display:inline-flex;
+    background: var(--surface2);
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    overflow:hidden;
+    box-shadow: var(--shadow);
+  }
+  .view-switch button{
+    border: none;
+    background: transparent;
+    font-weight: 950;
+    padding: .55rem .8rem;
+    cursor:pointer;
+    color: var(--muted);
+  }
+  .view-switch button.active{
+    color: var(--ink);
+    background: rgba(198,40,40,.10);
+  }
+
+  /* Theme button */
+  .icon-btn{
+    border:none; background: transparent;
+    border-radius: 999px;
+    padding: .62rem .75rem;
+    cursor:pointer;
+    border: 2px solid var(--line);
+    background: var(--surface2);
+    box-shadow: var(--shadow);
+  }
+
+  /* HERO */
+  .hero{ padding: 26px 0 10px; text-align:center; }
+  .kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: rgba(198,40,40,.10);
+    border: 1px solid rgba(198,40,40,.18);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-weight: 950;
+    color: var(--ink);
+  }
+  .hero h1{
+    font-size: clamp(28px, 4.6vw, 48px);
+    margin: 10px 0 10px;
+    letter-spacing: -0.8px;
+    line-height: 1.05;
+  }
+  .hero p{
+    margin: 0 auto;
+    max-width: 820px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  .cta-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  /* Hero media / logo card */
+  .hero-media{
+    position: relative;
+    max-width: 860px;
+    margin: 18px auto 0;
+    border-radius: 22px;
+    overflow:hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .hero-media .inner{
+    display:grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  .hero-photo{
+    min-height: 280px;
+    background:
+      radial-gradient(900px 400px at 10% 10%, rgba(198,40,40,.18), transparent 60%),
+      radial-gradient(800px 380px at 70% 35%, rgba(0,0,0,.10), transparent 55%),
+      linear-gradient(135deg, rgba(255,255,255,.8), rgba(255,255,255,.35));
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-start;
+    padding: 18px;
+  }
+  .hero-photo .note{
+    background: rgba(255,255,255,.88);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 12px 14px;
+    text-align:left;
+    max-width: 380px;
+  }
+  .hero-photo .note strong{ display:block; }
+  .hero-photo .note span{ display:block; margin-top:4px; color: var(--muted); font-weight: 700; font-size: 13px; line-height:1.45; }
+
+  :root[data-theme="dark"] .hero-photo .note{
+    background: rgba(15,26,43,.88);
+  }
+
+  .hero-card{
+    border-left: 1px solid var(--line);
+    padding: 16px;
+    display:flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content:center;
+    background: rgba(255,255,255,.65);
+  }
+  :root[data-theme="dark"] .hero-card{ background: rgba(15,26,43,.65); }
+
+  .hero-card img{ width: 190px; height:auto; display:block; margin: 0 auto; }
+  .hero-card .mini{
+    text-align:center;
+    color: var(--muted);
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .hero-card .mini strong{ color: var(--ink); }
+
+  /* STATS */
+  .stats{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    max-width: 860px;
+    margin: 16px auto 0;
+    color: var(--ink);
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .stat{
+    display:flex; gap:8px; align-items:flex-start;
+    padding: 12px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+  }
+  .tick{ color: var(--red); font-weight: 950; }
+
+  /* SECTIONS */
+  .section{ max-width: 980px; margin: 56px auto; text-align:center; }
+  .section h2{ font-size: clamp(24px, 3.6vw, 36px); margin:0 0 10px; letter-spacing:-.4px; }
+  .section p{ color: var(--muted); font-size: 18px; margin:0 0 20px; line-height:1.65; }
+
+  .cols{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    text-align:left;
+  }
+  @media(min-width: 860px){
+    .cols{ grid-template-columns: repeat(3, 1fr); }
+  }
+  .card-mini{
+    padding: 18px;
+    border-radius: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card-mini .icon{ font-size: 42px; line-height:1; }
+  .card-mini h3{ margin: 0; font-size: 18px; letter-spacing: -.2px; }
+  .card-mini .desc{ margin:0; color: var(--muted); font-weight: 650; line-height:1.6; }
+
+
+  /* EMPRESAS: 4 cards (B2B) */
+  .biz-features{ margin-top: 22px; text-align:center; }
+  .biz-features .biz-features__title{
+    margin: 14px 0 10px;
+    font-size: 18px;
+    letter-spacing: -.2px;
+  }
+  .biz-features-grid{
+    display:grid;
+    /* Mobile: 2x2 */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  /* Pantallas muy pequeñas: 1 columna para evitar que se apriete */
+  @media(max-width: 340px){
+    .biz-features-grid{ grid-template-columns: 1fr; }
+  }
+  @media(min-width: 680px){
+    .biz-features-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media(min-width: 992px){
+    .biz-features-grid{ grid-template-columns: repeat(4, 1fr); }
+  }
+  .biz-card{
+    transition: transform .16s ease, box-shadow .16s ease;
+    will-change: transform;
+    text-align: center;
+    align-items: center; /* card-mini es flex-column */
+  }
+  .biz-card .icon{ font-size: 52px; }
+  @media (hover:hover){
+    .biz-card:hover{
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 22px 50px rgba(2,6,23,.10);
+    }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .biz-card{ transition: none; }
+    .biz-card:hover{ transform:none; }
+  }
+
+  /* SERVICES */
+  .services-grid{ grid-template-columns: 1fr; }
+  @media(min-width: 680px){ .services-grid{ grid-template-columns: repeat(2, 1fr); } }
+  @media(min-width: 992px){ .services-grid{ grid-template-columns: repeat(3, 1fr); } }
+
+  .svc-badge{
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(198,40,40,.10);
+    border: 1px solid rgba(198,40,40,.16);
+    font-weight: 950;
+    font-size: 12px;
+    width: fit-content;
+  }
+
+  .service-card .btn{ margin-top:auto; border-radius: 14px; padding:.75rem 1rem; }
+
+  /* REVIEWS */
+  .review{
+    position:relative;
+    padding: 18px;
+    border-radius: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+  }
+  .review p{ margin:0; color: var(--muted); line-height:1.7; font-weight: 650; }
+  .review strong{ display:block; margin-top: 10px; color: var(--ink); }
+  .quote{
+    position:absolute;
+    right: 14px; top: 14px;
+    font-size: 28px;
+    color: rgba(198,40,40,.25);
+    font-weight: 950;
+  }
+
+  /* CTA BAND */
+  .cta-band{
+    max-width: 980px;
+    margin: 56px auto 0;
+    background: linear-gradient(135deg, rgba(198,40,40,.14), rgba(0,0,0,.04));
+    border: 1px solid rgba(198,40,40,.18);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    text-align:center;
+  }
+  .cta-band h3{ margin:0 0 6px; font-size: 22px; letter-spacing:-.2px; }
+  .cta-band p{ margin:0 0 14px; color: var(--muted); line-height:1.6; }
+
+  /* FOOTER */
+  .footer{
+    background: var(--surface2);
+    border-top: 1px solid var(--line);
+    margin-top: 60px;
+  }
+  .footer-top{
+    width: 100%;
+
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 240px));
+    justify-content: center;
+    justify-items: center;
+    align-items: start;
+    gap: 70px;
+    padding: 28px 0;
+    text-align:center;
+  }
+  .footer-col h4{
+    margin:0 0 8px;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .footer-col ul{ list-style:none; margin:0; padding:0; display:grid; gap: 8px; }
+  .footer-col a{ color: var(--ink); text-decoration:none; font-weight: 850; }
+  .footer-col a:hover{ text-decoration: underline; }
+
+  
+  
+  .social{
+    width: 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 10px;
+    margin: 18px auto 18px;
+    flex-wrap: wrap;
+  }
+  .social__link{
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    overflow:hidden;
+    border: 1px solid var(--line);
+    background: var(--surface2);
+    box-shadow: 0 12px 26px rgba(2,6,23,.08);
+    display:inline-flex; align-items:center; justify-content:center;
+  }
+  .social__link img{ width: 100%; height: 100%; object-fit: cover; display:block; }
+  .social__link:hover{ transform: translateY(-1px); }
+
+  .footer-bottom{
+    border-top: 1px solid var(--line);
+    text-align:center;
+    padding: 18px 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  
+  /* Floating Buttons */
+  .fab{
+    position: fixed; right: 16px; z-index: 1200;
+    width: clamp(56px, 7.2vw, 68px);
+    height: clamp(56px, 7.2vw, 68px);
+    border-radius: 50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    background: var(--surface2);
+    box-shadow: var(--shadow-strong);
+    border: 2px solid var(--line);
+    text-decoration:none;
+    overflow:hidden;
+  }
+  .fab img{ width: 100%; height: 100%; object-fit: cover; display:block; }
+  .fab--wa{ bottom: 16px; }
+  .fab--py{ bottom: calc(16px + clamp(56px, 7.2vw, 68px) + 10px); }
+  .fab--ue{ bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 2) + 20px); }
+
+  /* Mini Carrito (badge flotante discreto) */
+  .mini-cart-fab{
+    position: fixed;
+    right: calc(16px + clamp(56px, 7.2vw, 68px) + 12px); /* a la izquierda del FAB de WhatsApp */
+    bottom: 16px;
+    z-index: 1201;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    text-decoration: none;
+    overflow: visible;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mini-cart-fab:focus-visible{
+    outline: 2px solid var(--line);
+    outline-offset: 3px;
+  }
+  .mini-cart-fab img{ width: 24px; height: 24px; object-fit: contain; display:block; }
+  .mini-cart-count{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 14px rgba(0,0,0,.16);
+    border: 1px solid rgba(255,255,255,.85);
+  }
+  @media(max-width: 720px){
+    .mini-cart-fab{
+      right: 16px;
+      bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 3) + 30px);
+    }
+  }
+
+  /* CTA flotante "Cotizá" (solo /business) */
+  .cotiza-fab{
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1202;
+    padding: 14px 18px;
+    border-radius: 999px;
+    font-weight: 900;
+    letter-spacing: .2px;
+    text-decoration: none;
+    background:  #d30133;
+    color: #fff;
+    box-shadow: var(--shadow-strong);
+    border: 2px solid rgba(255,255,255,.10);
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .cotiza-fab:hover{
+    animation: floaty 3.2s ease-in-out infinite, pulseRingCotiza 1.3s ease-out infinite;
+  }
+.cotiza-fab:active{ transform: translateY(1px); }
+  .cotiza-fab:focus-visible{
+    outline: 3px solid var(--ring);
+    outline-offset: 3px;
+  }
+  @media(max-width: 480px){
+    .cotiza-fab{
+      right: 12px;
+      bottom: 14px;
+      padding: 16px 20px;
+      font-size: 16px;
+    }
+  }
+
+
+  .hidden{ display:none !important; }
+
+  @media(max-width: 920px){
+    .stats{ grid-template-columns: 1fr; }
+    .hero-media .inner{ grid-template-columns: 1fr; }
+    .hero-card{ border-left:none; border-top: 1px solid var(--line); }
+  }
+
+    /* Responsive header controls */
+  @media(max-width: 720px){
+    header .row{ flex-wrap: wrap; justify-content: space-between; }
+    .spacer{ display:none; }
+    .brand{ width: 100%; justify-content: flex-start; }
+    /* keep view switch compact (no fixed width) */
+    .view-switch{
+      width: auto;
+      justify-content:center;
+      flex-wrap: nowrap;
+    }
+    .view-switch button{
+      flex: 0 0 auto;
+      width: auto;
+      white-space: nowrap;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+    .spacer{ display:none; }
+    .brand{ width: 100%; justify-content: flex-start; }
+    .view-switch{ width: auto; justify-content: center; }
+    .view-switch button{ flex: 1 1 0; text-align:center; }
+    #topCta{ width: 100%; justify-content:center; }
+  }
+
+  /* Menú (solo Público) */
+  .menu-wrap{
+    margin: 22px auto 0;
+    max-width: 980px;
+    text-align:left;
+  }
+  .menu-toggle{
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    padding: 14px 14px;
+    border-radius: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+    cursor:pointer;
+  }
+  .menu-toggle__left{ display:flex; align-items:center; gap: 12px; }
+  .menu-toggle__icon{ font-size: 22px; }
+  .menu-toggle__meta{
+    display:block;
+    color: var(--muted);
+    font-weight: 800;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .menu-toggle__chev{
+    font-size: 18px;
+    font-weight: 950;
+    color: var(--muted);
+    transition: transform .18s ease;
+  }
+  .menu-toggle[aria-expanded="true"] .menu-toggle__chev{ transform: rotate(180deg); }
+
+  .menu-panel{
+    margin-top: 12px;
+    padding: 14px;
+    border-radius: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px rgba(2,6,23,.06);
+  }
+  .menu-grid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media(max-width: 380px){
+    .menu-grid{ grid-template-columns: 1fr; }
+  }
+  @media(min-width: 680px){
+    .menu-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media(min-width: 1020px){
+    .menu-grid{ grid-template-columns: repeat(3, 1fr); }
+  }
+  .menu-item{
+    display:flex;
+    flex-direction: column;
+    border-radius: 18px;
+    overflow:hidden;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.80);
+  }
+  :root[data-theme="dark"] .menu-item{ background: rgba(15,26,43,.75); }
+
+  .menu-img{
+    width: 100%;
+    aspect-ratio: 16/10;
+    background:
+      radial-gradient(700px 260px at 25% 35%, rgba(198,40,40,.18), transparent 60%),
+      radial-gradient(700px 260px at 80% 55%, rgba(0,0,0,.10), transparent 60%),
+      rgba(255,255,255,.55);
+    border-bottom: 1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .menu-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display:block;
+  }
+  .menu-body{ padding: 12px 12px 14px; }
+  .menu-body h3{ margin: 0 0 6px; font-size: 16px; letter-spacing: -.2px; }
+  .menu-body p{ margin: 0 0 10px; color: var(--muted); font-size: 14px; line-height: 1.55; }
+  .menu-price{
+    display:inline-flex;
+    width: fit-content;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 950;
+    font-size: 12px;
+    background: rgba(198,40,40,.10);
+    border: 1px solid rgba(198,40,40,.16);
+  }
+  .menu-cta{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content:center;
+    margin-top: 14px;
+  }
+  .menu-note{
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-weight: 750;
+    font-size: 13px;
+    text-align:center;
+  }
+
+  /* Carrusel Público (Flayers) */
+  .promo-carousel{
+    padding: 18px 0 0;
+  }
+  .promo-carousel .carousel{
+    position: relative;
+    max-width: 980px;
+    margin: 0 auto;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .promo-carousel .carousel__viewport{ overflow: hidden; }
+  .promo-carousel .carousel__track{
+    display:flex;
+    transform: translateX(0%);
+    transition: transform .35s ease;
+    will-change: transform;
+  }
+  .promo-carousel .carousel__slide{ min-width:100%; }
+  .promo-carousel .carousel__slide img{
+    width:100%;
+    height: min(520px, 55vw);
+    max-height: 520px;
+    object-fit: cover;
+    display:block;
+  }
+  .promo-carousel .carousel__btn{
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    width: 42px; height: 42px;
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: rgba(255,255,255,.88);
+    box-shadow: 0 14px 30px rgba(2,6,23,.12);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 26px;
+    cursor:pointer;
+    user-select:none;
+    z-index: 2;
+  }
+  :root[data-theme="dark"] .promo-carousel .carousel__btn{ background: rgba(15,26,43,.88); }
+  .promo-carousel .carousel__btn--prev{ left: 12px; }
+  .promo-carousel .carousel__btn--next{ right: 12px; }
+
+  .promo-carousel .carousel__dots{
+    position:absolute;
+    left:0; right:0;
+    bottom: 12px;
+    display:flex;
+    justify-content:center;
+    gap: 8px;
+    z-index: 2;
+  }
+  .promo-carousel .carousel__dot{
+    width: 9px; height: 9px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(0,0,0,.10);
+    cursor:pointer;
+    padding:0;
+  }
+  :root[data-theme="dark"] .promo-carousel .carousel__dot{ background: rgba(255,255,255,.14); }
+  .promo-carousel .carousel__dot.is-active{
+    background: rgba(198,40,40,.75);
+    border-color: rgba(198,40,40,.55);
+    width: 22px;
+  }
+  @media(max-width: 720px){
+    .promo-carousel .carousel__btn{ width: 38px; height: 38px; font-size: 24px; }
+    .promo-carousel .carousel__slide img{ height: min(360px, 62vw); }
+  }
+
+  /* Header: botones Público/Business compactos (no ancho fijo) */
+  .view-switch{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+  .view-switch button{
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  @media(max-width: 720px){
+    .view-switch{ gap: 6px; }
+    .view-switch button{
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 999px;
+    }
+  }
+
+  @media(max-width: 520px){
+    header .row{ gap: 8px; }
+    .view-switch{ max-width: auto; width: auto; }
+  }
+
+  
+
+  /* Accesibilidad: respeta "reducir movimiento" */
+  @media (prefers-reduced-motion: reduce){
+    .fab{ animation: none !important; }
+    .promo-carousel .carousel__track{ transition: none !important; }
+  }
+
+  /* Animación ligera para botones flotantes */
+  @keyframes floaty {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+  }
+  @keyframes pulseRing {
+    0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.22); }
+    @keyframes pulseRingCotiza {
+    0%   { box-shadow: 0 0 0 0 rgba(179,18,23,.22); }
+    70%  { box-shadow: 0 0 0 10px rgba(179,18,23,0); }
+    100% { box-shadow: 0 0 0 0 rgba(179,18,23,0); }
+  }
+  70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+  }
+  .fab{
+    animation: floaty 3.2s ease-in-out infinite;
+  }
+  .fab--py{ animation-delay: .15s; }
+  .fab--ue{ animation-delay: .3s; }
+  .fab--wa{ animation-delay: 0s; }
+  /* ring suave solo en hover para no distraer */
+  .fab:hover{
+    animation: floaty 3.2s ease-in-out infinite, pulseRing 1.3s ease-out infinite;
+  }
+
+  /* Fix final: View switch compacto en cualquier ancho */
+  .view-switch{ width: auto !important; }
+  .view-switch button{ width: auto !important; white-space: nowrap; }
+
+  /* Header layout: marca a la izquierda, switch a la derecha, sin expandirse */
+  header .row{
+    justify-content: space-between;
+  }
+  .brand{
+    justify-content: flex-start !important;
+    text-align: left;
+  }
+  .view-switch{
+    margin-left: auto !important;
+    width: fit-content !important;
+    flex: 0 0 auto !important;
+    justify-content: flex-end !important;
+  }
+  .view-switch button{
+    flex: 0 0 auto !important;
+    width: auto !important;
+    white-space: nowrap;
+  }
+  @media(max-width: 720px){
+    header .row{
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    .brand{
+      flex: 1 1 auto;
+      width: auto;
+    }
+  }
+
+  /* Público: espacio entre menú y tarjetas informativas */
+  #publico .cols{ margin-top: 18px; }
+
+  @media(max-width: 680px){
+    .menu-item{ border-radius: 16px; }
+    .menu-body{ padding: 10px 10px 12px; }
+    .menu-body h4{ font-size: 14px; }
+    .menu-body p{ font-size: 12.5px; line-height: 1.35; }
+    .menu-meta{ font-size: 12px; }
+  }
+
+  /* Menú: título más premium */
+  .menu-title{
+    color: var(--accent);
+    font-weight: 800;
+    letter-spacing: .2px;
+  }
+  .menu-toggle__meta{
+    opacity: .85;
+  }
+
+  /* ====== Publico: carrito + cantidad en menu ====== */
+  .menu-item{ position:relative; }
+  .qty-controls{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    margin-top:10px;
+    opacity:0;
+    transform: translateY(3px);
+    transition: opacity .15s ease, transform .15s ease;
+    pointer-events:none;
+  }
+  .menu-item:hover .qty-controls,
+  .menu-item:focus-within .qty-controls{
+    opacity:1;
+    transform: translateY(0);
+    pointer-events:auto;
+  }
+  /* If there is quantity, show only the number (no + / -) until hover */
+  .menu-item.has-qty .qty-controls{
+    opacity:1;
+    transform: translateY(0);
+    pointer-events:none;
+  }
+  .menu-item.has-qty .qty-controls .qty-btn{ display:none; }
+  .menu-item.has-qty:hover .qty-controls,
+  .menu-item.has-qty:focus-within .qty-controls{
+    pointer-events:auto;
+  }
+  .menu-item.has-qty:hover .qty-controls .qty-btn,
+  .menu-item.has-qty:focus-within .qty-controls .qty-btn{
+    display:inline-flex;
+  }
+  .qty-btn{
+    width:30px; height:30px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-weight:900;
+    line-height:1;
+    cursor:pointer;
+    display:inline-flex; align-items:center; justify-content:center;
+    user-select:none;
+    opacity:.75;
+  }
+  .qty-btn:hover{ opacity:1; background: rgba(184,31,36,.08); }
+  .qty-num{
+    min-width:22px;
+    text-align:center;
+    font-weight:900;
+    color: var(--ink);
+    opacity:.85;
+  }
+  .menu-orderbar{
+    display:flex;
+    justify-content:flex-start;
+    margin: 10px 0 12px;
+  }
+  .cart-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .cart-label{ font-weight:900; color: var(--ink); }
+  .cart-count{
+    min-width:26px;
+    height:26px;
+    border-radius:999px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    background: rgba(184,31,36,.12);
+    color: var(--ink);
+    border: 1px solid rgba(184,31,36,.22);
+  }
+  .wa-badge{
+    margin-left:10px;
+    min-width:22px;
+    height:22px;
+    padding:0 6px;
+    border-radius:999px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:900;
+    background: var(--danger);
+    color:white;
+    border: 2px solid rgba(255,255,255,.65);
+  }
+  .btn.btn-primary.has-badge .wa-badge{ display:inline-flex; }
+  .wa-badge.pulse{
+    animation: waPulse 1.15s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes waPulse{
+    0%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,.55); }
+    70%{ transform: scale(1.14); box-shadow: 0 0 0 10px rgba(255,59,48,0); }
+    100%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,0); }
+  }
+
+  /* Fly-to-cart (feedback visual al sumar) */
+  .fly-dot{
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: #ef4444;
+    box-shadow: 0 10px 18px rgba(0,0,0,.22);
+    z-index: 2000;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  /* =====================
+     Modal Publico (datos pedido WhatsApp)
+     ===================== */
+  .modal-overlay{
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    z-index: 1600;
+    background: rgba(2, 6, 23, .55);
+    backdrop-filter: blur(8px) saturate(140%);
+  }
+  :root[data-theme="dark"] .modal-overlay{ background: rgba(0,0,0,.62); }
+  .modal-overlay.is-open{ display: flex; }
+
+  .modal{
+    /* un poco mas compacto (~10%) */
+    width: min(342px, 100%);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow-strong);
+    position: relative;
+    padding: 11px;
+  }
+  .modal-x{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: var(--surface2);
+    color: var(--ink);
+    cursor: pointer;
+    font-weight: 950;
+  }
+  .modal-x:hover{ filter: brightness(0.98); }
+
+  .modal-head{ padding: 5px 5px 9px; }
+  .modal-kicker{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(198,40,40,.10);
+    border: 1px solid rgba(198,40,40,.18);
+    font-weight: 950;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .modal-title{ margin: 0 0 6px; letter-spacing: -.4px; }
+  .modal-sub{ margin: 0; color: var(--muted); line-height: 1.55; font-weight: 650; font-size: 13px; }
+
+  .modal-form{ padding: 0 6px 6px; display: grid; gap: 10px; }
+  .field label{ display:block; font-weight: 900; margin: 0 0 6px; }
+  .field input, .field textarea, .field select{
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid var(--line);
+    background: var(--surface2);
+    padding: 10px 12px;
+    color: var(--ink);
+    outline: none;
+    font-weight: 750;
+    /* iOS: evita el zoom automatico al enfocar (requiere >= 16px) */
+    font-size: 16px;
+  }
+  .field select{ appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 38px; }
+  .field select{ cursor: pointer; transition: border-color 140ms ease, filter 140ms ease; }
+  .field select:hover{ border-color: rgba(198,40,40,.25); filter: brightness(0.99); }
+  .field .select-wrap{ position: relative; }
+  .field .select-wrap:after{
+    content: "▾";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 950;
+    color: var(--muted);
+    pointer-events: none;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{ box-shadow: 0 0 0 6px var(--ring); border-color: rgba(198,40,40,.35); }
+  .field textarea{ resize: vertical; min-height: 76px; }
+
+  .field-error{
+    margin-top: 6px;
+    min-height: 16px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--danger);
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+
+  /* =====================
+     Empresas v1 (Hero + Modal)
+     ===================== */
+  .biz-hero{
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-strong);
+    background: var(--surface);
+    min-height: 320px;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+  }
+  @media (max-width: 860px){
+    .biz-hero{ grid-template-columns: 1fr; min-height: 420px; }
+  }
+  .biz-hero__media{
+    position: relative;
+    min-height: 320px;
+  }
+  @media (max-width: 860px){
+    .biz-hero__media{ min-height: 230px; }
+  }
+  .biz-hero__media img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display:block;
+  }
+
+  /* HERO carousel (Empresas) */
+  #bizSection .container{ max-width: 1400px; width: min(1400px, calc(100% - 48px)); margin: 0 auto; }
+  .biz-hero{ grid-template-columns: 1fr minmax(420px, 520px); }
+  @media (max-width: 860px){
+    .biz-hero{ grid-template-columns: 1fr; }
+    .biz-hero__content{ padding: 18px 16px; }
+  }
+  @media (max-width: 520px){
+    #bizSection .container{ width: calc(100% - 28px); }
+    .biz-hero{ border-radius: 18px; }
+    .biz-carousel__btn{ width: 38px; height: 38px; }
+  }
+
+  .biz-hero__media{ min-height: 360px; }
+  @media (max-width: 860px){ .biz-hero__media{ min-height: 250px; } }
+  .kicker-center{ width: 100%; text-align: center; }
+
+  /* =====================
+     Empresas v54_6 (Hero separado: carrusel arriba + tarjeta abajo)
+     Objetivo: Carrusel con mismas dimensiones/posición que el carrusel de Público.
+     ===================== */
+  #bizSection.section{ margin-top: 28px; }
+  @media (max-width: 860px){ #bizSection.section{ margin-top: 18px; } }
+  #bizSection .biz-hero{
+    display:block;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+    min-height: unset;
+  }
+  /* Carrusel como "tarjeta" igual a .promo-carousel .carousel (Público) */
+  #bizSection .biz-hero__media{
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    min-height: 499px;
+  }
+  @media (max-width: 860px){
+    #bizSection .biz-hero__media{ min-height: 250px; }
+  }
+
+  /* Caja de cotización separada, centrada abajo */
+  #bizSection .biz-hero__content{
+    /* CTA hero: sin tarjeta / sin caja */
+    max-width: none;
+    margin: 14px auto 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    text-align: center;
+  }
+
+  /* Compactar tarjeta (solo /business) */
+  #bizSection .kicker{ padding: 6px 10px; font-size: 13px; }
+  #bizSection .biz-h1{ font-size: 28px; }
+  @media (max-width: 520px){ #bizSection .biz-h1{ font-size: 24px; } }
+  #bizSection .biz-sub{ font-size: 14px; font-weight: 650; }
+  #bizSection .biz-cta{ margin-top: 12px; }
+  #bizSection .biz-cta .btn{ padding: 12px 16px; font-size: 15px; }
+
+  #bizSection .biz-cta{ justify-content: center; }
+  #bizSection .biz-trust{ justify-content: center; }
+  .biz-carousel{
+    position:absolute;
+    inset:0;
+  }
+  .biz-carousel img{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition: opacity .6s ease;
+  }
+  .biz-carousel img:first-child{ opacity:1; }
+  .biz-carousel img.is-active{ opacity:1; }
+
+  /* Controles (flechas + dots) para carrusel Empresas */
+  .biz-carousel__btn{
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    width: 42px; height: 42px;
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: rgba(255,255,255,.88);
+    box-shadow: 0 14px 30px rgba(2,6,23,.12);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 26px;
+    cursor:pointer;
+    user-select:none;
+    z-index: 3;
+  }
+  :root[data-theme="dark"] .biz-carousel__btn{ background: rgba(15,26,43,.88); }
+  .biz-carousel__btn--prev{ left: 14px; }
+  .biz-carousel__btn--next{ right: 14px; }
+
+  .biz-carousel__dots{
+    position:absolute;
+    left:0; right:0;
+    bottom: 14px;
+    display:flex;
+    justify-content:center;
+    gap: 8px;
+    z-index: 3;
+  }
+  .biz-carousel__dot{
+    width: 9px; height: 9px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(0,0,0,.10);
+    cursor:pointer;
+    padding:0;
+  }
+  :root[data-theme="dark"] .biz-carousel__dot{ background: rgba(255,255,255,.14); }
+  .biz-carousel__dot.is-active{
+    background: rgba(198,40,40,.75);
+    border-color: rgba(198,40,40,.55);
+    width: 22px;
+  }
+  @media(max-width: 720px){
+    .biz-carousel__btn{ width: 38px; height: 38px; font-size: 24px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .biz-carousel img{ transition:none; }
+  }
+
+  .biz-hero__shade{
+    position:absolute;
+    inset:0;
+    background: linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.08));
+  }
+  @media (max-width: 860px){
+    .biz-hero__shade{ background: linear-gradient(180deg, rgba(0,0,0,.56), rgba(0,0,0,.10)); }
+  }
+  :root[data-theme="dark"] .biz-hero__shade{
+    background: linear-gradient(90deg, rgba(0,0,0,.62), rgba(0,0,0,.12));
+  }
+  .biz-hero__content{
+    position: relative;
+    padding: 22px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+  .biz-h1{ margin: 0; letter-spacing: -.7px; line-height: 1.08; }
+  .biz-sub{ margin: 0; color: var(--muted); font-weight: 650; line-height: 1.6; }
+  .biz-accent{ color: var(--danger); }
+  .biz-cta{ margin-top: 4px; }
+  .biz-cta--hero{
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .biz-cta--hero .btn{
+    padding: 14px 18px;
+    font-weight: 800;
+  }
+  @media (max-width: 520px){
+    .biz-cta--hero{ gap: 10px; }
+    .biz-cta--hero .btn{ width: 100%; }
+  }
+
+  .biz-trust{ display:flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 6px; }
+  .biz-trust__item{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface2);
+    font-weight: 800;
+    color: var(--ink);
+    font-size: 13px;
+  }
+  .biz-band{ border-radius: 18px; }
+
+  /* Modal Empresas */
+  .biz-modal-overlay{
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    z-index: 1650;
+    background: rgba(2, 6, 23, .55);
+    backdrop-filter: blur(9px) saturate(140%);
+  }
+  :root[data-theme="dark"] .biz-modal-overlay{ background: rgba(0,0,0,.64); }
+  .biz-modal-overlay.is-open{ display:flex; }
+  .biz-modal{
+    width: min(720px, 100%);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: var(--shadow-strong);
+    position: relative;
+    padding: 16px;
+  }
+  .biz-modal-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  @media (max-width: 720px){
+    .biz-modal{ padding: 12px; }
+    .biz-modal-grid{ grid-template-columns: 1fr; }
+  
+  /* Empresas modal - mejoras responsive (compacto en móvil) */
+  .biz-modal{
+    max-height: calc(100vh - 28px);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .biz-subgrid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  /* Evita zoom de iOS en inputs del modal Empresas */
+  .biz-modal input, .biz-modal select, .biz-modal textarea{ font-size: 16px; }
+
+  @media (max-width: 520px){
+    .biz-modal-overlay{ padding: 12px; }
+    .biz-modal{ border-radius: 16px; padding: 10px; }
+    .biz-modal-grid{ gap: 10px; margin-top: 8px; }
+    .biz-ico{ width: 30px; height: 30px; border-radius: 10px; }
+    .biz-ico img{ width: 16px; height: 16px; }
+    .biz-modal .modal-kicker{ font-size: 12px; }
+    .biz-modal .modal-title{ font-size: 18px; }
+    .biz-modal .modal-sub{ font-size: 13px; }
+
+    .biz-subgrid{ grid-template-columns: 1fr; gap: 8px; }
+
+    /* Botones de envío en columna (mejor en iPhone) */
+    .biz-actions{
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+    .biz-actions .btn{
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+  .biz-field{
+    display:flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .biz-ico{
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--surface2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex: 0 0 auto;
+  }
+  .biz-ico img{ width: 18px; height: 18px; object-fit: contain; }
+  .biz-field .field{ flex: 1 1 auto; }
+  .biz-actions{
+    display:flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .btn-icon{
+    display:inline-flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .btn-icon img{ width: 18px; height: 18px; object-fit: contain; }
+  .field-error.is-show{ opacity: 1; transform: translateY(0px); }
+
+  .modal-actions{ display:flex; gap: 10px; justify-content:flex-end; align-items:center; padding-top: 4px; }
+  .send-btn{
+    position: relative;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: var(--surface2);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+  }
+  .send-btn:hover{ transform: translateY(-1px); }
+  .send-btn:after{
+    content: "Enviar pedido";
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 8px);
+    transform: translateX(-50%);
+    padding: 5px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-weight: 900;
+    font-size: 11px;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 140ms ease;
+}
+  .send-btn:hover:after{ opacity: 1; }
+  .send-icon{ width: 20px; height: 20px; object-fit: contain; }
+
+  /* Toast (notificacion discreta) */
+  .toast-host{ position: fixed; top: 16px; right: 16px; z-index: 2500; display: grid; gap: 10px; }
+  .toast{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--danger);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 10px 12px;
+    min-width: 220px;
+    max-width: min(360px, calc(100vw - 32px));
+    font-weight: 900;
+    color: var(--ink);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+  .toast.is-show{ opacity: 1; transform: translateY(0px); }
+
+  /* Barra de progreso (tiempo) en la notificación */
+  .toast{ position: relative; overflow: hidden; }
+  .toast::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    height:3px;
+    width:100%;
+    background: var(--danger);
+    transform-origin: left;
+    transform: scaleX(1);
+    transition: transform var(--toast-ms, 2200ms) linear;
+  }
+  .toast.is-show::after{ transform: scaleX(0); }
+
+  /* Modal (Publico): bloquear scroll del fondo mientras esta abierto */
+  body.modal-lock{
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+  }
+  .modal-overlay{
+    overscroll-behavior: contain;
+  }
+
+
+
+
+  /* ===== Empresas CTA animado (solo /business) ===== */
+  @keyframes bizCtaPulse{
+    0%{ transform: translateY(0) scale(1); box-shadow: 0 12px 32px rgba(225,29,72,.18); }
+    50%{ transform: translateY(-1px) scale(1.03); box-shadow: 0 16px 40px rgba(225,29,72,.26); }
+    100%{ transform: translateY(0) scale(1); box-shadow: 0 12px 32px rgba(225,29,72,.18); }
+  }
+  #bizSection #bizQuoteBtn{
+    animation: bizCtaPulse 1.6s ease-in-out infinite;
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: reduce){
+    #bizSection #bizQuoteBtn{ animation: none; }
+  }
+
+  /* Centrar kicker del hero Empresas */
+  #bizSection .kicker-center{
+    text-align: center;
+    justify-content: center;
+  }
+
+
+  /* =====================
+     v54_10: Empresas Modal (compacto) — SOLO MODAL EMPRESAS (#bizModal)
+     Nota: el modal vive fuera de #bizSection, por eso se scopea por ID.
+     Mantiene font-size 16px (anti-zoom iOS).
+     ===================== */
+  #bizModal .biz-modal{
+    padding: 14px; /* antes 16px */
+  }
+  #bizModal .biz-modal-grid{
+    gap: 8px; /* antes 12px */
+  }
+  #bizModal .biz-modal .field label{
+    margin-bottom: 4px; /* antes 6px */
+    font-size: 12px;
+  }
+  #bizModal .biz-modal .field input,
+  #bizModal .biz-modal .field textarea,
+  #bizModal .biz-modal .field select{
+    border-width: 1px;     /* antes 2px */
+    padding: 8px 10px;     /* antes 10px 12px */
+    font-size: 16px;       /* mantener anti-zoom iOS */
+    line-height: 1.2;
+  }
+  #bizModal .biz-modal .field textarea{
+    min-height: 64px;
+  }
+
+  #bizModal .biz-modal .field input[type="time"]{
+    width: 100%;
+    min-width: 0; /* evita overflow/traslape en iOS */
+  }
+  @media (max-width: 560px){
+    #bizModal .biz-modal{ padding: 12px; }
+    #bizModal .biz-modal-grid{ gap: 8px; }
+  }
+
+
+
+    /* Productos (checkbox) — SOLO MODAL EMPRESAS */
+  #bizModal .biz-products-wrap{ margin-top: 8px; }
+
+  /* Head alineado como el resto de campos (icono en recuadro + label) */
+  #bizModal .biz-products-head{
+    display:flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  #bizModal .biz-products-head .field-ico{
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--surface2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex: 0 0 auto;
+  }
+  #bizModal .biz-products-head .field-ico img{
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+  #bizModal .biz-products-head .field-label{
+    display:block;
+    font-weight: 900;
+    margin: 0;
+    color: var(--ink);
+    line-height: 1.2;
+    padding-top: 2px; /* micro-ajuste para alinear baseline con otros labels */
+  }
+
+  #bizModal .biz-products{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 10px;
+  }
+  #bizModal .biz-check{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    user-select:none;
+  }
+  #bizModal .biz-check input{
+    width: 14px;
+    height: 14px;
+    accent-color: #ff0100;
+    transform: translateY(1px);
+  }
+
+/* Productos: icono en recuadro igual a otros fields */
+
+
+
+
+
+  /* v54_13 — Productos alineado con los demas campos (icono + label) */
+  #bizModal .biz-field-products{ grid-column: 2; }
+  #bizModal .biz-field-products .biz-products{
+    margin-top: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 10px;
+  }
+  #bizModal .biz-field-products .biz-check{ font-size: 12px; }
+
+
+/* v54_15: Modal Empresas sin huecos (dos columnas independientes) */
+#bizModal .biz-modal-grid{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+}
+#bizModal .biz-col{
+  flex:1 1 0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-width:0;
+}
+@media (max-width: 860px){
+  #bizModal .biz-modal-grid{ display:block; }
+  #bizModal .biz-col{ gap:10px; }
+}
+
+/* v54_17: Compactar altura del modal (reducir espacio vacío antes de botones) */
+#bizModal .biz-actions{ margin-top: -30px; } /* baja el hueco entre el grid y los CTAs */
+
+
+  /* ===== v54_16: Ajustes de tema para pickers date/time (iOS/Chrome) — SOLO MODAL EMPRESAS ===== */
+  html[data-theme="dark"] #bizModal input[type="date"],
+  html[data-theme="dark"] #bizModal input[type="time"]{
+    color-scheme: dark;
+  }
+  html[data-theme="dark"] #bizModal input[type="date"]::-webkit-calendar-picker-indicator,
+  html[data-theme="dark"] #bizModal input[type="time"]::-webkit-calendar-picker-indicator{
+    filter: invert(1);
+    opacity: .85;
+  }
+
+ /* Ajuste fino: subir FECHA (label + input) 14px */
+#bizModal .biz-field .field label[for="bizDate"]{
+  position: relative;
+  top: -4px;
+}
+#bizModal #bizDate{
+  position: relative;
+  top: -4px;
+}
+#bizModal #bizErrDate{
+  position: relative;
+  top: -4px;
+} 
+
+ /* Ajuste fino: subir PDORDUCTO (label + input) 14px XXXXX*/ 
+#bizModal .biz-field-products .field{
+  position: relative;
+  top: -8px;
+}
+#bizModal #bizErrProducts{
+  position: relative;
+  top: -8px;
+}
+
+ /* Ajuste fino: subir UBICACION (label + input) 14px */
+#bizModal .biz-field .field label[for="bizLocation"]{
+  position: relative;
+  top: -30px;
+}
+#bizModal #bizLocation{
+  position: relative;
+  top: -30px;
+}
+#bizModal #bizErrLocation{
+  position: relative;
+  top: -30px;
+}
+
+/* Ajuste fino: subir Correo (label + input) 14px */
+#bizModal .biz-field .field label[for="bizEmail"]{
+  position: relative;
+  top: -40px;
+}
+#bizModal #bizEmail{
+  position: relative;
+  top: -40px;
+}
+#bizModal #bizErrEmail{
+  position: relative;
+  top: -40px;
+}
+
+#bizModal .biz-field:has(#bizEmail) .biz-ico{
+  position: relative;
+  top: -40px;
+}
+
+
+
+
+/* =========================
+   BIZ PROMOS (v59)
+   ========================= */
+.biz-promos{
+  margin-top: 22px;
+}
+.biz-promos__title{
+  text-align: center;
+  max-width: 900px;
+  margin: 10px auto 18px;
+  
+}
+
+.promo-list{
+  display: grid;
+  gap: 14px;
+}
+
+.promo-row{
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 14px;
+  align-items: stretch;
+  border-radius: 18px;
+  background: var(--card-bg, rgba(255,255,255,.05));
+  border: 1px solid var(--card-brd, rgba(255,255,255,.10));
+  overflow: hidden;
+}
+
+.promo-row--reverse{
+  grid-template-columns: .95fr 1.05fr;
+}
+.promo-row--reverse .promo-media{ order: 2; }
+.promo-row--reverse .promo-copy{ order: 1; }
+
+.promo-media{
+  position: relative;
+  min-height: 220px;
+  background: rgba(0,0,0,.08);
+}
+.promo-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  transition: transform .35s ease;
+}
+
+.promo-row:hover .promo-media img{
+  transform: scale(1.05);
+}
+
+.promo-copy{
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+.promo-copy h3{
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+.promo-copy p{
+  margin: 0 0 10px;
+  
+}
+.promo-note{
+  margin-top: 2px;
+  opacity: .78;
+  font-size: .95rem;
+}
+
+/* Scroll reveal */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .55s ease, transform .55s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-in{
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 980px){
+  .promo-row,
+  .promo-row--reverse{
+    grid-template-columns: 1fr;
+  }
+  .promo-row--reverse .promo-media{ order: 0; }
+  .promo-copy{
+    text-align: left;
+  }
+  .promo-media{
+    min-height: 200px;
+  }
+}
+
+
+/* =========================
+   BIZ PROMOS (variante banners) (v59_2)
+   ========================= */
+.biz-promos--banners .promo-banners{
+  display: grid;
+  gap: 14px;
+}
+
+.promo-banner{
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  min-height: 260px;
+  border: 1px solid var(--card-brd, rgba(255,255,255,.10));
+  background: rgba(0,0,0,.12);
+}
+
+.promo-banner img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+  transition: transform .6s ease;
+  filter: saturate(1.02) contrast(1.02);
+}
+
+.promo-banner:hover img{
+  transform: scale(1.07);
+}
+
+.promo-tint{
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(900px 420px at 25% 50%, rgba(0,0,0,.62), rgba(0,0,0,.18) 60%, rgba(0,0,0,.06)),
+    linear-gradient(90deg, rgba(255,1,0,.18), rgba(255,1,0,0));
+  pointer-events: none;
+}
+
+.promo-banner--right .promo-tint{
+  background:
+    radial-gradient(900px 420px at 75% 50%, rgba(0,0,0,.62), rgba(0,0,0,.18) 60%, rgba(0,0,0,.06)),
+    linear-gradient(270deg, rgba(255,1,0,.18), rgba(255,1,0,0));
+}
+
+.promo-panel{
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  margin: 0;
+  padding: 18px 18px 16px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+}
+
+.promo-banner--left .promo-panel{
+  padding-right: 22px;
+  text-align: left;
+}
+
+.promo-banner--right .promo-panel{
+  margin-left: auto;
+  text-align: right;
+  padding-left: 22px;
+}
+
+
+.promo-banner--center .promo-panel{
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+}
+
+.promo-panel h3{
+  margin: 0;
+  font-size: 1.22rem;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.promo-panel p{
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #fff;
+}
+
+.promo-bullets{
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.promo-bullets li{
+  margin: 4px 0;
+  font-size: .98rem;
+  font-weight: 700;
+  color: #fff;
+}
+.promo-bullets li::before{
+  content: "• ";
+  font-weight: 900;
+}
+
+
+@media (max-width: 980px){
+  .promo-banner{ min-height: 240px; }
+  .promo-panel{ max-width: 100%; }
+}
+
+@media (max-width: 520px){
+  .promo-banner{
+    min-height: 260px;
+  }
+  .promo-panel{
+    padding: 16px 16px 14px;
+  }
+}
+
+
+/* PUBLICO – Titulos de menu en modo oscuro */
+/* removed body.dark-mode rule */
+html[data-theme="dark"] .menu-title,
+body.dark-mode .menu-section-title,
+body.dark-mode h2.menu-title,
+body.dark-mode h2.menu-section-title{
+  color: #ffffff !important;
+}
+
+
+/* PUBLICO – Titulos de menu en modo oscuro (selector correcto por data-theme) */
+html[data-theme="dark"] .menu-title,
+html[data-theme="dark"] .menu-section-title,
+html[data-theme="dark"] h2.menu-title,
+html[data-theme="dark"] h2.menu-section-title,
+:root[data-theme="dark"] .menu-title,
+:root[data-theme="dark"] .menu-section-title{
+  color: #ffffff !important;
+}
+
+
+  /* FOOTER (v59_14) - institucional */
+  .footer-brand{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    padding: 30px 0 10px;
+    text-align:center;
+  }
+  .footer-brand__logo img{
+    height: 46px;
+    width: auto;
+    display:block;
+    filter: drop-shadow(0 10px 18px rgba(2,6,23,.10));
+  }
+  .footer-brand__tagline{
+    margin:0;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .footer-links-inline{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items:center;
+    gap: 10px;
+    padding: 6px 0 10px;
+    text-align:center;
+    font-size: 13px;
+  }
+  .footer-links-inline a{
+    color: var(--ink);
+    text-decoration:none;
+    font-weight: 850;
+  }
+  .footer-links-inline a:hover{ text-decoration: underline; }
+  .footer-links-inline .sep{ opacity:.35; }
+
+
+
+  /* ===== Subpagina: FAQ ===== */
+  .page-wrap{ padding: 28px 0 8px; }
+  .faq-hero{ text-align:center; margin: 12px auto 18px; }
+  .faq-pill{
+    display:inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #4b5563;
+    background: rgba(2,6,23,.06);
+    border: 1px solid var(--line);
+  }
+  :root[data-theme="dark"] .faq-pill{ color: var(--muted); background: rgba(255,255,255,.06); }
+
+  .faq-title{
+    margin: 10px auto 6px;
+    max-width: 820px;
+    font-size: clamp(26px, 3.2vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .faq-sub{
+    margin: 0 auto;
+    max-width: 820px;
+    color: var(--muted);
+    font-size: 16px;
+  }
+  .faq-box{
+    max-width: 920px;
+    margin: 18px auto 0;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .faq-item{ border-bottom: 1px solid var(--line); }
+  .faq-item:last-child{ border-bottom: 0; }
+
+  .faq-q{
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 16px;
+    background: transparent;
+    border: 0;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+  }
+  .faq-q:focus-visible{
+    outline: 3px solid var(--ring);
+    outline-offset: -3px;
+  }
+  .qtext{ font-size: 16px; font-weight: 800; }
+  .chev{ width: 16px; flex: 0 0 16px; color: var(--muted); transition: transform .2s ease; }
+  .faq-q[aria-expanded="true"] .chev{ transform: rotate(180deg); }
+
+  .faq-a{ padding: 0 16px 16px; }
+  .faq-a__inner{
+    color: var(--muted);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .faq-a__inner strong{ color: var(--ink); }
+
+  /* Hacer el bloque del brand clickeable sin cambiar su markup */
+  header .brand{ cursor: pointer; }
+  
+/* v59_15: Privacidad - card centrada y compacta */
+main{padding: 28px 0 36px;}
+.contact-card{max-width: 760px; margin: 0 auto; padding: 26px;}
+.contact-card h1{margin-top:0; margin-bottom:10px; font-size:32px; text-align:center;}
+.contact-card h2{margin:18px 0 8px; font-size:18px;}
+.contact-card p, .contact-card li{font-size:15px;}
+.contact-card ul{margin: 0 0 10px 18px;}
+</style>
+</head>
+<body>
+<header>
+<div class="container row">
+<div class="brand">
+<!-- Pon estos PNG en la misma carpeta que este HTML, o ajustá rutas. -->
+<img alt="Mr Pizza GT Logo" decoding="async" id="logoHeader" loading="lazy" src="MR PIZZA LOGO-Ligth.png"/>
+<div>
+<div class="title">Mr Pizza GT</div>
+<div class="subtitle" id="subtitleHeader">Pizzas &amp; Crepas • Guatemala</div>
+</div>
+</div>
+<div class="spacer"></div>
+<div aria-label="Cambiar vista" class="view-switch">
+<button class="active" id="btnPublic" type="button">Público</button>
+<button id="btnBiz" type="button">Empresas</button>
+</div>
+<button class="icon-btn" id="themeBtn" title="Tema"><span id="themeIcon">🖥️</span></button>
+</div>
+</header>
+<main><div class="container"><section class="contact-card"><h1>Política de privacidad</h1><p>Tu privacidad importa. Esta política explica qué información se maneja y con qué propósito cuando interactúas con MR Pizza GT a través del sitio y nuestros canales.</p><h2>1) Información que puedes proporcionar</h2><p>Cuando solicitas una cotización, haces un pedido o nos escribes, podrías compartir:</p><ul><li>Nombre y datos de contacto (por ejemplo, correo o número de teléfono).</li><li>Detalles del evento o pedido (fecha, horario, zona aproximada, preferencias).</li><li>Datos fiscales únicamente si solicitas factura.</li></ul><h2>2) Cómo utilizamos la información</h2><p>Usamos tu información únicamente para brindarte atención y completar el servicio.</p><ul><li>Responder consultas y dar seguimiento a pedidos/cotizaciones.</li><li>Confirmar disponibilidad, coordinar entrega y logística.</li><li>Emitir factura si fue solicitada y se proporcionaron datos fiscales.</li></ul><h2>3) Canales y almacenamiento</h2><p>La comunicación suele ocurrir por WhatsApp u otros canales. La información puede quedar registrada en dichos servicios conforme a sus propias políticas. En el sitio, no almacenamos una base de datos de clientes (no hay backend).</p><h2>4) Compartición con terceros</h2><p>No vendemos tu información. Solo la compartimos si es estrictamente necesario para cumplir el servicio, por ejemplo, con logística/entrega, o para facturación cuando aplique.</p><h2>5) Seguridad</h2><p>Aplicamos buenas prácticas razonables para proteger la información. Aun así, ningún sistema es 100% infalible. Evita compartir información sensible innecesaria por canales no seguros.</p><h2>6) Tus derechos y solicitudes</h2><p>Puedes solicitar correcciones o eliminación de información de conversaciones cuando sea posible. Para hacerlo, escribe por WhatsApp indicando “Privacidad” y el detalle de tu solicitud.</p><h2>7) Cambios a esta política</h2><p>Podemos actualizar esta política para reflejar mejoras del servicio o requisitos legales. La versión vigente estará publicada en esta página.</p><p style="margin-top:16px; text-align:center;"><a class="btn" href="/mrpizzasgt/">Volver al sitio principal</a></p></section></div></main>
+<footer class="footer">
+<div class="container footer-brand">
+<a aria-label="Ir a inicio" class="footer-brand__logo" href="/mrpizzasgt/">
+<img alt="MR Pizza GT" decoding="async" id="logoFooter" loading="lazy" src="MR PIZZA LOGO-Ligth.png"/>
+</a>
+<p class="footer-brand__tagline">Soluciones gastronomicas para eventos corporativos.</p>
+</div>
+<div aria-label="Enlaces del sitio" class="container footer-links-inline">
+<a href="/mrpizzasgt/preguntas.html">Preguntas frecuentes</a>
+<span class="sep">|</span>
+<a href="/mrpizzasgt/quienes-somos.html">Quienes somos</a>
+<span class="sep">|</span>
+<a href="/mrpizzasgt/contacto.html">Contacto</a>
+<span class="sep">|</span>
+<a href="/mrpizzasgt/terminos.html">Terminos de uso</a>
+<span class="sep">|</span>
+<a href="/mrpizzasgt/privacidad.html">Politica de privacidad</a>
+</div>
+<div class="container">
+<div aria-label="Redes sociales" class="social">
+<a aria-label="WhatsApp" class="social__link" href="#" id="waFooter" rel="noopener" target="_blank">
+<img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp.png"/>
+</a>
+<a aria-label="Instagram" class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" rel="noopener" target="_blank">
+<img alt="Instagram" decoding="async" loading="lazy" src="instagram.png"/>
+</a>
+<a aria-label="TikTok" class="social__link" href="#" rel="noopener" target="_blank">
+<img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png"/>
+</a>
+<a aria-label="Facebook" class="social__link" href="#" rel="noopener" target="_blank">
+<img alt="Facebook" decoding="async" loading="lazy" src="facebook.png"/>
+</a>
+<a aria-label="Uber Eats" class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" rel="noopener" target="_blank">
+<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
+</a>
+<a aria-label="PedidosYa" class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">
+<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
+</a>
+</div>
+</div>
+<div class="container footer-bottom">
+<p>© <span id="year"></span> <strong>MR Pizza GT</strong> by <strong>GaschSoft</strong>. Todos los derechos reservados. Hecho en Guatemala 🇬🇹</p>
+</div>
+</footer>
+<script>
+  // ===== Brand assets (mismo criterio que la pagina principal)
+  function updateBrandAssets(theme){
+    const t = theme || document.documentElement.getAttribute("data-theme") || "light";
+    const src = (t==="dark") ? "MR PIZZA LOGO_Dark.png" : "MR PIZZA LOGO-Ligth.png";
+
+    const headerLogo = document.getElementById("logoHeader");
+    const footerLogo = document.getElementById("logoFooter");
+    if(headerLogo) headerLogo.src = src;
+    if(footerLogo) footerLogo.src = src;
+
+    const favicon = document.getElementById("favicon");
+    if(favicon) favicon.href = src;
+  }
+
+  // ===== Theme toggle (igual al main)
+  (function(){
+    const KEY="mrpizza_theme_mode";
+    const btn=document.getElementById("themeBtn");
+    const icon=document.getElementById("themeIcon");
+    const media=window.matchMedia("(prefers-color-scheme: dark)");
+    let mode=localStorage.getItem(KEY) || "system";
+
+    function currentTheme(){
+      return mode==="system" ? (media.matches ? "dark" : "light") : mode;
+    }
+    function renderTheme(){
+      const theme=currentTheme();
+      document.documentElement.setAttribute("data-theme", theme);
+      updateBrandAssets(theme);
+      if(icon) icon.textContent = (mode==="system") ? "🖥️" : (mode==="light" ? "☀️" : "🌙");
+    }
+    if(btn){
+      btn.addEventListener("click", ()=>{
+        mode = (mode==="system") ? "light" : (mode==="light" ? "dark" : "system");
+        localStorage.setItem(KEY, mode);
+        renderTheme();
+      });
+    }
+    media.addEventListener("change", ()=>{ if(mode==="system") renderTheme(); });
+    renderTheme();
+  })();
+
+  // ===== Header (misma NV visual; acciones redirigen al index principal)
+  (function(){
+    const brand=document.querySelector("header .brand");
+    if(brand) brand.addEventListener("click", ()=>{ location.href="/mrpizzasgt/"; });
+
+    const btnPublic=document.getElementById("btnPublic");
+    const btnBiz=document.getElementById("btnBiz");
+    // NOTA: /business no existe como ruta. Usamos hash para cambiar de vista en el index.
+    if(btnPublic) btnPublic.addEventListener("click", ()=>{ location.href="/mrpizzasgt/#public"; });
+    if(btnBiz) btnBiz.addEventListener("click", ()=>{ location.href="/mrpizzasgt/#biz"; });
+  })();
+
+  // ===== FAQ accordion
+  (function(){
+    const items = Array.from(document.querySelectorAll(".faq-item"));
+    items.forEach((item)=>{
+      const btn=item.querySelector(".faq-q");
+      const panel=item.querySelector(".faq-a");
+      if(!btn || !panel) return;
+
+      btn.addEventListener("click", ()=>{
+        const open = btn.getAttribute("aria-expanded")==="true";
+        // cerrar todos para que sea limpio
+        items.forEach((it)=>{
+          const b=it.querySelector(".faq-q");
+          const p=it.querySelector(".faq-a");
+          if(b && p){ b.setAttribute("aria-expanded","false"); p.hidden=true; }
+        });
+        // abrir el actual si estaba cerrado
+        if(!open){ btn.setAttribute("aria-expanded","true"); panel.hidden=false; }
+      });
+    });
+  })();
+
+  const form = document.getElementById("contactForm");
+  if(form){
+    form.addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const n=cName.value.trim(), e2=cEmail.value.trim(), m=cMsg.value.trim();
+      if(!n||!e2||!m){
+        alert("Completa todos los campos.");
+        return;
+      }
+      alert("Correo enviado (simulación). Te responderemos en breve.");
+      form.reset();
+    });
+  }
+</script>
+</body>
+</html>

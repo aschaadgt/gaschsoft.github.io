@@ -318,7 +318,7 @@
     gap: 16px;
   }
   /* Pantallas muy pequeñas: 1 columna para evitar que se apriete */
-  @media(max-width: 420px){
+  @media(max-width: 340px){
     .biz-features-grid{ grid-template-columns: 1fr; }
   }
   @media(min-width: 680px){
@@ -1568,6 +1568,11 @@
   #bizModal .biz-modal .field textarea{
     min-height: 64px;
   }
+
+  #bizModal .biz-modal .field input[type="time"]{
+    width: 100%;
+    min-width: 0; /* evita overflow/traslape en iOS */
+  }
   @media (max-width: 560px){
     #bizModal .biz-modal{ padding: 12px; }
     #bizModal .biz-modal-grid{ gap: 8px; }
@@ -2186,7 +2191,7 @@
 <!-- BENEFICIOS B2B (4 cards) -->
 <div aria-label="Beneficios para empresas" class="biz-features">
 <div class="kicker kicker-center">Hecho para eventos corporativos</div>
-<p class="biz-features__title">Sabor, orden y experiencia para que tu equipo solo se enfoque en disfrutar.</p>
+<p class="biz-features__title">De la cotización a la ejecución, sin complicaciones.</p>
 <div class="biz-features-grid">
 <div class="card-mini biz-card">
 <div aria-hidden="true" class="icon">📲</div>
@@ -2701,7 +2706,7 @@
 <div class="biz-ico"><img alt="" decoding="async" id="icoTime" loading="lazy" src="Logotipos/reloj.png"/></div>
 <div class="field">
 <label>Horario</label>
-<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+<div style="display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px;">
 <div>
 <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
 <img alt="" decoding="async" id="icoStartEvent" loading="lazy" src="Logotipos/calendar.png" style="width:16px; height:16px; object-fit:contain; opacity:.95;"/>
@@ -3446,6 +3451,27 @@ if(document.readyState === 'loading'){
     const bizQuoteBtn2 = document.getElementById('bizQuoteBtn2');
 
     const bizForm = document.getElementById('bizForm');
+    const bizDateEl = document.getElementById('bizDate');
+    if(bizDateEl){
+      // iOS a veces deja seleccionar pasado aunque exista min; lo corregimos al vuelo
+      bizDateEl.addEventListener('change', ()=>{ enforceBizDateRange(true); });
+      bizDateEl.addEventListener('input', ()=>{ enforceBizDateRange(false); });
+      bizDateEl.addEventListener('blur', ()=>{ enforceBizDateRange(true); });
+    
+    const bizStartEl = document.getElementById('bizStart');
+    const bizServeEl = document.getElementById('bizServe');
+    if(bizStartEl && bizServeEl){
+      const check = (show)=>{ enforceBizTimeOrder(!!show); };
+      bizStartEl.addEventListener('change', ()=>{ check(true); });
+      bizStartEl.addEventListener('input', ()=>{ check(false); });
+      bizStartEl.addEventListener('blur', ()=>{ check(true); });
+
+      bizServeEl.addEventListener('change', ()=>{ check(true); });
+      bizServeEl.addEventListener('input', ()=>{ check(false); });
+      bizServeEl.addEventListener('blur', ()=>{ check(true); });
+    }
+}
+
     const bizSendWa = document.getElementById('bizSendWa');
     const bizSendEmail = document.getElementById('bizSendEmail');
 
@@ -3475,7 +3501,7 @@ if(document.readyState === 'loading'){
 
     window.updateBizIcons = updateBizIcons;
 
-    // v55_2 — Limitar fecha de cotizacion (SOLO modal Empresas) 100 días
+    // v55_2 — Limitar fecha de cotizacion (SOLO modal Empresas)
     function setBizDateBounds(){
       const dateEl = document.getElementById('bizDate');
       if(!dateEl) return;
@@ -3505,10 +3531,78 @@ if(document.readyState === 'loading'){
       }
     }
 
+    // Enforce rango de fecha en móvil (iOS/Android) incluso si el date picker deja seleccionar pasado
+    function enforceBizDateRange(showMsg){
+      const dateEl = document.getElementById('bizDate');
+      const errEl = document.getElementById('bizErrDate');
+      if(!dateEl) return true;
+
+      const v = cleanText(dateEl.value);       // YYYY-MM-DD
+      const minStr = cleanText(dateEl.min);    // YYYY-MM-DD
+      const maxStr = cleanText(dateEl.max);    // YYYY-MM-DD
+
+      // Si está vacío, que lo valide el required normal
+      if(!v) return false;
+
+      const RESET_DELAY_MS = 650;
+
+      // Comparación lexicográfica funciona para YYYY-MM-DD
+      if(minStr && v < minStr){
+        if(showMsg) fieldError(errEl, 'La fecha no puede ser anterior a hoy');
+        // Dejar que el usuario vea el mensaje y luego corregir
+        window.setTimeout(()=>{ 
+          // Si aún está fuera de rango, corrige
+          const cur = cleanText(dateEl.value);
+          if(cur && cur < minStr) dateEl.value = minStr;
+        }, RESET_DELAY_MS);
+        return false;
+      }
+      if(maxStr && v > maxStr){
+        if(showMsg) fieldError(errEl, 'La fecha no puede ser mayor a 100 días');
+        window.setTimeout(()=>{ 
+          const cur = cleanText(dateEl.value);
+          if(cur && cur > maxStr) dateEl.value = maxStr;
+        }, RESET_DELAY_MS);
+        return false;
+      }
+      return true;
+    }
+
+
+    // Validar orden de horas: servicio debe ser despues del inicio del evento
+    function enforceBizTimeOrder(showMsg){
+      const startEl = document.getElementById('bizStart');
+      const serveEl = document.getElementById('bizServe');
+      const errServe = document.getElementById('bizErrServe');
+      if(!startEl || !serveEl) return true;
+
+      const start = cleanText(startEl.value); // HH:MM
+      const serve = cleanText(serveEl.value); // HH:MM
+
+      if(!start || !serve) return false;
+
+      const RESET_DELAY_MS = 650;
+
+      // Lexicografico funciona para HH:MM
+      if(serve <= start){
+        if(showMsg) fieldError(errServe, 'La hora de servicio debe ser después del inicio del evento');
+        // Deja ver el mensaje y luego limpia para que elijan de nuevo
+        window.setTimeout(()=>{
+          const s2 = cleanText(startEl.value);
+          const v2 = cleanText(serveEl.value);
+          if(s2 && v2 && v2 <= s2) serveEl.value = '';
+        }, RESET_DELAY_MS);
+        return false;
+      }
+      return true;
+    }
+
     function openBizModal(){
       if(!bizModal) return;
       updateBizIcons();
       setBizDateBounds();
+      // Normaliza si el picker dejó una fecha fuera de rango (móvil)
+      enforceBizDateRange(false);
       // Bloquea scroll del fondo (sin cerrar con click fuera)
       try{
         const y = window.scrollY || document.documentElement.scrollTop || 0;
@@ -3585,7 +3679,8 @@ if(document.readyState === 'loading'){
         company: cleanText(document.getElementById('bizCompany')?.value),
         adults: cleanText(document.getElementById('bizAdults')?.value),
         kids: cleanText(document.getElementById('bizKids')?.value),
-        date: formatDateGT(document.getElementById('bizDate')?.value),
+        dateRaw: cleanText(document.getElementById('bizDate')?.value),
+        date: formatDateGT(cleanText(document.getElementById('bizDate')?.value)),
         start: cleanText(document.getElementById('bizStart')?.value),
         serve: cleanText(document.getElementById('bizServe')?.value),
         location: cleanText(document.getElementById('bizLocation')?.value),
@@ -3609,9 +3704,11 @@ if(document.readyState === 'loading'){
         bizVal('bizErrAdults', a >= 0, 'Adultos inválido') &&
         bizVal('bizErrKids', k >= 0, 'Niños inválido') &&
         bizVal('bizErrAdults', total > 0, 'Colocá al menos 1 persona') &&
-        bizVal('bizErrDate', !!d.date, 'Elegí una fecha') &&
+        bizVal('bizErrDate', !!(d.dateRaw||d.date), 'Elegí una fecha') &&
+        bizVal('bizErrDate', enforceBizDateRange(true), 'La fecha no puede ser anterior a hoy') &&
         bizVal('bizErrStart', !!d.start, 'Elegí hora de inicio') &&
         bizVal('bizErrServe', !!d.serve, 'Elegí hora de servicio') &&
+        bizVal('bizErrServe', enforceBizTimeOrder(true), 'La hora de servicio debe ser después del inicio del evento') &&
         bizVal('bizErrProducts', (d.products && d.products.length>0), 'Seleccioná al menos un producto') &&
         bizVal('bizErrLocation', !!d.location, 'Ingresá la ubicación') &&
         bizVal('bizErrPhone', !!d.phone, 'Ingresá un teléfono') &&
