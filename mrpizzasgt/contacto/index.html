@@ -2367,8 +2367,8 @@ html[data-theme="dark"] h2.menu-section-title,
     const btnPublic=document.getElementById("btnPublic");
     const btnBiz=document.getElementById("btnBiz");
     // NOTA: /business no existe como ruta. Usamos hash para cambiar de vista en el index.
-    if(btnPublic) btnPublic.addEventListener("click", ()=>{ location.href="../#public"; });
-    if(btnBiz) btnBiz.addEventListener("click", ()=>{ location.href="../#biz"; });
+    if(btnPublic) btnPublic.addEventListener("click", ()=>{ location.href="../"; });
+    if(btnBiz) btnBiz.addEventListener("click", ()=>{ location.href="../?view=business"; });
   })();
 
   // ===== FAQ accordion

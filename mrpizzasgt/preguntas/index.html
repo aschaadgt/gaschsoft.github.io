@@ -2289,15 +2289,15 @@ html[data-theme="dark"] h2.menu-section-title,
   </div>
 
   <div class="container footer-links-inline" aria-label="Enlaces del sitio">
-    <a href="/mrpizzasgt/preguntas.html">Preguntas frecuentes</a>
+    <a href="/mrpizzasgt/preguntas/">Preguntas frecuentes</a>
     <span class="sep">|</span>
-    <a href="/mrpizzasgt/about.html">Quienes somos</a>
+    <a href="/mrpizzasgt/quienes-somos/">Quienes somos</a>
     <span class="sep">|</span>
-    <a href="/mrpizzasgt/contact.html">Contacto</a>
+    <a href="/mrpizzasgt/contacto/">Contacto</a>
     <span class="sep">|</span>
-    <a href="/mrpizzasgt/terms.html">Terminos de uso</a>
+    <a href="/mrpizzasgt/terminos/">Terminos de uso</a>
     <span class="sep">|</span>
-    <a href="/mrpizzasgt/privacy.html">Politica de privacidad</a>
+    <a href="/mrpizzasgt/privacidad/">Politica de privacidad</a>
   </div>
 
   <div class="container">
@@ -2379,8 +2379,8 @@ html[data-theme="dark"] h2.menu-section-title,
     const btnPublic=document.getElementById("btnPublic");
     const btnBiz=document.getElementById("btnBiz");
     // NOTA: /business no existe como ruta. Usamos hash para cambiar de vista en el index.
-    if(btnPublic) btnPublic.addEventListener("click", ()=>{ location.href="/mrpizzasgt/#public"; });
-    if(btnBiz) btnBiz.addEventListener("click", ()=>{ location.href="/mrpizzasgt/#biz"; });
+    if(btnPublic) btnPublic.addEventListener("click", ()=>{ location.href="/mrpizzasgt/"; });
+    if(btnBiz) btnBiz.addEventListener("click", ()=>{ location.href="/mrpizzasgt/?view=business"; });
   })();
 
   // ===== FAQ accordion

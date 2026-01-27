@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Quiénes somos | MR Pizza GT</title>
+<title>Contacto | MR Pizza GT</title>
 <link href="../MR PIZZA LOGO-Ligth.png" id="favicon" rel="icon" type="image/png"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
 <link href="../site.webmanifest" rel="manifest"/>
@@ -2101,7 +2101,96 @@ html[data-theme="dark"] h2.menu-section-title,
 
   /* Hacer el bloque del brand clickeable sin cambiar su markup */
   header .brand{ cursor: pointer; }
-  </style>
+  
+    .contact-whatsapp{
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
+      text-align:center;
+    }
+    .contact-whatsapp h2{ margin: 18px 0 6px; font-size: 26px; }
+    .contact-whatsapp p{ margin: 0 0 14px; color: #555; }
+    .btn-wa{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      justify-content:center;
+      text-decoration:none;
+      background:#25D366;
+      color:#fff;
+      font-weight:800;
+      padding: 12px 18px;
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.08);
+      border: 1px solid rgba(0,0,0,.06);
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+    .btn-wa img{ width: 22px; height:22px; object-fit:contain; filter: drop-shadow(0 1px 0 rgba(0,0,0,.08)); }
+    .btn-wa:hover{ transform: translateY(-1px); }
+    
+
+    /* Contacto (subpagina) */
+    .contact-card .card{
+      background: var(--surface, #fff);
+      border: 1px solid var(--line, #e6e6e6);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.06);
+      padding: 18px;
+    }
+    .contact-card form .field{ margin: 0 0 12px; text-align:left; }
+    .contact-card form label{
+      display:block;
+      font-weight: 800;
+      font-size: 13px;
+      margin: 0 0 6px;
+      color: var(--ink, #111);
+    }
+    .contact-card input,
+    .contact-card textarea{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line, #d6d6d6);
+      background: var(--surface, #fff);
+      color: var(--ink, #111);
+      outline: none;
+    }
+    .contact-card input:focus,
+    .contact-card textarea:focus{
+      border-color: rgba(0,0,0,.35);
+      box-shadow: 0 0 0 4px rgba(0,0,0,.06);
+    }
+    .contact-card .actions{ margin-top: 10px; }
+    .contact-card .btn-primary{
+      width: 100%;
+      border: 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .contact-card .hint{ margin-top: 10px; opacity: .85; line-height: 1.35; }
+    .contact-card .hint small{ display:block; }
+
+
+.contact-card{
+  max-width: 420px;
+  margin: 24px auto 0;
+}
+.contact-actions{
+  margin-top: 24px;
+}
+.whatsapp-cta{
+  margin: 14px auto 0;
+  display:flex;
+  justify-content:center;
+}
+.whatsapp-cta a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+</style>
 </head>
 <body>
 <header>
@@ -2122,24 +2211,60 @@ html[data-theme="dark"] h2.menu-section-title,
 <button class="icon-btn" id="themeBtn" title="Tema"><span id="themeIcon">🖥️</span></button>
 </div>
 </header>
-<main class="page-wrap"><div class="container"><h1>Quiénes somos</h1><p>MR Pizza GT es una marca guatemalteca enfocada en pizzas y complementos, con una experiencia pensada para pedidos nocturnos y eventos corporativos (B2B).</p><div class="callout"><h2>Nuestra propuesta</h2><ul><li>Cotización rápida: eliges productos y el sistema arma tu mensaje para WhatsApp.</li><li>Menú claro y consistente: lo que ves es lo que cotizas.</li><li>Enfoque B2B: eventos, oficinas, reuniones, capacitaciones y convivios.</li><li>Diseño mobile-first: pensado para funcionar bien como PWA en Android/iOS.</li></ul></div><h2>¿Para qué tipo de eventos?</h2><p>Nos adaptamos a diferentes tamaños y formatos. Ejemplos comunes:</p><ul><li>Reuniones internas, capacitaciones y team buildings.</li><li>Convivios de fin de año, aniversarios y celebraciones.</li><li>Activaciones, lanzamientos y visitas de clientes.</li><li>Cenas corporativas o pedidos para turnos nocturnos.</li></ul><h2>Cómo trabajamos</h2><p>Seleccionas productos, indicas fecha y horario, y envías la cotización o pedido por WhatsApp. Te confirmamos disponibilidad, logística y siguientes pasos.</p><p style="margin-top:14px;"><a class="btn primary" href="/mrpizzasgt/">Volver al sitio principal</a></p></div></main>
+<div aria-atomic="true" aria-live="polite" class="toast-host" id="toastHost"></div>
+<main>
+<section class="contact-hero" style=" text-align:center">
+<h1>¿Quieres contactarnos?</h1>
+<p>Envíanos un correo desde aquí y te responderemos en breve.</p>
+</section>
+<section class="contact-card" style="max-width:420px; margin:24px auto 0;">
+<div class="card">
+<form autocomplete="on" id="contactForm" novalidate="">
+<div class="field">
+<label for="cName">Tu nombre</label>
+<input id="cName" name="name" placeholder="Tu nombre" required="" type="text"/>
+</div>
+<div class="field">
+<label for="cEmail">Tu correo electrónico</label>
+<input id="cEmail" name="email" placeholder="Tu correo electrónico" required="" type="email"/>
+</div>
+<div class="field">
+<label for="cMsg">Tu mensaje</label>
+<textarea id="cMsg" name="message" placeholder="Cuéntanos qué necesitas (pedido, cotización, dudas…)" required="" rows="6"></textarea>
+</div>
+<div class="actions">
+<button class="btn-primary" type="submit">Enviar correo</button>
+</div>
+</form>
+<div class="hint"style=" text-align:center">
+<small>Gracias por escribirnos</small>
+</div>
+</div>
+</section><div style="height:0px;"></div>
+<section class="whatsapp-cta contact-whatsapp" style="margin-top:84px; display:flex; justify-content:center;">
+<a aria-label="Escribir por WhatsApp" class="btn-wa" href="#" id="waBtn" role="button">
+<img alt="" decoding="async" loading="lazy" src="../Logotipos/Logo whatsapp.png"/>
+<span>Escríbenos por WhatsApp</span>
+</a>
+</section>
+</main>
 <footer class="footer">
 <div class="container footer-brand">
-<a aria-label="Ir a inicio" class="footer-brand__logo" href="/mrpizzasgt/">
+<a aria-label="Ir a inicio" class="footer-brand__logo" href="../">
 <img alt="MR Pizza GT" decoding="async" id="logoFooter" loading="lazy" src="../MR PIZZA LOGO-Ligth.png"/>
 </a>
 <p class="footer-brand__tagline">Soluciones gastronomicas para eventos corporativos.</p>
 </div>
 <div aria-label="Enlaces del sitio" class="container footer-links-inline">
-<a href="/mrpizzasgt/preguntas/">Preguntas frecuentes</a>
+<a href="../preguntas/">Preguntas frecuentes</a>
 <span class="sep">|</span>
-<a href="/mrpizzasgt/quienes-somos.html">Quienes somos</a>
+<a href="../quienes-somos/">Quienes somos</a>
 <span class="sep">|</span>
-<a href="/mrpizzasgt/contacto/">Contacto</a>
+<a href="../contacto/">Contacto</a>
 <span class="sep">|</span>
-<a href="/mrpizzasgt/terminos/">Terminos de uso</a>
+<a href="../terminos/">Terminos de uso</a>
 <span class="sep">|</span>
-<a href="/mrpizzasgt/privacidad/">Politica de privacidad</a>
+<a href="../privacidad/">Politica de privacidad</a>
 </div>
 <div class="container">
 <div aria-label="Redes sociales" class="social">
@@ -2210,16 +2335,40 @@ html[data-theme="dark"] h2.menu-section-title,
     renderTheme();
   })();
 
-  // ===== Header (misma NV visual; acciones redirigen al index principal)
+  
+  // ===== Toast (igual al sitio principal)
+  function showToast(text, ms){
+    const toastHost = document.getElementById("toastHost");
+    if(!toastHost) return;
+    ms = Number(ms);
+    if(!isFinite(ms) || ms <= 0) ms = 2200;
+
+    const el = document.createElement("div");
+    el.className = "toast";
+    el.textContent = text;
+
+    // Barra de progreso sincronizada con el tiempo de vida del toast
+    el.style.setProperty("--toast-ms", ms + "ms");
+
+    toastHost.appendChild(el);
+    requestAnimationFrame(()=> el.classList.add("is-show"));
+
+    window.setTimeout(()=>{
+      el.classList.remove("is-show");
+      window.setTimeout(()=> el.remove(), 220);
+    }, ms);
+  }
+
+// ===== Header (misma NV visual; acciones redirigen al index principal)
   (function(){
     const brand=document.querySelector("header .brand");
-    if(brand) brand.addEventListener("click", ()=>{ location.href="/mrpizzasgt/"; });
+    if(brand) brand.addEventListener("click", ()=>{ location.href="../"; });
 
     const btnPublic=document.getElementById("btnPublic");
     const btnBiz=document.getElementById("btnBiz");
     // NOTA: /business no existe como ruta. Usamos hash para cambiar de vista en el index.
-    if(btnPublic) btnPublic.addEventListener("click", ()=>{ location.href="/mrpizzasgt/"; });
-    if(btnBiz) btnBiz.addEventListener("click", ()=>{ location.href="/mrpizzasgt/?view=business"; });
+    if(btnPublic) btnPublic.addEventListener("click", ()=>{ location.href="../#public"; });
+    if(btnBiz) btnBiz.addEventListener("click", ()=>{ location.href="../#biz"; });
   })();
 
   // ===== FAQ accordion
@@ -2241,6 +2390,47 @@ html[data-theme="dark"] h2.menu-section-title,
         // abrir el actual si estaba cerrado
         if(!open){ btn.setAttribute("aria-expanded","true"); panel.hidden=false; }
       });
+    });
+  })();
+</script>
+<script>
+  // Contacto (subpagina) — usa la misma toast del sitio
+  (function(){
+    function onReady(fn){
+      if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+      else fn();
+    }
+    onReady(function(){
+      const form = document.getElementById("contactForm");
+      const waBtn = document.getElementById("waBtn");
+
+      if(form){
+        form.addEventListener("submit", function(e){
+          e.preventDefault();
+          // Validacion simple usando el navegador
+          const name = document.getElementById("cName");
+          const email = document.getElementById("cEmail");
+          const msg = document.getElementById("cMsg");
+          if(!name?.value || !email?.value || !msg?.value){
+            if(typeof showToast === "function") showToast("Completa todos los campos");
+            return;
+          }
+          if(typeof showToast === "function") showToast("Correo dummy enviado");
+          form.reset();
+        });
+      }
+
+      if(waBtn){
+        waBtn.addEventListener("click", function(e){
+          e.preventDefault();
+          try{
+            const message = (typeof MSG === "object" && MSG.mixed) ? MSG.mixed : "Hola! Vengo del canal web: Mr Pizza GT by GaschSoft. Quiero informacion, por favor.";
+            window.open(waLink(message), "_blank", "noopener");
+          }catch(err){
+            window.open("https://wa.me/50239151615", "_blank", "noopener");
+          }
+        });
+      }
     });
   })();
 </script>
