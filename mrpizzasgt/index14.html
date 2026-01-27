@@ -2977,22 +2977,17 @@ html[data-theme="dark"] h2.menu-section-title,
     const pyFab = document.getElementById("pyFab");
     const waFab = document.getElementById("waFab");
     const cotizaFab = document.getElementById("cotizaFab");
-    const miniCartFab = document.getElementById("miniCartFab");
 
     if(isBusinessView){
       if(ueFab) ueFab.style.display = "none";
       if(pyFab) pyFab.style.display = "none";
       if(waFab) waFab.style.display = "none";
       if(cotizaFab) cotizaFab.style.display = "";
-      // En Empresas: ocultar por completo el mini-carrito flotante (aunque haya items cargados)
-      if(miniCartFab) miniCartFab.style.display = "none";
     }else{
       if(ueFab) ueFab.style.display = "";
       if(pyFab) pyFab.style.display = "";
       if(waFab) waFab.style.display = "";
       if(cotizaFab) cotizaFab.style.display = "none";
-      // En Público: devolvemos control a su lógica/clases (hidden, items, etc.)
-      if(miniCartFab) miniCartFab.style.display = "";
     }
   }
 
@@ -3240,15 +3235,10 @@ function setView(view){
     const miniCartFab = document.getElementById("miniCartFab");
     const miniCartCountEl = document.getElementById("miniCartCount");
 
-    // Nota: desde v59+ la vista Empresas vive en el MISMO index via ?view=business.
-    // Por eso no podemos depender solo de location.pathname.
-    const isBusinessPath = ()=>{
-      try{
-        if(typeof detectViewFromPath === 'function') return detectViewFromPath() === 'business';
-      }catch(e){}
+    const isBusinessPath = (()=>{
       const p = (location && location.pathname ? location.pathname.toLowerCase() : '');
       return p.includes('/business') || p.includes('/bussines');
-    };
+    })();
 
     if(miniCartFab){
       miniCartFab.addEventListener('click', (e)=>{
@@ -3909,7 +3899,7 @@ if(document.readyState === 'loading'){
 
       // Mini carrito flotante
       if(miniCartCountEl) miniCartCountEl.textContent = String(total);
-      if(miniCartFab) miniCartFab.classList.toggle('hidden', isBusinessPath() || total<=0);
+      if(miniCartFab) miniCartFab.classList.toggle('hidden', isBusinessPath || total<=0);
 
       const msg = buildMessage();
       waBtn.href = msg ? ("https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg)) : ("https://wa.me/" + PHONE);
