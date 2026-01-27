@@ -36,6 +36,7 @@ C:\PROYECTOS\GASCHSOFT.GITHUB.IO\MRPIZZASGT
 |   index.html
 |   index10.html
 |   index11.html
+|   index12.html
 |   index7.html
 |   index8.html
 |   index9.html
@@ -56,6 +57,7 @@ C:\PROYECTOS\GASCHSOFT.GITHUB.IO\MRPIZZASGT
 |   mrpizzasgt_v59_13.html
 |   mrpizzasgt_v59_14.html
 |   mrpizzasgt_v59_15.html
+|   mrpizzasgt_v59_16.html
 |   mrpizzasgt_v59_5.html
 |   Nachos.webp
 |   pedidosya.png
@@ -73,6 +75,9 @@ C:\PROYECTOS\GASCHSOFT.GITHUB.IO\MRPIZZASGT
 |   whatsapp 64p original.png
 |   whatsapp.png
 |   
++---contacto
+|       index.html
+|       
 +---Fotosempresa
 |       FotoCatering.webp
 |       FotoCatering2.webp
@@ -82,34 +87,46 @@ C:\PROYECTOS\GASCHSOFT.GITHUB.IO\MRPIZZASGT
 |       FotoPromo2.webp
 |       FotoPromo3.webp
 |       
-\---Logotipos
-        calendar-dark.png
-        calendar.png
-        calendario-dark.png
-        calendario.png
-        chico-dark.png
-        chico.png
-        corporacion-dark.png
-        corporacion.png
-        correo-electronico-dark.png
-        correo-electronico.png
-        Logo gmail.png
-        Logo outlook.png
-        Logo whatsapp.png
-        marcador-de-posicion-dark.png
-        marcador-de-posicion.png
-        organizador-dark.png
-        organizador.png
-        pareja-dark.png
-        pareja.png
-        personas-dark.png
-        personas.png
-        productos-dark.png
-        productos.png
-        reloj-dark.png
-        reloj.png
-        Telefono-dark.png
-        Telefono.png
-        tenedor-dark.png
-        tenedor.png
++---Logotipos
+|       calendar-dark.png
+|       calendar.png
+|       calendario-dark.png
+|       calendario.png
+|       chico-dark.png
+|       chico.png
+|       corporacion-dark.png
+|       corporacion.png
+|       correo-electronico-dark.png
+|       correo-electronico.png
+|       Logo gmail.png
+|       Logo outlook.png
+|       Logo whatsapp.png
+|       marcador-de-posicion-dark.png
+|       marcador-de-posicion.png
+|       organizador-dark.png
+|       organizador.png
+|       pareja-dark.png
+|       pareja.png
+|       personas-dark.png
+|       personas.png
+|       productos-dark.png
+|       productos.png
+|       reloj-dark.png
+|       reloj.png
+|       Telefono-dark.png
+|       Telefono.png
+|       tenedor-dark.png
+|       tenedor.png
+|       
++---preguntas
+|       index.html
+|       
++---privacidad
+|       index.html
+|       
++---quienes-somos
+|       index.html
+|       
+\---terminos
+        index.html
         

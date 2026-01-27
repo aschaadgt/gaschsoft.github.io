@@ -2637,15 +2637,15 @@ html[data-theme="dark"] h2.menu-section-title,
   </div>
 
   <div class="container footer-links-inline" aria-label="Enlaces del sitio">
-    <a href="preguntas/">Preguntas frecuentes</a>
+    <a href="preguntas.html">Preguntas frecuentes</a>
     <span class="sep">|</span>
-    <a href="quienes-somos/">Quienes somos</a>
+    <a href="quienes-somos.html">Quienes somos</a>
     <span class="sep">|</span>
-    <a href="contacto/">Contacto</a>
+    <a href="contacto.html">Contacto</a>
     <span class="sep">|</span>
-    <a href="terminos/">Terminos de uso</a>
+    <a href="terminos.html">Terminos de uso</a>
     <span class="sep">|</span>
-    <a href="privacidad/">Politica de privacidad</a>
+    <a href="privacidad.html">Politica de privacidad</a>
   </div>
 
   <div class="container">
@@ -2951,19 +2951,8 @@ html[data-theme="dark"] h2.menu-section-title,
   const state = { view: "public" }; // "public" | "business"
 
   function detectViewFromPath(){
-    // 1) Prioridad: query param (?view=business)
-    try{
-      const sp = new URLSearchParams(location.search || "");
-      const v = (sp.get("view") || "").toLowerCase();
-      if(v === "business") return "business";
-    }catch(e){}
-
-    // 2) Hash (#business)
-    const h = (location.hash || "").toLowerCase().replace("#","");
-    if(h === "business") return "business";
-
-    // 3) Path (/business o /bussines legacy)
     const p = (location.pathname || "").toLowerCase();
+    // Soportar /business (correcto) y /bussines (legacy)
     if(p.includes("/business") || p.includes("/bussines")) return "business";
     return "public";
   }
@@ -2991,24 +2980,8 @@ html[data-theme="dark"] h2.menu-section-title,
     }
   }
 
-
-  function updateUrlForView(view){
-    try{
-      const u = new URL(location.href);
-      if(view === "business"){
-        u.searchParams.set("view","business");
-      }else{
-        u.searchParams.delete("view");
-      }
-      u.hash = "";
-      history.replaceState(null, "", u.pathname + (u.search ? u.search : "") + u.hash);
-    }catch(e){}
-  }
-
 function setView(view){
     state.view = view;
-
-    updateUrlForView(view);
 
     // botones
     document.getElementById("btnPublic").classList.toggle("active", view==="public");
