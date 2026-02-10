@@ -41,7 +41,7 @@ function Header() {
             fontSize: '1rem'
           }}>Contacto</a>
 
-          <a href="https://wa.me/50251232754" target="_blank" rel="noopener noreferrer" style={{
+          <a href="https://wa.me/50251174129" target="_blank" rel="noopener noreferrer" style={{
             backgroundColor: '#28a745',
             color: '#fff',
             padding: '0.31rem 1rem',

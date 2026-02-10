@@ -9,7 +9,7 @@ function HeroSection() {
           Soluciones tecnológicas inteligentes para negocios modernos en Guatemala.
         </p>
         <a
-          href="https://wa.me/50251232754"
+          href="https://wa.me/50251174129"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full shadow transition"
