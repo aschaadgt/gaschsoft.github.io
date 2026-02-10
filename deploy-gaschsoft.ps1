@@ -15,6 +15,7 @@ $preserve = @(
   "landing-gaschsoft",
   "mrpizzasgt",
   "villacaninagt",
+  "newgaschsoft",
   "assets",
   "Script Arbol.txt",
   "deploy-gaschsoft.ps1",

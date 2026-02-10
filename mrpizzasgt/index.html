@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Mr Pizza GT | Pizzas &amp; Crepas para Empresas y Pedidos Nocturnos</title>
-<link href="MR PIZZA LOGO-Ligth.png" id="favicon" rel="icon" type="image/png"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr Pizza GT | Pizzas & Crepas para Empresas y Pedidos Nocturnos</title>
+<link id="favicon" rel="icon" type="image/png" href="MR PIZZA LOGO-Ligth.png">
+
+
+
 <!-- iOS / PWA (sin afectar el favicon dinámico de la pestaña) -->
-<link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-<link href="site.webmanifest" rel="manifest"/>
-<meta content="#b81f24" name="theme-color"/>
-<meta content="yes" name="apple-mobile-web-app-capable"/>
-<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
-<meta content="Mr Pizza GT" name="apple-mobile-web-app-title"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#b81f24">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mr Pizza GT">
 <!--
   ✅ Un solo HTML para 2 URLs:
   - Público:   /mrpizzasgt
@@ -21,6 +23,7 @@
   - Si el archivo se sirve en /mrpizzasgt/bussines, automáticamente muestra la vista BUSINESS.
   - Si se abre localmente, podés cambiar de vista con los botones.
 -->
+
 <style>
   :root{
     /* Marca (logo rojo/negro/blanco) + tonos suaves */
@@ -47,18 +50,6 @@
 
     --danger:#ef4444;
     --header-bg: rgba(255,255,255,.78);
-
-/* Google Reviews (theme-aware) */
---rev-card-bg: var(--surface);
---rev-card-border: rgba(11,15,20,.10);
---rev-card-shadow: 0 10px 26px rgba(2,6,23,.08);
---rev-title: var(--ink);
---rev-meta: rgba(11,15,20,.58);
---rev-body: rgba(11,15,20,.78);
---rev-btn-bg: var(--ctrl-bg);
---rev-btn-border: var(--ctrl-border);
---rev-btn-ink: var(--ink);
---rev-btn-hover-bg: var(--ctrl-bg-hover);
   }
 
   :root[data-theme="dark"]{
@@ -77,20 +68,7 @@
     --ctrl-border: rgba(255,255,255,.25);
     --ctrl-bg: rgba(255,255,255,.06);
     --ctrl-bg-hover: rgba(255,255,255,.12);
-  
-  /* Google reviews (dark theme) */
---rev-card-bg: rgba(12,18,30,.92);
---rev-card-border: rgba(255,255,255,.12);
---rev-card-shadow: 0 12px 30px rgba(0,0,0,.40);
---rev-title: var(--ink);
---rev-meta: rgba(229,231,235,.76);
---rev-body: rgba(229,231,235,.86);
---rev-btn-bg: rgba(255,255,255,.06);
---rev-btn-border: rgba(255,255,255,.14);
---rev-btn-ink: #e5e7eb;
---rev-btn-hover-bg: rgba(255,255,255,.12);
-
-}
+  }
 
   *{ box-sizing:border-box; }
   body{
@@ -108,8 +86,6 @@
     background: var(--header-bg);
     border-bottom: 1px solid var(--line);
     backdrop-filter: saturate(180%) blur(10px);
-    isolation: isolate; /* v63: evita glitches de stacking (Android) */
-    transform: translateZ(0); /* v63: fuerza capa propia para sticky */
   }
   .row{ display:flex; align-items:center; gap:12px; }
   .spacer{ flex:1; }
@@ -330,48 +306,6 @@
   .card-mini h3{ margin: 0; font-size: 18px; letter-spacing: -.2px; }
   .card-mini .desc{ margin:0; color: var(--muted); font-weight: 650; line-height:1.6; }
 
-
-  /* EMPRESAS: 4 cards (B2B) */
-  .biz-features{ margin-top: 22px; text-align:center; }
-  .biz-features .biz-features__title{
-    margin: 14px 0 10px;
-    font-size: 18px;
-    letter-spacing: -.2px;
-  }
-  .biz-features-grid{
-    display:grid;
-    /* Mobile: 2x2 */
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  /* Pantallas muy pequeñas: 1 columna para evitar que se apriete */
-  @media(max-width: 340px){
-    .biz-features-grid{ grid-template-columns: 1fr; }
-  }
-  @media(min-width: 680px){
-    .biz-features-grid{ grid-template-columns: repeat(2, 1fr); }
-  }
-  @media(min-width: 992px){
-    .biz-features-grid{ grid-template-columns: repeat(4, 1fr); }
-  }
-  .biz-card{
-    transition: transform .16s ease, box-shadow .16s ease;
-    will-change: transform;
-    text-align: center;
-    align-items: center; /* card-mini es flex-column */
-  }
-  .biz-card .icon{ font-size: 52px; }
-  @media (hover:hover){
-    .biz-card:hover{
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 22px 50px rgba(2,6,23,.10);
-    }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .biz-card{ transition: none; }
-    .biz-card:hover{ transform:none; }
-  }
-
   /* SERVICES */
   .services-grid{ grid-template-columns: 1fr; }
   @media(min-width: 680px){ .services-grid{ grid-template-columns: repeat(2, 1fr); } }
@@ -543,48 +477,12 @@
     box-shadow: 0 8px 14px rgba(0,0,0,.16);
     border: 1px solid rgba(255,255,255,.85);
   }
-  @media(max-width: 720px){
+  @media(max-width: 520px){
     .mini-cart-fab{
-      right: 16px;
-      bottom: calc(16px + (clamp(56px, 7.2vw, 68px) * 3) + 30px);
-    }
-  }
-
-  /* CTA flotante "Cotizá" (solo /business) */
-  .cotiza-fab{
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    z-index: 1202;
-    padding: 14px 18px;
-    border-radius: 999px;
-    font-weight: 900;
-    letter-spacing: .2px;
-    text-decoration: none;
-    background:  #d30133;
-    color: #fff;
-    box-shadow: var(--shadow-strong);
-    border: 2px solid rgba(255,255,255,.10);
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .cotiza-fab:hover{
-    animation: floaty 3.2s ease-in-out infinite, pulseRingCotiza 1.3s ease-out infinite;
-  }
-.cotiza-fab:active{ transform: translateY(1px); }
-  .cotiza-fab:focus-visible{
-    outline: 3px solid var(--ring);
-    outline-offset: 3px;
-  }
-  @media(max-width: 480px){
-    .cotiza-fab{
       right: 12px;
-      bottom: 14px;
-      padding: 16px 20px;
-      font-size: 16px;
+      bottom: calc(16px + clamp(56px, 7.2vw, 68px) + 10px); /* arriba del FAB de WhatsApp en pantallas muy chicas */
     }
   }
-
 
   .hidden{ display:none !important; }
 
@@ -619,6 +517,7 @@
     .view-switch button{ flex: 1 1 0; text-align:center; }
     #topCta{ width: 100%; justify-content:center; }
   }
+
 
   /* Menú (solo Público) */
   .menu-wrap{
@@ -732,6 +631,7 @@
     text-align:center;
   }
 
+
   /* Carrusel Público (Flayers) */
   .promo-carousel{
     padding: 18px 0 0;
@@ -808,6 +708,7 @@
     .promo-carousel .carousel__slide img{ height: min(360px, 62vw); }
   }
 
+
   /* Header: botones Público/Business compactos (no ancho fijo) */
   .view-switch{
     display:flex;
@@ -829,10 +730,12 @@
     }
   }
 
+
   @media(max-width: 520px){
     header .row{ gap: 8px; }
     .view-switch{ max-width: auto; width: auto; }
   }
+
 
   
 
@@ -850,12 +753,7 @@
   }
   @keyframes pulseRing {
     0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.22); }
-    @keyframes pulseRingCotiza {
-    0%   { box-shadow: 0 0 0 0 rgba(179,18,23,.22); }
-    70%  { box-shadow: 0 0 0 10px rgba(179,18,23,0); }
-    100% { box-shadow: 0 0 0 0 rgba(179,18,23,0); }
-  }
-  70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+    70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
     100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
   }
   .fab{
@@ -869,9 +767,11 @@
     animation: floaty 3.2s ease-in-out infinite, pulseRing 1.3s ease-out infinite;
   }
 
+
   /* Fix final: View switch compacto en cualquier ancho */
   .view-switch{ width: auto !important; }
   .view-switch button{ width: auto !important; white-space: nowrap; }
+
 
   /* Header layout: marca a la izquierda, switch a la derecha, sin expandirse */
   header .row{
@@ -903,8 +803,10 @@
     }
   }
 
+
   /* Público: espacio entre menú y tarjetas informativas */
   #publico .cols{ margin-top: 18px; }
+
 
   @media(max-width: 680px){
     .menu-item{ border-radius: 16px; }
@@ -913,6 +815,7 @@
     .menu-body p{ font-size: 12.5px; line-height: 1.35; }
     .menu-meta{ font-size: 12px; }
   }
+
 
   /* Menú: título más premium */
   .menu-title{
@@ -923,6 +826,7 @@
   .menu-toggle__meta{
     opacity: .85;
   }
+
 
   /* ====== Publico: carrito + cantidad en menu ====== */
   .menu-item{ position:relative; }
@@ -1030,6 +934,7 @@
     100%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,0); }
   }
 
+
   /* Fly-to-cart (feedback visual al sumar) */
   .fly-dot{
     position: fixed;
@@ -1043,2224 +948,670 @@
     will-change: transform, opacity;
   }
 
-  /* =====================
-     Modal Publico (datos pedido WhatsApp)
-     ===================== */
-  .modal-overlay{
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 18px;
-    z-index: 1600;
-    background: rgba(2, 6, 23, .55);
-    backdrop-filter: blur(8px) saturate(140%);
-  }
-  :root[data-theme="dark"] .modal-overlay{ background: rgba(0,0,0,.62); }
-  .modal-overlay.is-open{ display: flex; }
-
-  .modal{
-    /* un poco mas compacto (~10%) */
-    width: min(342px, 100%);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    box-shadow: var(--shadow-strong);
-    position: relative;
-    padding: 11px;
-  }
-  .modal-x{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
-    border: 2px solid var(--line);
-    background: var(--surface2);
-    color: var(--ink);
-    cursor: pointer;
-    font-weight: 950;
-  }
-  .modal-x:hover{ filter: brightness(0.98); }
-
-  .modal-head{ padding: 5px 5px 9px; }
-  .modal-kicker{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: rgba(198,40,40,.10);
-    border: 1px solid rgba(198,40,40,.18);
-    font-weight: 950;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .modal-title{ margin: 0 0 6px; letter-spacing: -.4px; }
-  .modal-sub{ margin: 0; color: var(--muted); line-height: 1.55; font-weight: 650; font-size: 13px; }
-
-  .modal-form{ padding: 0 6px 6px; display: grid; gap: 10px; }
-  .field label{ display:block; font-weight: 900; margin: 0 0 6px; }
-  .field input, .field textarea, .field select{
-    width: 100%;
-    border-radius: 12px;
-    border: 2px solid var(--line);
-    background: var(--surface2);
-    padding: 10px 12px;
-    color: var(--ink);
-    outline: none;
-    font-weight: 750;
-    /* iOS: evita el zoom automatico al enfocar (requiere >= 16px) */
-    font-size: 16px;
-  }
-  .field select{ appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 38px; }
-  .field select{ cursor: pointer; transition: border-color 140ms ease, filter 140ms ease; }
-  .field select:hover{ border-color: rgba(198,40,40,.25); filter: brightness(0.99); }
-  .field .select-wrap{ position: relative; }
-  .field .select-wrap:after{
-    content: "▾";
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: 950;
-    color: var(--muted);
-    pointer-events: none;
-  }
-  .field input:focus, .field textarea:focus, .field select:focus{ box-shadow: 0 0 0 6px var(--ring); border-color: rgba(198,40,40,.35); }
-  .field textarea{ resize: vertical; min-height: 76px; }
-
-  .field-error{
-    margin-top: 6px;
-    min-height: 16px;
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--danger);
-    opacity: 0;
-    transform: translateY(-2px);
-    transition: opacity 160ms ease, transform 160ms ease;
-  }
-
-  /* =====================
-     Empresas v1 (Hero + Modal)
-     ===================== */
-  .biz-hero{
-    position: relative;
-    border-radius: 22px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow-strong);
-    background: var(--surface);
-    min-height: 320px;
-    display: grid;
-    grid-template-columns: 1.25fr 1fr;
-  }
-  @media (max-width: 860px){
-    .biz-hero{ grid-template-columns: 1fr; min-height: 420px; }
-  }
-  .biz-hero__media{
-    position: relative;
-    min-height: 320px;
-  }
-  @media (max-width: 860px){
-    .biz-hero__media{ min-height: 230px; }
-  }
-  .biz-hero__media img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display:block;
-  }
-
-  /* HERO carousel (Empresas) */
-  #bizSection .container{ max-width: 1400px; width: min(1400px, calc(100% - 48px)); margin: 0 auto; }
-  .biz-hero{ grid-template-columns: 1fr minmax(420px, 520px); }
-  @media (max-width: 860px){
-    .biz-hero{ grid-template-columns: 1fr; }
-    .biz-hero__content{ padding: 18px 16px; }
-  }
-  @media (max-width: 520px){
-    #bizSection .container{ width: calc(100% - 28px); }
-    .biz-hero{ border-radius: 18px; }
-    .biz-carousel__btn{ width: 38px; height: 38px; }
-  }
-
-  .biz-hero__media{ min-height: 360px; }
-  @media (max-width: 860px){ .biz-hero__media{ min-height: 250px; } }
-  .kicker-center{ width: 100%; text-align: center; }
-
-  /* =====================
-     Empresas v54_6 (Hero separado: carrusel arriba + tarjeta abajo)
-     Objetivo: Carrusel con mismas dimensiones/posición que el carrusel de Público.
-     ===================== */
-  #bizSection.section{ margin-top: 28px; }
-  @media (max-width: 860px){ #bizSection.section{ margin-top: 18px; } }
-  #bizSection .biz-hero{
-    display:block;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    overflow: visible;
-    min-height: unset;
-  }
-  /* Carrusel como "tarjeta" igual a .promo-carousel .carousel (Público) */
-  #bizSection .biz-hero__media{
-    max-width: 1200px;
-    margin: 0 auto;
-    border-radius: 22px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    box-shadow: var(--shadow);
-    min-height: 499px;
-  }
-  @media (max-width: 860px){
-    #bizSection .biz-hero__media{ min-height: 250px; }
-  }
-
-  /* Caja de cotización separada, centrada abajo */
-  #bizSection .biz-hero__content{
-    /* CTA hero: sin tarjeta / sin caja */
-    max-width: none;
-    margin: 14px auto 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-    text-align: center;
-  }
-
-  /* Compactar tarjeta (solo /business) */
-  #bizSection .kicker{ padding: 6px 10px; font-size: 13px; }
-  #bizSection .biz-h1{ font-size: 28px; }
-  @media (max-width: 520px){ #bizSection .biz-h1{ font-size: 24px; } }
-  #bizSection .biz-sub{ font-size: 14px; font-weight: 650; }
-  #bizSection .biz-cta{ margin-top: 12px; }
-  #bizSection .biz-cta .btn{ padding: 12px 16px; font-size: 15px; }
-
-  #bizSection .biz-cta{ justify-content: center; }
-  #bizSection .biz-trust{ justify-content: center; }
-  .biz-carousel{
-    position:absolute;
-    inset:0;
-  }
-  .biz-carousel img{
-    position:absolute;
-    inset:0;
-    opacity:0;
-    transition: opacity .6s ease;
-  }
-  .biz-carousel img:first-child{ opacity:1; }
-  .biz-carousel img.is-active{ opacity:1; }
-
-  /* Controles (flechas + dots) para carrusel Empresas */
-  .biz-carousel__btn{
-    position:absolute;
-    top:50%;
-    transform: translateY(-50%);
-    width: 42px; height: 42px;
-    border-radius: 999px;
-    border: 2px solid var(--line);
-    background: rgba(255,255,255,.88);
-    box-shadow: 0 14px 30px rgba(2,6,23,.12);
-    display:flex; align-items:center; justify-content:center;
-    font-size: 26px;
-    cursor:pointer;
-    user-select:none;
-    z-index: 3;
-  }
-  :root[data-theme="dark"] .biz-carousel__btn{ background: rgba(15,26,43,.88); }
-  .biz-carousel__btn--prev{ left: 14px; }
-  .biz-carousel__btn--next{ right: 14px; }
-
-  .biz-carousel__dots{
-    position:absolute;
-    left:0; right:0;
-    bottom: 14px;
-    display:flex;
-    justify-content:center;
-    gap: 8px;
-    z-index: 3;
-  }
-  .biz-carousel__dot{
-    width: 9px; height: 9px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: rgba(0,0,0,.10);
-    cursor:pointer;
-    padding:0;
-  }
-  :root[data-theme="dark"] .biz-carousel__dot{ background: rgba(255,255,255,.14); }
-  .biz-carousel__dot.is-active{
-    background: rgba(198,40,40,.75);
-    border-color: rgba(198,40,40,.55);
-    width: 22px;
-  }
-  @media(max-width: 720px){
-    .biz-carousel__btn{ width: 38px; height: 38px; font-size: 24px; }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .biz-carousel img{ transition:none; }
-  }
-
-  .biz-hero__shade{
-    position:absolute;
-    inset:0;
-    background: linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.08));
-  }
-  @media (max-width: 860px){
-    .biz-hero__shade{ background: linear-gradient(180deg, rgba(0,0,0,.56), rgba(0,0,0,.10)); }
-  }
-  :root[data-theme="dark"] .biz-hero__shade{
-    background: linear-gradient(90deg, rgba(0,0,0,.62), rgba(0,0,0,.12));
-  }
-  .biz-hero__content{
-    position: relative;
-    padding: 22px;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
-  }
-  .biz-h1{ margin: 0; letter-spacing: -.7px; line-height: 1.08; }
-  .biz-sub{ margin: 0; color: var(--muted); font-weight: 650; line-height: 1.6; }
-  .biz-accent{ color: var(--danger); }
-  .biz-cta{ margin-top: 4px; }
-  .biz-cta--hero{
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .biz-cta--hero .btn{
-    padding: 14px 18px;
-    font-weight: 800;
-  }
-  @media (max-width: 520px){
-    .biz-cta--hero{ gap: 10px; }
-    .biz-cta--hero .btn{ width: 100%; }
-  }
-
-  .biz-trust{ display:flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 6px; }
-  .biz-trust__item{
-    display:inline-flex;
-    align-items:center;
-    gap: 8px;
-    padding: 8px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--surface2);
-    font-weight: 800;
-    color: var(--ink);
-    font-size: 13px;
-  }
-  .biz-band{ border-radius: 18px; }
-
-  /* Modal Empresas */
-  .biz-modal-overlay{
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 18px;
-    z-index: 1650;
-    background: rgba(2, 6, 23, .55);
-    backdrop-filter: blur(9px) saturate(140%);
-  }
-  :root[data-theme="dark"] .biz-modal-overlay{ background: rgba(0,0,0,.64); }
-  .biz-modal-overlay.is-open{ display:flex; }
-  .biz-modal{
-    width: min(720px, 100%);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    box-shadow: var(--shadow-strong);
-    position: relative;
-    padding: 16px;
-  }
-  .biz-modal-grid{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 10px;
-  }
-  @media (max-width: 720px){
-    .biz-modal{ padding: 12px; }
-    .biz-modal-grid{ grid-template-columns: 1fr; }
-  
-  /* Empresas modal - mejoras responsive (compacto en móvil) */
-  .biz-modal{
-    max-height: calc(100vh - 28px);
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .biz-subgrid{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  /* Evita zoom de iOS en inputs del modal Empresas */
-  .biz-modal input, .biz-modal select, .biz-modal textarea{ font-size: 16px; }
-
-  @media (max-width: 520px){
-    .biz-modal-overlay{ padding: 12px; }
-    .biz-modal{ border-radius: 16px; padding: 10px; }
-    .biz-modal-grid{ gap: 10px; margin-top: 8px; }
-    .biz-ico{ width: 30px; height: 30px; border-radius: 10px; }
-    .biz-ico img{ width: 16px; height: 16px; }
-    .biz-modal .modal-kicker{ font-size: 12px; }
-    .biz-modal .modal-title{ font-size: 18px; }
-    .biz-modal .modal-sub{ font-size: 13px; }
-
-    .biz-subgrid{ grid-template-columns: 1fr; gap: 8px; }
-
-    /* Botones de envío en columna (mejor en iPhone) */
-    .biz-actions{
-      flex-direction: column;
-      align-items: stretch;
-      gap: 10px;
-    }
-    .biz-actions .btn{
-      width: 100%;
-      justify-content: center;
-    }
-  }
-}
-  .biz-field{
-    display:flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .biz-ico{
-    width: 34px;
-    height: 34px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    background: var(--surface2);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex: 0 0 auto;
-  }
-  .biz-ico img{ width: 18px; height: 18px; object-fit: contain; }
-  .biz-field .field{ flex: 1 1 auto; }
-  .biz-actions{
-    display:flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 14px;
-    flex-wrap: wrap;
-  }
-  .btn-icon{
-    display:inline-flex;
-    align-items:center;
-    gap: 10px;
-  }
-  .btn-icon img{ width: 18px; height: 18px; object-fit: contain; }
-  .field-error.is-show{ opacity: 1; transform: translateY(0px); }
-
-  .modal-actions{ display:flex; gap: 10px; justify-content:flex-end; align-items:center; padding-top: 4px; }
-  .send-btn{
-    position: relative;
-    width: 46px;
-    height: 46px;
-    border-radius: 999px;
-    border: 2px solid var(--line);
-    background: var(--surface2);
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow);
-  }
-  .send-btn:hover{ transform: translateY(-1px); }
-  .send-btn:after{
-    content: "Enviar pedido";
-    position: absolute;
-    left: 50%;
-    top: calc(100% + 8px);
-    transform: translateX(-50%);
-    padding: 5px 8px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink);
-    font-weight: 900;
-    font-size: 11px;
-    line-height: 1;
-    white-space: nowrap;
-    box-shadow: var(--shadow);
-    z-index: 5;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 140ms ease;
-}
-  .send-btn:hover:after{ opacity: 1; }
-  .send-icon{ width: 20px; height: 20px; object-fit: contain; }
-
-  /* Toast (notificacion discreta) */
-  .toast-host{ position: fixed; top: 16px; right: 16px; z-index: 2500; display: grid; gap: 10px; }
-  .toast{
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--danger);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    padding: 10px 12px;
-    min-width: 220px;
-    max-width: min(360px, calc(100vw - 32px));
-    font-weight: 900;
-    color: var(--ink);
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 160ms ease, transform 160ms ease;
-  }
-  .toast.is-show{ opacity: 1; transform: translateY(0px); }
-
-  /* Barra de progreso (tiempo) en la notificación */
-  .toast{ position: relative; overflow: hidden; }
-  .toast::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:0;
-    height:3px;
-    width:100%;
-    background: var(--danger);
-    transform-origin: left;
-    transform: scaleX(1);
-    transition: transform var(--toast-ms, 2200ms) linear;
-  }
-  .toast.is-show::after{ transform: scaleX(0); }
-
-  /* Modal (Publico): bloquear scroll del fondo mientras esta abierto */
-  body.modal-lock{
-    position: fixed;
-    width: 100%;
-    overflow: hidden;
-  }
-  .modal-overlay{
-    overscroll-behavior: contain;
-  }
-
-
-
-
-  /* ===== Empresas CTA animado (solo /business) ===== */
-  @keyframes bizCtaPulse{
-    0%{ transform: translateY(0) scale(1); box-shadow: 0 12px 32px rgba(225,29,72,.18); }
-    50%{ transform: translateY(-1px) scale(1.03); box-shadow: 0 16px 40px rgba(225,29,72,.26); }
-    100%{ transform: translateY(0) scale(1); box-shadow: 0 12px 32px rgba(225,29,72,.18); }
-  }
-  #bizSection #bizQuoteBtn{
-    animation: bizCtaPulse 1.6s ease-in-out infinite;
-    will-change: transform;
-  }
-  @media (prefers-reduced-motion: reduce){
-    #bizSection #bizQuoteBtn{ animation: none; }
-  }
-
-  /* Centrar kicker del hero Empresas */
-  #bizSection .kicker-center{
-    text-align: center;
-    justify-content: center;
-  }
-
-
-  /* =====================
-     v54_10: Empresas Modal (compacto) — SOLO MODAL EMPRESAS (#bizModal)
-     Nota: el modal vive fuera de #bizSection, por eso se scopea por ID.
-     Mantiene font-size 16px (anti-zoom iOS).
-     ===================== */
-  #bizModal .biz-modal{
-    padding: 14px; /* antes 16px */
-  }
-  #bizModal .biz-modal-grid{
-    gap: 8px; /* antes 12px */
-  }
-  #bizModal .biz-modal .field label{
-    margin-bottom: 4px; /* antes 6px */
-    font-size: 12px;
-  }
-  #bizModal .biz-modal .field input,
-  #bizModal .biz-modal .field textarea,
-  #bizModal .biz-modal .field select{
-    border-width: 1px;     /* antes 2px */
-    padding: 8px 10px;     /* antes 10px 12px */
-    font-size: 16px;       /* mantener anti-zoom iOS */
-    line-height: 1.2;
-  }
-  #bizModal .biz-modal .field textarea{
-    min-height: 64px;
-  }
-
-  #bizModal .biz-modal .field input[type="time"]{
-    width: 100%;
-    min-width: 0; /* evita overflow/traslape en iOS */
-  }
-  @media (max-width: 560px){
-    #bizModal .biz-modal{ padding: 12px; }
-    #bizModal .biz-modal-grid{ gap: 8px; }
-  }
-
-
-
-    /* Productos (checkbox) — SOLO MODAL EMPRESAS */
-  #bizModal .biz-products-wrap{ margin-top: 8px; }
-
-  /* Head alineado como el resto de campos (icono en recuadro + label) */
-  #bizModal .biz-products-head{
-    display:flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-bottom: 6px;
-  }
-  #bizModal .biz-products-head .field-ico{
-    width: 34px;
-    height: 34px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    background: var(--surface2);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex: 0 0 auto;
-  }
-  #bizModal .biz-products-head .field-ico img{
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-  }
-  #bizModal .biz-products-head .field-label{
-    display:block;
-    font-weight: 900;
-    margin: 0;
-    color: var(--ink);
-    line-height: 1.2;
-    padding-top: 2px; /* micro-ajuste para alinear baseline con otros labels */
-  }
-
-  #bizModal .biz-products{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 10px;
-  }
-  #bizModal .biz-check{
-    display:flex;
-    align-items:center;
-    gap: 8px;
-    font-size: 12px;
-    color: var(--muted);
-    user-select:none;
-  }
-  #bizModal .biz-check input{
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0; /* Evita que el checkbox se comprima con textos largos */
-    accent-color: #ff0100;
-    transform: translateY(1px);
-  }
-
-/* Productos: icono en recuadro igual a otros fields */
-
-
-
-
-
-  /* v54_13 — Productos alineado con los demas campos (icono + label) */
-  #bizModal .biz-field-products{ grid-column: 2; }
-  #bizModal .biz-field-products .biz-products{
-    margin-top: 2px; /* Reducido de 6px a 2px para dar espacio a 7 productos */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 10px;
-  }
-  #bizModal .biz-field-products .biz-check{ font-size: 12px; }
-
-
-/* v54_15: Modal Empresas sin huecos (dos columnas independientes) */
-#bizModal .biz-modal-grid{
-  display:flex;
-  gap:14px;
-  align-items:flex-start;
-}
-#bizModal .biz-col{
-  flex:1 1 0;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  min-width:0;
-}
-@media (max-width: 860px){
-  #bizModal .biz-modal-grid{ display:block; }
-  #bizModal .biz-col{ gap:10px; }
-}
-
-/* v54_17: Compactar altura del modal (reducir espacio vacío antes de botones) */
-#bizModal .biz-actions{ margin-top: -30px; } /* baja el hueco entre el grid y los CTAs */
-
-
-  /* ===== v54_16: Ajustes de tema para pickers date/time (iOS/Chrome) — SOLO MODAL EMPRESAS ===== */
-  html[data-theme="dark"] #bizModal input[type="date"],
-  html[data-theme="dark"] #bizModal input[type="time"]{
-    color-scheme: dark;
-  }
-  html[data-theme="dark"] #bizModal input[type="date"]::-webkit-calendar-picker-indicator,
-  html[data-theme="dark"] #bizModal input[type="time"]::-webkit-calendar-picker-indicator{
-    filter: invert(1);
-    opacity: .85;
-  }
-
- /* Ajuste fino: subir FECHA (label + input) 14px */
-#bizModal .biz-field .field label[for="bizDate"]{
-  position: relative;
-  top: -4px;
-}
-#bizModal #bizDate{
-  position: relative;
-  top: -4px;
-}
-#bizModal #bizErrDate{
-  position: relative;
-  top: -4px;
-} 
-
- /* Ajuste fino: subir PDORDUCTO (label + input) 14px XXXXX*/ 
-#bizModal .biz-field-products .field{
-  position: relative;
-  top: -8px;
-}
-#bizModal #bizErrProducts{
-  position: relative;
-  top: -8px;
-}
-
- /* Ajuste fino: subir UBICACION (label + input) 14px */
-#bizModal .biz-field .field label[for="bizLocation"]{
-  position: relative;
-  top: -30px;
-}
-#bizModal #bizLocation{
-  position: relative;
-  top: -30px;
-}
-#bizModal #bizErrLocation{
-  position: relative;
-  top: -30px;
-}
-
-/* Ajuste fino: subir Correo (label + input) 14px */
-#bizModal .biz-field .field label[for="bizEmail"]{
-  position: relative;
-  top: -40px;
-}
-#bizModal #bizEmail{
-  position: relative;
-  top: -40px;
-}
-#bizModal #bizErrEmail{
-  position: relative;
-  top: -40px;
-}
-
-#bizModal .biz-field:has(#bizEmail) .biz-ico{
-  position: relative;
-  top: -40px;
-}
-
-
-
-
-/* =========================
-   BIZ PROMOS (v59)
-   ========================= */
-.biz-promos{
-  margin-top: 22px;
-}
-.biz-promos__title{
-  text-align: center;
-  max-width: 900px;
-  margin: 10px auto 18px;
-  
-}
-
-.promo-list{
-  display: grid;
-  gap: 14px;
-}
-
-.promo-row{
-  display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap: 14px;
-  align-items: stretch;
-  border-radius: 18px;
-  background: var(--card-bg, rgba(255,255,255,.05));
-  border: 1px solid var(--card-brd, rgba(255,255,255,.10));
-  overflow: hidden;
-}
-
-.promo-row--reverse{
-  grid-template-columns: .95fr 1.05fr;
-}
-.promo-row--reverse .promo-media{ order: 2; }
-.promo-row--reverse .promo-copy{ order: 1; }
-
-.promo-media{
-  position: relative;
-  min-height: 220px;
-  background: rgba(0,0,0,.08);
-}
-.promo-media img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transform: scale(1.02);
-  transition: transform .35s ease;
-}
-
-.promo-row:hover .promo-media img{
-  transform: scale(1.05);
-}
-
-.promo-copy{
-  padding: 18px 18px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-}
-.promo-copy h3{
-  margin: 0 0 8px;
-  font-size: 1.05rem;
-}
-.promo-copy p{
-  margin: 0 0 10px;
-  
-}
-.promo-note{
-  margin-top: 2px;
-  opacity: .78;
-  font-size: .95rem;
-}
-
-/* Scroll reveal */
-.reveal{
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity .55s ease, transform .55s ease;
-  will-change: opacity, transform;
-}
-.reveal.is-in{
-  opacity: 1;
-  transform: none;
-}
-
-@media (max-width: 980px){
-  .promo-row,
-  .promo-row--reverse{
-    grid-template-columns: 1fr;
-  }
-  .promo-row--reverse .promo-media{ order: 0; }
-  .promo-copy{
-    text-align: left;
-  }
-  .promo-media{
-    min-height: 200px;
-  }
-}
-
-
-/* =========================
-   BIZ PROMOS (variante banners) (v59_2)
-   ========================= */
-.biz-promos--banners .promo-banners{
-  display: grid;
-  gap: 14px;
-}
-
-.promo-banner{
-  position: relative;
-  border-radius: 18px;
-  overflow: hidden;
-  min-height: 260px;
-  border: 1px solid var(--card-brd, rgba(255,255,255,.10));
-  background: rgba(0,0,0,.12);
-}
-
-.promo-banner img{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.03);
-  transition: transform .6s ease;
-  filter: saturate(1.02) contrast(1.02);
-}
-
-.promo-banner:hover img{
-  transform: scale(1.07);
-}
-
-.promo-tint{
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(900px 420px at 25% 50%, rgba(0,0,0,.62), rgba(0,0,0,.18) 60%, rgba(0,0,0,.06)),
-    linear-gradient(90deg, rgba(255,1,0,.18), rgba(255,1,0,0));
-  pointer-events: none;
-}
-
-.promo-banner--right .promo-tint{
-  background:
-    radial-gradient(900px 420px at 75% 50%, rgba(0,0,0,.62), rgba(0,0,0,.18) 60%, rgba(0,0,0,.06)),
-    linear-gradient(270deg, rgba(255,1,0,.18), rgba(255,1,0,0));
-}
-
-.promo-panel{
-  position: relative;
-  z-index: 1;
-  max-width: 520px;
-  margin: 0;
-  padding: 18px 18px 16px;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 8px;
-  color: #fff;
-}
-
-.promo-banner--left .promo-panel{
-  padding-right: 22px;
-  text-align: left;
-}
-
-.promo-banner--right .promo-panel{
-  margin-left: auto;
-  text-align: right;
-  padding-left: 22px;
-}
-
-
-.promo-banner--center .promo-panel{
-  margin: 0 auto;
-  text-align: center;
-  align-items: center;
-}
-
-.promo-panel h3{
-  margin: 0;
-  font-size: 1.22rem;
-  font-weight: 800;
-  letter-spacing: .2px;
-}
-
-.promo-panel p{
-  margin: 0;
-  font-size: 1.02rem;
-  font-weight: 600;
-  line-height: 1.35;
-  color: #fff;
-}
-
-.promo-bullets{
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.promo-bullets li{
-  margin: 4px 0;
-  font-size: .98rem;
-  font-weight: 700;
-  color: #fff;
-}
-.promo-bullets li::before{
-  content: "• ";
-  font-weight: 900;
-}
-
-
-@media (max-width: 980px){
-  .promo-banner{ min-height: 240px; }
-  .promo-panel{ max-width: 100%; }
-}
-
-@media (max-width: 520px){
-  .promo-banner{
-    min-height: 260px;
-  }
-  .promo-panel{
-    padding: 16px 16px 14px;
-  }
-}
-
-
-/* PUBLICO – Titulos de menu en modo oscuro */
-/* removed body.dark-mode rule */
-html[data-theme="dark"] .menu-title,
-body.dark-mode .menu-section-title,
-body.dark-mode h2.menu-title,
-body.dark-mode h2.menu-section-title{
-  color: #ffffff !important;
-}
-
-
-/* PUBLICO – Titulos de menu en modo oscuro (selector correcto por data-theme) */
-html[data-theme="dark"] .menu-title,
-html[data-theme="dark"] .menu-section-title,
-html[data-theme="dark"] h2.menu-title,
-html[data-theme="dark"] h2.menu-section-title,
-:root[data-theme="dark"] .menu-title,
-:root[data-theme="dark"] .menu-section-title{
-  color: #ffffff !important;
-}
-
-
-  /* FOOTER (v59_14) - institucional */
-  .footer-brand{
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content:center;
-    gap: 10px;
-    padding: 30px 0 10px;
-    text-align:center;
-  }
-  .footer-brand__logo img{
-    height: 46px;
-    width: auto;
-    display:block;
-    filter: drop-shadow(0 10px 18px rgba(2,6,23,.10));
-  }
-  .footer-brand__tagline{
-    margin:0;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-  .footer-links-inline{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content:center;
-    align-items:center;
-    gap: 10px;
-    padding: 6px 0 10px;
-    text-align:center;
-    font-size: 13px;
-  }
-  .footer-links-inline a{
-    color: var(--ink);
-    text-decoration:none;
-    font-weight: 850;
-  }
-  .footer-links-inline a:hover{ text-decoration: underline; }
-  .footer-links-inline .sep{ opacity:.35; }
-
-
-/* v61_9: asegurar que el sobre se complete antes de ocultar */
-#appLoading.is-finishing svg{
-  animation: none !important;
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-/* ===== Google Reviews Carousel (v62_8) ===== */
-.googleReviewsCarouselWrap{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-top: 18px;
-}
-
-.googleReviewsTrack{
-  flex:1;
-  display:flex;
-  gap:18px;
-  overflow-x:auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 2px;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  padding: 8px 2px 14px;
-  scrollbar-width: none;
-  overscroll-behavior-x: contain;
-}
-.googleReviewsTrack::-webkit-scrollbar{ display:none; }
-
-/* v63: Android — evitar que el carrusel de reseñas pinte por encima del header sticky */
-#confianza{ position: relative; z-index: 0; }
-.googleReviewsCarouselWrap,
-.googleReviewsTrack,
-.googleReviewCard{ position: relative; z-index: 0; }
-
-.googleReviewCard{
-  flex: 0 0 clamp(220px, 60vw, 280px);
-  max-width: 280px;
-  scroll-snap-align: start;
-  border-radius: 18px;
-  background: var(--rev-card-bg);
-  border: 1px solid var(--rev-card-border);
-  box-shadow: none;
-  overflow: hidden;
-  display:flex;
-  flex-direction: column;
-  min-height: 220px;
-}
-
-.googleReviewHeader{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  padding:14px 16px 12px 16px;
-  background: var(--rev-card-bg); /* unificado: mismo fondo que la card */
-  border-bottom: 1px solid rgba(0,0,0,.04);
-}
-:root[data-theme="dark"] .googleReviewHeader{
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-
-.googleReviewAvatar{
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  overflow: hidden;
-  background: rgba(0,0,0,.06);
-  flex: 0 0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-:root[data-theme="dark"] .googleReviewAvatar{ background: rgba(255,255,255,.08); }
-
-.googleReviewAvatar img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display:block;
-}
-
-.googleReviewMeta{ min-width:0; }
-.googleReviewName{
-  font-weight:800;
-  font-size:15px;
-  color: var(--rev-title);
-  line-height:1.15;
-  white-space: nowrap;
-  overflow:hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-.googleReviewSub{
-  margin-top:4px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  align-items:center;
-  font-size:12px;
-  color: var(--rev-meta);
-}
-.googleReviewStars{ font-size: 13px; font-weight: 800; }
-.googleReviewTime{ white-space: normal; }
-
-.googleReviewText{
-  padding:14px 16px 18px 16px;
-  color: var(--rev-body);
-  font-size: 15.5px;
-  line-height: 1.45;
-  min-height: 92px;
-}
-
-.revNav{
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
-  border: 1px solid var(--rev-btn-border);
-  background: var(--rev-btn-bg);
-  color: var(--rev-btn-ink);
-  box-shadow: none; /* sin sombras pesadas */
-  cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  user-select:none;
-  touch-action: manipulation;
-}
-.revNav:hover{ background: var(--rev-btn-hover-bg); }
-.revNav:disabled{
-  opacity: .35;
-  cursor: default;
-}
-
-/* Responsive: 2 visibles en tablet, 1 grande en móvil */
-@media (max-width: 980px){
-  .googleReviewCard{ flex-basis: calc((100% - 14px)/2); }
-}
-@media (max-width: 640px){
-  .googleReviewsCarouselWrap{ gap:10px; }
-  .revNav{ width: 40px; height: 40px; }
-  .googleReviewCard{ flex-basis: 78%; }
-}
 </style>
-<link as="image" href="Fotosempresa/Flayer 1.webp" rel="preload"/>
+<link rel="preload" as="image" href="Flayer 1.webp">
+
 <!-- Open Graph / WhatsApp -->
-<meta content="website" property="og:type"/>
-<meta content="Mr Pizza GT | Pizzas &amp; Crepas para Empresas y Pedidos Nocturnos" property="og:title"/>
-<meta content="Pizzas y crepas para pedidos nocturnos y convivios empresariales. Confirmamos rápido y entregamos sin complicarte." property="og:description"/>
-<meta content="https://gaschsoft.com/mrpizzasgt/" property="og:url"/>
-<meta content="https://gaschsoft.com/mrpizzasgt/MR%20PIZZA%20LOGO-Ligth.png" property="og:image"/>
-<meta content="1200" property="og:image:width"/>
-<meta content="630" property="og:image:height"/>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr Pizza GT | Pizzas & Crepas para Empresas y Pedidos Nocturnos">
+<meta property="og:description" content="Pizzas y crepas para pedidos nocturnos y convivios empresariales. Confirmamos rápido y entregamos sin complicarte.">
+<meta property="og:url" content="https://gaschsoft.com/mrpizzasgt/">
+<meta property="og:image" content="https://gaschsoft.com/mrpizzasgt/MR%20PIZZA%20LOGO-Ligth.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
 <!-- Twitter Card -->
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="Mr Pizza GT | Pizzas &amp; Crepas" name="twitter:title"/>
-<meta content="Pedidos nocturnos y eventos empresariales sin complicarte." name="twitter:description"/>
-<meta content="https://gaschsoft.com/mrpizzasgt/MR%20PIZZA%20LOGO-Ligth.png" name="twitter:image"/>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mr Pizza GT | Pizzas & Crepas">
+<meta name="twitter:description" content="Pedidos nocturnos y eventos empresariales sin complicarte.">
+<meta name="twitter:image" content="https://gaschsoft.com/mrpizzasgt/MR%20PIZZA%20LOGO-Ligth.png">
+
+
 <!-- Favicons / PWA -->
-<meta content="#b81f24" name="theme-color"/>
-<meta content="yes" name="apple-mobile-web-app-capable"/>
-<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
-<meta content="Mr Pizza GT" name="apple-mobile-web-app-title"/>
 
-<style id="appLoadingStyles">
-  /* ===========================
-     Loader GLOBAL (App Loading)
-     Reutilizable: Empresas, Contacto, futuro checkout
-     =========================== */
-  body.is-app-loading{ overflow:hidden; }
-
-  .app-loading{
-  pointer-events: all;
-
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: rgba(0,0,0,.55);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-  }
-  
-
-/* v61_6: Loader global minimal (solo sobre, sin atenuar ni tarjeta) */
-.app-loading{
-  background: transparent !important;   /* sin atenuar */
-  backdrop-filter: none !important;
-}
-.app-loading svg{
-  width: 160px;
-  height: auto;
-  display:block;
-}
-.app-loading.is-hidden{ display:none; }
-
-  .app-loading__card{
-    width: min(520px, 92vw);
-    border-radius: 18px;
-    background: rgba(18,18,18,.88);
-    border: 1px solid rgba(255,255,255,.12);
-    box-shadow: 0 18px 60px rgba(0,0,0,.45);
-    padding: 22px 18px 18px;
-    text-align: center;
-    color: #fff;
-  }
-  .app-loading__title{
-    font-weight: 800;
-    letter-spacing: .2px;
-    margin: 6px 0 4px;
-    font-size: 18px;
-  }
-  .app-loading__text{
-    opacity: .9;
-    margin: 0 0 8px;
-    font-size: 14px;
-  }
-  .app-loading__hint{
-    opacity: .7;
-    margin: 0;
-    font-size: 12px;
-  }
-
-  /* Envelope loader (adaptado a CSS puro, sin SCSS) */
-  .app-loading svg{
-    display:block;
-    width: min(260px, 70vw);
-    height: auto;
-    margin: 0 auto 10px;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
-    animation: envelope-enter 1.2s ease-out both, envelope-pulse 2s 1.6s ease-in-out infinite;
-  }
-
-  .app-loading .st0{ fill:#b3b3b3 }
-  .app-loading .st1{ fill:#e6e6e6 }
-  .app-loading .st2{ fill:#ccc }
-
-  /* Colores “lighten/darken” aproximados */
-  .app-loading{ --env:#d30133; --env-light:#ff4d6d; --env-mid:#d30133; --env-dark:#9d0026; }
-
-  #letter-top{ animation: letter-top 1.2s ease-out both; transform-origin: 50% 32%; }
-  #letter-top-2{ animation: letter-top-2 1.2s ease-out both; transform-origin: 50% 32%; }
-  #letter-bottom{ animation: letter-bottom 1.2s ease 0.6s both; }
-  #envelope-back{ animation: envelope-back .8s ease 0.9s both; }
-
-  #envelope-top{ animation: envelope-top 1s ease-in-out 1.1s both; transform-origin: 50% 30%; }
-  #envelope-top-shadow{ animation: envelope-top-shadow 1s ease-in-out 1.1s both; transform-origin: 50% 30%; }
-  #envelope-right{ animation: envelope-right 1s ease-in-out 1.1s both; transform-origin: 69.5% 50%; }
-  #envelope-left{ animation: envelope-left 1s ease-in-out 1.1s both; transform-origin: 30.5% 50%; }
-  #envelope-bottom{ animation: envelope-bottom 1s ease-in-out 1.1s both; transform-origin: 50% 70%; }
-
-  @keyframes envelope-back{ from{opacity:0} to{opacity:1} }
-  @keyframes envelope-enter{
-    0%{ opacity:0; transform: scale(.85) translateY(8px); }
-    100%{ opacity:1; transform: scale(1) translateY(0); }
-  }
-  @keyframes envelope-pulse{
-    0%,25%{ transform: scale(1); }
-    50%{ transform: scale(.97); }
-    100%{ transform: scale(1); }
-  }
-
-  @keyframes letter-top{
-    0%{ transform: scaleY(-1) skewX(0deg); fill:#e6e6e6; }
-    50%{ transform: scaleY(0) skewX(-10deg); fill:#cfcfcf; }
-    100%{ transform: scaleY(1) skewX(0deg); fill:#e6e6e6; }
-  }
-  @keyframes letter-top-2{
-    0%{ transform: scaleY(-1) skewX(0deg); fill:#e6e6e6; }
-    50%{ transform: scaleY(0) skewX(10deg); fill:#cfcfcf; }
-    100%{ transform: scaleY(1) skewX(0deg); fill:#e6e6e6; }
-  }
-  @keyframes letter-bottom{ from{fill:#e6e6e6} to{fill:#d9d9d9} }
-
-  @keyframes envelope-top{
-    0%{ transform: scaleY(0); fill: var(--env-light); }
-    50%{ transform: scaleY(-1); fill: var(--env-mid); }
-    100%{ transform: scaleY(1); fill: var(--env-mid); }
-  }
-  @keyframes envelope-top-shadow{
-    0%{ opacity:0; }
-    65%{ opacity:0; transform: scaleY(1.5); }
-    100%{ opacity:.25; transform: scaleY(1); }
-  }
-  @keyframes envelope-right{
-    0%{ transform: scaleX(0); fill:#e9e9e9; }
-    50%{ transform: scaleX(-1); fill:#ccc; }
-    100%{ transform: scaleX(1); fill:#bdbdbd; }
-  }
-  @keyframes envelope-left{
-    0%{ transform: scaleX(0); fill:#e9e9e9; }
-    50%{ transform: scaleX(-1); fill:#ccc; }
-    100%{ transform: scaleX(1); fill:#bdbdbd; }
-  }
-  @keyframes envelope-bottom{
-    0%{ transform: scaleY(0); fill:#8f8f8f; }
-    50%{ transform: scaleY(-1); fill:#b3b3b3; }
-    100%{ transform: scaleY(1); fill:#c8c8c8; }
-  }
-
-  /* Accesibilidad: reduce motion */
-  @media (prefers-reduced-motion: reduce){
-    .app-loading svg, #letter-top, #letter-top-2, #letter-bottom, #envelope-back,
-    #envelope-top, #envelope-top-shadow, #envelope-right, #envelope-left, #envelope-bottom{
-      animation: none !important;
-    }
-  }
-
-  /* v61_11: acelerar animación del sobre para que siempre se vea completa */
-  .app-loading svg{
-    animation: envelope-enter .6s ease-out both, envelope-pulse 1.2s .8s ease-in-out infinite !important;
-  }
-  #letter-top{ animation: letter-top .6s ease-out both !important; }
-  #letter-top-2{ animation: letter-top-2 .6s ease-out both !important; }
-  #letter-bottom{ animation: letter-bottom .6s ease-out .35s both !important; }
-  #envelope-back{ animation: envelope-back .35s ease-out .4s both !important; }
-
-  #envelope-top{ animation: envelope-top .55s ease-in-out .55s both !important; }
-  #envelope-top-shadow{ animation: envelope-top-shadow .55s ease-in-out .55s both !important; }
-  #envelope-right{ animation: envelope-right .55s ease-in-out .55s both !important; }
-  #envelope-left{ animation: envelope-left .55s ease-in-out .55s both !important; }
-  #envelope-bottom{ animation: envelope-bottom .55s ease-in-out .55s both !important; }
-
-  /* Al cerrar: congelar en estado final (sin “corte” a medias) */
-  #appLoading.is-finishing svg,
-  #appLoading.is-finishing #letter-top,
-  #appLoading.is-finishing #letter-top-2,
-  #appLoading.is-finishing #letter-bottom,
-  #appLoading.is-finishing #envelope-back,
-  #appLoading.is-finishing #envelope-top,
-  #appLoading.is-finishing #envelope-top-shadow,
-  #appLoading.is-finishing #envelope-right,
-  #appLoading.is-finishing #envelope-left,
-  #appLoading.is-finishing #envelope-bottom{
-    animation: none !important;
-  }
-
-</style>
+<meta name="theme-color" content="#b81f24">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mr Pizza GT">
 
 </head>
+
 <body>
-
-  <!-- Loader GLOBAL (reutilizable en toda la app) -->
-  <div id="appLoading" class="app-loading is-hidden" role="status" aria-live="polite" aria-hidden="true">
-    
-  <svg id="envelope" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 500" aria-hidden="true">
-        <path class="st0" d="M440 350H200c-2.8 0-5-2.2-5-5V155c0-2.8 2.2-5 5-5h240c2.8 0 5 2.2 5 5v190c0 2.8-2.2 5-5 5z" id="envelope-back"/>
-        <path id="letter-bottom" class="st1" d="M198 156h243v189H198z"/>
-        <path id="letter-top" class="st1" d="M198 156h243v189H198z"/>
-        <path id="letter-top-2" class="st1" d="M198 156h243v189H198z"/>
-        <path class="st2" d="M332.2 244.7c2-11.9 109-93.7 109-93.7 2.1 0 3.8 1.5 3.8 3.3v191.9c0 1.8-1.7 3.3-3.8 3.3 0 0-108.2-79.4-109-94.2-.1-2.1-.3-8.6 0-10.6z" id="envelope-right"/>
-        <path class="st2" d="M307.8 255.8c-2 11.9-109 93.7-109 93.7-2.1 0-3.8-1.5-3.8-3.3V154.3c0-1.8 1.7-3.3 3.8-3.3 0 0 108.2 79.4 109 94.2.1 2.1.3 8.6 0 10.6z" id="envelope-left"/>
-        <path class="st0" d="M327 249.3c15 1.7 118 97.3 118 97.3 0 1.9-1.9 3.4-4.2 3.4H199.2c-2.3 0-4.2-1.5-4.2-3.4 0 0 100-96.6 118.6-97.3 2.7-.2 10.9-.3 13.4 0z" id="envelope-bottom"/>
-        <path d="M319.4 295c-3.1 0-7.6-.6-11.1-4.1C274 257 195 154.3 195 154.3c0-2.4 1.9-4.3 4.2-4.3h241.6c2.3 0 4.2 1.9 4.2 4.3 0 0-82 103.6-115.5 136.6-3.1 3-7.1 4.1-10.1 4.1z" fill="gray" id="envelope-top-shadow"/>
-        <path class="st1" d="M319.4 291c-3.1 0-7.6-.5-11.1-4C274 254 195 154.2 195 154.2c0-2.3 1.9-4.2 4.2-4.2h241.6c2.3 0 4.2 1.9 4.2 4.2 0 0-82 100.8-115.5 132.8-3.1 2.9-7.1 4-10.1 4z" id="envelope-top"/>
-      </svg>
-</div>
-
-
 <header>
-<div class="container row">
-<div class="brand">
-<!-- Pon estos PNG en la misma carpeta que este HTML, o ajustá rutas. -->
-<img alt="Mr Pizza GT Logo" decoding="async" id="logoHeader" loading="lazy" src="MR PIZZA LOGO-Ligth.png"/>
-<div>
-<div class="title">Mr Pizza GT</div>
-<div class="subtitle" id="subtitleHeader">Pizzas &amp; Crepas • Guatemala</div>
-</div>
-</div>
-<div class="spacer"></div>
-<div aria-label="Cambiar vista" class="view-switch">
-<button class="active" id="btnPublic" type="button">Público</button>
-<button id="btnBiz" type="button">Empresas</button>
-</div>
-<button class="icon-btn" id="themeBtn" title="Tema"><span id="themeIcon">🖥️</span></button>
+  <div class="container row">
+    <div class="brand">
+      <!-- Pon estos PNG en la misma carpeta que este HTML, o ajustá rutas. -->
+      <img loading="lazy" decoding="async" id="logoHeader" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT Logo">
+      <div>
+        <div class="title">Mr Pizza GT</div>
+        <div class="subtitle" id="subtitleHeader">Pizzas & Crepas • Guatemala</div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="view-switch" aria-label="Cambiar vista">
+      <button id="btnPublic" class="active" type="button">Público</button>
+      <button id="btnBiz" type="button">Business</button>
+    </div>
+
+    <button id="themeBtn" class="icon-btn" title="Tema"><span id="themeIcon">🖥️</span></button>
 </div>
 </header>
+
 <main>
-<!-- ===================== CARRUSEL PROMOCIONES (SOLO PÚBLICO) ===================== -->
-<section aria-label="Promociones Público" class="promo-carousel hidden" id="promoCarouselSection">
-<div class="container">
-<div class="carousel" data-promo-carousel="">
-<button aria-label="Anterior" class="carousel__btn carousel__btn--prev" data-prev="" type="button">‹</button>
-<div class="carousel__viewport">
-<div class="carousel__track" data-track="">
-<div class="carousel__slide"><img alt="Flayer 1" decoding="sync" fetchpriority="high" src="Fotosempresa/Flayer 1.webp"/></div>
-<div class="carousel__slide"><img alt="Flayer 2" decoding="async" loading="lazy" src="Fotosempresa/Flayer 2.webp"/></div>
-<div class="carousel__slide"><img alt="Flayer 3" decoding="async" loading="lazy" src="Fotosempresa/Flayer 3.webp"/></div>
-<div class="carousel__slide"><img alt="Flayer 4" decoding="async" loading="lazy" src="Fotosempresa/Flayer 4.webp"/></div>
-</div>
-</div>
-<button aria-label="Siguiente" class="carousel__btn carousel__btn--next" data-next="" type="button">›</button>
-<div aria-label="Puntos" class="carousel__dots" role="tablist">
-<button aria-label="Ir al 1" class="carousel__dot" data-dot="0" type="button"></button>
-<button aria-label="Ir al 2" class="carousel__dot" data-dot="1" type="button"></button>
-<button aria-label="Ir al 3" class="carousel__dot" data-dot="2" type="button"></button>
-<button aria-label="Ir al 4" class="carousel__dot" data-dot="3" type="button"></button>
-</div>
-</div>
-</div>
-</section>
-<!-- ===================== HERO (común) ===================== -->
-<section class="hero" id="heroCommon">
-<div class="container">
-<div class="kicker">🔥 Hecho para compartir • Sin complicarte</div>
-<h1 id="heroTitle">
+
+  <!-- ===================== CARRUSEL PROMOCIONES (SOLO PÚBLICO) ===================== -->
+  <section class="promo-carousel hidden" id="promoCarouselSection" aria-label="Promociones Público">
+    <div class="container">
+      <div class="carousel" data-promo-carousel>
+        <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Anterior" data-prev>‹</button>
+        <div class="carousel__viewport">
+          <div class="carousel__track" data-track>
+            <div class="carousel__slide"><img fetchpriority="high" decoding="sync" src="Flayer 1.webp" alt="Flayer 1"></div>
+            <div class="carousel__slide"><img loading="lazy" decoding="async" src="Flayer 2.webp" alt="Flayer 2"></div>
+            <div class="carousel__slide"><img loading="lazy" decoding="async" src="Flayer 3.webp" alt="Flayer 3"></div>
+            <div class="carousel__slide"><img loading="lazy" decoding="async" src="Flayer 4.webp" alt="Flayer 4"></div>
+          </div>
+        </div>
+        <button class="carousel__btn carousel__btn--next" type="button" aria-label="Siguiente" data-next>›</button>
+
+        <div class="carousel__dots" role="tablist" aria-label="Puntos">
+          <button class="carousel__dot" type="button" aria-label="Ir al 1" data-dot="0"></button>
+          <button class="carousel__dot" type="button" aria-label="Ir al 2" data-dot="1"></button>
+          <button class="carousel__dot" type="button" aria-label="Ir al 3" data-dot="2"></button>
+          <button class="carousel__dot" type="button" aria-label="Ir al 4" data-dot="3"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HERO (común) ===================== -->
+  <section class="hero">
+    <div class="container">
+      <div class="kicker">🔥 Hecho para compartir • Sin complicarte</div>
+
+      <h1 id="heroTitle">
         Pizzas y crepas que hacen que la gente diga: “¡qué buen convivio!”
       </h1>
-<p id="heroSub">
+
+      <p id="heroSub">
         Dos rutas claras: <strong>eventos empresariales</strong> (bien pagados y bien organizados) o <strong>pedidos nocturnos</strong> para resolver el antojo.
         Aquí no te perdés: siempre sabés qué hacer.
       </p>
-<div class="cta-row" id="heroCtaRow">
-<a class="btn btn-primary" href="#" id="heroCta" rel="noopener" target="_blank">Escribirme por WhatsApp</a>
-<a class="btn btn-soft" href="#servicios">Ver servicios</a>
-</div>
-<div class="hero-media">
-<div class="inner">
-<div class="hero-photo">
-<div class="note" id="heroNote">
-<strong>Lo que compras es tranquilidad.</strong>
-<span>Orden, puntualidad y atención humana. Y sí: comida rica que se acaba rápido.</span>
-</div>
-</div>
-<div class="hero-card" id="heroCard">
-<img alt="Mr Pizza GT" decoding="async" id="logoHero" loading="lazy" src="MR PIZZA LOGO-Ligth.png"/>
-<div class="mini" id="heroCardText">
-<strong>Ruta rápida:</strong><br/>
+
+      <div class="cta-row" id="heroCtaRow">
+        <a id="heroCta" class="btn btn-primary" href="#" target="_blank" rel="noopener">Escribirme por WhatsApp</a>
+        <a class="btn btn-soft" href="#servicios">Ver servicios</a>
+      </div>
+
+      <div class="hero-media">
+        <div class="inner">
+          <div class="hero-photo">
+            <div class="note" id="heroNote">
+              <strong>Lo que compras es tranquilidad.</strong>
+              <span>Orden, puntualidad y atención humana. Y sí: comida rica que se acaba rápido.</span>
+            </div>
+          </div>
+          <div class="hero-card" id="heroCard">
+            <img loading="lazy" decoding="async" id="logoHero" src="MR PIZZA LOGO-Ligth.png" alt="Mr Pizza GT">
+            <div class="mini" id="heroCardText">
+              <strong>Ruta rápida:</strong><br/>
               Empresa → cotizar evento<br/>
               Público → pedir de noche
             </div>
-<a class="btn btn-primary" href="#" id="heroCardCta" rel="noopener" target="_blank">Abrir WhatsApp</a>
-<a class="btn btn-outline" href="#confianza">Ver reseñas</a>
-</div>
-</div>
-</div>
-<div class="stats" id="statsRow">
-<div class="stat"><span class="tick">✓</span> <span id="s1">Cotización clara y rápida</span></div>
-<div class="stat"><span class="tick">✓</span> <span id="s2">Presentación limpia y ordenada</span></div>
-<div class="stat"><span class="tick">✓</span> <span id="s3">Eventos privados y públicos</span></div>
-<div class="stat"><span class="tick">✓</span> <span id="s4">Pedidos nocturnos disponibles</span></div>
-</div>
-</div>
-</section>
-<!-- ===================== PROPUESTA DE VALOR ===================== -->
-<section class="section" id="valor">
-<div class="container">
-<h2 id="valueTitle">Lo que te damos (sin palabras raras)</h2>
-<p id="valueSub">Comida rica + organización + comunicación clara. Eso es lo que hace que un evento salga “pro”.</p>
-<div class="cols">
-<div class="card-mini">
-<div class="icon">🧠</div>
-<h3>Te quitamos carga mental</h3>
-<p class="desc">Confirmamos, coordinamos y llegamos listos. Vos solo disfrutás el momento.</p>
-</div>
-<div class="card-mini">
-<div class="icon">🕒</div>
-<h3>Puntualidad y ritmo</h3>
-<p class="desc">Sirviendo sin caos. La gente no se queda esperando y el flujo se siente ordenado.</p>
-</div>
-<div class="card-mini">
-<div class="icon">🤝</div>
-<h3>Trato humano</h3>
-<p class="desc">Mensajes claros, cero vueltas. Te decimos lo que sí y lo que no, desde el inicio.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- ===================== SERVICIOS (limitados y claros) ===================== -->
-<section class="section" data-section="servicios" id="servicios">
-<div class="container">
-<h2 id="svcTitle">Servicios</h2>
-<p id="svcSub">Pocos, claros y entendibles. Elegí uno y te guiamos.</p>
-<div class="cols services-grid" id="svcGrid">
-<article class="card-mini service-card">
-<div class="svc-badge">🏢 Empresas</div>
-<h3>Eventos corporativos</h3>
-<p class="desc">Convivios, aniversarios, fechas especiales (madre/padre/navidad) y actividades de equipo.</p>
-<a class="btn btn-primary" href="#" id="svcBizCta" rel="noopener" target="_blank">Cotizar evento</a>
-</article>
-<article class="card-mini service-card">
-<div class="svc-badge">🌙 Público</div>
-<h3>Pedidos nocturnos</h3>
-<p class="desc">On demand por la noche. Ideal para antojo, amigos, partido o “hoy no cocino”.</p>
-<a class="btn btn-primary" href="#" id="svcPubCta" rel="noopener" target="_blank">Pedir por WhatsApp</a>
-</article>
-<article class="card-mini service-card">
-<div class="svc-badge">🎪 Eventos</div>
-<h3>Privados y públicos</h3>
-<p class="desc">Iglesias, conciertos, cumpleaños y reuniones. Te ayudamos a estimar cantidades.</p>
-<a class="btn btn-primary" href="#" id="svcMixCta" rel="noopener" target="_blank">Coordinar evento</a>
-</article>
-</div>
-</div>
-</section>
-<!-- ===================== PAQUETES (COMERCIAL, CLARO) ===================== -->
-<section class="section" id="paquetes">
-<div class="container">
-<h2>Paquetes listos (sin enredos)</h2>
-<p>Ejemplos para que tengas una idea rápida. Cuando me escribís, lo ajustamos a tu gente, horario y lugar.</p>
-<div class="cols services-grid">
-<article class="card-mini service-card">
-<div class="svc-badge">🏢 Empresa</div>
-<h3>Convivio Esencial</h3>
-<p class="desc">Perfecto para una actividad corta y ordenada. Ideal cuando querés “resolver bien” y sin estrés.</p>
-<a class="btn btn-primary" href="#" id="pkgBiz1" rel="noopener" target="_blank">Cotizar este paquete</a>
-</article>
-<article class="card-mini service-card">
-<div class="svc-badge">🏢 Empresa</div>
-<h3>Convivio Full</h3>
-<p class="desc">Para aniversarios y fechas fuertes. Más variedad y mejor experiencia para el equipo.</p>
-<a class="btn btn-primary" href="#" id="pkgBiz2" rel="noopener" target="_blank">Cotizar Full</a>
-</article>
-<article class="card-mini service-card">
-<div class="svc-badge">🌙 Público</div>
-<h3>Noche Resuelta</h3>
-<p class="desc">Antojo, amigos o partido. Pedís rápido y confirmamos disponibilidad al momento.</p>
-<a class="btn btn-primary" href="#" id="pkgPub1" rel="noopener" target="_blank">Pedir ahora</a>
-</article>
-</div>
-<div class="cta-band">
-<h3>Fechas empresariales se llenan</h3>
-<p>Si es convivio o actividad de empresa, escribime con tiempo para reservar tu espacio.</p>
-<div class="cta-row">
-<a class="btn btn-primary" href="#" id="pkgCta" rel="noopener" target="_blank">Reservar por WhatsApp</a>
-<a class="btn btn-outline" href="#confianza">Ver reseñas</a>
-</div>
-</div>
-</div>
-</section>
-<!-- ===================== SECCIÓN CONDICIONAL: EMPRESAS ===================== -->
-<section class="section" id="bizSection">
-<div class="container">
-<!-- HERO EMPRESAS (nuevo) -->
-<div aria-label="Catering empresarial" class="biz-hero">
-<div aria-hidden="true" class="biz-hero__media">
-<div class="biz-carousel" id="bizHeroCarousel">
-<img alt="Catering empresarial Mr Pizza GT" decoding="sync" loading="eager" src="Fotosempresa/FotoCatering.webp"/>
-<img alt="Catering empresarial Mr Pizza GT" decoding="async" loading="lazy" src="Fotosempresa/FotoCatering2.webp"/>
-<img alt="Catering empresarial Mr Pizza GT" decoding="async" loading="lazy" src="Fotosempresa/FotoCatering3.webp"/>
-<img alt="Catering empresarial Mr Pizza GT" decoding="async" loading="lazy" src="Fotosempresa/FotoCatering4.webp"/>
-<img alt="Catering empresarial Mr Pizza GT" decoding="async" loading="lazy" src="Fotosempresa/FotoCatering5.webp"/>
-</div>
-<button aria-label="Anterior" class="biz-carousel__btn biz-carousel__btn--prev" id="bizHeroPrev" type="button">‹</button>
-<button aria-label="Siguiente" class="biz-carousel__btn biz-carousel__btn--next" id="bizHeroNext" type="button">›</button>
-<div aria-label="Indicadores del carrusel" class="biz-carousel__dots" id="bizHeroDots"></div>
-<div class="biz-hero__shade"></div>
-</div>
-<div class="biz-hero__content biz-hero__content--cta">
-<div class="cta-row biz-cta biz-cta--hero">
-<button class="btn btn-primary" id="bizQuoteBtn" type="button">Cotizá tu evento</button>
-<a class="btn btn-outline" href="#confianza">Ver reseñas</a>
-</div>
-</div>
-</div>
-<!-- BENEFICIOS B2B (4 cards) -->
-<div aria-label="Beneficios para empresas" class="biz-features">
-<div class="kicker kicker-center">Hecho para eventos corporativos</div>
-<p class="biz-features__title">Sabor, orden y experiencia para que tu equipo solo se enfoque en disfrutar.</p>
-<div class="biz-features-grid">
-<div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">📲</div>
-<h3>1) Contanos tu evento</h3>
-<p class="desc">Completá el formulario con fecha, cantidad de personas y ubicación.</p>
-</div>
-<div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">📄</div>
-<h3>2) Recibí tu cotización</h3>
-<p class="desc">Te enviamos una propuesta clara según tus necesidades y presupuesto.</p>
-</div>
-<div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">📅</div>
-<h3>3) Confirmá y reservá</h3>
-<p class="desc">Ajustamos detalles y reservamos la fecha con tu confirmación.</p>
-</div>
-<div class="card-mini biz-card">
-<div aria-hidden="true" class="icon">✅</div>
-<h3>4) Nosotros lo ejecutamos</h3>
-<p class="desc">Llegamos, montamos y servimos para que tu equipo solo disfrute.</p>
-</div>
-</div>
-</div>
-<!-- PROMOS B2B (variante: banners con texto sobre imagen) -->
-<div aria-label="Promocionales de servicio corporativo" class="biz-promos biz-promos--banners">
-<div class="promo-banners">
-<article class="promo-banner promo-banner--right reveal" data-reveal-delay="0">
-<img alt="Servicio de pizza en eventos" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo1.webp"/>
-<span aria-hidden="true" class="promo-tint"></span>
-<div class="promo-panel">
-<h3>🍕 Pizza Bar en vivo</h3>
-<p>Servicio en vivo para mantener el ritmo: rápido, caliente y sin filas eternas.</p>
-<ul class="promo-bullets"><li>Ejecución para eventos masivos</li><li>Presentación ordenada y profesional</li><li>Pizzas recién hechas al momento</li></ul>
-</div>
-</article>
-<article class="promo-banner promo-banner--left reveal" data-reveal-delay="60">
-<img alt="Logística y montaje para eventos" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo2.webp"/>
-<span aria-hidden="true" class="promo-tint"></span>
-<div class="promo-panel">
-<h3>🧾 Logística sin fricción</h3>
-<p>Coordinación clara con RRHH y proveedores. Llegamos listos, montamos rápido y cuidamos cada detalle.</p>
-<ul class="promo-bullets"><li>Comunicación simple y directa</li><li>Montaje ágil y puntual</li><li>Operación limpia durante el evento</li></ul>
-</div>
-</article>
-<article class="promo-banner promo-banner--center reveal" data-reveal-delay="120">
-<img alt="Ingredientes y calidad de producto" decoding="async" loading="lazy" src="Fotosempresa/FotoPromo3.webp"/>
-<span aria-hidden="true" class="promo-tint"></span>
-<div class="promo-panel">
-<h3>🥇 Calidad con sello propio</h3>
-<p>Masa, salsa e ingredientes desarrollados por nosotros para un toque original y consistente.</p>
-<ul class="promo-bullets"><li>Recetas propias: masa y salsa</li><li>Ingredientes de primera</li><li>Consistencia en cada porción</li></ul>
-</div>
-</article>
-</div>
-</div>
-</div>
-</section>
-<!-- ===================== SECCIÓN CONDICIONAL: PÚBLICO ===================== -->
-<section class="section" id="pubSection">
-<div class="container">
-<h2>Pedí en la noche sin complicarte</h2>
-<p>
-        Cuando el antojo pega, lo resolvemos rápido. Vos escribís, confirmamos disponibilidad y listo.
-      </p>
-<!-- ===================== MENÚ (SOLO PÚBLICO) ===================== -->
-<div class="menu-wrap" id="menu">
-<button aria-controls="menuPanel" aria-expanded="true" class="menu-toggle" id="menuToggle" type="button">
-<span class="menu-toggle__left">
-<span class="menu-toggle__icon">🍕</span>
-<span>
-<strong class="menu-title">Nuestro Menú</strong>
-<span class="menu-toggle__meta">Pizzas Q85 • 8 porciones • 8 sabores</span>
-</span>
-</span>
-<span aria-hidden="true" class="menu-toggle__chev">▾</span>
-</button>
-<div class="menu-panel" id="menuPanel">
-<div class="menu-grid">
-<article class="menu-item">
-<div class="menu-img"><img alt="Pizza Hawaiana" decoding="async" loading="lazy" src="Menu/Hawaiana.webp"/></div>
-<div class="menu-body">
-<h3>Hawaiana</h3>
-<p>Base de salsa de tomate, mozzarella, jamón y piña. La clásica dulce-salada.</p>
-<div class="menu-price">Q85 • 8 porciones</div>
-<div class="qty-controls" data-category="pizza" data-flavor="Hawaiana">
-<button aria-label="Restar Hawaiana" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Hawaiana" class="qty-num">0</span>
-<button aria-label="Sumar Hawaiana" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Pizza Peperoni" decoding="async" loading="lazy" src="Menu/Peperoni.webp"/></div>
-<div class="menu-body">
-<h3>Peperoni</h3>
-<p>Salsa de tomate, mozzarella y pepperoni doradito. Simple y poderosa.</p>
-<div class="menu-price">Q85 • 8 porciones</div>
-<div class="qty-controls" data-category="pizza" data-flavor="Peperoni">
-<button aria-label="Restar Peperoni" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Peperoni" class="qty-num">0</span>
-<button aria-label="Sumar Peperoni" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Pizza Margarita Pesto" decoding="async" loading="lazy" src="Menu/Margarita Pesto.webp"/></div>
-<div class="menu-body">
-<h3>Margarita Pesto</h3>
-<p>Salsa de tomate de la casa, con masa de la casa, mozzarella, tomate cherry y un pesto espectacular.</p>
-<div class="menu-price">Q85 • 8 porciones</div>
-<div class="qty-controls" data-category="pizza" data-flavor="Margarita Pesto">
-<button aria-label="Restar Margarita Pesto" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Margarita Pesto" class="qty-num">0</span>
-<button aria-label="Sumar Margarita Pesto" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Pizza Chapina" decoding="async" loading="lazy" src="Menu/Chapina.webp"/></div>
-<div class="menu-body">
-<h3>Chapina</h3>
-<p>Pizza con masa de la casa, salsa de chile guaque con chorizo y longaniza.</p>
-<div class="menu-price">Q85 • 8 porciones</div>
-<div class="qty-controls" data-category="pizza" data-flavor="Chapina">
-<button aria-label="Restar Chapina" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Chapina" class="qty-num">0</span>
-<button aria-label="Sumar Chapina" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Pizza de Carnes" decoding="async" loading="lazy" src="Menu/Carnes.webp"/></div>
-<div class="menu-body">
-<h3>Carnes</h3>
-<p>Salsa de tomate de la casa, masa de la casa, queso mozzarella, jamón, tocino y pepperoni.</p>
-<div class="menu-price">Q85 • 8 porciones</div>
-<div class="qty-controls" data-category="pizza" data-flavor="Carnes">
-<button aria-label="Restar Carnes" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Carnes" class="qty-num">0</span>
-<button aria-label="Sumar Carnes" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Pizza Tejana" decoding="async" loading="lazy" src="Menu/Tejana.webp"/></div>
-<div class="menu-body">
-<h3>Tejana</h3>
-<p>Salsa de tomate, mozzarella, carne sazonada y un toque de jalapeño (nivel “rico”, no complicado).</p>
-<div class="menu-price">Q85 • 8 porciones</div>
-<div class="qty-controls" data-category="pizza" data-flavor="Tejana">
-<button aria-label="Restar Tejana" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Tejana" class="qty-num">0</span>
-<button aria-label="Sumar Tejana" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Pizza de Tocino" decoding="async" loading="lazy" src="Menu/Tocino.webp"/></div>
-<div class="menu-body">
-<h3>Tocino</h3>
-<p>Salsa de tomate, mozzarella y tocino crujiente. Favorita para compartir.</p>
-<div class="menu-price">Q85 • 8 porciones</div>
-<div class="qty-controls" data-category="pizza" data-flavor="Tocino">
-<button aria-label="Restar Tocino" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Tocino" class="qty-num">0</span>
-<button aria-label="Sumar Tocino" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Pizza de Jamón" decoding="async" loading="lazy" src="Menu/Jamon.webp"/></div>
-<div class="menu-body">
-<h3>Jamón</h3>
-<p>Salsa de tomate de la casa, con queso mozzarella y jamón.</p>
-<div class="menu-price">Q85 • 8 porciones</div>
-<div class="qty-controls" data-category="pizza" data-flavor="Jamón">
-<button aria-label="Restar Jamón" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Jamón" class="qty-num">0</span>
-<button aria-label="Sumar Jamón" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-</div>
-<!-- ===== Entradas y Postres (NO desplegado por default) ===== -->
-<div class="menu-wrap" id="menuExtras" style="margin-top:14px;">
-<button aria-controls="menuExtrasPanel" aria-expanded="false" class="menu-toggle" id="menuExtrasToggle" type="button">
-<span class="menu-toggle__left">
-<span class="menu-toggle__icon">🍓</span>
-<span>
-<strong class="menu-title">Nuestras Entradas y Postres</strong>
-<span class="menu-toggle__meta">Nachos • Alitas • Crepas • Fresas</span>
-</span>
-</span>
-<span aria-hidden="true" class="menu-toggle__chev">▾</span>
-</button>
-<div class="menu-panel" hidden="" id="menuExtrasPanel">
-<div class="menu-grid">
-<article class="menu-item">
-<div class="menu-img"><img alt="Nachos" decoding="async" loading="lazy" src="Menu/Nachos.webp"/></div>
-<div class="menu-body">
-<h3>Nachos con queso</h3>
-<p>Nachos crujientes con queso derretido y toppings (según disponibilidad).</p>
-<div class="menu-price">Q35</div>
-<div class="qty-controls" data-category="extra" data-flavor="Nachos con queso">
-<button aria-label="Restar Nachos con queso" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Nachos con queso" class="qty-num">0</span>
-<button aria-label="Sumar Nachos con queso" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Alitas" decoding="async" loading="lazy" src="Menu/Alitas.webp"/></div>
-<div class="menu-body">
-<h3>Alitas (porción)</h3>
-<p>Alitas doraditas con salsa a elegir (consulta opciones disponibles).</p>
-<div class="menu-price">Q35</div>
-<div class="qty-controls" data-category="extra" data-flavor="Alitas (porción)">
-<button aria-label="Restar Alitas (porción)" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Alitas (porción)" class="qty-num">0</span>
-<button aria-label="Sumar Alitas (porción)" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Crepa de fresas con Nutella" decoding="async" loading="lazy" src="Menu/Crepa-Fresas-Nutela.webp"/></div>
-<div class="menu-body">
-<h3>Crepa de fresas con Nutella</h3>
-<p>Crepa recién hecha con fresas frescas y Nutella.</p>
-<div class="menu-price">Q40</div>
-<div class="qty-controls" data-category="extra" data-flavor="Crepa de fresas con Nutella">
-<button aria-label="Restar Crepa de fresas con Nutella" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Crepa de fresas con Nutella" class="qty-num">0</span>
-<button aria-label="Sumar Crepa de fresas con Nutella" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Crepa de banano con Nutella" decoding="async" loading="lazy" src="Menu/Crepa-Banano-Nutela.webp"/></div>
-<div class="menu-body">
-<h3>Crepa de banano con Nutella</h3>
-<p>Crepa recién hecha con banano y Nutella. Dulce y contundente.</p>
-<div class="menu-price">Q40</div>
-<div class="qty-controls" data-category="extra" data-flavor="Crepa de banano con Nutella">
-<button aria-label="Restar Crepa de banano con Nutella" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Crepa de banano con Nutella" class="qty-num">0</span>
-<button aria-label="Sumar Crepa de banano con Nutella" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Crepa de fresa y banano" decoding="async" loading="lazy" src="Menu/Crepa-Fresa-Banano.webp"/></div>
-<div class="menu-body">
-<h3>Crepa de fresa y banano</h3>
-<p>Crepa con fresa y banano: el combo que nunca falla.</p>
-<div class="menu-price">Q40</div>
-<div class="qty-controls" data-category="extra" data-flavor="Crepa de fresa y banano">
-<button aria-label="Restar Crepa de fresa y banano" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Crepa de fresa y banano" class="qty-num">0</span>
-<button aria-label="Sumar Crepa de fresa y banano" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Fresas con crema en vaso" decoding="async" loading="lazy" src="Menu/Fresas-Con-Crema-Vaso.webp"/></div>
-<div class="menu-body">
-<h3>Vaso de fresas con crema</h3>
-<p>Fresas frescas con crema dulce servidas en vaso.</p>
-<div class="menu-price">Q35</div>
-<div class="qty-controls" data-category="extra" data-flavor="Vaso de fresas con crema">
-<button aria-label="Restar Vaso de fresas con crema" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Vaso de fresas con crema" class="qty-num">0</span>
-<button aria-label="Sumar Vaso de fresas con crema" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-<article class="menu-item">
-<div class="menu-img"><img alt="Fresas con chocolate en vaso" decoding="async" loading="lazy" src="Menu/Fresas-Con-Chocolate-Vaso.webp"/></div>
-<div class="menu-body">
-<h3>Vaso de fresas con chocolate</h3>
-<p>Fresas frescas bañadas con chocolate, servidas en vaso.</p>
-<div class="menu-price">Q35</div>
-<div class="qty-controls" data-category="extra" data-flavor="Vaso de fresas con chocolate">
-<button aria-label="Restar Vaso de fresas con chocolate" class="qty-btn qty-minus" type="button">−</button>
-<span aria-label="Cantidad Vaso de fresas con chocolate" class="qty-num">0</span>
-<button aria-label="Sumar Vaso de fresas con chocolate" class="qty-btn qty-plus" type="button">+</button>
-</div>
-</div>
-</article>
-</div>
-<p class="menu-note" style="margin-top:10px;">Nota: salsas y detalles (si aplica) se confirman por WhatsApp.</p>
-</div>
-</div>
-<div class="menu-cta">
-<a class="btn btn-primary" href="#" id="menuCtaWa" rel="noopener" target="_blank">Pedir por WhatsApp <span aria-hidden="true" class="wa-badge" id="waBadge">0</span></a>
-<a class="btn btn-outline" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">Pedir por PedidosYa</a>
-<a class="btn btn-outline" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" rel="noopener" target="_blank">Pedir por Uber Eats</a>
-</div>
-<p class="menu-note">Tip: escribinos el sabor + cantidad + ubicación. Te confirmamos disponibilidad al momento.</p>
-</div>
-</div>
-<div class="cols">
-<div class="card-mini">
-<div class="icon">💬</div>
-<h3>Mensaje directo</h3>
-<p class="desc">WhatsApp es lo más rápido para confirmar y coordinar.</p>
-</div>
-<div class="card-mini">
-<div class="icon">🛵</div>
-<h3>Domicilio nocturno</h3>
-<p class="desc">Atención on demand por la noche (según disponibilidad del día).</p>
-</div>
-<div class="card-mini">
-<div class="icon">🍕</div>
-<h3>Sabores que gustan</h3>
-<p class="desc">Pizzas y crepas para compartir. Lo clásico siempre gana.</p>
-</div>
-</div>
-<div class="cta-band">
-<h3>¿Pedimos hoy?</h3>
-<p>Mandame: qué querés, cantidad y tu ubicación. Te confirmo al momento.</p>
-<div class="cta-row">
-<a class="btn btn-primary" href="#" id="pubCta1" rel="noopener" target="_blank">Pedir por WhatsApp</a>
-</div>
-</div>
-</div>
-</section>
-<!-- ===================== PRUEBA SOCIAL ===================== -->
-<section class="section" id="confianza">
-  <div class="container">
-    <h2>Nuestras reseñas reales de Google</h2>
-    <p id="googleReviewsHint">Cargando reseñas reales desde Google…</p>
+            <a id="heroCardCta" class="btn btn-primary" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+            <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
+          </div>
+        </div>
+      </div>
 
-    <!-- Header dinámico (rating + link a Google) -->
-    <div id="googleRatingRow" style="display:none;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 12px;">
-      <div id="googleRatingText" style="font-weight:700;"></div>
-    </div>
-
-    <!-- Aquí se pintan las reseñas reales -->
-    <div class="googleReviewsCarouselWrap" id="googleReviewsCarouselWrap" aria-label="Reseñas de Google" style="display:none;">
-  <button class="revNav revPrev" id="revPrev" type="button" aria-label="Reseña anterior">‹</button>
-
-  <div class="googleReviewsTrack" id="googleReviewsTrack" tabindex="0" aria-label="Carrusel de reseñas">
-    <!-- Cards se renderizan aquí desde Google Places -->
-  </div>
-
-  <button class="revNav revNext" id="revNext" type="button" aria-label="Reseña siguiente">›</button>
-</div>
-
-    <div id="googleReviewsBtnRow" style="display:none;justify-content:center;margin-top:12px;">
-      <a class="btn btn-outline" href="#" id="googleReviewsLink" rel="noopener" target="_blank" style="padding:10px 14px;display:inline-flex;align-items:center;gap:8px;">
-        <img src="Logotipos/Google.png" alt="Google" style="height:16px;width:auto;" />
-        Ver mas en Google
-      </a>
-    </div>
-
-    <!-- Fallback (si falla la API o billing) -->
-    <div class="cols" id="reviewsFallback">
-      <article class="review">
-        <div class="quote">“</div>
-        <p>La actividad salió ordenada, sirvieron rápido y a la gente le encantó. Cero estrés para RRHH.</p>
-        <strong>— Cliente empresa</strong>
-      </article>
-      <article class="review">
-        <div class="quote">“</div>
-        <p>Pedí tarde y me confirmaron en minutos. La pizza llegó bien y estaba buenísima.</p>
-        <strong>— Cliente nocturno</strong>
-      </article>
-      <article class="review">
-        <div class="quote">“</div>
-        <p>Buen servicio en evento. Crepas top. Se nota el cuidado en los detalles.</p>
-        <strong>— Evento privado</strong>
-      </article>
-    </div>
-
-    <div class="cta-band" id="ctaBandFinal">
-      <h3>Listo: ahora solo falta que me escribás</h3>
-      <p>Te respondo con una ruta clara según lo que necesitás.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#" id="ctaFinal" rel="noopener" target="_blank">WhatsApp</a>
-        <a class="btn btn-outline" href="#valor">Volver arriba</a>
+      <div class="stats" id="statsRow">
+        <div class="stat"><span class="tick">✓</span> <span id="s1">Cotización clara y rápida</span></div>
+        <div class="stat"><span class="tick">✓</span> <span id="s2">Presentación limpia y ordenada</span></div>
+        <div class="stat"><span class="tick">✓</span> <span id="s3">Eventos privados y públicos</span></div>
+        <div class="stat"><span class="tick">✓</span> <span id="s4">Pedidos nocturnos disponibles</span></div>
       </div>
     </div>
-  </div>
-</section>
-<!-- Mini Carrito (flotante, discreto) -->
-<a aria-label="Ver carrito" class="mini-cart-fab hidden" href="#" id="miniCartFab" title="Ver carrito">
-<img alt="Carrito" decoding="async" id="miniCartIcon" loading="lazy" src="carrito-ligth.png"/>
-<span aria-hidden="true" class="mini-cart-count" id="miniCartCount">0</span>
-</a>
-<!-- WhatsApp Floating Button -->
-<a aria-label="Pedir por Uber Eats" class="fab fab--ue" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" id="ueFab" rel="noopener" target="_blank" title="Uber Eats">
-<img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
-</a>
-<a aria-label="Pedir por PedidosYa" class="fab fab--py" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" id="pyFab" rel="noopener" target="_blank" title="PedidosYa">
-<img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
-</a>
-<a aria-label="Escribirme por WhatsApp" class="fab fab--wa" href="#" id="waFab" rel="noopener" target="_blank" title="WhatsApp">
-<img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp 64p original.png"/>
-</a><a aria-label="Cotizá tu evento" class="cotiza-fab" href="#" id="cotizaFab" style="display:none;" title="Cotizá">Cotizá</a>
-</main>
-<footer class="footer">
-  <div class="container footer-brand">
-    <a class="footer-brand__logo" href="" aria-label="Ir a inicio">
-      <img id="logoFooter" alt="MR Pizza GT" decoding="async" loading="lazy" src="MR PIZZA LOGO-Ligth.png"/>
-    </a>
-    <p class="footer-brand__tagline">Soluciones gastronomicas para eventos corporativos.</p>
-  </div>
+  </section>
 
-  <div class="container footer-links-inline" aria-label="Enlaces del sitio">
-    <a href="preguntas/">Preguntas frecuentes</a>
-    <span class="sep">|</span>
-    <a href="quienes-somos/">Quienes somos</a>
-    <span class="sep">|</span>
-    <a href="contacto/">Contacto</a>
-    <span class="sep">|</span>
-    <a href="terminos/">Terminos de uso</a>
-    <span class="sep">|</span>
-    <a href="privacidad/">Politica de privacidad</a>
+  <!-- ===================== PROPUESTA DE VALOR ===================== -->
+  <section class="section" id="valor">
+    <div class="container">
+      <h2 id="valueTitle">Lo que te damos (sin palabras raras)</h2>
+      <p id="valueSub">Comida rica + organización + comunicación clara. Eso es lo que hace que un evento salga “pro”.</p>
+
+      <div class="cols">
+        <div class="card-mini">
+          <div class="icon">🧠</div>
+          <h3>Te quitamos carga mental</h3>
+          <p class="desc">Confirmamos, coordinamos y llegamos listos. Vos solo disfrutás el momento.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🕒</div>
+          <h3>Puntualidad y ritmo</h3>
+          <p class="desc">Sirviendo sin caos. La gente no se queda esperando y el flujo se siente ordenado.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🤝</div>
+          <h3>Trato humano</h3>
+          <p class="desc">Mensajes claros, cero vueltas. Te decimos lo que sí y lo que no, desde el inicio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICIOS (limitados y claros) ===================== -->
+  <section class="section" id="servicios" data-section="servicios">
+    <div class="container">
+      <h2 id="svcTitle">Servicios</h2>
+      <p id="svcSub">Pocos, claros y entendibles. Elegí uno y te guiamos.</p>
+
+      <div class="cols services-grid" id="svcGrid">
+        <article class="card-mini service-card">
+          <div class="svc-badge">🏢 Empresas</div>
+          <h3>Eventos corporativos</h3>
+          <p class="desc">Convivios, aniversarios, fechas especiales (madre/padre/navidad) y actividades de equipo.</p>
+          <a class="btn btn-primary" id="svcBizCta" href="#" target="_blank" rel="noopener">Cotizar evento</a>
+        </article>
+
+        <article class="card-mini service-card">
+          <div class="svc-badge">🌙 Público</div>
+          <h3>Pedidos nocturnos</h3>
+          <p class="desc">On demand por la noche. Ideal para antojo, amigos, partido o “hoy no cocino”.</p>
+          <a class="btn btn-primary" id="svcPubCta" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        </article>
+
+        <article class="card-mini service-card">
+          <div class="svc-badge">🎪 Eventos</div>
+          <h3>Privados y públicos</h3>
+          <p class="desc">Iglesias, conciertos, cumpleaños y reuniones. Te ayudamos a estimar cantidades.</p>
+          <a class="btn btn-primary" id="svcMixCta" href="#" target="_blank" rel="noopener">Coordinar evento</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== PAQUETES (COMERCIAL, CLARO) ===================== -->
+  <section class="section" id="paquetes">
+    <div class="container">
+      <h2>Paquetes listos (sin enredos)</h2>
+      <p>Ejemplos para que tengas una idea rápida. Cuando me escribís, lo ajustamos a tu gente, horario y lugar.</p>
+
+      <div class="cols services-grid">
+        <article class="card-mini service-card">
+          <div class="svc-badge">🏢 Empresa</div>
+          <h3>Convivio Esencial</h3>
+          <p class="desc">Perfecto para una actividad corta y ordenada. Ideal cuando querés “resolver bien” y sin estrés.</p>
+          <a class="btn btn-primary" id="pkgBiz1" href="#" target="_blank" rel="noopener">Cotizar este paquete</a>
+        </article>
+
+        <article class="card-mini service-card">
+          <div class="svc-badge">🏢 Empresa</div>
+          <h3>Convivio Full</h3>
+          <p class="desc">Para aniversarios y fechas fuertes. Más variedad y mejor experiencia para el equipo.</p>
+          <a class="btn btn-primary" id="pkgBiz2" href="#" target="_blank" rel="noopener">Cotizar Full</a>
+        </article>
+
+        <article class="card-mini service-card">
+          <div class="svc-badge">🌙 Público</div>
+          <h3>Noche Resuelta</h3>
+          <p class="desc">Antojo, amigos o partido. Pedís rápido y confirmamos disponibilidad al momento.</p>
+          <a class="btn btn-primary" id="pkgPub1" href="#" target="_blank" rel="noopener">Pedir ahora</a>
+        </article>
+      </div>
+
+      <div class="cta-band">
+        <h3>Fechas empresariales se llenan</h3>
+        <p>Si es convivio o actividad de empresa, escribime con tiempo para reservar tu espacio.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="pkgCta" href="#" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+          <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== SECCIÓN CONDICIONAL: BUSINESS ===================== -->
+  <section class="section" id="bizSection">
+    <div class="container">
+      <h2>Business: el convivio sale bien (y vos quedás bien)</h2>
+      <p>
+        Este servicio es ideal para empresas porque suele existir presupuesto anual para actividades del personal.
+        Nosotros lo convertimos en un evento ordenado, rico y sin estrés.
+      </p>
+
+      <div class="cols">
+        <div class="card-mini">
+          <div class="icon">📦</div>
+          <h3>Paquetes simples</h3>
+          <p class="desc">Te cotizamos por cantidad de personas y combinaciones. Sin listas infinitas.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🧼</div>
+          <h3>Presentación limpia</h3>
+          <p class="desc">Montaje y servicio cuidado. Se nota profesional.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">✅</div>
+          <h3>Confirmación y seguimiento</h3>
+          <p class="desc">Cerramos detalles antes del evento para que no hayan sorpresas.</p>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h3>¿Cotizamos tu actividad?</h3>
+        <p>Mandame fecha, hora, zona y cantidad de personas. Te respondo con propuesta clara.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="bizCta1" href="#" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+          <a class="btn btn-outline" href="#confianza">Ver reseñas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECCIÓN CONDICIONAL: PÚBLICO ===================== -->
+  <section class="section" id="pubSection">
+    <div class="container">
+      <h2>Público: pedí en la noche sin complicarte</h2>
+      <p>
+        Cuando el antojo pega, lo resolvemos rápido. Vos escribís, confirmamos disponibilidad y listo.
+      </p>
+
+      <!-- ===================== MENÚ (SOLO PÚBLICO) ===================== -->
+      <div class="menu-wrap" id="menu">
+        <button class="menu-toggle" type="button" aria-expanded="true" aria-controls="menuPanel" id="menuToggle">
+          <span class="menu-toggle__left">
+            <span class="menu-toggle__icon">🍕</span>
+            <span>
+              <strong class="menu-title">Nuestras pizzas</strong>
+              <span class="menu-toggle__meta">Q85 • 8 porciones • 8 sabores</span>
+            </span>
+          </span>
+          <span class="menu-toggle__chev" aria-hidden="true">▾</span>
+        </button>
+
+        <div class="menu-panel" id="menuPanel">
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Hawaiana.webp" alt="Pizza Hawaiana"></div>
+              <div class="menu-body">
+                <h3>Hawaiana</h3>
+                <p>Base de salsa de tomate, mozzarella, jamón y piña. La clásica dulce-salada.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Hawaiana" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Hawaiana">−</button>
+                  <span class="qty-num" aria-label="Cantidad Hawaiana">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Hawaiana">+</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Peperoni.webp" alt="Pizza Peperoni"></div>
+              <div class="menu-body">
+                <h3>Peperoni</h3>
+                <p>Salsa de tomate, mozzarella y pepperoni doradito. Simple y poderosa.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Peperoni" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Peperoni">−</button>
+                  <span class="qty-num" aria-label="Cantidad Peperoni">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Peperoni">+</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Margarita Pesto.webp" alt="Pizza Margarita Pesto"></div>
+              <div class="menu-body">
+                <h3>Margarita Pesto</h3>
+                <p>Salsa de tomate de la casa, con masa de la casa, mozzarella, tomate cherry y un pesto espectacular.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Margarita Pesto" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Margarita Pesto">−</button>
+                  <span class="qty-num" aria-label="Cantidad Margarita Pesto">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Margarita Pesto">+</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Chapina.webp" alt="Pizza Chapina"></div>
+              <div class="menu-body">
+                <h3>Chapina</h3>
+                <p>Pizza con masa de la casa, salsa de chile guaque con chorizo y longaniza.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Chapina" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Chapina">−</button>
+                  <span class="qty-num" aria-label="Cantidad Chapina">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Chapina">+</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Carnes.png" alt="Pizza de Carnes"></div>
+              <div class="menu-body">
+                <h3>Carnes</h3>
+                <p>Salsa de tomate de la casa, masa de la casa, queso mozzarella, jamón, tocino y pepperoni.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Carnes" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Carnes">−</button>
+                  <span class="qty-num" aria-label="Cantidad Carnes">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Carnes">+</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Tejana.webp" alt="Pizza Tejana"></div>
+              <div class="menu-body">
+                <h3>Tejana</h3>
+                <p>Salsa de tomate, mozzarella, carne sazonada y un toque de jalapeño (nivel “rico”, no complicado).</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Tejana" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Tejana">−</button>
+                  <span class="qty-num" aria-label="Cantidad Tejana">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Tejana">+</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Tocino.webp" alt="Pizza de Tocino"></div>
+              <div class="menu-body">
+                <h3>Tocino</h3>
+                <p>Salsa de tomate, mozzarella y tocino crujiente. Favorita para compartir.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Tocino" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Tocino">−</button>
+                  <span class="qty-num" aria-label="Cantidad Tocino">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Tocino">+</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-img"><img loading="lazy" decoding="async" src="Jamon.webp" alt="Pizza de Jamón"></div>
+              <div class="menu-body">
+                <h3>Jamón</h3>
+                <p>Salsa de tomate de la casa, con queso mozzarella y jamón.</p>
+                <div class="menu-price">Q85 • 8 porciones</div>
+                <div class="qty-controls" data-flavor="Jamón" data-category="pizza">
+                  <button class="qty-btn qty-minus" type="button" aria-label="Restar Jamón">−</button>
+                  <span class="qty-num" aria-label="Cantidad Jamón">0</span>
+                  <button class="qty-btn qty-plus" type="button" aria-label="Sumar Jamón">+</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          
+          <!-- ===== Entradas y Postres (NO desplegado por default) ===== -->
+          <div class="menu-wrap" id="menuExtras" style="margin-top:14px;">
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menuExtrasPanel" id="menuExtrasToggle">
+              <span class="menu-toggle__left">
+                <span class="menu-toggle__icon">🍓</span>
+                <span>
+                  <strong class="menu-title">Nuestras Entradas y Postres</strong>
+                  <span class="menu-toggle__meta">Nachos • Alitas • Crepas • Fresas</span>
+                </span>
+              </span>
+              <span class="menu-toggle__chev" aria-hidden="true">▾</span>
+            </button>
+
+            <div class="menu-panel" id="menuExtrasPanel" hidden>
+              <div class="menu-grid">
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Nachos.webp" alt="Nachos"></div>
+                  <div class="menu-body">
+                    <h3>Nachos con queso</h3>
+                    <p>Nachos crujientes con queso derretido y toppings (según disponibilidad).</p>
+                    <div class="menu-price">Q35</div>
+                    <div class="qty-controls" data-flavor="Nachos con queso" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Nachos con queso">−</button>
+                      <span class="qty-num" aria-label="Cantidad Nachos con queso">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Nachos con queso">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Alitas.webp" alt="Alitas"></div>
+                  <div class="menu-body">
+                    <h3>Alitas (porción)</h3>
+                    <p>Alitas doraditas con salsa a elegir (consulta opciones disponibles).</p>
+                    <div class="menu-price">Q35</div>
+                    <div class="qty-controls" data-flavor="Alitas (porción)" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Alitas (porción)">−</button>
+                      <span class="qty-num" aria-label="Cantidad Alitas (porción)">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Alitas (porción)">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Crepa-Fresas-Nutela.webp" alt="Crepa de fresas con Nutella"></div>
+                  <div class="menu-body">
+                    <h3>Crepa de fresas con Nutella</h3>
+                    <p>Crepa recién hecha con fresas frescas y Nutella.</p>
+                    <div class="menu-price">Q40</div>
+                    <div class="qty-controls" data-flavor="Crepa de fresas con Nutella" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Crepa de fresas con Nutella">−</button>
+                      <span class="qty-num" aria-label="Cantidad Crepa de fresas con Nutella">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Crepa de fresas con Nutella">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Crepa-Banano-Nutela.webp" alt="Crepa de banano con Nutella"></div>
+                  <div class="menu-body">
+                    <h3>Crepa de banano con Nutella</h3>
+                    <p>Crepa recién hecha con banano y Nutella. Dulce y contundente.</p>
+                    <div class="menu-price">Q40</div>
+                    <div class="qty-controls" data-flavor="Crepa de banano con Nutella" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Crepa de banano con Nutella">−</button>
+                      <span class="qty-num" aria-label="Cantidad Crepa de banano con Nutella">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Crepa de banano con Nutella">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Crepa-Fresa-Banano.webp" alt="Crepa de fresa y banano"></div>
+                  <div class="menu-body">
+                    <h3>Crepa de fresa y banano</h3>
+                    <p>Crepa con fresa y banano: el combo que nunca falla.</p>
+                    <div class="menu-price">Q40</div>
+                    <div class="qty-controls" data-flavor="Crepa de fresa y banano" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Crepa de fresa y banano">−</button>
+                      <span class="qty-num" aria-label="Cantidad Crepa de fresa y banano">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Crepa de fresa y banano">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Fresas-Con-Crema-Vaso.webp" alt="Fresas con crema en vaso"></div>
+                  <div class="menu-body">
+                    <h3>Vaso de fresas con crema</h3>
+                    <p>Fresas frescas con crema dulce servidas en vaso.</p>
+                    <div class="menu-price">Q35</div>
+                    <div class="qty-controls" data-flavor="Vaso de fresas con crema" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Vaso de fresas con crema">−</button>
+                      <span class="qty-num" aria-label="Cantidad Vaso de fresas con crema">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Vaso de fresas con crema">+</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="menu-item">
+                  <div class="menu-img"><img loading="lazy" decoding="async" src="Fresas-Con-Chocolate-Vaso.webp" alt="Fresas con chocolate en vaso"></div>
+                  <div class="menu-body">
+                    <h3>Vaso de fresas con chocolate</h3>
+                    <p>Fresas frescas bañadas con chocolate, servidas en vaso.</p>
+                    <div class="menu-price">Q35</div>
+                    <div class="qty-controls" data-flavor="Vaso de fresas con chocolate" data-category="extra">
+                      <button class="qty-btn qty-minus" type="button" aria-label="Restar Vaso de fresas con chocolate">−</button>
+                      <span class="qty-num" aria-label="Cantidad Vaso de fresas con chocolate">0</span>
+                      <button class="qty-btn qty-plus" type="button" aria-label="Sumar Vaso de fresas con chocolate">+</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <p class="menu-note" style="margin-top:10px;">Nota: salsas y detalles (si aplica) se confirman por WhatsApp.</p>
+            </div>
+          </div>
+          <div class="menu-cta">
+            <a class="btn btn-primary" id="menuCtaWa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp <span class="wa-badge" id="waBadge" aria-hidden="true">0</span></a>
+            <a class="btn btn-outline" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener">Pedir por PedidosYa</a>
+            <a class="btn btn-outline" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener">Pedir por Uber Eats</a>
+          </div>
+
+          <p class="menu-note">Tip: escribinos el sabor + cantidad + ubicación. Te confirmamos disponibilidad al momento.</p>
+        </div>
+      </div>
+
+
+      <div class="cols">
+        <div class="card-mini">
+          <div class="icon">💬</div>
+          <h3>Mensaje directo</h3>
+          <p class="desc">WhatsApp es lo más rápido para confirmar y coordinar.</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🛵</div>
+          <h3>Domicilio nocturno</h3>
+          <p class="desc">Atención on demand por la noche (según disponibilidad del día).</p>
+        </div>
+        <div class="card-mini">
+          <div class="icon">🍕</div>
+          <h3>Sabores que gustan</h3>
+          <p class="desc">Pizzas y crepas para compartir. Lo clásico siempre gana.</p>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h3>¿Pedimos hoy?</h3>
+        <p>Mandame: qué querés, cantidad y tu ubicación. Te confirmo al momento.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="pubCta1" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRUEBA SOCIAL ===================== -->
+  <section class="section" id="confianza">
+    <div class="container">
+      <h2>Reseñas (prueba social que sí convence)</h2>
+      <p></p>
+
+      <div class="cols">
+        <article class="review">
+          <div class="quote">“</div>
+          <p>La actividad salió ordenada, sirvieron rápido y a la gente le encantó. Cero estrés para RRHH.</p>
+          <strong>— Cliente empresa</strong>
+        </article>
+        <article class="review">
+          <div class="quote">“</div>
+          <p>Pedí tarde y me confirmaron en minutos. La pizza llegó bien y estaba buenísima.</p>
+          <strong>— Cliente nocturno</strong>
+        </article>
+        <article class="review">
+          <div class="quote">“</div>
+          <p>Buen servicio en evento. Crepas top. Se nota el cuidado en los detalles.</p>
+          <strong>— Evento privado</strong>
+        </article>
+      </div>
+
+      <div class="cta-band" id="ctaBandFinal">
+        <h3>Listo: ahora solo falta que me escribás</h3>
+        <p>Te respondo con una ruta clara según lo que necesitás.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="ctaFinal" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-outline" href="#valor">Volver arriba</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Mini Carrito (flotante, discreto) -->
+  <a id="miniCartFab" class="mini-cart-fab hidden" href="#" aria-label="Ver carrito" title="Ver carrito">
+    <img id="miniCartIcon" loading="lazy" decoding="async" src="carrito-ligth.png" alt="Carrito">
+    <span id="miniCartCount" class="mini-cart-count" aria-hidden="true">0</span>
+  </a>
+
+  <!-- WhatsApp Floating Button -->
+  <a id="ueFab" class="fab fab--ue" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener" aria-label="Pedir por Uber Eats" title="Uber Eats">
+  <img loading="lazy" decoding="async" src="ubereats.png" alt="Uber Eats" />
+</a>
+
+<a id="pyFab" class="fab fab--py" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener" aria-label="Pedir por PedidosYa" title="PedidosYa">
+  <img loading="lazy" decoding="async" src="pedidosya.png" alt="PedidosYa" />
+</a>
+
+<a id="waFab" class="fab fab--wa" href="#" target="_blank" rel="noopener" aria-label="Escribirme por WhatsApp" title="WhatsApp">
+  <img loading="lazy" decoding="async" src="whatsapp 64p original.png" alt="WhatsApp" />
+</a>
+</main>
+
+<footer class="footer">
+  <div class="container footer-top">
+    <nav class="footer-col">
+      <h4>Explora</h4>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#confianza">Reseñas</a></li>
+      </ul>
+    </nav>
+    
+    <nav class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a id="waFooter" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener">PedidosYa</a></li>
+</ul>
+
+      
+
+    </nav>
+
   </div>
 
   <div class="container">
-    <div class="social" aria-label="Redes sociales">
-      <a aria-label="WhatsApp" class="social__link" href="#" id="waFooter" rel="noopener" target="_blank">
-        <img alt="WhatsApp" decoding="async" loading="lazy" src="whatsapp.png"/>
+<div class="social">
+        <a class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" target="_blank" rel="noopener" aria-label="Instagram">
+          <img loading="lazy" decoding="async" src="instagram.png" alt="Instagram" />
+        </a>
+        <a class="social__link" href="#" target="_blank" rel="noopener" aria-label="TikTok">
+          <img loading="lazy" decoding="async" src="tiktok.png" alt="TikTok" />
+        </a>
+        <a class="social__link" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+          <img loading="lazy" decoding="async" src="facebook.png" alt="Facebook" />
+        </a>
+              <a class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" target="_blank" rel="noopener" aria-label="Uber Eats">
+        <img loading="lazy" decoding="async" src="ubereats.png" alt="Uber Eats" />
       </a>
-      <a aria-label="Instagram" class="social__link" href="https://www.instagram.com/misterpizzaguate?igsh=MTNjbmR1MGRwY3Vvcg==" rel="noopener" target="_blank">
-        <img alt="Instagram" decoding="async" loading="lazy" src="instagram.png"/>
-      </a>
-      <a aria-label="TikTok" class="social__link" href="#" rel="noopener" target="_blank">
-        <img alt="TikTok" decoding="async" loading="lazy" src="tiktok.png"/>
-      </a>
-      <a aria-label="Facebook" class="social__link" href="#" rel="noopener" target="_blank">
-        <img alt="Facebook" decoding="async" loading="lazy" src="facebook.png"/>
-      </a>
-      <a aria-label="Uber Eats" class="social__link" href="https://www.ubereats.com/store/mr-pizza/v4JKS9wiV9GBl_N_cV1ZNw" rel="noopener" target="_blank">
-        <img alt="Uber Eats" decoding="async" loading="lazy" src="ubereats.png"/>
-      </a>
-      <a aria-label="PedidosYa" class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" rel="noopener" target="_blank">
-        <img alt="PedidosYa" decoding="async" loading="lazy" src="pedidosya.png"/>
-      </a>
-    </div>
+<a class="social__link" href="https://www.pedidosya.com.gt/restaurantes/ciudad-de-guatemala/mister-pizza-z4-aac4f772-ab3a-4694-9b73-3391a283d481-menu" target="_blank" rel="noopener" aria-label="PedidosYa">
+          <img loading="lazy" decoding="async" src="pedidosya.png" alt="PedidosYa" />
+        </a>
+      </div>
   </div>
 
   <div class="container footer-bottom">
-    <p>© <span id="year"></span> <strong>MR Pizza GT</strong> by <strong>GaschSoft</strong>. Todos los derechos reservados. Hecho en Guatemala 🇬🇹</p>
+    <p>© 2026 <strong>GASCHSOFT</strong>. Todos los derechos reservados. I Hecho en Guatemala 🇬🇹</p>
   </div>
 </footer>
-<!-- ===================== MODAL PUBLICO: DATOS PARA PEDIDO WHATSAPP ===================== -->
-<div aria-atomic="true" aria-live="polite" class="toast-host" id="toastHost"></div>
-<div aria-hidden="true" class="modal-overlay" id="orderModal">
-<div aria-labelledby="orderModalTitle" aria-modal="false" class="modal" role="dialog">
-<button aria-label="Cerrar" class="modal-x" id="orderModalClose" type="button">✕</button>
-<div class="modal-head">
-<div class="modal-kicker">Pedido por WhatsApp</div>
-<h3 class="modal-title" id="orderModalTitle">Tus datos para confirmar</h3>
-<p class="modal-sub">Esto nos ayuda a personalizar el mensaje y facturarte más rápido.</p>
-</div>
-<form autocomplete="on" class="modal-form" id="orderForm">
-<div class="field">
-<label for="ordName">Nombre</label>
-<input id="ordName" name="name" placeholder="Ejemplo: Andre Morales" required="" type="text"/>
-<div aria-live="polite" class="field-error" id="errName"></div>
-</div>
-<div class="field">
-<label for="ordNit">NIT</label>
-<input id="ordNit" inputmode="text" name="nit" placeholder="Enviamos tu factura por WhatsApp" type="text"/>
-</div>
-<div class="field">
-<label for="ordAddress">Dirección</label>
-<textarea id="ordAddress" name="address" placeholder="Ejemplo: Zona 4, Colonia ____ , 2da avenida 10-20, referencia: frente a ____" required="" rows="3"></textarea>
-<div aria-live="polite" class="field-error" id="errAddress"></div>
-</div>
-<div class="field">
-<label for="ordPay">Método de pago</label>
-<div class="select-wrap">
-<select id="ordPay" name="pay" required="">
-<option disabled="" selected="" value="">Elegí una opción…</option>
-<option value="Link de Pago">Link de Pago (Visa/Mastercard)</option>
-<option value="Efectivo">Efectivo</option>
-</select>
-</div>
-<div aria-live="polite" class="field-error" id="errPay"></div>
-</div>
-<div class="modal-actions">
-<button class="btn btn-outline" id="orderModalCancel" type="button">Cancelar</button>
-<button aria-label="Enviar pedido" class="send-btn" id="orderModalSend" type="submit">
-<img alt="" class="send-icon" decoding="async" id="sendMsgIcon" loading="lazy" src="enviar-mensaje.png"/>
-</button>
-</div>
-</form>
-</div>
-</div>
-<!-- ===================== MODAL EMPRESAS: COTIZAR EVENTO ===================== -->
-<div aria-hidden="true" class="biz-modal-overlay" id="bizModal">
-<div aria-labelledby="bizModalTitle" aria-modal="false" class="biz-modal" role="dialog">
-<button aria-label="Cerrar" class="modal-x" id="bizModalClose" type="button">✕</button>
-<div class="modal-head" style="padding: 8px 8px 4px;">
-<div class="modal-kicker">Empresas • Cotización</div>
-<h3 class="modal-title" id="bizModalTitle" style="margin:0;">Cotizá tu evento</h3>
-</div>
-<form autocomplete="on" class="modal-form" id="bizForm" style="padding: 0 8px 6px;">
-<div class="biz-modal-grid">
-<div class="biz-col biz-col-left"><div class="biz-field">
-<div class="biz-ico"><img alt="" decoding="async" id="icoEventType" loading="lazy" src="Logotipos/organizador.png"/></div>
-<div class="field">
-<label for="bizType">Tipo de evento</label>
-<select id="bizType" name="type" required="">
-<option disabled="" selected="" value="">Seleccioná el tipo de evento…</option>
-<option>Convivio corporativo</option>
-<option>Aniversario</option>
-<option>Fin de año / Navidad</option>
-<option>Cumpleaños</option>
-<option>Graduación</option>
-<option>Reunión de equipo</option>
-<option>Lanzamiento / inauguración</option>
-<option>Otros</option>
-</select>
-<div aria-live="polite" class="field-error" id="bizErrType"></div>
-</div>
-</div><div class="biz-field">
-<div class="biz-ico"><img alt="" decoding="async" id="icoPeople" loading="lazy" src="Logotipos/personas.png"/></div>
-<div class="field">
-<label>Cantidad de personas</label>
-<div class="biz-subgrid">
-<div>
-<div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
-<img alt="" decoding="async" id="icoAdults" loading="lazy" src="Logotipos/pareja.png" style="width:16px; height:16px; object-fit:contain; opacity:.95;"/>
-<span style="font-weight:900; font-size:13px; color:var(--muted);">Adultos</span>
-</div>
-<input id="bizAdults" inputmode="numeric" min="0" name="adults" placeholder="0" required="" type="number"/>
-<div aria-live="polite" class="field-error" id="bizErrAdults"></div>
-</div>
-<div>
-<div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
-<img alt="" decoding="async" id="icoKids" loading="lazy" src="Logotipos/chico.png" style="width:16px; height:16px; object-fit:contain; opacity:.95;"/>
-<span style="font-weight:900; font-size:13px; color:var(--muted);">Niños</span>
-</div>
-<input id="bizKids" inputmode="numeric" min="0" name="kids" placeholder="0" required="" type="number"/>
-<div aria-live="polite" class="field-error" id="bizErrKids"></div>
-</div>
-</div>
-</div>
-</div><div class="biz-field">
-<div class="biz-ico"><img alt="" decoding="async" id="icoTime" loading="lazy" src="Logotipos/reloj.png"/></div>
-<div class="field">
-<label>Horario</label>
-<div style="display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px;">
-<div>
-<div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
-<img alt="" decoding="async" id="icoStartEvent" loading="lazy" src="Logotipos/calendar.png" style="width:16px; height:16px; object-fit:contain; opacity:.95;"/>
-<span style="font-weight:900; font-size:13px; color:var(--muted);">Inicio evento</span>
-</div>
-<input id="bizStart" name="start" required="" type="time"/>
-<div aria-live="polite" class="field-error" id="bizErrStart"></div>
-</div>
-<div>
-<div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
-<img alt="" decoding="async" id="icoServe" loading="lazy" src="Logotipos/tenedor.png" style="width:16px; height:16px; object-fit:contain; opacity:.95;"/>
-<span style="font-weight:900; font-size:13px; color:var(--muted);">Inicio servicio</span>
-</div>
-<input id="bizServe" name="serve" required="" type="time"/>
-<div aria-live="polite" class="field-error" id="bizErrServe"></div>
-</div>
-</div>
-</div>
-</div><div class="biz-field">
-<div class="biz-ico"><img alt="" decoding="async" id="icoPhone" loading="lazy" src="Logotipos/Telefono.png"/></div>
-<div class="field">
-<label for="bizPhone">Teléfono / contacto</label>
-<input id="bizPhone" inputmode="tel" name="phone" placeholder="Ej: +502 5555-5555" required="" type="tel"/>
-<div aria-live="polite" class="field-error" id="bizErrPhone"></div>
-</div>
-</div></div><div class="biz-col biz-col-right"><div class="biz-field">
-<div class="biz-ico"><img alt="" decoding="async" id="icoCompany" loading="lazy" src="Logotipos/corporacion.png"/></div>
-<div class="field">
-<label for="bizCompany">Empresa</label>
-<input id="bizCompany" name="company" placeholder="Ej: Mi Empresa S.A." required="" type="text"/>
-<div aria-live="polite" class="field-error" id="bizErrCompany"></div>
-</div>
-</div><div class="biz-field">
-<div class="biz-ico"><img alt="" decoding="async" id="icoDate" loading="lazy" src="Logotipos/calendario.png"/></div>
-<div class="field">
-<label for="bizDate">Fecha</label>
-<input id="bizDate" name="date" required="" type="date"/>
-<div aria-live="polite" class="field-error" id="bizErrDate"></div>
-</div>
-</div><div class="biz-field biz-field-products">
-<div class="biz-ico"><img alt="" decoding="async" id="icoProducts" loading="lazy" src="Logotipos/productos.png"/></div>
-<div class="field">
-<label>Productos</label>
-<div aria-label="Productos a incluir" class="biz-products">
-<label class="biz-check"><input id="bizProdPizzas" type="checkbox" value="Pizzas"/> <span>Pizzas</span></label>
-<label class="biz-check"><input id="bizProdCrepas" type="checkbox" value="Crepas"/> <span>Crepas</span></label>
-<label class="biz-check"><input id="bizProdFresas" type="checkbox" value="Vaso de fresas con Pistacho"/> <span>Vaso de fresas con Pistacho</span></label>
-<label class="biz-check"><input id="bizProdBebidas" type="checkbox" value="Bebidas"/> <span>Bebidas</span></label>
-<label class="biz-check"><input id="bizProdToldos" type="checkbox" value="Toldos"/> <span>Toldos</span></label>
-<label class="biz-check"><input id="bizProdCarpachos" type="checkbox" value="Carpachos"/> <span>Carpachos</span></label>
-<label class="biz-check"><input id="bizProdNachos" type="checkbox" value="Nachos"/> <span>Nachos</span></label>
-<label class="biz-check"><input id="bizProdAlitas" type="checkbox" value="Alitas"/> <span>Alitas</span></label>
-</div>
-<div aria-live="polite" class="field-error" id="bizErrProducts"></div>
-</div>
-</div><div class="biz-field">
-<div class="biz-ico"><img alt="" decoding="async" id="icoLoc" loading="lazy" src="Logotipos/marcador-de-posicion.png"/></div>
-<div class="field">
-<label for="bizLocation">Ubicación</label>
-<textarea id="bizLocation" name="location" placeholder="Ej: Zona 10, edificio ___, salón ___, referencia: ____" required="" rows="2"></textarea>
-<div aria-live="polite" class="field-error" id="bizErrLocation"></div>
-</div>
-</div><div class="biz-field">
-<div class="biz-ico"><img alt="" decoding="async" id="icoMail" loading="lazy" src="Logotipos/correo-electronico.png"/></div>
-<div class="field">
-<label for="bizEmail">Correo</label>
-<input id="bizEmail" name="email" placeholder="Ej: nombre@empresa.com" required="" type="email"/>
-<div aria-live="polite" class="field-error" id="bizErrEmail"></div>
-</div>
-</div></div></div>
-<div class="biz-actions">
-<button class="btn btn-outline" id="bizModalCancel" type="button">Cancelar</button>
-<button class="btn btn-outline btn-icon" id="bizSendEmail" type="button">
-<span>Enviar por correo</span>
-<img alt="" decoding="async" loading="lazy" src="Logotipos/Logo gmail.png"/>
-<img alt="" decoding="async" loading="lazy" src="Logotipos/Logo outlook.png"/>
-</button>
-<button class="btn btn-primary btn-icon" id="bizSendWa" type="button">
-<span>Enviar por WhatsApp</span>
-<img alt="" decoding="async" loading="lazy" src="Logotipos/Logo whatsapp.png"/>
-</button>
-</div>
-</form>
-</div>
-</div>
+
 <script>
   // =============================
-  // CONFIG: CAMBIÁ SOLO ESTO ;)
+  // CONFIG: CAMBIÁ SOLO ESTO
   // =============================
   const CONFIG = {
     // Número WhatsApp en formato internacional SIN "+"
@@ -3284,10 +1635,9 @@ html[data-theme="dark"] h2.menu-section-title,
 
     const headerLogo = document.getElementById("logoHeader");
     const heroLogo   = document.getElementById("logoHero");
-    const footerLogo = document.getElementById("logoFooter");
+
     if(headerLogo) headerLogo.src = src;
     if(heroLogo)   heroLogo.src = src;
-    if(footerLogo) footerLogo.src = src;
     const favicon = document.getElementById("favicon");
     if(favicon) favicon.href = (t==="dark") ? "MR PIZZA LOGO_Dark.png" : "MR PIZZA LOGO-Ligth.png";
     const cartIcon = document.getElementById("cartIcon");
@@ -3295,14 +1645,8 @@ html[data-theme="dark"] h2.menu-section-title,
     const miniCartIcon = document.getElementById("miniCartIcon");
     if(miniCartIcon) miniCartIcon.src = (t==="dark") ? "carrito-dark.png" : "carrito-ligth.png";
 
-    // Icono del boton "Enviar pedido" del modal (Publico)
-    const sendMsgIcon = document.getElementById("sendMsgIcon");
-    if(sendMsgIcon) sendMsgIcon.src = (t==="dark") ? "enviar-mensaje-dark.png" : "enviar-mensaje.png";
-
-
-    // Mantener iconos del modal Empresas sincronizados con el tema
-    if(typeof updateBizIcons === "function") updateBizIcons(t);
   }
+
 
   // Mensajes por ruta
   const MSG = {
@@ -3339,81 +1683,20 @@ html[data-theme="dark"] h2.menu-section-title,
     renderTheme();
   })();
 
-  // Year en footer
-  (function(){
-    const y=document.getElementById('year');
-    if(y) y.textContent = new Date().getFullYear();
-  })();
-
   // =============================
   // Router simple: si URL contiene /bussines => vista BUSINESS
   // =============================
   const state = { view: "public" }; // "public" | "business"
 
   function detectViewFromPath(){
-    // 1) Prioridad: query param (?view=business)
-    try{
-      const sp = new URLSearchParams(location.search || "");
-      const v = (sp.get("view") || "").toLowerCase();
-      if(v === "business") return "business";
-    }catch(e){}
-
-    // 2) Hash (#business)
-    const h = (location.hash || "").toLowerCase().replace("#","");
-    if(h === "business") return "business";
-
-    // 3) Path (/business o /bussines legacy)
     const p = (location.pathname || "").toLowerCase();
-    if(p.includes("/business") || p.includes("/bussines")) return "business";
+    // Mantengo "bussines" porque así lo pediste en la URL
+    if(p.includes("/bussines")) return "business";
     return "public";
   }
 
-  
-  // =============================
-  // Floating CTAs: Público (UE/PY/WA) vs Empresas (Cotizá)
-  // =============================
-  function setFloatingCTAsForView(isBusinessView){
-    const ueFab = document.getElementById("ueFab");
-    const pyFab = document.getElementById("pyFab");
-    const waFab = document.getElementById("waFab");
-    const cotizaFab = document.getElementById("cotizaFab");
-    const miniCartFab = document.getElementById("miniCartFab");
-
-    if(isBusinessView){
-      if(ueFab) ueFab.style.display = "none";
-      if(pyFab) pyFab.style.display = "none";
-      if(waFab) waFab.style.display = "none";
-      if(cotizaFab) cotizaFab.style.display = "";
-      // En Empresas: ocultar por completo el mini-carrito flotante (aunque haya items cargados)
-      if(miniCartFab) miniCartFab.style.display = "none";
-    }else{
-      if(ueFab) ueFab.style.display = "";
-      if(pyFab) pyFab.style.display = "";
-      if(waFab) waFab.style.display = "";
-      if(cotizaFab) cotizaFab.style.display = "none";
-      // En Público: devolvemos control a su lógica/clases (hidden, items, etc.)
-      if(miniCartFab) miniCartFab.style.display = "";
-    }
-  }
-
-
-  function updateUrlForView(view){
-    try{
-      const u = new URL(location.href);
-      if(view === "business"){
-        u.searchParams.set("view","business");
-      }else{
-        u.searchParams.delete("view");
-      }
-      u.hash = "";
-      history.replaceState(null, "", u.pathname + (u.search ? u.search : "") + u.hash);
-    }catch(e){}
-  }
-
-function setView(view){
+  function setView(view){
     state.view = view;
-
-    updateUrlForView(view);
 
     // botones
     document.getElementById("btnPublic").classList.toggle("active", view==="public");
@@ -3423,54 +1706,58 @@ function setView(view){
     document.getElementById("bizSection").classList.toggle("hidden", view!=="business");
     document.getElementById("pubSection").classList.toggle("hidden", view!=="public");
 
-    // UI base
-    const subtitle      = document.getElementById("subtitleHeader");
-    const promoCarousel = document.getElementById("promoCarouselSection");
-
-    // Secciones comunes
-    const heroCommon = document.getElementById("heroCommon");
-    const valorSec   = document.getElementById("valor");
-    const serviciosSec = document.getElementById("servicios");
-    const paquetesSec  = document.getElementById("paquetes");
-
-    // Público: elementos a ocultar (según la versión estable)
+    // headline y copy
     const heroTitle = document.getElementById("heroTitle");
     const heroSub   = document.getElementById("heroSub");
     const heroNote  = document.getElementById("heroNote");
     const heroCard  = document.getElementById("heroCardText");
+    const subtitle  = document.getElementById("subtitleHeader");
+    const heroCtaRowEl = document.getElementById("heroCtaRow");
+    const heroMediaEl  = document.querySelector(".hero-media");
+    const statsRowEl2  = document.getElementById("statsRow");
+    const serviciosEl2 = document.getElementById("servicios");
 
+
+    // Público: elementos a ocultar (según limpieza)
     const heroTitleEl = document.getElementById("heroTitle");
     const heroSubEl   = document.getElementById("heroSub");
     const heroCtaRow  = document.getElementById("heroCtaRow");
     const heroNoteEl  = document.getElementById("heroNote");
     const heroCardEl  = document.getElementById("heroCard");
     const statsRowEl  = document.getElementById("statsRow");
+    const valorSec    = document.getElementById("valor");
+    const paquetesSec = document.getElementById("paquetes");
+    const serviciosSec= document.getElementById("servicios");
     const checksSec   = document.getElementById("checks");
     const ctaFinalBand= document.getElementById("ctaBandFinal");
 
+    const promoCarousel = document.getElementById("promoCarouselSection");
+
     if(view==="business"){
-      // Empresas: nuevo embudo. Ocultamos el resto para no mezclar contenidos.
+
+      // Business: asegurar visibles (si fueron ocultos en Público)
+      [heroCtaRowEl, heroMediaEl, statsRowEl2, serviciosEl2].forEach(el=>{ if(el) el.classList.remove("hidden"); });
+
+
+      // Business: mostrar todo
+      [heroTitleEl, heroSubEl, heroCtaRow, heroNoteEl, heroCardEl, statsRowEl, valorSec, paquetesSec, ctaFinalBand, serviciosSec, checksSec]
+        .forEach(el => { if(el) el.hidden = false; });
+
       if(promoCarousel) promoCarousel.classList.add("hidden");
-      if(heroCommon) heroCommon.classList.add("hidden");
-      [valorSec, serviciosSec, paquetesSec].forEach(el=>{ if(el) el.classList.add("hidden"); });
-      if(subtitle) subtitle.textContent = "Empresas • Catering empresarial";
+      subtitle.textContent = "Business • Catering para empresas";
+      heroTitle.innerHTML = 'Pizzas y crepas para <span style="color:var(--red);">convivios empresariales</span> que salen perfectos';
+      heroSub.innerHTML = "Cerrá tu actividad con orden, puntualidad y comida rica. Ideal para RRHH, aniversarios, navidad y fechas especiales.";
+      heroNote.innerHTML = "<strong>Ruta empresa:</strong><span>Presupuesto anual + proveedor confiable = evento sin estrés.</span>";
+      heroCard.innerHTML = "<strong>Estás en Business.</strong><br/>Cotizá en 2 minutos por WhatsApp.";
     } else {
 
       // Público: ocultar botones bajo carrusel, cuadro de rol, checks y sección servicios
-      const heroCtaRowEl = document.getElementById("heroCtaRow");
-      const heroMediaEl  = document.querySelector(".hero-media");
-      const statsRowEl2  = document.getElementById("statsRow");
-      const serviciosEl2 = document.getElementById("servicios");
       [heroCtaRowEl, heroMediaEl, statsRowEl2, serviciosEl2].forEach(el=>{ if(el) el.classList.add("hidden"); });
 
+
       // Público: ocultar secciones/textos para que no se sature
-      // (OJO: mantenemos esto tal cual porque Público está "cerrado / estable")
       [heroTitleEl, heroSubEl, heroCtaRow, heroNoteEl, heroCardEl, statsRowEl, valorSec, paquetesSec, ctaFinalBand, serviciosSec, checksSec]
         .forEach(el => { if(el) el.hidden = true; });
-
-      // Asegurar que lo ocultado para Empresas regrese en Público
-      if(heroCommon) heroCommon.classList.remove("hidden");
-      [valorSec, serviciosSec, paquetesSec].forEach(el=>{ if(el) el.classList.remove("hidden"); });
 
       if(promoCarousel) promoCarousel.classList.remove("hidden");
       subtitle.textContent = "Público • Pedidos nocturnos";
@@ -3479,9 +1766,6 @@ function setView(view){
       heroNote.innerHTML = "<strong>Lo que compras es tranquilidad.</strong><span>Mensajes claros, confirmación rápida y comida rica para compartir.</span>";
       heroCard.innerHTML = "<strong>Estás en Público.</strong><br/>Pedí de noche por WhatsApp y te confirmamos.";
     }
-
-    // Floating CTAs (solo se ven según vista)
-    setFloatingCTAsForView(view==="business");
 
     // CTAs
     const msgTop  = (view==="business") ? MSG.business : MSG.public;
@@ -3492,17 +1776,12 @@ function setView(view){
     document.getElementById("heroCta").href = waLink(msgHero);
     document.getElementById("heroCardCta").href = waLink(msgHero);
 
-    const svcBiz = document.getElementById("svcBizCta");
-    const svcPub = document.getElementById("svcPubCta");
-    const svcMix = document.getElementById("svcMixCta");
-    if(svcBiz) svcBiz.href = waLink(MSG.business);
-    if(svcPub) svcPub.href = waLink(MSG.public);
-    if(svcMix) svcMix.href = waLink(MSG.mixed);
+    document.getElementById("svcBizCta").href = waLink(MSG.business);
+    document.getElementById("svcPubCta").href = waLink(MSG.public);
+    document.getElementById("svcMixCta").href = waLink(MSG.mixed);
 
-    const bizCta1 = document.getElementById("bizCta1");
-    const pubCta1 = document.getElementById("pubCta1");
-    if(bizCta1) bizCta1.href = waLink(MSG.business);
-    if(pubCta1) pubCta1.href = waLink(MSG.public);
+    document.getElementById("bizCta1").href = waLink(MSG.business);
+    document.getElementById("pubCta1").href = waLink(MSG.public);
 
     document.getElementById("ctaFinal").href = waLink(msgTop);
     document.getElementById("waFab").href = waLink(msgTop);
@@ -3529,6 +1808,7 @@ function setView(view){
   })();
 
   // Año
+
 
   // Promo carrusel (solo Público)
   (function(){
@@ -3561,6 +1841,7 @@ function setView(view){
 
     render();
   })();
+
 
   // Menú desplegable (solo Público)
   (function(){
@@ -3600,17 +1881,6 @@ function setView(view){
 
   // Boot
   setView(detectViewFromPath());
-
-    // CTA flotante Cotizá: reutiliza el mismo flujo del botón principal de cotización
-    const cotizaFab = document.getElementById("cotizaFab");
-    if(cotizaFab){
-      cotizaFab.addEventListener("click", (e)=>{
-        e.preventDefault();
-        const btn = document.getElementById("bizQuoteBtn");
-        if(btn) btn.click();
-      });
-    }
-
 </script>
 <script>
 
@@ -3620,35 +1890,14 @@ function setView(view){
     const waBadge = document.getElementById("waBadge");
     const cartCountEl = document.getElementById("cartCount");
 
-    // Modal Publico (datos antes de ir a WhatsApp)
-    const orderModal = document.getElementById('orderModal');
-    const orderClose = document.getElementById('orderModalClose');
-    const orderCancel = document.getElementById('orderModalCancel');
-    const orderForm = document.getElementById('orderForm');
-    const ordName = document.getElementById('ordName');
-    const ordNit = document.getElementById('ordNit');
-    const ordAddress = document.getElementById('ordAddress');
-    const ordPay = document.getElementById('ordPay');
-
-    const errName = document.getElementById('errName');
-    const errAddress = document.getElementById('errAddress');
-    const errPay = document.getElementById('errPay');
-
-    const toastHost = document.getElementById('toastHost');
-
     // Mini carrito flotante (solo Publico)
     const miniCartFab = document.getElementById("miniCartFab");
     const miniCartCountEl = document.getElementById("miniCartCount");
 
-    // Nota: desde v59+ la vista Empresas vive en el MISMO index via ?view=business.
-    // Por eso no podemos depender solo de location.pathname.
-    const isBusinessPath = ()=>{
-      try{
-        if(typeof detectViewFromPath === 'function') return detectViewFromPath() === 'business';
-      }catch(e){}
+    const isBusinessPath = (()=>{
       const p = (location && location.pathname ? location.pathname.toLowerCase() : '');
       return p.includes('/business') || p.includes('/bussines');
-    };
+    })();
 
     if(miniCartFab){
       miniCartFab.addEventListener('click', (e)=>{
@@ -3665,7 +1914,6 @@ function setView(view){
     const PHONE = "50239151615";
     const state = {};      // itemName -> qty
     const category = {};   // itemName -> "pizza" | "extra"
-    const priceMap = {};   // itemName -> price (Q)
 
     function totalCount(){
       return Object.values(state).reduce((a,b)=>a+(b||0),0);
@@ -3675,15 +1923,6 @@ function setView(view){
       let t = 0;
       Object.keys(state).forEach(k=>{ if(category[k]===cat) t += (state[k]||0); });
       return t;
-    }
-
-    function totalAmount(){
-      let total = 0;
-      Object.keys(state).forEach(k=>{
-        const q = state[k]||0;
-        if(q>0) total += q * (priceMap[k]||0);
-      });
-      return total;
     }
 
     function buildMessage(){
@@ -3699,9 +1938,9 @@ function setView(view){
       if(pizzas>0 && extras>0){
         lines.push("Quiero hacer un pedido: " + pizzas + " pizzas y " + extras + " entradas/postres.");
       }else if(pizzas>0){
-        lines.push("Quiero hacer un pedido, deseo " + pizzas + " pizzas.");
+        lines.push("Quiero hacer un pedido, deseo " + pizzas + " pizzas los sabores son:");
       }else{
-        lines.push("Quiero hacer un pedido, deseo " + extras + " entradas/postres.");
+        lines.push("Quiero hacer un pedido, deseo " + extras + " entradas/postres:");
       }
 
       if(pizzas>0){
@@ -3725,673 +1964,6 @@ function setView(view){
 
       return lines.join("\n");
     }
-
-    function buildFinalOrderMessage(opts){
-      const name = cleanText(opts && opts.name);
-      const nit = cleanText(opts && opts.nit) || 'CF';
-      const address = cleanText(opts && opts.address);
-      const pay = cleanText(opts && opts.pay);
-
-      const pizzas = totalBy("pizza");
-      const extras = totalBy("extra");
-      const amount = totalAmount();
-
-      const lines = [];
-      lines.push("Hola! Vengo del canal web: Mr Pizza GT by GaschSoft.");
-      lines.push("");
-
-      lines.push("Quiero hacer un pedido.");
-      lines.push("");
-
-      // Datos del cliente (para facturación/entrega)
-      lines.push("Datos del cliente:");
-      lines.push("Nombre: " + name);
-      lines.push("NIT: " + nit);
-      lines.push("Método de pago: " + pay);
-      lines.push("Dirección: " + address);
-      lines.push("");
-
-      // Detalle
-      if(pizzas>0){
-        lines.push("Pizzas:");
-        Object.keys(state).forEach(item=>{
-          const q = state[item]||0;
-          if(q>0 && category[item]==="pizza") lines.push("- " + q + " de " + item);
-        });
-      }
-      if(extras>0){
-        if(pizzas>0) lines.push("");
-        lines.push("Entradas y postres:");
-        Object.keys(state).forEach(item=>{
-          const q = state[item]||0;
-          if(q>0 && category[item]==="extra") lines.push("- " + q + " de " + item);
-        });
-      }
-
-      lines.push("");
-      lines.push("Total de la orden: Q" + amount);
-      lines.push("");
-      lines.push("Confirmo que deseo el pedido.");
-      lines.push("En este chat puedo compartir mi ubicación actual para coordinar la entrega y que me confirmen el tiempo estimado.");
-      return lines.join("\n");
-    }
-
-    function cleanText(x){
-      return String(x||"").replace(/\s+/g,' ').trim();
-    }
-
-
-    function formatDateGT(yyyyMmDd){
-      const s = cleanText(yyyyMmDd);
-      // Espera "YYYY-MM-DD" (valor típico de input[type="date"])
-      const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
-      if(!m) return s;
-      const yyyy = m[1], mm = m[2], dd = m[3];
-      return dd + "/" + mm + "/" + yyyy;
-    }
-
-    // Toast discreto (arriba derecha)
-    function showToast(text, ms){
-      if(!toastHost) return;
-      ms = Number(ms);
-      if(!isFinite(ms) || ms <= 0) ms = 2200;
-
-      const el = document.createElement('div');
-      el.className = 'toast';
-      el.textContent = text;
-
-      // Barra de progreso sincronizada con el tiempo de vida del toast
-      el.style.setProperty('--toast-ms', ms + 'ms');
-
-      toastHost.appendChild(el);
-      requestAnimationFrame(()=> el.classList.add('is-show'));
-
-      window.setTimeout(()=>{
-        el.classList.remove('is-show');
-        window.setTimeout(()=> el.remove(), 220);
-      }, ms);
-    }
-
-    // Error bajo el campo (3s)
-    function fieldError(el, msg){
-      if(!el) return;
-      el.textContent = msg;
-      el.classList.add('is-show');
-      window.setTimeout(()=>{
-        el.classList.remove('is-show');
-        window.setTimeout(()=>{ if(el.textContent === msg) el.textContent = ''; }, 180);
-      }, 3000);
-    }    function openOrderModal(){
-      if(!orderModal) return;
-      // Bloquea scroll del fondo (sin cerrar con click fuera)
-      try{
-        const y = window.scrollY || document.documentElement.scrollTop || 0;
-        document.body.dataset.scrollY = String(y);
-        document.body.style.top = (-y) + 'px';
-        document.body.classList.add('modal-lock');
-      }catch(e){}
-      orderModal.classList.add('is-open');
-      orderModal.setAttribute('aria-hidden','false');
-      // No forzamos focus (en iOS puede disparar zoom al enfocar inputs)
-    }
-
-        function closeOrderModal(){
-      if(!orderModal) return;
-      orderModal.classList.remove('is-open');
-      orderModal.setAttribute('aria-hidden','true');
-      // Restaura scroll del fondo
-      try{
-        const y = parseInt(document.body.dataset.scrollY || '0', 10) || 0;
-        document.body.classList.remove('modal-lock');
-        document.body.style.top = '';
-        window.scrollTo(0, y);
-      }catch(e){}
-    }
-
-    // Cierres del modal
-    if(orderClose) orderClose.addEventListener('click', closeOrderModal);
-    if(orderCancel) orderCancel.addEventListener('click', closeOrderModal);
-
-    // =============================
-    // HERO EMPRESAS: carrusel de imagenes (sin librerias)
-    // =============================
-    (function initBizHeroCarousel(){
-      const wrap = document.getElementById('bizHeroCarousel');
-      if(!wrap) return;
-
-      const slides = Array.from(wrap.querySelectorAll('img'));
-      if(slides.length <= 1) return;
-
-      const prevBtn = document.getElementById('bizHeroPrev');
-      const nextBtn = document.getElementById('bizHeroNext');
-      const dotsWrap = document.getElementById('bizHeroDots');
-
-      // Estado
-      let i = 0;
-
-      function setSlide(next){
-        slides[i].classList.remove('is-active');
-        i = (next + slides.length) % slides.length;
-        slides[i].classList.add('is-active');
-
-        // Dots
-        if(dotsWrap){
-          const dots = Array.from(dotsWrap.querySelectorAll('button'));
-          dots.forEach((d, idx)=> d.classList.toggle('is-active', idx === i));
-        }
-      }
-
-      // Init visible
-      slides.forEach((img, idx)=> img.classList.toggle('is-active', idx === 0));
-
-      // Dots build
-      if(dotsWrap){
-        dotsWrap.innerHTML = '';
-        slides.forEach((_, idx)=>{
-          const b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'biz-carousel__dot' + (idx === 0 ? ' is-active' : '');
-          b.setAttribute('aria-label', `Ir a imagen ${idx+1} de ${slides.length}`);
-          b.addEventListener('click', ()=>{ stopAuto(); setSlide(idx); startAuto(); });
-          dotsWrap.appendChild(b);
-        });
-      }
-
-      // Controls
-      if(prevBtn) prevBtn.addEventListener('click', ()=>{ stopAuto(); setSlide(i-1); startAuto(); });
-      if(nextBtn) nextBtn.addEventListener('click', ()=>{ stopAuto(); setSlide(i+1); startAuto(); });
-
-      // Auto-play (respeta reduced motion)
-      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let timer = null;
-
-      function startAuto(){
-        if(reduce) return;
-        stopAuto();
-        timer = setInterval(()=> setSlide(i+1), 4500);
-      }
-      function stopAuto(){
-        if(timer){ clearInterval(timer); timer = null; }
-      }
-
-      startAuto();
-    })()
-
-    // =============================
-    // BIZ PROMOS: scroll reveal (sin librerias)
-    // =============================
-    // =============================
-// BIZ PROMOS: scroll reveal (sin librerias)
-// =============================
-function initBizPromoReveal(){
-  const items = document.querySelectorAll('#bizSection .reveal');
-  if(!items || !items.length) return;
-
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce){
-    items.forEach(el=> el.classList.add('is-in'));
-    return;
-  }
-
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach((e)=>{
-      if(!e.isIntersecting) return;
-      const el = e.target;
-      const d = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
-      if(d) el.style.transitionDelay = d + 'ms';
-      el.classList.add('is-in');
-      io.unobserve(el);
-    });
-  }, { threshold: 0.15 });
-
-  items.forEach(el=> io.observe(el));
-}
-window.initBizPromoReveal = initBizPromoReveal;
-
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', initBizPromoReveal);
-}else{
-  initBizPromoReveal();
-}
-
-// ===================== =============================
-    // MODAL EMPRESAS (Cotizar evento)
-    // =============================
-    const bizModal = document.getElementById('bizModal');
-    const bizClose = document.getElementById('bizModalClose');
-    const bizCancel = document.getElementById('bizModalCancel');
-    const bizQuoteBtn = document.getElementById('bizQuoteBtn');
-    const bizQuoteBtn2 = document.getElementById('bizQuoteBtn2');
-
-    const bizForm = document.getElementById('bizForm');
-    const bizDateEl = document.getElementById('bizDate');
-    if(bizDateEl){
-      // iOS a veces deja seleccionar pasado aunque exista min; lo corregimos al vuelo
-      bizDateEl.addEventListener('change', ()=>{ enforceBizDateRange(true); });
-      bizDateEl.addEventListener('input', ()=>{ enforceBizDateRange(false); });
-      bizDateEl.addEventListener('blur', ()=>{ enforceBizDateRange(true); });
-    
-    const bizStartEl = document.getElementById('bizStart');
-    const bizServeEl = document.getElementById('bizServe');
-    if(bizStartEl && bizServeEl){
-      const check = (show)=>{ enforceBizTimeOrder(!!show); };
-      bizStartEl.addEventListener('change', ()=>{ check(true); });
-      bizStartEl.addEventListener('input', ()=>{ check(false); });
-      bizStartEl.addEventListener('blur', ()=>{ check(true); });
-
-      bizServeEl.addEventListener('change', ()=>{ check(true); });
-      bizServeEl.addEventListener('input', ()=>{ check(false); });
-      bizServeEl.addEventListener('blur', ()=>{ check(true); });
-    }
-}
-
-    const bizSendWa = document.getElementById('bizSendWa');
-    const bizSendEmail = document.getElementById('bizSendEmail');
-
-    function updateBizIcons(theme){
-      const t = theme || document.documentElement.getAttribute('data-theme') || 'light';
-      const isDark = t === 'dark';
-      const m = {
-        icoEventType: isDark ? 'Logotipos/organizador-dark.png' : 'Logotipos/organizador.png',
-        icoPeople:    isDark ? 'Logotipos/personas-dark.png' : 'Logotipos/personas.png',
-        icoAdults:    isDark ? 'Logotipos/pareja-dark.png' : 'Logotipos/pareja.png',
-        icoKids:      isDark ? 'Logotipos/chico-dark.png' : 'Logotipos/chico.png',
-        icoDate:      isDark ? 'Logotipos/calendario-dark.png' : 'Logotipos/calendario.png',
-        icoProducts:  isDark ? 'Logotipos/productos-dark.png' : 'Logotipos/productos.png',
-        icoTime:      isDark ? 'Logotipos/reloj-dark.png' : 'Logotipos/reloj.png',
-        icoStartEvent:isDark ? 'Logotipos/calendar-dark.png' : 'Logotipos/calendar.png',
-        icoServe:     isDark ? 'Logotipos/tenedor-dark.png' : 'Logotipos/tenedor.png',
-        icoLoc:       isDark ? 'Logotipos/marcador-de-posicion-dark.png' : 'Logotipos/marcador-de-posicion.png',
-        icoPhone:     isDark ? 'Logotipos/Telefono-dark.png' : 'Logotipos/Telefono.png',
-        icoCompany:   isDark ? 'Logotipos/corporacion-dark.png' : 'Logotipos/corporacion.png',
-        icoMail:      isDark ? 'Logotipos/correo-electronico-dark.png' : 'Logotipos/correo-electronico.png'
-      };
-      Object.keys(m).forEach(id=>{
-        const el = document.getElementById(id);
-        if(el) el.src = m[id];
-      });
-    }
-
-    window.updateBizIcons = updateBizIcons;
-
-    // v55_2 — Limitar fecha de cotizacion (SOLO modal Empresas)
-    function setBizDateBounds(){
-      const dateEl = document.getElementById('bizDate');
-      if(!dateEl) return;
-      const today = new Date();
-      // Normalizar a fecha local (00:00)
-      const localMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      const maxDate = new Date(localMidnight);
-      maxDate.setDate(maxDate.getDate() + 100);
-
-      const toYMD = (d)=>{
-        const y = d.getFullYear();
-        const m = String(d.getMonth()+1).padStart(2,'0');
-        const day = String(d.getDate()).padStart(2,'0');
-        return `${y}-${m}-${day}`;
-      };
-
-      const minStr = toYMD(localMidnight);
-      const maxStr = toYMD(maxDate);
-
-      dateEl.min = minStr;
-      dateEl.max = maxStr;
-
-      // Si el valor actual esta fuera de rango, ajustarlo (sin romper UX)
-      if(dateEl.value){
-        if(dateEl.value < minStr) dateEl.value = minStr;
-        if(dateEl.value > maxStr) dateEl.value = maxStr;
-      }
-    }
-
-    // Enforce rango de fecha en móvil (iOS/Android) incluso si el date picker deja seleccionar pasado
-    function enforceBizDateRange(showMsg){
-      const dateEl = document.getElementById('bizDate');
-      const errEl = document.getElementById('bizErrDate');
-      if(!dateEl) return true;
-
-      const v = cleanText(dateEl.value);       // YYYY-MM-DD
-      const minStr = cleanText(dateEl.min);    // YYYY-MM-DD
-      const maxStr = cleanText(dateEl.max);    // YYYY-MM-DD
-
-      // Si está vacío, que lo valide el required normal
-      if(!v) return false;
-
-      const RESET_DELAY_MS = 650;
-
-      // Comparación lexicográfica funciona para YYYY-MM-DD
-      if(minStr && v < minStr){
-        if(showMsg) fieldError(errEl, 'La fecha no puede ser anterior a hoy');
-        // Dejar que el usuario vea el mensaje y luego corregir
-        window.setTimeout(()=>{ 
-          // Si aún está fuera de rango, corrige
-          const cur = cleanText(dateEl.value);
-          if(cur && cur < minStr) dateEl.value = minStr;
-        }, RESET_DELAY_MS);
-        return false;
-      }
-      if(maxStr && v > maxStr){
-        if(showMsg) fieldError(errEl, 'La fecha no puede ser mayor a 100 días');
-        window.setTimeout(()=>{ 
-          const cur = cleanText(dateEl.value);
-          if(cur && cur > maxStr) dateEl.value = maxStr;
-        }, RESET_DELAY_MS);
-        return false;
-      }
-      return true;
-    }
-
-
-    // Validar orden de horas: servicio debe ser despues del inicio del evento
-    function enforceBizTimeOrder(showMsg){
-      const startEl = document.getElementById('bizStart');
-      const serveEl = document.getElementById('bizServe');
-      const errServe = document.getElementById('bizErrServe');
-      if(!startEl || !serveEl) return true;
-
-      const start = cleanText(startEl.value); // HH:MM
-      const serve = cleanText(serveEl.value); // HH:MM
-
-      if(!start || !serve) return false;
-
-      const RESET_DELAY_MS = 650;
-
-      // Lexicografico funciona para HH:MM
-      if(serve <= start){
-        if(showMsg) fieldError(errServe, 'La hora de servicio debe ser después del inicio del evento');
-        // Deja ver el mensaje y luego limpia para que elijan de nuevo
-        window.setTimeout(()=>{
-          const s2 = cleanText(startEl.value);
-          const v2 = cleanText(serveEl.value);
-          if(s2 && v2 && v2 <= s2) serveEl.value = '';
-        }, RESET_DELAY_MS);
-        return false;
-      }
-      return true;
-    }
-
-    function openBizModal(){
-      if(!bizModal) return;
-      updateBizIcons();
-      setBizDateBounds();
-      // Normaliza si el picker dejó una fecha fuera de rango (móvil)
-      enforceBizDateRange(false);
-      // Bloquea scroll del fondo (sin cerrar con click fuera)
-      try{
-        const y = window.scrollY || document.documentElement.scrollTop || 0;
-        document.body.dataset.scrollY = String(y);
-        document.body.style.top = (-y) + 'px';
-        document.body.classList.add('modal-lock');
-      }catch(e){}
-      bizModal.classList.add('is-open');
-      bizModal.setAttribute('aria-hidden','false');
-    }
-
-    function closeBizModal(){
-      if(!bizModal) return;
-      bizModal.classList.remove('is-open');
-      bizModal.setAttribute('aria-hidden','true');
-      try{
-        const y = parseInt(document.body.dataset.scrollY || '0', 10) || 0;
-        document.body.classList.remove('modal-lock');
-        document.body.style.top = '';
-        window.scrollTo(0, y);
-      }catch(e){}
-    }
-
-    if(bizClose) bizClose.addEventListener('click', closeBizModal);
-    if(bizCancel) bizCancel.addEventListener('click', closeBizModal);
-    if(bizQuoteBtn) bizQuoteBtn.addEventListener('click', openBizModal);
-    if(bizQuoteBtn2) bizQuoteBtn2.addEventListener('click', openBizModal);
-    // v55_1 — Toast al agregar productos (SOLO modal Empresas)
-    (function(){
-      const cbs = document.querySelectorAll('#bizModal .biz-products input[type="checkbox"]');
-      if(!cbs || !cbs.length) return;
-      cbs.forEach(cb=>{
-        cb.addEventListener('change', (e)=>{
-          const t = e.target;
-          if(t && t.checked){
-            showToast(`Se ha añadido ${t.value} a la cotización`);
-          }
-        });
-      });
-    })();
-
-
-    function bizVal(idErr, ok, msg){
-      const el = document.getElementById(idErr);
-      if(ok) return true;
-      fieldError(el, msg);
-      return false;
-    }
-
-    function buildBizMessage(d){
-      const lines = [];
-      lines.push('Hola! Vengo del canal web: Mr Pizza GT by GaschSoft.');
-      lines.push('');
-      lines.push('Quiero cotizar un evento.');
-      lines.push('');
-      lines.push('Datos del evento:');
-      lines.push('Tipo de evento: ' + d.type);
-      lines.push('Empresa: ' + d.company);
-      lines.push('Personas: ' + d.adults + ' adultos, ' + d.kids + ' niños');
-      lines.push('Fecha: ' + d.date);
-      lines.push('Horario: Inicio evento ' + d.start + ' • Inicio servicio ' + d.serve);
-      if(d.products && d.products.length){ lines.push('Productos: ' + d.products.join(', ')); }
-      lines.push('Ubicación: ' + d.location);
-      lines.push('Contacto: ' + d.phone);
-      lines.push('Correo: ' + d.email);
-      lines.push('');
-      lines.push('¿Me confirmás disponibilidad y una cotización estimada? Gracias.');
-      return lines.join('\n');
-    }
-
-    function collectBizData(){
-      const d = {
-        type: cleanText(document.getElementById('bizType')?.value),
-        company: cleanText(document.getElementById('bizCompany')?.value),
-        adults: cleanText(document.getElementById('bizAdults')?.value),
-        kids: cleanText(document.getElementById('bizKids')?.value),
-        dateRaw: cleanText(document.getElementById('bizDate')?.value),
-        date: formatDateGT(cleanText(document.getElementById('bizDate')?.value)),
-        start: cleanText(document.getElementById('bizStart')?.value),
-        serve: cleanText(document.getElementById('bizServe')?.value),
-        location: cleanText(document.getElementById('bizLocation')?.value),
-        phone: cleanText(document.getElementById('bizPhone')?.value),
-        email: cleanText(document.getElementById('bizEmail')?.value),
-        products: Array.from(document.querySelectorAll('#bizModal .biz-products input[type=\"checkbox\"]:checked')).map(cb=>cb.value)
-      };
-      return d;
-    }
-
-    function validateBiz(d){
-      const a = parseInt(d.adults||'0',10) || 0;
-      const k = parseInt(d.kids||'0',10) || 0;
-      const total = a + k;
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email || '');
-      return (
-        bizVal('bizErrType', !!d.type, 'Ingresá el tipo de evento') &&
-        bizVal('bizErrCompany', !!d.company, 'Ingresá el nombre de la empresa') &&
-        bizVal('bizErrAdults', d.adults !== '' && d.adults !== null, 'Colocá adultos') &&
-        bizVal('bizErrKids', d.kids !== '' && d.kids !== null, 'Colocá niños') &&
-        bizVal('bizErrAdults', a >= 0, 'Adultos inválido') &&
-        bizVal('bizErrKids', k >= 0, 'Niños inválido') &&
-        bizVal('bizErrAdults', total > 0, 'Colocá al menos 1 persona') &&
-        bizVal('bizErrDate', !!(d.dateRaw||d.date), 'Elegí una fecha') &&
-        bizVal('bizErrDate', enforceBizDateRange(true), 'La fecha no puede ser anterior a hoy') &&
-        bizVal('bizErrStart', !!d.start, 'Elegí hora de inicio') &&
-        bizVal('bizErrServe', !!d.serve, 'Elegí hora de servicio') &&
-        bizVal('bizErrServe', enforceBizTimeOrder(true), 'La hora de servicio debe ser después del inicio del evento') &&
-        bizVal('bizErrProducts', (d.products && d.products.length>0), 'Seleccioná al menos un producto') &&
-        bizVal('bizErrLocation', !!d.location, 'Ingresá la ubicación') &&
-        bizVal('bizErrPhone', !!d.phone, 'Ingresá un teléfono') &&
-        bizVal('bizErrEmail', emailOk, 'Ingresá un correo válido')
-      );
-    }
-
-    if(bizSendWa) bizSendWa.addEventListener('click', ()=>{
-      const d = collectBizData();
-      if(!validateBiz(d)) return;
-      const msg = buildBizMessage(d);
-      window.open(waLink(msg), '_blank', 'noopener');
-      closeBizModal();
-    });
-
-    if(bizSendEmail) bizSendEmail.addEventListener('click', async ()=>{
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mykpoqra";
-
-  const d = collectBizData();
-  if(!validateBiz(d)) return;
-
-  // Loader GLOBAL
-  showAppLoading("Enviando cotización por correo…", "Enviando cotización…");
-
-  // Mensaje con el formato ya aprobado (mismo modelo que WhatsApp)
-  const msg = buildBizMessage(d);
-
-  // Bloquear interacciones dentro del modal mientras se envía (sin overlay visible)
-  let blocker;
-  try{
-    const modal = document.getElementById("bizModal");
-    blocker = document.getElementById("bizSendBlocker");
-    if(!blocker && modal){
-      blocker = document.createElement("div");
-      blocker.id = "bizSendBlocker";
-      blocker.className = "biz-send-blocker";
-      modal.appendChild(blocker);
-    }
-    if(blocker) blocker.classList.add("show");
-  }catch(e){}
-
-  // UI: deshabilitar botones + texto "enviando"
-  const prevHtml = bizSendEmail.innerHTML;
-  const prevCancelDisabled = bizModalCancel ? bizModalCancel.disabled : null;
-  const prevWaDisabled = bizSendWa ? bizSendWa.disabled : null;
-  try{
-    bizSendEmail.disabled = true;
-    bizSendEmail.classList.add("is-loading");
-    bizSendEmail.innerHTML = '<span>Enviando correo…</span>';
-  }catch(e){}
-  try{ if(bizModalCancel) bizModalCancel.disabled = true; }catch(e){}
-  try{ if(bizSendWa) bizSendWa.disabled = true; }catch(e){}
-
-  try{
-    const fd = new FormData();
-
-    // ✅ SOLO lo básico (para que Formspree no cree columnas extra)
-    fd.append("name", d.company || "Empresa (sin nombre)");
-    fd.append("email", d.email);
-    fd.append("message", msg);
-
-    // Asunto dinámico: Cotización — {empresa}
-    const company = (d.company || "Empresa").trim();
-    fd.append("_subject", `Cotización — ${company}`);
-
-    // Pista mínima del origen
-    fd.append("source", "Empresas / Modal Cotización");
-
-    const res = await fetch(FORMSPREE_ENDPOINT, {
-      method: "POST",
-      body: fd,
-      headers: { "Accept": "application/json" }
-    });
-
-    if(res.ok){
-      const em = (d.email || "").trim();
-      showToast(`Hemos recibido tu email desde ${em || "tu correo"}. Te responderemos en breve.`);
-      // Limpia campos tras envío exitoso
-      try{
-        if(bizForm) bizForm.reset();
-        document
-          .querySelectorAll('#bizModal .biz-products input[type="checkbox"]')
-          .forEach(cb => cb.checked = false);
-      }catch(e){}
-      closeBizModal();
-    }else{
-      showToast("No se pudo enviar. Intenta de nuevo.");
-    }
-  }catch(err){
-    showToast("Error de red. Revisa tu conexión.");
-  }finally{
-    // Restaurar UI (si el modal sigue abierto)
-    try{
-      bizSendEmail.disabled = false;
-      bizSendEmail.classList.remove("is-loading");
-      bizSendEmail.innerHTML = prevHtml;
-    }catch(e){}
-    try{
-      if(bizModalCancel && prevCancelDisabled !== null) bizModalCancel.disabled = prevCancelDisabled;
-    }catch(e){}
-    try{
-      if(bizSendWa && prevWaDisabled !== null) bizSendWa.disabled = prevWaDisabled;
-    }catch(e){}
-    try{
-      if(blocker) blocker.classList.remove("show");
-    }catch(e){}
-    // Apagar loader global
-    hideAppLoading();
-  }
-});
-
-    // ===========================
-    // Loader GLOBAL (reutilizable)
-    // ===========================
-    
-function showAppLoading(text, title){
-  const el = document.getElementById('appLoading');
-  if(!el) return;
-
-  // Guardar timestamp para asegurar que el sobre alcance a "formarse"
-  window.__appLoadingShownAt = Date.now();
-  window.__appLoadingToken = (window.__appLoadingToken || 0) + 1;
-  const myToken = window.__appLoadingToken;
-
-  const t = document.getElementById('appLoadingText');
-  const h = document.getElementById('appLoadingTitle');
-  if(h) h.textContent = (title || "Enviando…");
-  if(t) t.textContent = (text || "Estamos procesando tu solicitud.");
-
-  document.body.classList.add('is-app-loading');
-  el.classList.remove('is-hidden');
-  el.classList.remove('is-finishing');
-  el.setAttribute('aria-hidden','false');
-
-  // Si alguien llamó hide antes de tiempo, cancelamos ese "fin" con token
-  window.__appLoadingActiveToken = myToken;
-}
-
-function hideAppLoading(){
-  const el = document.getElementById('appLoading');
-  if(!el) return;
-
-  const MIN_MS = 1250;   // coincide con el "enter" rápido
-  const FINISH_MS = 220; // pausa breve mostrando el sobre completo
-
-  const shownAt = window.__appLoadingShownAt || Date.now();
-  const elapsed = Date.now() - shownAt;
-  const wait = Math.max(0, MIN_MS - elapsed);
-
-  const myToken = window.__appLoadingToken || 0;
-
-  window.setTimeout(()=>{
-    // Si se volvió a mostrar el loader, no lo ocultes (evita parpadeos)
-    if((window.__appLoadingToken || 0) !== myToken) return;
-
-    // Congelar animación en estado final un momento
-    el.classList.add('is-finishing');
-
-    window.setTimeout(()=>{
-      if((window.__appLoadingToken || 0) !== myToken) return;
-
-      el.classList.add('is-hidden');
-      el.classList.remove('is-finishing');
-      el.setAttribute('aria-hidden','true');
-      document.body.classList.remove('is-app-loading');
-    }, FINISH_MS);
-  }, wait);
-}
-// Si el usuario presiona Enter en un campo, no enviar por default
-    if(bizForm) bizForm.addEventListener('submit', (e)=>{ e.preventDefault(); });
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function flyToCart(fromEl){
@@ -4455,7 +2027,7 @@ function hideAppLoading(){
 
       // Mini carrito flotante
       if(miniCartCountEl) miniCartCountEl.textContent = String(total);
-      if(miniCartFab) miniCartFab.classList.toggle('hidden', isBusinessPath() || total<=0);
+      if(miniCartFab) miniCartFab.classList.toggle('hidden', isBusinessPath || total<=0);
 
       const msg = buildMessage();
       waBtn.href = msg ? ("https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg)) : ("https://wa.me/" + PHONE);
@@ -4477,21 +2049,11 @@ function hideAppLoading(){
       render();
     }
 
-    function parsePriceFromCtrl(ctrl){
-      const card = ctrl.closest('.menu-item');
-      if(!card) return 0;
-      const priceEl = card.querySelector('.menu-price');
-      const t = priceEl ? priceEl.textContent : '';
-      const m = t && t.match(/Q\s*([0-9]+)/i);
-      return m ? parseInt(m[1],10) : 0;
-    }
-
     document.querySelectorAll(".qty-controls").forEach(ctrl=>{
       const itemName = ctrl.getAttribute("data-flavor") || "Item";
       const cat = (ctrl.getAttribute("data-category") || "pizza").toLowerCase();
       state[itemName] = 0;
       category[itemName] = (cat === "extra") ? "extra" : "pizza";
-      priceMap[itemName] = parsePriceFromCtrl(ctrl);
 
       const minus = ctrl.querySelector(".qty-minus");
       const plus  = ctrl.querySelector(".qty-plus");
@@ -4513,47 +2075,10 @@ function hideAppLoading(){
       const total = totalCount();
       if(total<=0){
         e.preventDefault();
-        showToast("Agregá al menos 1 item al carrito");
+        alert("Agregá al menos 1 item al carrito para armar el mensaje.");
         return;
       }
-
-      // En PUBLICO: antes de abrir WhatsApp, pedimos datos en un modal
-      e.preventDefault();
-      openOrderModal();
-    });
-
-    if(orderForm){
-      orderForm.addEventListener('submit', (e)=>{
-        e.preventDefault();
-
-        const total = totalCount();
-        if(total<=0){
-          showToast('Agregá al menos 1 item al carrito');
-          closeOrderModal();
-          return;
-        }
-
-        const name = cleanText(ordName ? ordName.value : '');
-        const nitRaw = cleanText(ordNit ? ordNit.value : '');
-        const nit = nitRaw ? nitRaw : 'CF';
-        const address = cleanText(ordAddress ? ordAddress.value : '');
-
-        const pay = cleanText(ordPay ? ordPay.value : '');
-
-        // Validación discreta (sin alerts)
-        let ok = true;
-        if(!name){ fieldError(errName, 'Ingresá tu nombre'); ok = false; }
-        if(!address){ fieldError(errAddress, 'Ingresá tu dirección'); ok = false; }
-        if(!pay){ fieldError(errPay, 'Elegí una opción'); ok = false; }
-        if(!ok) return;
-
-        const msg = buildFinalOrderMessage({ name, nit, address, pay });
-        const url = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
-
-        // Abre WhatsApp
-        window.open(url, '_blank', 'noopener');
-
-        // Reset del carrito (igual que antes, pero despues de enviar)
+      setTimeout(()=>{
         Object.keys(state).forEach(k=>state[k]=0);
         document.querySelectorAll(".qty-controls").forEach(ctrl=>{
           const num = ctrl.querySelector(".qty-num");
@@ -4562,436 +2087,12 @@ function hideAppLoading(){
           if(card) card.classList.remove("has-qty");
         });
         render();
-
-        // Limpia el formulario y cierra
-        try{ orderForm.reset(); }catch(err){}
-        closeOrderModal();
-      });
-    }
+      }, 150);
+    });
 
     render();
   })();
 
 </script>
-<!-- iOS/PWA recover: avoid occasional blank screen when returning from external apps (e.g., WhatsApp) -->
-<script>
-(function () {
-  // Force a repaint/reflow in a very small, low-risk way.
-  function forceRepaint() {
-    try {
-      // Toggle a trivial transform to trigger GPU repaint
-      const el = document.documentElement;
-      const prev = el.style.webkitTransform;
-      el.style.webkitTransform = 'translateZ(0)';
-      // Also nudge scroll by 1px and back (works on iOS Safari/PWA)
-      const x = window.pageXOffset || 0;
-      const y = window.pageYOffset || 0;
-      window.scrollTo(x, y + 1);
-      window.scrollTo(x, y);
-      requestAnimationFrame(function () {
-        el.style.webkitTransform = prev || '';
-      });
-    } catch (e) { /* no-op */ }
-  }
-
-  // When returning from bfcache (back-forward cache) or restoring the page
-  window.addEventListener('pageshow', function (e) {
-    // Some iOS PWAs resume with a white screen; a repaint usually fixes it.
-    // Run on next tick so layout is ready.
-    setTimeout(forceRepaint, 30);
-  });
-
-  // When app becomes visible again (coming back from WhatsApp)
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) {
-      setTimeout(forceRepaint, 30);
-    }
-  });
-})();
-</script>
-
-<script>
-/* ===== Google Reviews (Places JS) — v62 =====
-   - Renderiza reseñas reales en carrusel (3 visibles desktop, swipe mobile)
-   - IMPORTANTE: reemplaza TU_API_KEY en el script de Google Maps más abajo
-*/
-(function(){
-  const MR_PIZZAS_PLACE_ID = "0x8589a39724e7027b:0x807d6f766016b606"; // Mr Pizzas GT (Place ID)
-
-  function escapeHtml(str){
-    return String(str || "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
-
-  function setText(id, value){
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
-  }
-
-  function show(id){
-    const el = document.getElementById(id);
-    if (el) el.style.display = "block";
-  }
-
-  function hide(id){
-    const el = document.getElementById(id);
-    if (el) el.style.display = "none";
-  }
-
-  function renderReviews(place){
-    hide("googleReviewsLoading");
-    hide("googleReviewsError");
-
-    const wrap = document.getElementById("googleReviewsCarouselWrap");
-    const track = document.getElementById("googleReviewsTrack");
-    if (!wrap || !track) return;
-
-    const reviews = (place?.reviews || []).slice(0, 10);
-
-    if (!reviews.length){
-      setText("googleReviewsError", "Aun no hay resenas para mostrar.");
-      show("googleReviewsError");
-      return;
-    }
-
-    // rating + total (si existen en tu layout)
-    if (place?.rating) setText("googleRatingValue", Number(place.rating).toFixed(1));
-    if (place?.user_ratings_total != null) setText("googleRatingCount", `(${place.user_ratings_total})`);
-
-    const googleLogo = "Logotipos/Google.png";
-
-    track.innerHTML = reviews.map(r => {
-      const name = escapeHtml(r.author_name || "Anonimo");
-      const photo = r.profile_photo_url || "";
-      const time = escapeHtml(r.relative_time_description || "");
-      const rating = Math.max(0, Math.min(5, r.rating || 0));
-      const stars = "⭐".repeat(rating);
-      const text = escapeHtml((r.text || "").trim() || "Resena sin texto.");
-
-      return `
-        <article class="googleReviewCard">
-          <div class="googleReviewHeader">
-            <div class="googleReviewUser">
-              ${photo ? `<img class="googleReviewAvatar" src="${photo}" alt="${name}">`
-                      : `<div class="googleReviewAvatar" aria-hidden="true"></div>`}
-              <div style="min-width:0">
-                <div class="googleReviewName" title="${name}">${name}</div>
-                <div class="googleReviewMeta">${time}</div>
-              </div>
-            </div>
-
-            <div class="googleReviewSource" title="Resena verificada de Google">
-              <img class="googleReviewGoogleLogo" src="${googleLogo}" alt="Google">
-              <div class="googleReviewStars" aria-label="Calificacion ${rating} de 5">${stars}</div>
-            </div>
-          </div>
-
-          <p class="googleReviewText">${text}</p>
-        </article>
-      `;
-    }).join("");
-
-    wrap.style.display = "flex";
-
-    // nav
-    const prev = document.getElementById("revPrev");
-    const next = document.getElementById("revNext");
-
-    function step(){
-      const card = track.querySelector(".googleReviewCard");
-      if (!card) return 320;
-      const gap = 18;
-      return card.getBoundingClientRect().width + gap;
-    }
-
-    function updateNav(){
-      if (!prev || !next) return;
-      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
-    prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= maxScroll;
-    }
-
-    function scrollDir(dir){
-      track.scrollBy({ left: step() * dir, behavior: "smooth" });
-    }
-
-    // Navegacion por botones (si existen)
-    if (prev && next){
-      prev.onclick = () => scrollDir(-1);
-      next.onclick = () => scrollDir(1);
-    }
-
-    // Drag / swipe (mouse + touch) para que SIEMPRE se pueda mover
-    let isDown = false;
-    let startX = 0;
-    let startScrollLeft = 0;
-
-    const onPointerDown = (e) => {
-      isDown = true;
-      startX = e.clientX;
-      startScrollLeft = track.scrollLeft;
-      try { track.setPointerCapture(e.pointerId); } catch(_){}
-    };
-    const onPointerMove = (e) => {
-      if (!isDown) return;
-      const dx = e.clientX - startX;
-      track.scrollLeft = startScrollLeft - dx;
-    };
-    const onPointerUp = () => { isDown = false; };
-
-    track.addEventListener("pointerdown", onPointerDown);
-    track.addEventListener("pointermove", onPointerMove);
-    track.addEventListener("pointerup", onPointerUp);
-    track.addEventListener("pointercancel", onPointerUp);
-    track.addEventListener("pointerleave", onPointerUp);
-
-    // Rueda del mouse -> scroll horizontal (comodisimo en desktop)
-    track.addEventListener("wheel", (e) => {
-      const absX = Math.abs(e.deltaX);
-      const absY = Math.abs(e.deltaY);
-      if (absY > absX){
-        track.scrollLeft += e.deltaY;
-        e.preventDefault();
-      }
-    }, { passive: false });
-
-    track.addEventListener("scroll", updateNav, { passive: true });
-    window.addEventListener("resize", updateNav);
-    setTimeout(updateNav, 200);
-  }
-
-  // Google Maps callback (debe ser global)
-  window.initGoogleReviews = function(){
-    // Config (no backend): resolve Place ID at runtime to avoid "Place ID no longer valid"
-    const GOOGLE_LOGO = "Logotipos/Google.png";
-    const PLACE_QUERY = "Mr Pizzas GT, Guatemala";
-
-    const $ = (id) => document.getElementById(id);
-
-    const hintEl = $("googleReviewsHint");
-    const ratingRowEl = $("googleRatingRow");
-    const ratingTextEl = $("googleRatingText");
-    const linkEl = $("googleReviewsLink");
-    const btnRowEl = $("googleReviewsBtnRow");
-    const wrapEl = $("googleReviewsCarouselWrap");
-    const trackEl = $("googleReviewsTrack");
-    const fallbackEl = $("reviewsFallback");
-    const prevBtn = $("revPrev");
-    const nextBtn = $("revNext");
-
-    function setState(state){
-      if (!hintEl || !ratingRowEl || !btnRowEl || !wrapEl || !fallbackEl) return;
-      if (state === "loading"){
-        hintEl.style.display = "";
-        ratingRowEl.style.display = "none";
-        btnRowEl.style.display = "none";
-        wrapEl.style.display = "none";
-        fallbackEl.style.display = "none";
-      } else if (state === "ok"){
-        hintEl.style.display = "none";
-        ratingRowEl.style.display = "";
-        btnRowEl.style.display = "flex";
-        wrapEl.style.display = "";
-        fallbackEl.style.display = "none";
-      } else {
-        hintEl.style.display = "none";
-        ratingRowEl.style.display = "none";
-        btnRowEl.style.display = "none";
-        wrapEl.style.display = "none";
-        fallbackEl.style.display = "";
-      }
-    }
-
-    function starsText(r){
-      const full = Math.round(r);
-      const empty = 5 - full;
-      return "⭐".repeat(full);
-    }
-
-    function escapeHtml(str){
-      return String(str ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-    }
-
-    function render(place){
-      const rating = place.rating ?? null;
-      const total = place.user_ratings_total ?? null;
-
-      // Header / rating row
-      if (ratingTextEl){
-        const ratingStr = rating ? `${rating.toFixed(1)} / 5` : "—";
-        const totalStr = total != null ? `(${total} reseñas)` : "";
-        ratingTextEl.innerHTML = `
-          <span class="gr-stars" aria-label="${ratingStr}">${rating ? starsText(rating) : "—"}</span>
-          <span class="gr-score">${ratingStr}</span>
-          <span class="gr-total">${totalStr}</span>
-          <span class="gr-src" style="display:inline-flex;align-items:center;gap:6px;margin-left:6px;">
-            <img src="${GOOGLE_LOGO}" alt="Google" loading="lazy" style="height:18px;width:auto;vertical-align:middle;" />
-          </span>
-        `;
-      }
-
-      if (linkEl && place.url){
-        linkEl.href = place.url;
-      }
-
-      const reviewsRaw = Array.isArray(place.reviews) ? place.reviews : [];
-      // Google suele ordenar por "relevancia"; para UX, mostramos las más recientes primero.
-      // (No cambia la integración: solo ordenamos el array ya recibido.)
-      const reviews = reviewsRaw
-        .slice()
-        .sort((a,b) => (b.time || 0) - (a.time || 0))
-        .slice(0, 7);
-      if (!trackEl) return;
-
-      // Build cards (Google suele devolver un subconjunto; renderizamos todas las que vengan)
-      const cards = reviews.map((r) => {
-        const name = escapeHtml(r.author_name || "Usuario");
-        const photo = r.profile_photo_url ? escapeHtml(r.profile_photo_url) : "";
-        const txt = escapeHtml(r.text || "").replace(/\n/g,"<br>");
-        const rt = typeof r.rating === "number" ? r.rating : null;
-        const time = escapeHtml(r.relative_time_description || "");
-        return `
-          <article class="googleReviewCard" role="group" aria-label="Reseña de ${name}">
-            <header class="googleReviewHeader">
-              <div class="googleReviewAvatar">
-                ${photo ? `<img src="${photo}" alt="${name}" loading="lazy" referrerpolicy="no-referrer" />` : ``}
-              </div>
-              <div class="googleReviewMeta">
-                <div class="googleReviewName">${name}</div>
-                <div class="googleReviewSub">
-                  <span class="googleReviewStars">${rt ? starsText(rt) : ""}</span>
-                  <span class="googleReviewTime">${time}</span>
-                </div>
-              </div>
-            </header>
-            <p class="googleReviewText">${txt || "—"}</p>
-          </article>
-        `;
-      }).join("");
-
-      trackEl.innerHTML = cards || `<div class="googleReviewEmpty">Aún no hay reseñas para mostrar.</div>`;
-      // Nav (botones SIEMPRE funcionales) — el scroll vive en trackEl, no en el wrapper
-      function updateNav(){
-        if (!trackEl || !prevBtn || !nextBtn) return;
-        const max = Math.max(0, trackEl.scrollWidth - trackEl.clientWidth - 2);
-        prevBtn.disabled = trackEl.scrollLeft <= 2;
-        nextBtn.disabled = trackEl.scrollLeft >= max;
-      }
-
-      const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const scrollStep = () => Math.max(260, Math.round(trackEl.clientWidth * 0.92));
-
-      if (trackEl && prevBtn && nextBtn){
-        prevBtn.onclick = () => trackEl.scrollBy({ left: -scrollStep(), behavior: reduceMotion ? "auto" : "smooth" });
-        nextBtn.onclick = () => trackEl.scrollBy({ left:  scrollStep(), behavior: reduceMotion ? "auto" : "smooth" });
-
-        trackEl.addEventListener("scroll", () => requestAnimationFrame(updateNav), { passive:true });
-        window.addEventListener("resize", () => requestAnimationFrame(updateNav));
-        setTimeout(updateNav, 120);
-
-        // Teclado (cuando el carrusel tiene foco): ← / →
-        trackEl.addEventListener("keydown", (e) => {
-          if (e.key === "ArrowLeft"){ e.preventDefault(); prevBtn.click(); }
-          if (e.key === "ArrowRight"){ e.preventDefault(); nextBtn.click(); }
-        });
-      }
-
-    }
-
-    function getService(){
-      return new google.maps.places.PlacesService(document.createElement("div"));
-    }
-
-    function resolvePlaceId(cb){
-      // If MR_PIZZAS_PLACE_ID is already a modern Place ID (ChIJ...), use it.
-      if (typeof MR_PIZZAS_PLACE_ID === "string" && MR_PIZZAS_PLACE_ID.startsWith("ChI")){
-        cb(MR_PIZZAS_PLACE_ID);
-        return;
-      }
-
-      // Otherwise, search by query (fresh place_id each time).
-      const svc = getService();
-      svc.findPlaceFromQuery(
-        { query: PLACE_QUERY, fields: ["place_id","name"] },
-        (results, status) => {
-          if (status === google.maps.places.PlacesServiceStatus.OK && results && results[0] && results[0].place_id){
-            cb(results[0].place_id);
-          } else {
-            cb(null);
-          }
-        }
-      );
-    }
-
-    function fetchDetails(placeId, cb){
-      const svc = getService();
-      svc.getDetails(
-        { placeId, fields: ["name","rating","user_ratings_total","reviews","url"] },
-        (place, status) => cb(place, status)
-      );
-    }
-
-    // Run
-    setState("loading");
-
-    resolvePlaceId((placeId) => {
-      if (!placeId){
-        setState("error");
-        return;
-      }
-
-      fetchDetails(placeId, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK && place){
-          setState("ok");
-          render(place);
-          return;
-        }
-
-        // If cached Place ID got invalidated, try again (fresh search).
-        if (String(status).toUpperCase().includes("INVALID_REQUEST")){
-          resolvePlaceId((placeId2) => {
-            if (!placeId2){
-              setState("error");
-              return;
-            }
-            fetchDetails(placeId2, (place2, status2) => {
-              if (status2 === google.maps.places.PlacesServiceStatus.OK && place2){
-                setState("ok");
-                render(place2);
-              } else {
-                setState("error");
-              }
-            });
-          });
-          return;
-        }
-
-        setState("error");
-      });
-    });
-  };
-})();
-</script>
-
-
-<!-- Google Maps JS + Places Library -->
-<!-- IMPORTANTE: reemplazá REEMPLAZA_CON_TU_API_KEY por tu key -->
-
-<!-- (v62) Script duplicado de pruebas removido -->
-
-
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ62QQZoJNn0Lx3XngxG2uedtBZ2QIwew&libraries=places&v=weekly&callback=initGoogleReviews">
-</script>
-
 </body>
 </html>
