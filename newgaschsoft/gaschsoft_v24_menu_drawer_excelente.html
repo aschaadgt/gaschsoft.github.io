@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GaschSoft</title>
+
+  <style>
+    :root{
+      /* Light */
+      --bg: #F8FAFC;
+      --card: #EEF2F7;
+      --text: #0F172A;
+      --muted: #475569;
+
+      --primary: #1F7AFF;
+      --accent: #38BDF8;
+
+      --border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 10px 30px rgba(2, 8, 23, 0.10);
+
+      --header-bg: rgba(248, 250, 252, 0.72);
+      --header-border: rgba(15, 23, 42, 0.10);
+
+      --icon-btn-bg: rgba(15, 23, 42, 0.06);
+      --icon-btn-bg-hover: rgba(15, 23, 42, 0.10);
+      --icon-btn-border: rgba(15, 23, 42, 0.10);
+
+      --menu-bg: rgba(248, 250, 252, 0.92);
+      --menu-border: rgba(15, 23, 42, 0.12);
+
+      --link-hover-bg: rgba(31, 122, 255, 0.10);
+      --link-hover-border: rgba(31, 122, 255, 0.18);
+    }
+
+    html[data-theme="dark"]{
+      --bg: #0B0F14;
+      --card: #111827;
+      --text: #E5E7EB;
+      --muted: #9CA3AF;
+
+      --primary: #1F7AFF;   /* se mantiene */
+      --accent: #38BDF8;
+
+      --border: rgba(229, 231, 235, 0.10);
+      --shadow: 0 12px 40px rgba(0,0,0,0.40);
+
+      --header-bg: rgba(11, 15, 20, 0.68);
+      --header-border: rgba(229, 231, 235, 0.10);
+
+      --icon-btn-bg: rgba(229, 231, 235, 0.06);
+      --icon-btn-bg-hover: rgba(229, 231, 235, 0.10);
+      --icon-btn-border: rgba(229, 231, 235, 0.10);
+
+      --menu-bg: rgba(11, 15, 20, 0.92);
+      --menu-border: rgba(229, 231, 235, 0.12);
+
+      --link-hover-bg: rgba(31, 122, 255, 0.14);
+      --link-hover-border: rgba(31, 122, 255, 0.22);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ===== Header ===== */
+    .header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--header-border);
+    }
+
+    .header-inner{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 240px;
+    }
+
+    .brand-logo{
+      width: 61px;
+      height: 61px;
+      
+      flex: 0 0 auto;
+      display:block;
+      object-fit: contain;
+    }
+
+    .brand-text{
+      display:flex;
+      flex-direction: column;
+      line-height: 1;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .brand-typing{
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      font-size: 20px;
+      font-family: "Open Sauce", "OpenSauce", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display:flex;
+      align-items:center;
+      gap: 6px;
+      user-select:none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .caret{
+      width: 10px;
+      height: 18px;
+      border-left: 2px solid var(--primary);
+      opacity: 0.9;
+      animation: blink 0.9s infinite;
+      transform: translateY(1px);
+    }
+
+    @keyframes blink{
+      0%, 45%{ opacity: 1; }
+      55%, 100%{ opacity: 0; }
+    }
+
+    .brand-sub{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    /* Nav */
+    .nav{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      margin-left: auto;
+      position: relative;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap: 6px;
+    }
+
+    .nav-link, .nav-dd-btn{
+      appearance: none;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+      text-decoration: none;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover, .nav-dd-btn:hover{
+      background: var(--link-hover-bg);
+      border-color: var(--link-hover-border);
+    }
+
+    .nav-link:active, .nav-dd-btn:active{ transform: translateY(1px); }
+
+    /* Homologar <button> (Servicios) con <a> (Portafolio/Nosotros/Contacto) */
+    button.nav-link{
+      font: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      color: inherit;
+      text-align: inherit;
+    }
+    button.nav-link::-moz-focus-inner{ border:0; padding:0; }
+
+    .chev{
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg);
+      margin-top: -2px;
+      transition: transform 160ms ease;
+    }
+
+    /* Icon buttons */
+    .icon-actions{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      margin-left: 8px;
+    }
+
+    .icon-btn{
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid var(--icon-btn-border);
+      background: var(--icon-btn-bg);
+      display:grid;
+      place-items:center;
+      cursor: pointer;
+      transition: background 160ms ease, transform 160ms ease, border-color 160ms ease;
+      position: relative;
+    }
+
+    .icon-btn:hover{
+      background: var(--icon-btn-bg-hover);
+      border-color: rgba(31, 122, 255, 0.30);
+    }
+
+    .icon-btn:active{ transform: translateY(1px); }
+
+    .icon-btn img{
+      width: 20px;
+      height: 20px;
+      display:block;
+    }
+
+    /* Dropdown (solo idioma) */
+    .dropdown{ position: relative; }
+
+    .menu{
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 220px;
+      background: var(--menu-bg);
+      border: 1px solid var(--menu-border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 8px;
+      display:none;
+    }
+
+    .menu.open{ display:block; }
+
+    .menu-item{
+      width: 100%;
+      text-align: left;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text);
+      padding: 10px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+
+    .menu-item:hover{
+      background: rgba(31, 122, 255, 0.12);
+      border-color: rgba(31, 122, 255, 0.20);
+    }
+
+    .menu-item[aria-selected="true"]{
+      background: rgba(31, 122, 255, 0.18);
+      border-color: rgba(31, 122, 255, 0.32);
+    }
+
+    /* Idiomas: ahorrar ancho (menos espacio vacio horizontal) */
+    #langMenu{ min-width: 150px; }
+    #langMenu .menu-item{ padding-left: 6px; padding-right: 6px; }
+
+    .flag{
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      object-fit: cover;
+      flex: 0 0 auto;
+    }
+
+    /* ===== Servicios: hover desktop ===== */
+    .dropdown.services:hover .menu,
+    .dropdown.services:focus-within .menu{
+      display:block;
+    }
+    .dropdown.services:hover .chev,
+    .dropdown.services:focus-within .chev{
+      transform: rotate(225deg);
+    }
+    /* Servicios: mantener hover (sin "hueco") y centrar menu bajo el boton */
+    .dropdown.services{ padding-bottom: 0; }
+    .dropdown.services .menu{
+      left: 50%; right: auto; transform: translateX(-50%);
+      top: calc(100% + 6px);
+    }
+    /* Puente invisible para que el hover no se caiga al mover el puntero al menu */
+    .dropdown.services .menu::before{
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      top: -10px;
+      height: 10px;
+    }
+
+    /* Mobile */
+    .burger{
+      display:none;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--icon-btn-border);
+      background: var(--icon-btn-bg);
+      cursor: pointer;
+      transition: background 160ms ease, transform 160ms ease;
+      place-items:center;
+    }
+    .burger:hover{ background: var(--icon-btn-bg-hover); }
+    .burger:active{ transform: translateY(1px); }
+
+    .burger-lines{ width: 18px; height: 12px; position: relative; }
+    .burger-lines span{
+      position:absolute; left:0; right:0;
+      height:2px; background: var(--text); border-radius: 3px;
+      opacity: 0.9;
+    }
+    .burger-lines span:nth-child(1){ top:0; }
+    .burger-lines span:nth-child(2){ top:5px; opacity: 0.7; }
+    .burger-lines span:nth-child(3){ top:10px; }
+
+
+    /* ===== Mobile Drawer (off-canvas) ===== */
+    .drawer{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: var(--headerH, 70px);
+      z-index: 90;
+      /* Mantener en DOM para animar */
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 180ms ease, visibility 0s linear 180ms;
+    }
+    .drawer.open{
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity 180ms ease, visibility 0s;
+    }
+    .drawer-backdrop{
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      opacity: 0;
+      transition: opacity 180ms ease;
+    }
+    .drawer.open .drawer-backdrop{ opacity: 1; }
+
+    .drawer-panel{
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(360px, 92vw);
+      background: var(--menu-bg);
+      border-left: 1px solid var(--menu-border);
+      box-shadow: var(--shadow);
+      transform: translateX(100%);
+      transition: transform 260ms ease-out;
+      display: flex;
+      flex-direction: column;
+    }
+    .drawer.open .drawer-panel{ transform: translateX(0); }
+
+    .drawer-header{
+      position: relative;
+      padding: 14px;
+      border-bottom: none;
+      min-height: 56px;
+    }
+    .drawer-title{
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .drawer-close{
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--icon-btn-border);
+      background: var(--icon-btn-bg);
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+    }
+    .drawer-close:hover{ background: var(--icon-btn-bg-hover); }
+    .drawer-close:hover{ background: var(--icon-btn-bg-hover); }
+
+    .drawer-body{
+      padding: 10px;
+      overflow: auto;
+    }
+
+    .drawer-item{
+      width: 100%;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      color: var(--text);
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .drawer-item:hover{
+      background: var(--link-hover-bg);
+      border-color: var(--link-hover-border);
+    }
+
+    .drawer-item-dd{
+      appearance: none;
+      text-align: left;
+    }
+    .drawer-chev{
+      margin-top: -2px;
+      transition: transform 160ms ease;
+    }
+    .drawer-item-dd[aria-expanded="true"] .drawer-chev{
+      transform: rotate(225deg);
+    }
+
+    .drawer-submenu{
+      display: none;
+      padding: 6px 6px 10px;
+      margin-left: 6px;
+      border-left: 2px solid rgba(31,122,255,0.25);
+    }
+    .drawer-submenu.open{ display:block; }
+
+    .drawer-subitem{
+      display:flex;
+      padding: 10px 12px;
+      border-radius: 12px;
+      text-decoration:none;
+      color: var(--text);
+      border: 1px solid transparent;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .drawer-subitem:hover{
+      background: rgba(31,122,255,0.12);
+      border-color: rgba(31,122,255,0.20);
+    }
+
+    /* Burger transform animation */
+    .burger-lines span{
+      transition: transform .25s ease, opacity .2s ease, width .25s ease;
+    }
+    .burger.active .burger-lines span:nth-child(1){
+      transform: translateY(5px) rotate(45deg);
+    }
+    .burger.active .burger-lines span:nth-child(2){
+      opacity: 0;
+    }
+    .burger.active .burger-lines span:nth-child(3){
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
+
+    @media (max-width: 920px){
+      .brand{ min-width: 180px; }
+      .nav-links{ display:none !important; }
+      .nav-links.open{ display:none !important; }
+.nav-link, .nav-dd-btn{ justify-content: space-between; }
+      .burger{ display:grid; }
+      .icon-actions{ margin-left: 0; }
+      .nav{ gap: 10px; }
+}
+
+    main{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 34px 16px 80px;
+    }
+    .hero{
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(31,122,255,0.10), transparent);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .hero h1{ margin: 0 0 8px; font-size: 28px; letter-spacing: -0.3px; }
+    .hero p{ margin: 0; color: var(--muted); max-width: 70ch; line-height: 1.5; }
+  </style>
+</head>
+
+<body>
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <div class="brand" aria-label="GaschSoft">
+        <img id="brandLogo" class="brand-logo" src="Logos/Ico GaschSoft.png" alt="GaschSoft logo" />
+        <div class="brand-text">
+          <div class="brand-typing" aria-label="GaschSoft">
+            <span id="typingText">Gaschsoft</span>
+            
+          </div>
+          <div class="brand-sub" id="brandSub">Construimos tu producto digital</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Navegación principal">
+<div class="nav-links" id="navLinks">
+          
+
+          
+          <div class="dropdown services services-test" id="servicesTestDD">
+            <a class="nav-link nav-dd-link" href="#services-test" id="servicesTestBtn" aria-haspopup="true" aria-expanded="false">
+              <span>Servicios</span>
+              <span class="chev" aria-hidden="true"></span>
+            </a>
+            <div class="menu" role="menu" aria-label="Servicios (test)">
+              <button class="menu-item" role="menuitem" type="button">Desarrollo Web</button>
+              <button class="menu-item" role="menuitem" type="button">Soporte IT</button>
+              <button class="menu-item" role="menuitem" type="button">Invitaciones Web</button>
+              <button class="menu-item" role="menuitem" type="button">Automatizaciones</button>
+            </div>
+          </div>
+
+          <a class="nav-link" href="#portfolio" id="navPortfolio">Portafolio</a>
+          <a class="nav-link" href="#about" id="navAbout">Nosotros</a>
+          <a class="nav-link" href="#contact" id="navContact">Contacto</a>
+        </div>
+
+        <div class="icon-actions">
+          <!-- Idioma -->
+          <div class="dropdown" id="langDD">
+            <button class="icon-btn" id="langBtn" type="button" aria-label="Idioma" aria-haspopup="true" aria-expanded="false">
+              <img id="langIcon" src="Logos/idiomas.png" alt="" />
+            </button>
+
+            <div class="menu" role="menu" aria-label="Selector de idioma" id="langMenu">
+              <button class="menu-item" role="menuitem" type="button" data-lang="es" aria-selected="true">
+                <img class="flag" src="Logos/ES.png" alt="ES" />
+                <span>Español</span>
+              </button>
+              <button class="menu-item" role="menuitem" type="button" data-lang="en" aria-selected="false">
+                <img class="flag" src="Logos/US.png" alt="US" />
+                <span>English</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tema (Opción A: ciclo 3 estados) -->
+          <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema (Sistema/Oscuro/Claro)">
+            <img id="themeIcon" src="Logos/sistema.png" alt="" />
+          </button>
+          <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menú" aria-expanded="false">
+          <div class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+        </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <aside class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menú">
+      
+      <div class="drawer-header">
+        
+      </div>
+    
+
+      <div class="drawer-body">
+        <div class="drawer-section">
+          <button class="drawer-item drawer-item-dd" id="drawerServicesBtn" type="button" aria-expanded="true">
+            <span id="drawerServicesLabel">Servicios</span>
+            <span class="chev drawer-chev" id="drawerServicesChev" aria-hidden="true"></span>
+          </button>
+          <div class="drawer-submenu open" id="drawerServicesMenu">
+            <a class="drawer-subitem" href="#serv-web" id="drawerSvcWeb">Desarrollo Web</a>
+            <a class="drawer-subitem" href="#serv-it" id="drawerSvcIT">Soporte IT</a>
+            <a class="drawer-subitem" href="#serv-inv" id="drawerSvcInv">Invitaciones Web</a>
+            <a class="drawer-subitem" href="#serv-auto" id="drawerSvcAuto">Automatizaciones</a>
+          </div>
+        </div>
+
+        <a class="drawer-item" href="#portfolio" id="drawerPortfolio">Portafolio</a>
+        <a class="drawer-item" href="#about" id="drawerAbout">Nosotros</a>
+        <a class="drawer-item" href="#contact" id="drawerContact">Contacto</a>
+        
+      </div>
+    </aside>
+  </div>
+
+
+  <main>
+    <section class="hero">
+      <h1 id="heroTitle">GaschSoft: software y soporte con mentalidad de producto.</h1>
+      <p id="heroDesc">Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover.</p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const elHtml = document.documentElement;
+
+      const ASSETS = {
+        brand: { light: "Logos/Ico GaschSoft.png", dark: "Logos/Ico GaschSoft - dark.png" },
+        langIcon: { light: "Logos/idiomas.png", dark: "Logos/idiomas - dark.png" },
+        theme: {
+          system: { light: "Logos/sistema.png", dark: "Logos/sistema - dark.png" },
+          light: "Logos/claro.png",
+          dark: "Logos/obscuro.png"
+        }
+      };
+
+      const I18N = {
+        es: {
+          brandSub: "Construimos tu producto digital",
+          nav: { services: "Servicios", portfolio: "Portafolio", contact: "Contacto", about: "Nosotros" },
+          services: { web:"Desarrollo Web", it:"Soporte IT", invites:"Invitaciones Web", auto:"Automatizaciones" },
+          hero: { title: "GaschSoft: software y soporte con mentalidad de producto.", desc: "Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover." }
+        },
+        en: {
+          brandSub: "We build your digital product.",
+          nav: { services: "Services", portfolio: "Portfolio", contact: "Contact", about: "About" },
+          services: { web:"Web Development", it:"IT Support", invites:"Web Invitations", auto:"Automations" },
+          hero: { title: "GaschSoft: software and support with a product mindset.", desc: "Lively header (typing), theme cycle System → Dark → Light, language selector, and hover services menu." }
+        }
+      };
+
+      const STORAGE = { themeMode: "gaschsoft_theme_mode", lang: "gaschsoft_lang" };
+
+      const brandLogo = document.getElementById("brandLogo");
+      const langIcon  = document.getElementById("langIcon");
+      const themeIcon = document.getElementById("themeIcon");
+
+      const brandSub  = document.getElementById("brandSub");
+      const navPortfolio = document.getElementById("navPortfolio");
+      const navContact = document.getElementById("navContact");
+      const navAbout = document.getElementById("navAbout");
+
+      const svcWeb = document.getElementById("svcWeb");
+      const svcIT = document.getElementById("svcIT");
+      const svcInv = document.getElementById("svcInv");
+      const svcAuto = document.getElementById("svcAuto");
+
+      const heroTitle = document.getElementById("heroTitle");
+      const heroDesc = document.getElementById("heroDesc");
+
+      const langBtn = document.getElementById("langBtn");
+      const langMenu = document.getElementById("langMenu");
+      const langItems = Array.from(langMenu.querySelectorAll("[data-lang]"));
+
+      const themeBtn = document.getElementById("themeBtn");
+
+      const burgerBtn = document.getElementById("burgerBtn");
+      const navLinks = document.getElementById("navLinks");
+
+      const mediaDark = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+      function getSavedThemeMode(){
+        const v = localStorage.getItem(STORAGE.themeMode);
+        return (v === "system" || v === "dark" || v === "light") ? v : "system";
+      }
+      function getSavedLang(){
+        const v = localStorage.getItem(STORAGE.lang);
+        return (v === "es" || v === "en") ? v : "es";
+      }
+
+      let state = { themeMode: getSavedThemeMode(), lang: getSavedLang() };
+
+      function systemTheme(){
+        return (mediaDark && mediaDark.matches) ? "dark" : "light";
+      }
+
+      function resolvedTheme(){
+        if (state.themeMode === "system") return systemTheme();
+        return state.themeMode;
+      }
+
+      function applyTheme(){
+        const theme = resolvedTheme();
+        elHtml.setAttribute("data-theme", theme);
+
+        // swap icons that depend on THEME (resolved)
+        brandLogo.src = (theme === "dark") ? ASSETS.brand.dark : ASSETS.brand.light;
+        langIcon.src  = (theme === "dark") ? ASSETS.langIcon.dark : ASSETS.langIcon.light;
+
+        // theme button icon (ciclo correcto):
+        // - Sistema  -> mostrar icono sistema (segun tema resuelto)
+        // - Oscuro   -> mostrar icono claro (ofrece ir a claro)
+        // - Claro    -> mostrar icono oscuro (ofrece ir a oscuro)
+        if (state.themeMode === "system") {
+          themeIcon.src = (theme === "dark")
+            ? ASSETS.theme.system.dark
+            : ASSETS.theme.system.light;
+        } else if (state.themeMode === "dark") {
+          themeIcon.src = ASSETS.theme.light;
+        } else {
+          themeIcon.src = ASSETS.theme.dark;
+        }
+
+        const label =
+          (state.themeMode === "system")
+            ? "Tema: Sistema (clic para Oscuro)"
+            : (state.themeMode === "dark")
+              ? "Tema: Oscuro (clic para Claro)"
+              : "Tema: Claro (clic para Sistema)";
+        themeBtn.setAttribute("aria-label", label);
+      }
+
+      function cycleThemeMode(){
+        // Order requested: Sistema -> Oscuro -> Claro -> Sistema
+        state.themeMode = (state.themeMode === "system") ? "dark" : (state.themeMode === "dark") ? "light" : "system";
+        localStorage.setItem(STORAGE.themeMode, state.themeMode);
+        applyTheme();
+      }
+
+      // Follow system changes ONLY if mode == system
+      if (mediaDark) {
+        mediaDark.addEventListener?.("change", () => {
+          if (state.themeMode === "system") applyTheme();
+        });
+      }
+
+      function applyLang(lang){
+        state.lang = lang;
+        localStorage.setItem(STORAGE.lang, lang);
+
+        const t = I18N[lang];
+
+        brandSub.textContent = t.brandSub;
+        navPortfolio.textContent = t.nav.portfolio;
+        navContact.textContent = t.nav.contact;
+        navAbout.textContent = t.nav.about;
+
+        // Drawer (mobile)
+        document.getElementById("drawerServicesLabel").textContent = t.nav.services;
+        document.getElementById("drawerPortfolio").textContent = t.nav.portfolio;
+        document.getElementById("drawerAbout").textContent = t.nav.about;
+        document.getElementById("drawerContact").textContent = t.nav.contact;
+        // Servicios drawer
+        document.getElementById("drawerSvcWeb").textContent = t.services.web;
+        document.getElementById("drawerSvcIT").textContent = t.services.it;
+        document.getElementById("drawerSvcInv").textContent = t.services.invites;
+        document.getElementById("drawerSvcAuto").textContent = t.services.auto;
+
+
+        svcWeb.textContent = t.services.web;
+        svcIT.textContent = t.services.it;
+        svcInv.textContent = t.services.invites;
+        svcAuto.textContent = t.services.auto;
+
+        heroTitle.textContent = t.hero.title;
+        heroDesc.textContent = t.hero.desc;
+
+        langItems.forEach(item => {
+          const isSelected = item.getAttribute("data-lang") === lang;
+          item.setAttribute("aria-selected", isSelected ? "true" : "false");
+        });
+
+        document.documentElement.lang = (lang === "en") ? "en" : "es";
+      }
+
+      // Language menu
+      function closeLangMenu(){
+        langMenu.classList.remove("open");
+        langBtn.setAttribute("aria-expanded", "false");
+      }
+      function toggleLangMenu(){
+        const open = !langMenu.classList.contains("open");
+        if (open){
+          langMenu.classList.add("open");
+          langBtn.setAttribute("aria-expanded", "true");
+        } else {
+          closeLangMenu();
+        }
+      }
+
+      langBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleLangMenu(); });
+
+      langItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+          e.stopPropagation();
+          applyLang(item.getAttribute("data-lang"));
+          closeLangMenu();
+        });
+      });
+
+      themeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeLangMenu();
+        cycleThemeMode();
+      });
+
+
+      // ===== Mobile Drawer =====
+      const drawer = document.getElementById("drawer");
+      const drawerPanel = drawer.querySelector(".drawer-panel");
+      const drawerBackdrop = document.getElementById("drawerBackdrop");
+      
+      const drawerServicesBtn = document.getElementById("drawerServicesBtn");
+      const drawerServicesMenu = document.getElementById("drawerServicesMenu");
+
+      const drawerPortfolio = document.getElementById("drawerPortfolio");
+      const drawerAbout = document.getElementById("drawerAbout");
+      const drawerContact = document.getElementById("drawerContact");
+      const drawerMore = document.getElementById("drawerMore");
+
+      function openDrawer(){
+        drawer.classList.add("open");
+        drawer.setAttribute("aria-hidden", "false");
+        burgerBtn.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+      }
+      function closeDrawer(){
+        burgerBtn.classList.remove("active");
+        drawer.classList.remove("open");
+        drawer.setAttribute("aria-hidden", "true");
+        burgerBtn.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      }
+
+      if (drawerPanel){
+        drawerPanel.addEventListener("click", (e) => e.stopPropagation());
+      }
+
+      burgerBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = drawer.classList.toggle("open");
+        burgerBtn.classList.toggle("active", isOpen);
+        burgerBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        closeLangMenu();
+      });
+
+      drawerBackdrop.addEventListener("click", closeDrawer);
+      
+      drawerServicesBtn.addEventListener("click", () => {
+        const open = drawerServicesMenu.classList.toggle("open");
+        drawerServicesBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      // cerrar drawer al navegar
+      drawer.querySelectorAll("a").forEach(a => a.addEventListener("click", closeDrawer));
+
+      document.addEventListener("click", (event) => {
+        if (drawer.classList.contains("open")) {
+          const panel = drawer.querySelector(".drawer-panel");
+          if (panel && !panel.contains(event.target)) closeDrawer();
+        }
+        closeLangMenu();
+        navLinks.classList.remove("open");
+        burgerBtn.setAttribute("aria-expanded", "false");
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          if (drawer.classList.contains("open")) {
+          const panel = drawer.querySelector(".drawer-panel");
+          if (panel && !panel.contains(event.target)) closeDrawer();
+        }
+          closeLangMenu();
+        }
+      });
+
+
+      // Header height -> drawer starts below header (no tapa el header)
+      const headerEl = document.querySelector(".header");
+      function syncHeaderHeight(){
+        if (!headerEl) return;
+        const h = Math.round(headerEl.getBoundingClientRect().height);
+        document.documentElement.style.setProperty("--headerH", h + "px");
+      }
+      window.addEventListener("resize", syncHeaderHeight);
+      syncHeaderHeight();
+
+      // Init
+      applyTheme();
+      applyLang(state.lang);
+    })();
+  </script>
+</body>
+</html>
