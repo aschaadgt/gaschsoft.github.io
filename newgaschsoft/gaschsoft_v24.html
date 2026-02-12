@@ -399,9 +399,9 @@
 
     .drawer-header{
       position: relative;
-      padding: 2px;
+      padding: 14px;
       border-bottom: none;
-      min-height: 11px;
+      min-height: 56px;
     }
     .drawer-title{
       font-weight: 700;
@@ -409,8 +409,8 @@
     }
     .drawer-close{
       position: absolute;
-      top: 6px;
-      right: 6px;
+      top: 12px;
+      right: 12px;
       width: 42px;
       height: 42px;
       border-radius: 14px;
@@ -424,7 +424,7 @@
     .drawer-close:hover{ background: var(--icon-btn-bg-hover); }
 
     .drawer-body{
-      padding: 6px 10px 10px;
+      padding: 10px;
       overflow: auto;
     }
 
@@ -844,9 +844,6 @@
 
       function openDrawer(){
         drawer.classList.add("open");
-        // Servicios abierto por defecto
-        drawerServicesMenu.classList.add("open");
-        drawerServicesBtn.setAttribute("aria-expanded", "true");
         drawer.setAttribute("aria-hidden", "false");
         burgerBtn.setAttribute("aria-expanded", "true");
         document.body.style.overflow = "hidden";
@@ -857,9 +854,6 @@
         drawer.setAttribute("aria-hidden", "true");
         burgerBtn.setAttribute("aria-expanded", "false");
         document.body.style.overflow = "";
-        // Mantener Servicios abierto por defecto
-        drawerServicesMenu.classList.add("open");
-        drawerServicesBtn.setAttribute("aria-expanded", "true");
       }
 
       if (drawerPanel){

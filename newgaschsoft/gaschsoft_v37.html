@@ -5,6 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GaschSoft</title>
 
+  <!-- Favicons (actualizados por JS según tema) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" id="favicon32">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" id="favicon16">
+  <link rel="shortcut icon" type="image/png" href="favicon-32x32.png" id="faviconShortcut">
+
+
+  <!-- SEO / Share -->
+  <meta name="description" content="GaschSoft crea software y sitios web con enfoque de producto: desarrollo web, soporte IT, automatizaciones e invitaciones web." />
+  <meta name="theme-color" content="#F8FAFC" id="metaThemeColor" />
+
+  <!-- Favicons (dinámico por preferencia del sistema / tema) -->
+
+
+<!-- iOS / Android Home Screen -->
+  <link rel="apple-touch-icon" href="Logos/Ico GaschSoft.png" id="appleTouchIcon" />
+
+  <!-- Open Graph / WhatsApp -->
+  <meta property="og:site_name" content="GaschSoft" />
+  <meta property="og:title" content="GaschSoft" />
+  <meta property="og:description" content="Creamos software y sitios web con enfoque de producto: desarrollo web, soporte IT y automatizaciones." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="Logos/Ico GaschSoft.png" id="ogImage" />
+  <meta property="og:image:alt" content="Logo de GaschSoft" />
+  <meta property="og:locale" content="es_GT" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GaschSoft" />
+  <meta name="twitter:description" content="Creamos software y sitios web con enfoque de producto: desarrollo web, soporte IT y automatizaciones." />
+  <meta name="twitter:image" content="Logos/Ico GaschSoft.png" id="twitterImage" />
+
+
   <style>
     :root{
       /* Light */
@@ -71,7 +103,7 @@
     .header{
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 220;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       background: var(--header-bg);
@@ -104,17 +136,15 @@
     }
 
     .brand-text{
-      display:flex;
-      flex-direction: column;
+      font-size: 61px;
+      font-weight: 600;
       line-height: 1;
-      gap: 2px;
-      min-width: 0;
     }
 
     .brand-typing{
       font-weight: 600;
-      letter-spacing: 0.2px;
-      font-size: 20px;
+      letter-spacing: 0.4px;
+      font-size: 30px;
       font-family: "Open Sauce", "OpenSauce", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       display:flex;
       align-items:center;
@@ -243,6 +273,13 @@
     /* Dropdown (solo idioma) */
     .dropdown{ position: relative; }
 
+    /* Asegurar que el dropdown de idioma quede por encima del drawer */
+    #langDD{ z-index: 240; }
+    #langMenu{ z-index: 260; }
+
+    #themeDD{ z-index: 240; }
+    #themeMenu{ z-index: 260; }
+
     .menu{
       position: absolute;
       top: calc(100% + 8px);
@@ -286,8 +323,46 @@
     }
 
     /* Idiomas: ahorrar ancho (menos espacio vacio horizontal) */
-    #langMenu{ min-width: 150px; }
-    #langMenu .menu-item{ padding-left: 6px; padding-right: 6px; }
+    #langMenu{ min-width: 132px; }
+    /* Centrar dropdown de idioma debajo del botón */
+    #langDD .menu{
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+    #langMenu{
+  padding: 4px;
+  min-width: auto;
+}
+
+#langMenu .menu-item{
+  padding: 6px 10px;
+}
+
+    /* Tema: centrado y compacto (igual que idioma) */
+    #themeDD .menu{
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+    #themeMenu{
+      padding: 4px;
+      min-width: auto;
+    }
+    #themeMenu .menu-item{
+      padding: 6px 10px;
+    }
+
+    #themeMenu .theme-item{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .theme-item-icon{
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
 
     .flag{
       width: 18px;
@@ -352,7 +427,10 @@
     /* ===== Mobile Drawer (off-canvas) ===== */
     .drawer{
       position: fixed;
-      inset: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: var(--headerH, 70px);
       z-index: 90;
       /* Mantener en DOM para animar */
       display: block;
@@ -395,30 +473,33 @@
     .drawer.open .drawer-panel{ transform: translateX(0); }
 
     .drawer-header{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      padding: 14px 14px 10px;
-      border-bottom: 1px solid var(--menu-border);
+      position: relative;
+      padding: 2px;
+      border-bottom: none;
+      min-height: 11px;
     }
     .drawer-title{
       font-weight: 700;
       letter-spacing: 0.2px;
     }
     .drawer-close{
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
       border: 1px solid var(--icon-btn-border);
       background: var(--icon-btn-bg);
       cursor: pointer;
-      font-weight: 800;
-      color: var(--text);
+      display:grid;
+      place-items:center;
     }
+    .drawer-close:hover{ background: var(--icon-btn-bg-hover); }
     .drawer-close:hover{ background: var(--icon-btn-bg-hover); }
 
     .drawer-body{
-      padding: 10px;
+      padding: 6px 10px 10px;
       overflow: auto;
     }
 
@@ -478,6 +559,20 @@
       border-color: rgba(31,122,255,0.20);
     }
 
+    /* Burger transform animation */
+    .burger-lines span{
+      transition: transform .25s ease, opacity .2s ease, width .25s ease;
+    }
+    .burger.active .burger-lines span:nth-child(1){
+      transform: translateY(5px) rotate(45deg);
+    }
+    .burger.active .burger-lines span:nth-child(2){
+      opacity: 0;
+    }
+    .burger.active .burger-lines span:nth-child(3){
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
 
     @media (max-width: 920px){
       .brand{ min-width: 180px; }
@@ -504,6 +599,10 @@
     .hero h1{ margin: 0 0 8px; font-size: 28px; letter-spacing: -0.3px; }
     .hero p{ margin: 0; color: var(--muted); max-width: 70ch; line-height: 1.5; }
   </style>
+
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
 </head>
 
 <body>
@@ -516,7 +615,7 @@
             <span id="typingText">Gaschsoft</span>
             
           </div>
-          <div class="brand-sub" id="brandSub">Construimos tu producto digital</div>
+          <div class="brand-sub" id="brandSub"></div>
         </div>
       </div>
 
@@ -531,10 +630,10 @@
               <span class="chev" aria-hidden="true"></span>
             </a>
             <div class="menu" role="menu" aria-label="Servicios (test)">
-              <button class="menu-item" role="menuitem" type="button">Desarrollo Web</button>
-              <button class="menu-item" role="menuitem" type="button">Soporte IT</button>
-              <button class="menu-item" role="menuitem" type="button">Invitaciones Web</button>
-              <button class="menu-item" role="menuitem" type="button">Automatizaciones</button>
+              <button class="menu-item" id="svcWeb" role="menuitem" type="button">Desarrollo Web</button>
+              <button class="menu-item" id="svcIT" role="menuitem" type="button">Soporte IT</button>
+              <button class="menu-item" id="svcInv" role="menuitem" type="button">Invitaciones Web</button>
+              <button class="menu-item" id="svcAuto" role="menuitem" type="button">Automatizaciones</button>
             </div>
           </div>
 
@@ -562,10 +661,27 @@
             </div>
           </div>
 
-          <!-- Tema (Opción A: ciclo 3 estados) -->
-          <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema (Sistema/Oscuro/Claro)">
-            <img id="themeIcon" src="Logos/sistema.png" alt="" />
-          </button>
+          <!-- Tema / Aspecto -->
+          <div class="dropdown" id="themeDD">
+            <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema" aria-haspopup="true" aria-expanded="false">
+              <img id="themeIcon" src="Logos/sistema.png" alt="" />
+            </button>
+
+            <div class="menu" role="menu" aria-label="Selector de tema" id="themeMenu">
+              <button class="menu-item theme-item" role="menuitem" type="button" data-theme="system" aria-selected="true">
+                <img src="Logos/sistema.png" class="theme-item-icon" alt="">
+                <span>Sistema</span>
+              </button>
+              <button class="menu-item theme-item" role="menuitem" type="button" data-theme="light" aria-selected="false">
+                <img src="Logos/claro.png" class="theme-item-icon" alt="">
+                <span>Claro</span>
+              </button>
+              <button class="menu-item theme-item" role="menuitem" type="button" data-theme="dark" aria-selected="false">
+                <img src="Logos/obscuro.png" class="theme-item-icon" alt="">
+                <span>Oscuro</span>
+              </button>
+            </div>
+          </div>
           <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menú" aria-expanded="false">
           <div class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></div>
         </button>
@@ -578,18 +694,19 @@
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
     <aside class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menú">
+      
       <div class="drawer-header">
-        <div class="drawer-title">Menú</div>
-        <button class="drawer-close" id="drawerClose" type="button" aria-label="Cerrar menú">✕</button>
+        
       </div>
+    
 
       <div class="drawer-body">
         <div class="drawer-section">
-          <button class="drawer-item drawer-item-dd" id="drawerServicesBtn" type="button" aria-expanded="false">
+          <button class="drawer-item drawer-item-dd" id="drawerServicesBtn" type="button" aria-expanded="true">
             <span id="drawerServicesLabel">Servicios</span>
             <span class="chev drawer-chev" id="drawerServicesChev" aria-hidden="true"></span>
           </button>
-          <div class="drawer-submenu" id="drawerServicesMenu">
+          <div class="drawer-submenu open" id="drawerServicesMenu">
             <a class="drawer-subitem" href="#serv-web" id="drawerSvcWeb">Desarrollo Web</a>
             <a class="drawer-subitem" href="#serv-it" id="drawerSvcIT">Soporte IT</a>
             <a class="drawer-subitem" href="#serv-inv" id="drawerSvcInv">Invitaciones Web</a>
@@ -600,7 +717,7 @@
         <a class="drawer-item" href="#portfolio" id="drawerPortfolio">Portafolio</a>
         <a class="drawer-item" href="#about" id="drawerAbout">Nosotros</a>
         <a class="drawer-item" href="#contact" id="drawerContact">Contacto</a>
-        <a class="drawer-item" href="#more" id="drawerMore">Más (próximamente)</a>
+        
       </div>
     </aside>
   </div>
@@ -622,20 +739,20 @@
         langIcon: { light: "Logos/idiomas.png", dark: "Logos/idiomas - dark.png" },
         theme: {
           system: { light: "Logos/sistema.png", dark: "Logos/sistema - dark.png" },
-          light: "Logos/claro.png",
-          dark: "Logos/obscuro.png"
+          light:  { light: "Logos/claro.png",   dark: "Logos/claro - dark.png" },
+          dark:   { light: "Logos/obscuro.png", dark: "Logos/obscuro - dark.png" }
         }
       };
 
       const I18N = {
         es: {
-          brandSub: "Construimos tu producto digital",
+          brandSub: "",
           nav: { services: "Servicios", portfolio: "Portafolio", contact: "Contacto", about: "Nosotros" },
           services: { web:"Desarrollo Web", it:"Soporte IT", invites:"Invitaciones Web", auto:"Automatizaciones" },
           hero: { title: "GaschSoft: software y soporte con mentalidad de producto.", desc: "Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover." }
         },
         en: {
-          brandSub: "We build your digital product.",
+          brandSub: "",
           nav: { services: "Services", portfolio: "Portfolio", contact: "Contact", about: "About" },
           services: { web:"Web Development", it:"IT Support", invites:"Web Invitations", auto:"Automations" },
           hero: { title: "GaschSoft: software and support with a product mindset.", desc: "Lively header (typing), theme cycle System → Dark → Light, language selector, and hover services menu." }
@@ -647,6 +764,15 @@
       const brandLogo = document.getElementById("brandLogo");
       const langIcon  = document.getElementById("langIcon");
       const themeIcon = document.getElementById("themeIcon");
+
+      // Head icons/meta (favicon / share)
+      const favicon32 = document.getElementById("favicon32");
+      const favicon16 = document.getElementById("favicon16");
+      const faviconShortcut = document.getElementById("faviconShortcut");
+      const appleTouchIcon = document.getElementById("appleTouchIcon");
+      const ogImage = document.getElementById("ogImage");
+      const twitterImage = document.getElementById("twitterImage");
+      const metaThemeColor = document.getElementById("metaThemeColor");
 
       const brandSub  = document.getElementById("brandSub");
       const navPortfolio = document.getElementById("navPortfolio");
@@ -666,6 +792,9 @@
       const langItems = Array.from(langMenu.querySelectorAll("[data-lang]"));
 
       const themeBtn = document.getElementById("themeBtn");
+      const themeMenu = document.getElementById("themeMenu");
+      const themeItems = Array.from(themeMenu.querySelectorAll("[data-theme]"));
+
 
       const burgerBtn = document.getElementById("burgerBtn");
       const navLinks = document.getElementById("navLinks");
@@ -700,35 +829,41 @@
         brandLogo.src = (theme === "dark") ? ASSETS.brand.dark : ASSETS.brand.light;
         langIcon.src  = (theme === "dark") ? ASSETS.langIcon.dark : ASSETS.langIcon.light;
 
-        // theme button icon (ciclo correcto):
-        // - Sistema  -> mostrar icono sistema (segun tema resuelto)
-        // - Oscuro   -> mostrar icono claro (ofrece ir a claro)
-        // - Claro    -> mostrar icono oscuro (ofrece ir a oscuro)
-        if (state.themeMode === "system") {
-          themeIcon.src = (theme === "dark")
-            ? ASSETS.theme.system.dark
-            : ASSETS.theme.system.light;
-        } else if (state.themeMode === "dark") {
-          themeIcon.src = ASSETS.theme.light;
+        // Head: favicon / iOS icon / share image
+        const headIcon = (theme === "dark") ? ASSETS.brand.dark : ASSETS.brand.light;
+                // Force favicon refresh (Edge/Chrome cache aggressively)
+        const v = Date.now();
+        const iconSrc = (theme === "dark") ? ASSETS.brand.dark : ASSETS.brand.light;
+        const icon32 = iconSrc + "?v=" + v;
+        const icon16 = iconSrc + "?v=" + v;
+        if (favicon32) favicon32.setAttribute("href", icon32);
+        if (favicon16) favicon16.setAttribute("href", icon16);
+        if (faviconShortcut) faviconShortcut.setAttribute("href", icon32);
+        if (appleTouchIcon) appleTouchIcon.setAttribute("href", headIcon);
+        if (ogImage) ogImage.setAttribute("content", headIcon);
+        if (twitterImage) twitterImage.setAttribute("content", headIcon);
+        if (metaThemeColor) metaThemeColor.setAttribute("content", theme === "dark" ? "#0B0F14" : "#F8FAFC");
+
+        // theme button icon (refleja la opción seleccionada; variante depende del tema resuelto)
+        const mode = state.themeMode; // system | light | dark
+        if (mode === "system") {
+          themeIcon.src = (theme === "dark") ? ASSETS.theme.system.dark : ASSETS.theme.system.light;
+        } else if (mode === "light") {
+          themeIcon.src = (theme === "dark") ? ASSETS.theme.light.dark : ASSETS.theme.light.light;
         } else {
-          themeIcon.src = ASSETS.theme.dark;
+          themeIcon.src = (theme === "dark") ? ASSETS.theme.dark.dark : ASSETS.theme.dark.light;
         }
 
-        const label =
-          (state.themeMode === "system")
-            ? "Tema: Sistema (clic para Oscuro)"
-            : (state.themeMode === "dark")
-              ? "Tema: Oscuro (clic para Claro)"
-              : "Tema: Claro (clic para Sistema)";
-        themeBtn.setAttribute("aria-label", label);
+        themeBtn.setAttribute("aria-label", "Tema: " + (mode === "system" ? "Sistema" : (mode === "light" ? "Claro" : "Oscuro")));
+
+        // sync selección en menú de tema
+        themeItems.forEach(item => {
+          const isSelected = item.getAttribute("data-theme") === mode;
+          item.setAttribute("aria-selected", isSelected ? "true" : "false");
+        });
       }
 
-      function cycleThemeMode(){
-        // Order requested: Sistema -> Oscuro -> Claro -> Sistema
-        state.themeMode = (state.themeMode === "system") ? "dark" : (state.themeMode === "dark") ? "light" : "system";
-        localStorage.setItem(STORAGE.themeMode, state.themeMode);
-        applyTheme();
-      }
+
 
       // Follow system changes ONLY if mode == system
       if (mediaDark) {
@@ -758,12 +893,10 @@
         document.getElementById("drawerSvcIT").textContent = t.services.it;
         document.getElementById("drawerSvcInv").textContent = t.services.invites;
         document.getElementById("drawerSvcAuto").textContent = t.services.auto;
-
-
-        svcWeb.textContent = t.services.web;
-        svcIT.textContent = t.services.it;
-        svcInv.textContent = t.services.invites;
-        svcAuto.textContent = t.services.auto;
+        if (svcWeb) svcWeb.textContent = t.services.web;
+        if (svcIT)  svcIT.textContent  = t.services.it;
+        if (svcInv) svcInv.textContent = t.services.invites;
+        if (svcAuto) svcAuto.textContent = t.services.auto;
 
         heroTitle.textContent = t.hero.title;
         heroDesc.textContent = t.hero.desc;
@@ -776,6 +909,24 @@
         document.documentElement.lang = (lang === "en") ? "en" : "es";
       }
 
+      // Theme menu
+      function closeThemeMenu(){
+        themeMenu.classList.remove("open");
+        themeBtn.setAttribute("aria-expanded", "false");
+      }
+      function toggleThemeMenu(){
+        const open = !themeMenu.classList.contains("open");
+        if (open){
+          // Exclusión mutua
+          closeLangMenu();
+        closeThemeMenu();
+          themeMenu.classList.add("open");
+          themeBtn.setAttribute("aria-expanded", "true");
+        } else {
+          closeThemeMenu();
+        }
+      }
+
       // Language menu
       function closeLangMenu(){
         langMenu.classList.remove("open");
@@ -784,6 +935,7 @@
       function toggleLangMenu(){
         const open = !langMenu.classList.contains("open");
         if (open){
+          closeThemeMenu();
           langMenu.classList.add("open");
           langBtn.setAttribute("aria-expanded", "true");
         } else {
@@ -793,26 +945,53 @@
 
       langBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleLangMenu(); });
 
+      themeBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleThemeMenu(); });
+
+      // Theme menu interactions
+      themeMenu.addEventListener("click", (e) => e.stopPropagation());
+
+      themeItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+          e.stopPropagation();
+
+          const next = item.getAttribute("data-theme"); // system | light | dark
+
+          // Visual selection (aria-selected)
+          themeItems.forEach(i => i.setAttribute("aria-selected", "false"));
+          item.setAttribute("aria-selected", "true");
+
+          // Persist + apply
+          state.themeMode = next;
+          localStorage.setItem(STORAGE.themeMode, state.themeMode);
+          applyTheme();
+
+          // Close immediately
+          closeThemeMenu();
+        });
+      });
+
+
       langItems.forEach(item => {
         item.addEventListener("click", (e) => {
           e.stopPropagation();
-          applyLang(item.getAttribute("data-lang"));
+          const next = item.getAttribute("data-lang");
+          closeLangMenu();
+          // Toggle visual selection immediately
+          langItems.forEach(i => i.setAttribute("aria-selected", "false"));
+          item.setAttribute("aria-selected", "true");
+          applyLang(next);
           closeLangMenu();
         });
       });
 
-      themeBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        closeLangMenu();
-        cycleThemeMode();
-      });
+
 
 
       // ===== Mobile Drawer =====
       const drawer = document.getElementById("drawer");
+      const drawerPanel = drawer.querySelector(".drawer-panel");
       const drawerBackdrop = document.getElementById("drawerBackdrop");
-      const drawerClose = document.getElementById("drawerClose");
-
+      
       const drawerServicesBtn = document.getElementById("drawerServicesBtn");
       const drawerServicesMenu = document.getElementById("drawerServicesMenu");
 
@@ -823,29 +1002,40 @@
 
       function openDrawer(){
         drawer.classList.add("open");
+        // Servicios abierto por defecto
+        drawerServicesMenu.classList.add("open");
+        drawerServicesBtn.setAttribute("aria-expanded", "true");
         drawer.setAttribute("aria-hidden", "false");
         burgerBtn.setAttribute("aria-expanded", "true");
         document.body.style.overflow = "hidden";
       }
       function closeDrawer(){
+        burgerBtn.classList.remove("active");
         drawer.classList.remove("open");
         drawer.setAttribute("aria-hidden", "true");
         burgerBtn.setAttribute("aria-expanded", "false");
         document.body.style.overflow = "";
-        // collapse submenu
-        drawerServicesMenu.classList.remove("open");
-        drawerServicesBtn.setAttribute("aria-expanded", "false");
+        // Mantener Servicios abierto por defecto
+        drawerServicesMenu.classList.add("open");
+        drawerServicesBtn.setAttribute("aria-expanded", "true");
+      }
+
+      if (drawerPanel){
+        drawerPanel.addEventListener("click", (e) => e.stopPropagation());
       }
 
       burgerBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        if (drawer.classList.contains("open")) closeDrawer(); else openDrawer();
+        // Cerrar dropdowns al abrir/cerrar el drawer
         closeLangMenu();
+        closeThemeMenu();
+        const isOpen = drawer.classList.toggle("open");
+        burgerBtn.classList.toggle("active", isOpen);
+        burgerBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
 
       drawerBackdrop.addEventListener("click", closeDrawer);
-      drawerClose.addEventListener("click", closeDrawer);
-
+      
       drawerServicesBtn.addEventListener("click", () => {
         const open = drawerServicesMenu.classList.toggle("open");
         drawerServicesBtn.setAttribute("aria-expanded", open ? "true" : "false");
@@ -854,9 +1044,15 @@
       // cerrar drawer al navegar
       drawer.querySelectorAll("a").forEach(a => a.addEventListener("click", closeDrawer));
 
-      document.addEventListener("click", () => {
-        if (drawer.classList.contains("open")) closeDrawer();
+      document.addEventListener("click", (event) => {
+        if (drawer.classList.contains("open")) {
+          const panel = drawer.querySelector(".drawer-panel");
+          const header = document.querySelector(".header");
+          const clickedHeader = header && header.contains(event.target);
+          if (panel && !panel.contains(event.target) && !clickedHeader) closeDrawer();
+        }
         closeLangMenu();
+        closeThemeMenu();
         navLinks.classList.remove("open");
         burgerBtn.setAttribute("aria-expanded", "false");
       });
@@ -865,8 +1061,20 @@
         if (e.key === "Escape") {
           if (drawer.classList.contains("open")) closeDrawer();
           closeLangMenu();
+          closeThemeMenu();
         }
       });
+
+
+      // Header height -> drawer starts below header (no tapa el header)
+      const headerEl = document.querySelector(".header");
+      function syncHeaderHeight(){
+        if (!headerEl) return;
+        const h = Math.round(headerEl.getBoundingClientRect().height);
+        document.documentElement.style.setProperty("--headerH", h + "px");
+      }
+      window.addEventListener("resize", syncHeaderHeight);
+      syncHeaderHeight();
 
       // Init
       applyTheme();

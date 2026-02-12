@@ -71,7 +71,7 @@
     .header{
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 120;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       background: var(--header-bg);
@@ -89,15 +89,15 @@
 
     .brand{
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       gap: 10px;
       min-width: 240px;
     }
 
     .brand-logo{
-      width: 55px;
-      height: 55px;
-      transform: translateY(2px);
+      width: 61px;
+      height: 61px;
+      
       flex: 0 0 auto;
       display:block;
       object-fit: contain;
@@ -106,7 +106,7 @@
     .brand-text{
       display:flex;
       flex-direction: column;
-      line-height: 1.1;
+      line-height: 1;
       gap: 2px;
       min-width: 0;
     }
@@ -243,6 +243,13 @@
     /* Dropdown (solo idioma) */
     .dropdown{ position: relative; }
 
+    /* Asegurar que el dropdown de idioma quede por encima del drawer */
+    #langDD{ z-index: 140; }
+    #langMenu{ z-index: 150; }
+
+    #themeDD{ z-index: 140; }
+    #themeMenu{ z-index: 150; }
+
     .menu{
       position: absolute;
       top: calc(100% + 8px);
@@ -286,8 +293,35 @@
     }
 
     /* Idiomas: ahorrar ancho (menos espacio vacio horizontal) */
-    #langMenu{ min-width: 150px; }
-    #langMenu .menu-item{ padding-left: 6px; padding-right: 6px; }
+    #langMenu{ min-width: 132px; }
+    /* Centrar dropdown de idioma debajo del botón */
+    #langDD .menu{
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+    #langMenu{
+  padding: 4px;
+  min-width: auto;
+}
+
+#langMenu .menu-item{
+  padding: 6px 10px;
+}
+
+    /* Tema: centrado y compacto (igual que idioma) */
+    #themeDD .menu{
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+    #themeMenu{
+      padding: 4px;
+      min-width: auto;
+    }
+    #themeMenu .menu-item{
+      padding: 6px 10px;
+    }
 
     .flag{
       width: 18px;
@@ -349,34 +383,165 @@
     .burger-lines span:nth-child(3){ top:10px; }
 
 
+    /* ===== Mobile Drawer (off-canvas) ===== */
+    .drawer{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: var(--headerH, 70px);
+      z-index: 90;
+      /* Mantener en DOM para animar */
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 180ms ease, visibility 0s linear 180ms;
+    }
+    .drawer.open{
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity 180ms ease, visibility 0s;
+    }
+    .drawer-backdrop{
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      opacity: 0;
+      transition: opacity 180ms ease;
+    }
+    .drawer.open .drawer-backdrop{ opacity: 1; }
+
+    .drawer-panel{
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(360px, 92vw);
+      background: var(--menu-bg);
+      border-left: 1px solid var(--menu-border);
+      box-shadow: var(--shadow);
+      transform: translateX(100%);
+      transition: transform 260ms ease-out;
+      display: flex;
+      flex-direction: column;
+    }
+    .drawer.open .drawer-panel{ transform: translateX(0); }
+
+    .drawer-header{
+      position: relative;
+      padding: 2px;
+      border-bottom: none;
+      min-height: 11px;
+    }
+    .drawer-title{
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .drawer-close{
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--icon-btn-border);
+      background: var(--icon-btn-bg);
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+    }
+    .drawer-close:hover{ background: var(--icon-btn-bg-hover); }
+    .drawer-close:hover{ background: var(--icon-btn-bg-hover); }
+
+    .drawer-body{
+      padding: 6px 10px 10px;
+      overflow: auto;
+    }
+
+    .drawer-item{
+      width: 100%;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      color: var(--text);
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .drawer-item:hover{
+      background: var(--link-hover-bg);
+      border-color: var(--link-hover-border);
+    }
+
+    .drawer-item-dd{
+      appearance: none;
+      text-align: left;
+    }
+    .drawer-chev{
+      margin-top: -2px;
+      transition: transform 160ms ease;
+    }
+    .drawer-item-dd[aria-expanded="true"] .drawer-chev{
+      transform: rotate(225deg);
+    }
+
+    .drawer-submenu{
+      display: none;
+      padding: 6px 6px 10px;
+      margin-left: 6px;
+      border-left: 2px solid rgba(31,122,255,0.25);
+    }
+    .drawer-submenu.open{ display:block; }
+
+    .drawer-subitem{
+      display:flex;
+      padding: 10px 12px;
+      border-radius: 12px;
+      text-decoration:none;
+      color: var(--text);
+      border: 1px solid transparent;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .drawer-subitem:hover{
+      background: rgba(31,122,255,0.12);
+      border-color: rgba(31,122,255,0.20);
+    }
+
+    /* Burger transform animation */
+    .burger-lines span{
+      transition: transform .25s ease, opacity .2s ease, width .25s ease;
+    }
+    .burger.active .burger-lines span:nth-child(1){
+      transform: translateY(5px) rotate(45deg);
+    }
+    .burger.active .burger-lines span:nth-child(2){
+      opacity: 0;
+    }
+    .burger.active .burger-lines span:nth-child(3){
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
+
     @media (max-width: 920px){
       .brand{ min-width: 180px; }
-      .nav-links{
-        display:none;
-        position:absolute;
-        top: 66px;
-        right: 16px;
-        left: 16px;
-        background: var(--menu-bg);
-        border: 1px solid var(--menu-border);
-        border-radius: 16px;
-        padding: 10px;
-        box-shadow: var(--shadow);
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
-      }
-      .nav-links.open{ display:flex; }
-      .nav-link, .nav-dd-btn{ justify-content: space-between; }
+      .nav-links{ display:none !important; }
+      .nav-links.open{ display:none !important; }
+.nav-link, .nav-dd-btn{ justify-content: space-between; }
       .burger{ display:grid; }
       .icon-actions{ margin-left: 0; }
       .nav{ gap: 10px; }
-
-      /* Servicios click en mobile */
-      .dropdown.services:hover .menu{ display:none; }
-      .dropdown.services .menu.open{ display:block; }
-      .dropdown.services .chev.up{ transform: rotate(225deg); }
-    }
+}
 
     main{
       max-width: 1200px;
@@ -405,27 +570,25 @@
             <span id="typingText">Gaschsoft</span>
             
           </div>
-          <div class="brand-sub" id="brandSub">Soluciones digitales, sin humo.</div>
+          <div class="brand-sub" id="brandSub">Construimos tu producto digital</div>
         </div>
       </div>
 
       <nav class="nav" aria-label="Navegación principal">
-        <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menú" aria-expanded="false">
-          <div class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></div>
-        </button>
+<div class="nav-links" id="navLinks">
+          
 
-        <div class="nav-links" id="navLinks">
-          <div class="dropdown services" id="servicesDD">
-            <button class="nav-link nav-dd-btn" id="servicesBtn" type="button" aria-haspopup="true" aria-expanded="false">
-              <span id="navServices">Servicios</span>
-              <span class="chev" id="servicesChev" aria-hidden="true"></span>
-            </button>
-
-            <div class="menu" role="menu" aria-label="Servicios" id="servicesMenu">
-              <button class="menu-item" role="menuitem" type="button" data-service="web"><span id="svcWeb">Desarrollo Web</span></button>
-              <button class="menu-item" role="menuitem" type="button" data-service="it"><span id="svcIT">Soporte IT</span></button>
-              <button class="menu-item" role="menuitem" type="button" data-service="invites"><span id="svcInv">Invitaciones Web</span></button>
-              <button class="menu-item" role="menuitem" type="button" data-service="auto"><span id="svcAuto">Automatizaciones</span></button>
+          
+          <div class="dropdown services services-test" id="servicesTestDD">
+            <a class="nav-link nav-dd-link" href="#services-test" id="servicesTestBtn" aria-haspopup="true" aria-expanded="false">
+              <span>Servicios</span>
+              <span class="chev" aria-hidden="true"></span>
+            </a>
+            <div class="menu" role="menu" aria-label="Servicios (test)">
+              <button class="menu-item" id="svcWeb" role="menuitem" type="button">Desarrollo Web</button>
+              <button class="menu-item" id="svcIT" role="menuitem" type="button">Soporte IT</button>
+              <button class="menu-item" id="svcInv" role="menuitem" type="button">Invitaciones Web</button>
+              <button class="menu-item" id="svcAuto" role="menuitem" type="button">Automatizaciones</button>
             </div>
           </div>
 
@@ -453,19 +616,69 @@
             </div>
           </div>
 
-          <!-- Tema (Opción A: ciclo 3 estados) -->
-          <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema (Sistema/Oscuro/Claro)">
-            <img id="themeIcon" src="Logos/sistema.png" alt="" />
-          </button>
+          <!-- Tema / Aspecto -->
+          <div class="dropdown" id="themeDD">
+            <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema" aria-haspopup="true" aria-expanded="false">
+              <img id="themeIcon" src="Logos/sistema.png" alt="" />
+            </button>
+
+            <div class="menu" role="menu" aria-label="Selector de tema" id="themeMenu">
+              <button class="menu-item" role="menuitem" type="button" data-theme="system" aria-selected="true">
+                <span>Sistema</span>
+              </button>
+              <button class="menu-item" role="menuitem" type="button" data-theme="light" aria-selected="false">
+                <span>Claro</span>
+              </button>
+              <button class="menu-item" role="menuitem" type="button" data-theme="dark" aria-selected="false">
+                <span>Oscuro</span>
+              </button>
+            </div>
+          </div>
+          <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menú" aria-expanded="false">
+          <div class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+        </button>
         </div>
       </nav>
     </div>
   </header>
 
+  <!-- Mobile Drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <aside class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menú">
+      
+      <div class="drawer-header">
+        
+      </div>
+    
+
+      <div class="drawer-body">
+        <div class="drawer-section">
+          <button class="drawer-item drawer-item-dd" id="drawerServicesBtn" type="button" aria-expanded="true">
+            <span id="drawerServicesLabel">Servicios</span>
+            <span class="chev drawer-chev" id="drawerServicesChev" aria-hidden="true"></span>
+          </button>
+          <div class="drawer-submenu open" id="drawerServicesMenu">
+            <a class="drawer-subitem" href="#serv-web" id="drawerSvcWeb">Desarrollo Web</a>
+            <a class="drawer-subitem" href="#serv-it" id="drawerSvcIT">Soporte IT</a>
+            <a class="drawer-subitem" href="#serv-inv" id="drawerSvcInv">Invitaciones Web</a>
+            <a class="drawer-subitem" href="#serv-auto" id="drawerSvcAuto">Automatizaciones</a>
+          </div>
+        </div>
+
+        <a class="drawer-item" href="#portfolio" id="drawerPortfolio">Portafolio</a>
+        <a class="drawer-item" href="#about" id="drawerAbout">Nosotros</a>
+        <a class="drawer-item" href="#contact" id="drawerContact">Contacto</a>
+        
+      </div>
+    </aside>
+  </div>
+
+
   <main>
     <section class="hero">
       <h1 id="heroTitle">GaschSoft: software y soporte con mentalidad de producto.</h1>
-      <p id="heroDesc">Header vivo (typing), tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover.</p>
+      <p id="heroDesc">Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover.</p>
     </section>
   </main>
 
@@ -478,20 +691,20 @@
         langIcon: { light: "Logos/idiomas.png", dark: "Logos/idiomas - dark.png" },
         theme: {
           system: { light: "Logos/sistema.png", dark: "Logos/sistema - dark.png" },
-          light: "Logos/claro.png",
-          dark: "Logos/obscuro.png"
+          light:  { light: "Logos/claro.png",   dark: "Logos/claro - dark.png" },
+          dark:   { light: "Logos/obscuro.png", dark: "Logos/obscuro - dark.png" }
         }
       };
 
       const I18N = {
         es: {
-          brandSub: "Soluciones digitales, sin humo.",
+          brandSub: "Construimos tu producto digital",
           nav: { services: "Servicios", portfolio: "Portafolio", contact: "Contacto", about: "Nosotros" },
           services: { web:"Desarrollo Web", it:"Soporte IT", invites:"Invitaciones Web", auto:"Automatizaciones" },
-          hero: { title: "GaschSoft: software y soporte con mentalidad de producto.", desc: "Header vivo (typing), tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover." }
+          hero: { title: "GaschSoft: software y soporte con mentalidad de producto.", desc: "Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover." }
         },
         en: {
-          brandSub: "Digital solutions, no nonsense.",
+          brandSub: "We build your digital product.",
           nav: { services: "Services", portfolio: "Portfolio", contact: "Contact", about: "About" },
           services: { web:"Web Development", it:"IT Support", invites:"Web Invitations", auto:"Automations" },
           hero: { title: "GaschSoft: software and support with a product mindset.", desc: "Lively header (typing), theme cycle System → Dark → Light, language selector, and hover services menu." }
@@ -505,7 +718,6 @@
       const themeIcon = document.getElementById("themeIcon");
 
       const brandSub  = document.getElementById("brandSub");
-      const navServices = document.getElementById("navServices");
       const navPortfolio = document.getElementById("navPortfolio");
       const navContact = document.getElementById("navContact");
       const navAbout = document.getElementById("navAbout");
@@ -523,13 +735,12 @@
       const langItems = Array.from(langMenu.querySelectorAll("[data-lang]"));
 
       const themeBtn = document.getElementById("themeBtn");
+      const themeMenu = document.getElementById("themeMenu");
+      const themeItems = Array.from(themeMenu.querySelectorAll("[data-theme]"));
+
 
       const burgerBtn = document.getElementById("burgerBtn");
       const navLinks = document.getElementById("navLinks");
-
-      const servicesBtn = document.getElementById("servicesBtn");
-      const servicesMenu = document.getElementById("servicesMenu");
-      const servicesChev = document.getElementById("servicesChev");
 
       const mediaDark = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
 
@@ -561,35 +772,26 @@
         brandLogo.src = (theme === "dark") ? ASSETS.brand.dark : ASSETS.brand.light;
         langIcon.src  = (theme === "dark") ? ASSETS.langIcon.dark : ASSETS.langIcon.light;
 
-        // theme button icon (ciclo correcto):
-        // - Sistema  -> mostrar icono sistema (segun tema resuelto)
-        // - Oscuro   -> mostrar icono claro (ofrece ir a claro)
-        // - Claro    -> mostrar icono oscuro (ofrece ir a oscuro)
-        if (state.themeMode === "system") {
-          themeIcon.src = (theme === "dark")
-            ? ASSETS.theme.system.dark
-            : ASSETS.theme.system.light;
-        } else if (state.themeMode === "dark") {
-          themeIcon.src = ASSETS.theme.light;
+        // theme button icon (refleja la opción seleccionada; variante depende del tema resuelto)
+        const mode = state.themeMode; // system | light | dark
+        if (mode === "system") {
+          themeIcon.src = (theme === "dark") ? ASSETS.theme.system.dark : ASSETS.theme.system.light;
+        } else if (mode === "light") {
+          themeIcon.src = (theme === "dark") ? ASSETS.theme.light.dark : ASSETS.theme.light.light;
         } else {
-          themeIcon.src = ASSETS.theme.dark;
+          themeIcon.src = (theme === "dark") ? ASSETS.theme.dark.dark : ASSETS.theme.dark.light;
         }
 
-        const label =
-          (state.themeMode === "system")
-            ? "Tema: Sistema (clic para Oscuro)"
-            : (state.themeMode === "dark")
-              ? "Tema: Oscuro (clic para Claro)"
-              : "Tema: Claro (clic para Sistema)";
-        themeBtn.setAttribute("aria-label", label);
+        themeBtn.setAttribute("aria-label", "Tema: " + (mode === "system" ? "Sistema" : (mode === "light" ? "Claro" : "Oscuro")));
+
+        // sync selección en menú de tema
+        themeItems.forEach(item => {
+          const isSelected = item.getAttribute("data-theme") === mode;
+          item.setAttribute("aria-selected", isSelected ? "true" : "false");
+        });
       }
 
-      function cycleThemeMode(){
-        // Order requested: Sistema -> Oscuro -> Claro -> Sistema
-        state.themeMode = (state.themeMode === "system") ? "dark" : (state.themeMode === "dark") ? "light" : "system";
-        localStorage.setItem(STORAGE.themeMode, state.themeMode);
-        applyTheme();
-      }
+
 
       // Follow system changes ONLY if mode == system
       if (mediaDark) {
@@ -605,15 +807,24 @@
         const t = I18N[lang];
 
         brandSub.textContent = t.brandSub;
-        navServices.textContent = t.nav.services;
         navPortfolio.textContent = t.nav.portfolio;
         navContact.textContent = t.nav.contact;
         navAbout.textContent = t.nav.about;
 
-        svcWeb.textContent = t.services.web;
-        svcIT.textContent = t.services.it;
-        svcInv.textContent = t.services.invites;
-        svcAuto.textContent = t.services.auto;
+        // Drawer (mobile)
+        document.getElementById("drawerServicesLabel").textContent = t.nav.services;
+        document.getElementById("drawerPortfolio").textContent = t.nav.portfolio;
+        document.getElementById("drawerAbout").textContent = t.nav.about;
+        document.getElementById("drawerContact").textContent = t.nav.contact;
+        // Servicios drawer
+        document.getElementById("drawerSvcWeb").textContent = t.services.web;
+        document.getElementById("drawerSvcIT").textContent = t.services.it;
+        document.getElementById("drawerSvcInv").textContent = t.services.invites;
+        document.getElementById("drawerSvcAuto").textContent = t.services.auto;
+        if (svcWeb) svcWeb.textContent = t.services.web;
+        if (svcIT)  svcIT.textContent  = t.services.it;
+        if (svcInv) svcInv.textContent = t.services.invites;
+        if (svcAuto) svcAuto.textContent = t.services.auto;
 
         heroTitle.textContent = t.hero.title;
         heroDesc.textContent = t.hero.desc;
@@ -626,6 +837,23 @@
         document.documentElement.lang = (lang === "en") ? "en" : "es";
       }
 
+      // Theme menu
+      function closeThemeMenu(){
+        themeMenu.classList.remove("open");
+        themeBtn.setAttribute("aria-expanded", "false");
+      }
+      function toggleThemeMenu(){
+        const open = !themeMenu.classList.contains("open");
+        if (open){
+          // Exclusión mutua
+          closeLangMenu();
+          themeMenu.classList.add("open");
+          themeBtn.setAttribute("aria-expanded", "true");
+        } else {
+          closeThemeMenu();
+        }
+      }
+
       // Language menu
       function closeLangMenu(){
         langMenu.classList.remove("open");
@@ -634,6 +862,7 @@
       function toggleLangMenu(){
         const open = !langMenu.classList.contains("open");
         if (open){
+          closeThemeMenu();
           langMenu.classList.add("open");
           langBtn.setAttribute("aria-expanded", "true");
         } else {
@@ -643,62 +872,132 @@
 
       langBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleLangMenu(); });
 
+      themeBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleThemeMenu(); });
+
+      // Theme menu interactions
+      themeMenu.addEventListener("click", (e) => e.stopPropagation());
+
+      themeItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+          e.stopPropagation();
+
+          const next = item.getAttribute("data-theme"); // system | light | dark
+
+          // Visual selection (aria-selected)
+          themeItems.forEach(i => i.setAttribute("aria-selected", "false"));
+          item.setAttribute("aria-selected", "true");
+
+          // Persist + apply
+          state.themeMode = next;
+          localStorage.setItem(STORAGE.themeMode, state.themeMode);
+          applyTheme();
+
+          // Close immediately
+          closeThemeMenu();
+        });
+      });
+
+
       langItems.forEach(item => {
         item.addEventListener("click", (e) => {
           e.stopPropagation();
-          applyLang(item.getAttribute("data-lang"));
+          const next = item.getAttribute("data-lang");
+          closeLangMenu();
+          // Toggle visual selection immediately
+          langItems.forEach(i => i.setAttribute("aria-selected", "false"));
+          item.setAttribute("aria-selected", "true");
+          applyLang(next);
           closeLangMenu();
         });
       });
 
-      themeBtn.addEventListener("click", (e) => {
+
+
+
+      // ===== Mobile Drawer =====
+      const drawer = document.getElementById("drawer");
+      const drawerPanel = drawer.querySelector(".drawer-panel");
+      const drawerBackdrop = document.getElementById("drawerBackdrop");
+      
+      const drawerServicesBtn = document.getElementById("drawerServicesBtn");
+      const drawerServicesMenu = document.getElementById("drawerServicesMenu");
+
+      const drawerPortfolio = document.getElementById("drawerPortfolio");
+      const drawerAbout = document.getElementById("drawerAbout");
+      const drawerContact = document.getElementById("drawerContact");
+      const drawerMore = document.getElementById("drawerMore");
+
+      function openDrawer(){
+        drawer.classList.add("open");
+        // Servicios abierto por defecto
+        drawerServicesMenu.classList.add("open");
+        drawerServicesBtn.setAttribute("aria-expanded", "true");
+        drawer.setAttribute("aria-hidden", "false");
+        burgerBtn.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+      }
+      function closeDrawer(){
+        burgerBtn.classList.remove("active");
+        drawer.classList.remove("open");
+        drawer.setAttribute("aria-hidden", "true");
+        burgerBtn.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+        // Mantener Servicios abierto por defecto
+        drawerServicesMenu.classList.add("open");
+        drawerServicesBtn.setAttribute("aria-expanded", "true");
+      }
+
+      if (drawerPanel){
+        drawerPanel.addEventListener("click", (e) => e.stopPropagation());
+      }
+
+      burgerBtn.addEventListener("click", (e) => {
         e.stopPropagation();
+        const isOpen = drawer.classList.toggle("open");
+        burgerBtn.classList.toggle("active", isOpen);
+        burgerBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
         closeLangMenu();
-        cycleThemeMode();
       });
 
-      document.addEventListener("click", () => {
+      drawerBackdrop.addEventListener("click", closeDrawer);
+      
+      drawerServicesBtn.addEventListener("click", () => {
+        const open = drawerServicesMenu.classList.toggle("open");
+        drawerServicesBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      // cerrar drawer al navegar
+      drawer.querySelectorAll("a").forEach(a => a.addEventListener("click", closeDrawer));
+
+      document.addEventListener("click", (event) => {
+        if (drawer.classList.contains("open")) {
+          const panel = drawer.querySelector(".drawer-panel");
+          if (panel && !panel.contains(event.target)) closeDrawer();
+        }
         closeLangMenu();
+        closeThemeMenu();
         navLinks.classList.remove("open");
         burgerBtn.setAttribute("aria-expanded", "false");
-        servicesMenu.classList.remove("open");
-        servicesChev.classList.remove("up");
-        servicesBtn.setAttribute("aria-expanded", "false");
       });
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
+          if (drawer.classList.contains("open")) closeDrawer();
           closeLangMenu();
-          servicesMenu.classList.remove("open");
-          servicesChev.classList.remove("up");
-          servicesBtn.setAttribute("aria-expanded", "false");
+          closeThemeMenu();
         }
       });
 
-      // Mobile burger
-      burgerBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const open = navLinks.classList.toggle("open");
-        burgerBtn.setAttribute("aria-expanded", open ? "true" : "false");
-        closeLangMenu();
-      });
-      navLinks.addEventListener("click", (e) => e.stopPropagation());
 
-      // Servicios click only in mobile
-      function isMobile(){ return window.matchMedia && window.matchMedia("(max-width: 920px)").matches; }
-
-      servicesBtn.addEventListener("click", (e) => {
-        if (!isMobile()) return;
-        e.preventDefault();
-        e.stopPropagation();
-        closeLangMenu();
-
-        const open = !servicesMenu.classList.contains("open");
-        servicesMenu.classList.toggle("open", open);
-        servicesBtn.setAttribute("aria-expanded", open ? "true" : "false");
-        servicesChev.classList.toggle("up", open);
-      });
-      servicesMenu.addEventListener("click", (e) => e.stopPropagation());
+      // Header height -> drawer starts below header (no tapa el header)
+      const headerEl = document.querySelector(".header");
+      function syncHeaderHeight(){
+        if (!headerEl) return;
+        const h = Math.round(headerEl.getBoundingClientRect().height);
+        document.documentElement.style.setProperty("--headerH", h + "px");
+      }
+      window.addEventListener("resize", syncHeaderHeight);
+      syncHeaderHeight();
 
       // Init
       applyTheme();
