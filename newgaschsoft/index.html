@@ -243,6 +243,107 @@
       gap: 10px;
       margin-left: 8px;
     }
+    
+        /* Demo button (homologado con Idioma/Tema + glow solo en el borde) */
+    .demo-btn{
+      height: 40px;
+      padding: 0 14px 0 12px;
+      border-radius: 999px;
+
+      /* MISMO look & feel que .icon-btn */
+      border: 1px solid var(--icon-btn-border);
+      background: var(--icon-btn-bg);
+      color: var(--text);
+
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+
+      position: relative;
+      z-index: 0;
+      isolation: isolate;
+
+      /* MISMAS transiciones que Idioma/Tema */
+      transition: background 160ms ease, transform 160ms ease, border-color 160ms ease;
+      white-space: nowrap;
+    }
+
+    .demo-btn:hover{
+      background: var(--icon-btn-bg-hover);
+      border-color: rgba(31, 122, 255, 0.30);
+    }
+
+    .demo-btn:active{ transform: translateY(1px); }
+
+    .demo-btn img{
+      width: 20px;
+      height: 20px;
+      display:block;
+    }
+
+    /* Glow: SOLO borde (centro recortado) */
+    .demo-btn::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius:999px;
+      padding: 4px; /* grosor del borde glow */
+
+      background: linear-gradient(
+        45deg,
+        #1F4ED8,
+        #1F7AFF,
+        #3AB6E6,
+        #A7E3FF,
+        #1F4ED8
+      );
+      background-size: 400%;
+      filter: blur(5px);
+
+      opacity: 0;
+      transition: opacity .25s ease-in-out;
+      animation: demoGlow 18s linear infinite;
+
+      z-index: -1;
+
+      /* recorte del centro => borde únicamente */
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+    }
+
+    .demo-btn:hover::before{ opacity: 1; }
+
+    @keyframes demoGlow{
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    /* Drawer item with left icon */
+    .drawer-item.with-icon{ justify-content: flex-start; }
+    .drawer-item .drawer-left{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+
+
+    .drawer-icon{
+      width: 20px;
+      height: 20px;
+      display:block;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
 
     .icon-btn{
       width: 40px;
@@ -420,7 +521,7 @@
       opacity: 0.9;
     }
     .burger-lines span:nth-child(1){ top:0; }
-    .burger-lines span:nth-child(2){ top:5px; opacity: 0.7; }
+    .burger-lines span:nth-child(2){ top:5px; opacity: 0.9; }
     .burger-lines span:nth-child(3){ top:10px; }
 
 
@@ -581,6 +682,7 @@
 .nav-link, .nav-dd-btn{ justify-content: space-between; }
       .burger{ display:grid; }
       .icon-actions{ margin-left: 0; }
+      #demoWrap{ display:none !important; }
       .nav{ gap: 10px; }
 }
 
@@ -643,6 +745,14 @@
         </div>
 
         <div class="icon-actions">
+          <!-- Demo (desktop only; moves into drawer on mobile) -->
+          <div id="demoWrap">
+            <a class="demo-btn" id="demoBtn" href="/newgaschsoft/demo" aria-label="Demo">
+              <img id="demoIcon" src="Logos/agendar.png" alt="">
+              <span>Demo</span>
+            </a>
+          </div>
+
           <!-- Idioma -->
           <div class="dropdown" id="langDD">
             <button class="icon-btn" id="langBtn" type="button" aria-label="Idioma" aria-haspopup="true" aria-expanded="false">
@@ -701,6 +811,12 @@
     
 
       <div class="drawer-body">
+        <a class="drawer-item with-icon" href="/newgaschsoft/demo" id="drawerDemo">
+          <span class="drawer-left">
+            <img class="drawer-icon" id="drawerDemoIcon" src="Logos/agendar.png" alt="">
+            <span>Demo</span>
+          </span>
+        </a>
         <div class="drawer-section">
           <button class="drawer-item drawer-item-dd" id="drawerServicesBtn" type="button" aria-expanded="true">
             <span id="drawerServicesLabel">Servicios</span>
@@ -737,6 +853,7 @@
       const ASSETS = {
         brand: { light: "Logos/Ico GaschSoft.png", dark: "Logos/Ico GaschSoft - dark.png" },
         langIcon: { light: "Logos/idiomas.png", dark: "Logos/idiomas - dark.png" },
+        demo: { light: "Logos/agendar.png", dark: "Logos/agendar - dark.png" },
         theme: {
           system: { light: "Logos/sistema.png", dark: "Logos/sistema - dark.png" },
           light:  { light: "Logos/claro.png",   dark: "Logos/claro - dark.png" },
@@ -764,6 +881,8 @@
       const brandLogo = document.getElementById("brandLogo");
       const langIcon  = document.getElementById("langIcon");
       const themeIcon = document.getElementById("themeIcon");
+      const demoIcon = document.getElementById("demoIcon");
+      const drawerDemoIcon = document.getElementById("drawerDemoIcon");
 
       // Head icons/meta (favicon / share)
       const favicon32 = document.getElementById("favicon32");
@@ -828,6 +947,8 @@
         // swap icons that depend on THEME (resolved)
         brandLogo.src = (theme === "dark") ? ASSETS.brand.dark : ASSETS.brand.light;
         langIcon.src  = (theme === "dark") ? ASSETS.langIcon.dark : ASSETS.langIcon.light;
+        if (demoIcon) demoIcon.src = (theme === "dark") ? ASSETS.demo.dark : ASSETS.demo.light;
+        if (drawerDemoIcon) drawerDemoIcon.src = (theme === "dark") ? ASSETS.demo.dark : ASSETS.demo.light;
 
         // Head: favicon / iOS icon / share image
         const headIcon = (theme === "dark") ? ASSETS.brand.dark : ASSETS.brand.light;
@@ -922,8 +1043,40 @@
         closeThemeMenu();
           themeMenu.classList.add("open");
           themeBtn.setAttribute("aria-expanded", "true");
+          requestAnimationFrame(adjustThemeMenuPosition);
         } else {
           closeThemeMenu();
+        }
+      }
+
+
+      function adjustThemeMenuPosition(){
+        // Reset inline positioning first (default: centered)
+        themeMenu.style.left = "";
+        themeMenu.style.right = "";
+        themeMenu.style.transform = "";
+
+        const rect = themeMenu.getBoundingClientRect();
+        const overflowRight = rect.right > window.innerWidth;
+        const overflowLeft  = rect.left < 0;
+
+        if (!overflowRight && !overflowLeft){
+          // Normal: centrado debajo del botón
+          themeMenu.style.left = "50%";
+          themeMenu.style.transform = "translateX(-50%)";
+          return;
+        }
+
+        if (overflowRight){
+          // Pegado al borde derecho del viewport: alinear al borde derecho del botón
+          themeMenu.style.left = "auto";
+          themeMenu.style.right = "0";
+          themeMenu.style.transform = "none";
+        } else if (overflowLeft){
+          // Pegado al borde izquierdo del viewport: alinear al borde izquierdo del botón
+          themeMenu.style.left = "0";
+          themeMenu.style.right = "auto";
+          themeMenu.style.transform = "none";
         }
       }
 
