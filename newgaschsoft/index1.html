@@ -700,7 +700,36 @@
     }
     .hero h1{ margin: 0 0 8px; font-size: 28px; letter-spacing: -0.3px; }
     .hero p{ margin: 0; color: var(--muted); max-width: 70ch; line-height: 1.5; }
-  </style>
+  
+/* ===== Protección básica contra selección y arrastre ===== */
+html, body, header, nav, main, .drawer {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Evitar arrastrar imágenes */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+
+
+/* ===== Fix: evitar que Plataforma/Casos se queden "pegados" tras click (focus) ===== */
+.nav-dd-link:focus,
+.nav-dd-link:active{
+  background: var(--nav-link-bg, transparent);
+  border-color: var(--nav-link-border, transparent);
+}
+
+.nav-dd-link:focus:not(:focus-visible){
+  outline: none;
+  box-shadow: none;
+}
+
+</style>
 
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
@@ -728,19 +757,30 @@
           
           <div class="dropdown services services-test" id="servicesTestDD">
             <a class="nav-link nav-dd-link" href="#services-test" id="servicesTestBtn" aria-haspopup="true" aria-expanded="false">
-              <span>Servicios</span>
+              <span>Plataforma</span>
               <span class="chev" aria-hidden="true"></span>
             </a>
-            <div class="menu" role="menu" aria-label="Servicios (test)">
-              <button class="menu-item" id="svcWeb" role="menuitem" type="button">Desarrollo Web</button>
-              <button class="menu-item" id="svcIT" role="menuitem" type="button">Soporte IT</button>
-              <button class="menu-item" id="svcInv" role="menuitem" type="button">Invitaciones Web</button>
+            <div class="menu" role="menu" aria-label="Plataforma">
               <button class="menu-item" id="svcAuto" role="menuitem" type="button">Automatizaciones</button>
+              <button class="menu-item" id="svcWeb" role="menuitem" type="button">Web Apps</button>
+              <button class="menu-item" id="svcIT" role="menuitem" type="button">Integraciones</button>
+              <button class="menu-item" id="svcInfra" role="menuitem" type="button">Infraestructura</button>
+              <button class="menu-item" id="svcInv" role="menuitem" type="button">Invitaciones Web</button>
             </div>
           </div>
 
-          <a class="nav-link" href="#portfolio" id="navPortfolio">Portafolio</a>
-          <a class="nav-link" href="#about" id="navAbout">Nosotros</a>
+          <div class="dropdown services services-test" id="casesDD">
+            <a class="nav-link nav-dd-link" href="#cases" id="navPortfolio" aria-haspopup="true" aria-expanded="false">
+              <span id="navCasesLabel">Casos</span>
+              <span class="chev" aria-hidden="true"></span>
+            </a>
+            <div class="menu" role="menu" aria-label="Casos">
+              <button class="menu-item" id="caseSME" role="menuitem" type="button">PYMEs</button>
+              <button class="menu-item" id="caseCorp" role="menuitem" type="button">Corporativo</button>
+              <button class="menu-item" id="caseStartup" role="menuitem" type="button">Startups</button>
+</div>
+          </div>
+<a class="nav-link" href="#about" id="navAbout">Empresa</a>
           <a class="nav-link" href="#contact" id="navContact">Contacto</a>
         </div>
 
@@ -819,19 +859,31 @@
         </a>
         <div class="drawer-section">
           <button class="drawer-item drawer-item-dd" id="drawerServicesBtn" type="button" aria-expanded="true">
-            <span id="drawerServicesLabel">Servicios</span>
+            <span id="drawerServicesLabel">Plataforma</span>
             <span class="chev drawer-chev" id="drawerServicesChev" aria-hidden="true"></span>
           </button>
           <div class="drawer-submenu open" id="drawerServicesMenu">
-            <a class="drawer-subitem" href="#serv-web" id="drawerSvcWeb">Desarrollo Web</a>
-            <a class="drawer-subitem" href="#serv-it" id="drawerSvcIT">Soporte IT</a>
-            <a class="drawer-subitem" href="#serv-inv" id="drawerSvcInv">Invitaciones Web</a>
-            <a class="drawer-subitem" href="#serv-auto" id="drawerSvcAuto">Automatizaciones</a>
+            <a class="drawer-subitem" href="#plat-auto" id="drawerSvcAuto">Automatizaciones</a>
+            <a class="drawer-subitem" href="#plat-webapps" id="drawerSvcWeb">Web Apps</a>
+            <a class="drawer-subitem" href="#plat-int" id="drawerSvcIT">Integraciones</a>
+            <a class="drawer-subitem" href="#plat-infra" id="drawerSvcInfra">Infraestructura</a>
+            <a class="drawer-subitem" href="#plat-inv" id="drawerSvcInv">Invitaciones Web</a>
           </div>
         </div>
 
-        <a class="drawer-item" href="#portfolio" id="drawerPortfolio">Portafolio</a>
-        <a class="drawer-item" href="#about" id="drawerAbout">Nosotros</a>
+        <div class="drawer-section">
+          <button class="drawer-item drawer-item-dd" id="drawerCasesBtn" type="button" aria-expanded="true">
+            <span id="drawerCasesLabel">Casos</span>
+            <span class="chev drawer-chev rot" id="drawerCasesChev" aria-hidden="true"></span>
+          </button>
+          <div class="drawer-submenu open" id="drawerCasesMenu">
+            <a class="drawer-subitem" href="#cases-sme" id="drawerCaseSME">PYMEs</a>
+            <a class="drawer-subitem" href="#cases-corp" id="drawerCaseCorp">Corporativo</a>
+            <a class="drawer-subitem" href="#cases-startups" id="drawerCaseStartup">Startups</a>
+          </div>
+        </div>
+
+<a class="drawer-item" href="#about" id="drawerAbout">Empresa</a>
         <a class="drawer-item" href="#contact" id="drawerContact">Contacto</a>
         
       </div>
@@ -864,13 +916,16 @@
       const I18N = {
         es: {
           brandSub: "",
-          nav: { services: "Servicios", portfolio: "Portafolio", contact: "Contacto", about: "Nosotros" },
+          nav: { services: "Plataforma", portfolio: "Casos", contact: "Contacto", about: "Empresa" },
           services: { web:"Desarrollo Web", it:"Soporte IT", invites:"Invitaciones Web", auto:"Automatizaciones" },
-          hero: { title: "GaschSoft: software y soporte con mentalidad de producto.", desc: "Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover." }
+        cases: { sme: "PYMEs", corp: "Corporativo", startups: "Startups" },
+        cases: { sme: "SMEs", corp: "Enterprise", startups: "Startups" },
+
+        hero: { title: "GaschSoft: software y soporte con mentalidad de producto.", desc: "Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover." }
         },
         en: {
           brandSub: "",
-          nav: { services: "Services", portfolio: "Portfolio", contact: "Contact", about: "About" },
+          nav: { services: "Platform", portfolio: "Use cases", contact: "Contact", about: "Company" },
           services: { web:"Web Development", it:"IT Support", invites:"Web Invitations", auto:"Automations" },
           hero: { title: "GaschSoft: software and support with a product mindset.", desc: "Lively header (typing), theme cycle System → Dark → Light, language selector, and hover services menu." }
         }
@@ -901,6 +956,7 @@
       const svcWeb = document.getElementById("svcWeb");
       const svcIT = document.getElementById("svcIT");
       const svcInv = document.getElementById("svcInv");
+      const svcInfra = document.getElementById("svcInfra");
       const svcAuto = document.getElementById("svcAuto");
 
       const heroTitle = document.getElementById("heroTitle");
@@ -1000,13 +1056,13 @@
         const t = I18N[lang];
 
         brandSub.textContent = t.brandSub;
-        navPortfolio.textContent = t.nav.portfolio;
+        document.getElementById("navCasesLabel").textContent = t.nav.portfolio;
         navContact.textContent = t.nav.contact;
         navAbout.textContent = t.nav.about;
 
         // Drawer (mobile)
         document.getElementById("drawerServicesLabel").textContent = t.nav.services;
-        document.getElementById("drawerPortfolio").textContent = t.nav.portfolio;
+        document.getElementById("drawerCasesLabel").textContent = t.nav.portfolio;
         document.getElementById("drawerAbout").textContent = t.nav.about;
         document.getElementById("drawerContact").textContent = t.nav.contact;
         // Servicios drawer
@@ -1014,6 +1070,10 @@
         document.getElementById("drawerSvcIT").textContent = t.services.it;
         document.getElementById("drawerSvcInv").textContent = t.services.invites;
         document.getElementById("drawerSvcAuto").textContent = t.services.auto;
+        // Casos drawer
+        document.getElementById("drawerCaseSME").textContent = t.cases.sme;
+        document.getElementById("drawerCaseCorp").textContent = t.cases.corp;
+        document.getElementById("drawerCaseStartup").textContent = t.cases.startups;
         if (svcWeb) svcWeb.textContent = t.services.web;
         if (svcIT)  svcIT.textContent  = t.services.it;
         if (svcInv) svcInv.textContent = t.services.invites;
@@ -1148,7 +1208,7 @@
       const drawerServicesBtn = document.getElementById("drawerServicesBtn");
       const drawerServicesMenu = document.getElementById("drawerServicesMenu");
 
-      const drawerPortfolio = document.getElementById("drawerPortfolio");
+      const drawerPortfolio = document.getElementById("drawerCasesLabel");
       const drawerAbout = document.getElementById("drawerAbout");
       const drawerContact = document.getElementById("drawerContact");
       const drawerMore = document.getElementById("drawerMore");
@@ -1209,6 +1269,24 @@
         navLinks.classList.remove("open");
         burgerBtn.setAttribute("aria-expanded", "false");
       });
+      drawerCasesBtn?.addEventListener("click", () => {
+        const isOpen = drawerCasesMenu.classList.contains("open");
+        if (isOpen){
+          drawerCasesMenu.classList.remove("open");
+          drawerCasesChev.classList.remove("rot");
+          drawerCasesBtn.setAttribute("aria-expanded", "false");
+        } else {
+          drawerCasesMenu.classList.add("open");
+          drawerCasesChev.classList.add("rot");
+          drawerCasesBtn.setAttribute("aria-expanded", "true");
+        }
+      });
+
+      drawerCaseSME?.addEventListener("click", () => { closeDrawer(); });
+      drawerCaseCorp?.addEventListener("click", () => { closeDrawer(); });
+      drawerCaseStartup?.addEventListener("click", () => { closeDrawer(); });
+
+
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
@@ -1232,6 +1310,30 @@
       // Init
       applyTheme();
       applyLang(state.lang);
+    
+      
+      // Deshabilitar click (focus pegajoso) en dropdown triggers: solo hover
+      const platTrigger = document.getElementById("servicesTestBtn");
+      const casesTrigger = document.getElementById("navPortfolio");
+
+      [platTrigger, casesTrigger].forEach((el) => {
+        if (!el) return;
+        // Evita que el click deje foco (y por CSS abra/sticky)
+        el.addEventListener("mousedown", (e) => {
+          e.preventDefault();
+        });
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          try { el.blur(); } catch(_) {}
+        });
+      });
+
+// Bloquear click derecho básico
+      document.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+      });
+
     })();
   </script>
 </body>
