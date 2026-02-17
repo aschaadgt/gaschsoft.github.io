@@ -38,7 +38,6 @@
 
 
   <style>
-
     :root{
       /* Light */
       --bg: #F8FAFC;
@@ -64,9 +63,6 @@
 
       --link-hover-bg: rgba(31, 122, 255, 0.10);
       --link-hover-border: rgba(31, 122, 255, 0.18);
-
-      --badge-bg: rgba(15, 23, 42, 0.04);
-      --badge-border: rgba(15, 23, 42, 0.10);
     }
 
     html[data-theme="dark"]{
@@ -93,8 +89,6 @@
 
       --link-hover-bg: rgba(31, 122, 255, 0.14);
       --link-hover-border: rgba(31, 122, 255, 0.22);
-      --badge-bg: rgba(229, 231, 235, 0.06);
-      --badge-border: rgba(229, 231, 235, 0.12);
     }
 
     *{ box-sizing: border-box; }
@@ -737,230 +731,23 @@
       margin: 0 auto;
       padding: 34px 16px 80px;
     }
-    /* ===== HERO v60 (contenido principal) ===== */
     .hero{
       border: 1px solid var(--border);
-      background:
-        radial-gradient(1200px 420px at 30% -10%, rgba(31,122,255,0.18), transparent 60%),
-        radial-gradient(900px 360px at 90% 10%, rgba(56,189,248,0.14), transparent 55%),
-        linear-gradient(180deg, rgba(31,122,255,0.06), transparent);
-      border-radius: 26px;
-      padding: clamp(18px, 3vw, 34px);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero-inner{
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: clamp(14px, 3vw, 32px);
-      align-items: center;
-    }
-
-    .hero-left{ min-width: 0; }
-    .hero-right{
-      min-width: 0;
-      display:flex;
-      justify-content: center;   /* centra horizontal */
-      align-items: center;       /* centra vertical dentro del alto fijo */
-    }
-
-    .hero-badges{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 0;
-      margin: 0 0 16px;
-      list-style: none;
-    }
-
-    .badge{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      border: 1px solid var(--badge-border);
-      background: var(--badge-bg);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 12.5px;
-      color: var(--muted);
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .badge-dot{
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--primary);
-      box-shadow: 0 0 0 3px rgba(31,122,255,0.14);
-    }
-
-    .hero-title{
-      margin: 0 0 10px;
-      font-size: clamp(30px, 4.1vw, 56px);
-      line-height: 1.05;
-      letter-spacing: -0.7px;
-    }
-    .hero-title span{ display: inline-block; }
-    .hero-accent{
-      color: var(--primary);
-    }
-
-    .hero-desc{
-      margin: 0 0 18px;
-      color: var(--muted);
-      max-width: 64ch;
-      line-height: 1.55;
-      font-size: 15.5px;
-    }
-
-    .hero-ctas{
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      flex-wrap: wrap;
-      margin: 0 0 10px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      height: 42px;
-      padding: 0 16px;
-      border-radius: 999px;
-      font-weight: 650;
-      font-size: 14px;
-      border: 1px solid transparent;
-      transition: transform 150ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
-      text-decoration: none;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn:focus-visible{
-      outline: 3px solid rgba(31,122,255,0.30);
-      outline-offset: 3px;
-    }
-    .btn.primary{
-      background: var(--text);
-      color: var(--bg);
-      border-color: rgba(0,0,0,0.0);
-    }
-    html[data-theme="dark"] .btn.primary{
-      background: #F3F4F6;
-      color: #0B0F14;
-    }
-    .btn.primary:hover{ transform: translateY(-1px); }
-
-    .btn.ghost{
-      background: transparent;
-      color: var(--text);
-      border-color: var(--border);
-    }
-    .btn.ghost:hover{ background: var(--link-hover-bg); border-color: var(--link-hover-border); }
-
-    .hero-proof{
-      font-size: 12.5px;
-      color: var(--muted);
-      opacity: 0.95;
-    }
-
-    /* Panel (preview) - 100% CSS, sin imágenes externas */
-    .hero-panel{
-      width: min(420px, 100%);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.38);
-      border-radius: 20px;
-      box-shadow: 0 16px 40px rgba(2, 8, 23, 0.16);
-      overflow: hidden;
-    }
-    html[data-theme="dark"] .hero-panel{
-      background: rgba(17,24,39,0.55);
-      box-shadow: 0 18px 46px rgba(0,0,0,0.55);
-    }
-
-    .panel-top{
-      display:flex;
-      gap: 8px;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,0.35);
-    }
-    html[data-theme="dark"] .panel-top{ background: rgba(17,24,39,0.40); }
-
-    .pill{
-      width: 34px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(148,163,184,0.55);
-    }
-    html[data-theme="dark"] .pill{ background: rgba(148,163,184,0.28); }
-
-    .panel-body{ padding: 14px; display:grid; gap: 12px; }
-    .panel-card{
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px;
-      background: rgba(255,255,255,0.45);
-    }
-    html[data-theme="dark"] .panel-card{ background: rgba(11,15,20,0.35); }
-
-    .pc-title{ width: 46%; height: 10px; border-radius: 999px; background: rgba(148,163,184,0.45); margin-bottom: 10px; }
-    .pc-line{ width: 88%; height: 8px; border-radius: 999px; background: rgba(148,163,184,0.30); margin-bottom: 8px; }
-    .pc-line.short{ width: 60%; margin-bottom: 0; }
-
-    html[data-theme="dark"] .pc-title{ background: rgba(148,163,184,0.22); }
-    html[data-theme="dark"] .pc-line{ background: rgba(148,163,184,0.16); }
-
-    .panel-metrics{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .metric{
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px;
-      background: rgba(255,255,255,0.40);
-    }
-    html[data-theme="dark"] .metric{ background: rgba(11,15,20,0.30); }
-    .metric-k{ width: 60%; height: 8px; border-radius: 999px; background: rgba(148,163,184,0.30); margin-bottom: 10px; }
-    .metric-v{ width: 40%; height: 12px; border-radius: 999px; background: rgba(31,122,255,0.22); }
-    html[data-theme="dark"] .metric-k{ background: rgba(148,163,184,0.16); }
-    html[data-theme="dark"] .metric-v{ background: rgba(31,122,255,0.26); }
-
-    @media (max-width: 900px){
-      .hero-inner{ grid-template-columns: 1fr; }
-      .hero-right{ justify-content:flex-start; }
-      .hero-panel{ width: 100%; }
-    }
-
-    /* Secciones base (v60) */
-    .section{
-      margin-top: 20px;
-      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(31,122,255,0.10), transparent);
       border-radius: 22px;
-      background: rgba(255,255,255,0.25);
+      padding: 22px;
       box-shadow: var(--shadow);
-      overflow: hidden;
     }
-    html[data-theme="dark"] .section{ background: rgba(17,24,39,0.35); }
-    .section-inner{ padding: 18px; }
-    .section-title{ margin: 0 0 6px; font-size: 18px; letter-spacing: -0.2px; }
-    .section-desc{ margin: 0; color: var(--muted); line-height: 1.55; }
+    .hero h1{ margin: 0 0 8px; font-size: 28px; letter-spacing: -0.3px; }
+    .hero p{ margin: 0; color: var(--muted); max-width: 70ch; line-height: 1.5; }
+  
 /* ===== Protección básica contra selección y arrastre ===== */
-html, body, header, nav, .drawer {
+html, body, header, nav, main, .drawer {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-
-/* Permitir seleccionar texto en el contenido */
-main{ user-select: text; -webkit-user-select: text; }
-main a, main button{ -webkit-tap-highlight-color: transparent; }
-
 
 /* Evitar arrastrar imágenes */
 img {
@@ -984,311 +771,6 @@ img {
 
 
 /* body.drawer-open is handled above (fixed positioning for iOS) */
-
-
-/* v62 Hero rotator (minimal, no flashy animation) */
-.hero-dots{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:16px;
-  align-items:center;
-  justify-content:center;
-  grid-column: 1 / -1;
-}
-.hero-dot{
-  width:10px;height:10px;border-radius:999px;
-  border:1px solid var(--border);
-  background: transparent;
-  padding:0;
-  cursor:pointer;
-  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
-}
-.hero-dot[aria-selected="true"]{
-  background: var(--accent);
-  border-color: var(--accent);
-  transform: scale(1.1);
-}
-.hero-dot:focus-visible{
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-.hero-rotator-fade{ transition: opacity 160ms ease; }
-.hero-rotator-fade.is-fading{ opacity:0; }
-@media (prefers-reduced-motion: reduce){
-  .hero-dot, .hero-rotator-fade{ transition:none; }
-}
-
-
-/* v62.1 Hero stability (no jump across variants) */
-
-/* ===== v64 Hero: fixed container (no size changes between options) ===== */
-
-/* ===== v65 Hero: truly fixed height (no jumps between options on desktop) ===== */
-.hero{
-  /* Fixed shell: content must adapt, not resize the container AQUI*/
-  height: 650px;
-  min-height: 650px;
-  max-height: 650px;
-  overflow: hidden;
-}
-@media (max-width: 900px){
-  .hero{
-    height: auto;
-    min-height: clamp(700px, 84svh, 920px);
-    max-height: none;
-    overflow: visible;
-  }
-}
-
-/* Prevent text blocks from changing layout height */
-.hero-title{
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* fixed to 2 lines */
-  overflow: hidden;
-}
-.hero-desc{
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; /* fixed to 3 lines */
-  overflow: hidden;
-}
-.hero-proof{
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* fixed to 2 lines */
-  overflow: hidden;
-}
-
-/* Make right column adapt inside fixed height */
-.hero-inner{ height: 100%; align-items: stretch; }
-.hero-right{ height: 100%; }
-.hero-panel{ height: 100%; overflow: hidden; }
-#heroPreview{ height: 100%; overflow: hidden; }
-
-/* Keep dots inside shell and centered */
-.hero-dots-wrap{ margin-top: 12px; }
-
-.hero-inner{
-  /* allow children to fill reserved height instead of resizing container */
-  align-items: stretch;
-}
-
-/* Reserve space for the largest variant (option 4) so the hero never jumps */
-.hero{
-  /* clamps keep it professional on desktop + safe on mobile */
-  min-height: clamp(560px, 68vh, 760px);
-}
-@media (max-width: 900px){
-  .hero{
-    min-height: clamp(620px, 78vh, 860px);
-  }
-}
-
-/* Make right panel participate in the fixed height (no pushing) */
-.hero-right{ align-self: stretch; }
-.hero-panel{ height: 100%; display:flex; flex-direction:column; }
-
-
-/* Keep hero block from jumping between variants (reserve space for the LONGEST variant: option 4) */
-.hero-title{ min-height: 3.6em; }          /* up to ~3 lines on desktop */
-.hero-desc{  min-height: 5.6em; }          /* longer description */
-.hero-proof{ min-height: 2.6em; }          /* 1–2 lines */
-@media (max-width: 820px){
-  .hero-title{ min-height: 4.4em; }
-  .hero-desc{  min-height: 6.6em; }
-  .hero-proof{ min-height: 3.2em; }
-}
-
-/* Dashboard: textless shapes */
-#heroPreview{ min-height: 300px; height: 30%; } /* stable height; prevents jump AQUI*/
-@media (max-width: 820px){ #heroPreview{ min-height: 260px; } }
-
-.panel-title{ display:none !important; } /* ensure no words */
-.panel-body{ display:grid; gap:12px; }
-
-.dash-cards{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px; }
-@media (max-width: 820px){ .dash-cards{ grid-template-columns: 1fr; } }
-
-.dash-card{
-  border:1px solid var(--border);
-  background: var(--card);
-  border-radius: 12px;
-  padding: 12px;
-  min-height: 64px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.dash-line{
-  height:10px;
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--text) 16%, transparent);
-}
-.dash-line.thin{ height:8px; opacity:.75; }
-.dash-line.short{ width:52%; }
-.dash-line.mid{ width:72%; }
-.dash-line.long{ width:92%; }
-
-.dash-chart{
-  border:1px solid var(--border);
-  background: var(--card);
-  border-radius: 12px;
-  padding: 12px;
-  min-height: 110px;
-  display:flex;
-  align-items:flex-end;
-  gap:10px;
-}
-.dash-bar{
-  width: 100%;
-  border-radius: 10px 10px 6px 6px;
-  background: color-mix(in oklab, var(--accent) 55%, transparent);
-  border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border));
-}
-.dash-bars{ display:flex; gap:10px; width:100%; height:100%; align-items:flex-end; }
-
-/* ===== v63: unique dashboards per option ===== */
-.dash-split{
-  display:grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 12px;
-}
-@media (max-width: 820px){
-  .dash-split{ grid-template-columns: 1fr; }
-}
-
-.dash-table{
-  border:1px solid var(--border);
-  background: var(--card);
-  border-radius: 12px;
-  padding: 10px;
-  display:grid;
-  gap: 10px;
-}
-.dash-row{
-  display:grid;
-  grid-template-columns: 1fr 0.6fr 28px;
-  gap: 10px;
-  align-items:center;
-}
-.dash-cell{
-  height: 10px;
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--text) 14%, transparent);
-}
-.dash-chip{
-  width: 18px;
-  height: 10px;
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--accent) 55%, transparent);
-  border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border));
-}
-.w-25{ width:25%; } .w-30{ width:30%; } .w-35{ width:35%; } .w-40{ width:40%; } .w-45{ width:45%; }
-.w-55{ width:55%; } .w-60{ width:60%; } .w-65{ width:65%; }
-
-.dash-kpis{ display:grid; gap: 10px; }
-.dash-kpi{
-  border:1px solid var(--border);
-  background: var(--card);
-  border-radius: 12px;
-  padding: 12px;
-  min-height: 58px;
-  display:grid;
-  gap: 10px;
-  align-content:start;
-}
-.kpi-k{ height: 8px; width: 62%; border-radius: 999px; background: color-mix(in oklab, var(--text) 14%, transparent); }
-.kpi-v{ height: 12px; width: 44%; border-radius: 999px; background: color-mix(in oklab, var(--accent) 55%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border)); }
-
-.dash-flow{
-  display:grid;
-  grid-template-columns: 28px 1fr;
-  gap: 12px;
-  align-items: stretch;
-}
-.dash-timeline{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding: 6px 0;
-}
-.tl-dot{
-  width: 10px; height: 10px;
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--accent) 55%, transparent);
-  border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border));
-}
-.tl-line{
-  width: 2px;
-  flex: 1 1 auto;
-  background: color-mix(in oklab, var(--text) 10%, transparent);
-  margin: 6px 0;
-  border-radius: 99px;
-}
-.dash-stack{ display:grid; gap: 10px; }
-.stack-card{
-  border:1px solid var(--border);
-  background: var(--card);
-  border-radius: 12px;
-  padding: 12px;
-  display:grid;
-  gap: 10px;
-}
-.stack-bars{
-  display:flex;
-  gap: 10px;
-  align-items:center;
-}
-.stack-bar{
-  height: 10px;
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--accent) 55%, transparent);
-  border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border));
-}
-
-.dash-authority{
-  display:grid;
-  gap: 12px;
-}
-.dash-donut{
-  display:grid;
-  grid-template-columns: 84px 1fr;
-  gap: 12px;
-  align-items:center;
-  border:1px solid var(--border);
-  background: var(--card);
-  border-radius: 12px;
-  padding: 12px;
-}
-.donut{
-  width: 72px; height: 72px;
-  border-radius: 999px;
-  background: conic-gradient(
-    color-mix(in oklab, var(--accent) 70%, transparent) 0 58%,
-    color-mix(in oklab, var(--text) 10%, transparent) 58% 100%
-  );
-  position: relative;
-}
-.donut::after{
-  content:"";
-  position:absolute;
-  inset: 16px;
-  border-radius: 999px;
-  background: var(--card);
-  border:1px solid var(--border);
-}
-.donut-lines{ display:grid; gap: 10px; }
-.dash-cards.two{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-@media (max-width: 820px){
-  .dash-flow{ grid-template-columns: 1fr; }
-  .dash-timeline{ display:none; }
-  .dash-donut{ grid-template-columns: 1fr; }
-  .donut{ margin: 0 auto; }
-  .dash-cards.two{ grid-template-columns: 1fr; }
-}
-
 </style>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/newgaschsoft/apple-touch-icon.png">
@@ -1452,92 +934,13 @@ img {
 
 
   <main>
-    <!-- ===== HERO v60 ===== -->
-    <section class="hero heroV60" aria-labelledby="heroTitle">
-      <div class="hero-inner">
-        <div class="hero-left">
-          <ul class="hero-badges" id="heroBadges" aria-label="Highlights">
-            <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge1">Entrega rápida</span></li>
-            <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge2">Enfoque en conversión</span></li>
-            <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge3">Soporte continuo</span></li>
-          </ul>
-
-          <h1 class="hero-title" id="heroTitle">
-            <span id="heroTitleA">Tu empresa ya creció.</span>
-            <span class="hero-accent" id="heroTitleB">Tu web debería hacerlo también.</span>
-          </h1>
-
-          <p class="hero-desc" id="heroDesc">
-            Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.
-          </p>
-
-          <div class="hero-ctas">
-            <a class="btn primary" id="heroCtaPrimary" href="#contact">Agendar diagnóstico</a>
-            <a class="btn ghost" id="heroCtaSecondary" href="#cases">Ver casos</a>
-          </div>
-
-          <div class="hero-proof" id="heroProof">Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer</div>
-</div>
-
-        <div class="hero-right" aria-hidden="true">
-          <div class="hero-panel" id="heroPreview">
-            <div class="panel-top">
-              <div class="pill"></div>
-              <div class="pill"></div>
-              <div class="pill"></div>
-            </div>
-
-            <div class="panel-body">
-              <div class="panel-card">
-                <div class="pc-title"></div>
-                <div class="pc-line"></div>
-                <div class="pc-line short"></div>
-              </div>
-              <div class="panel-card">
-                <div class="pc-title"></div>
-                <div class="pc-line"></div>
-                <div class="pc-line short"></div>
-              </div>
-
-              <div class="panel-metrics">
-                <div class="metric">
-                  <div class="metric-k"></div>
-                  <div class="metric-v"></div>
-                </div>
-                <div class="metric">
-                  <div class="metric-k"></div>
-                  <div class="metric-v"></div>
-                </div>
-                <div class="metric">
-                  <div class="metric-k"></div>
-                  <div class="metric-v"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="hero-dots" id="heroDots" aria-label="Hero options" role="tablist"></div>
-      </div>
-    </section>
-
-    <!-- Placeholder sections for anchors (v60) -->
-    <section class="section" id="cases" aria-label="Casos">
-      <div class="section-inner">
-        <h2 class="section-title" id="casesTitle">Casos</h2>
-        <p class="section-desc" id="casesDesc">Ejemplos y resultados (próximamente).</p>
-      </div>
-    </section>
-
-    <section class="section" id="contact" aria-label="Contacto">
-      <div class="section-inner">
-        <h2 class="section-title" id="contactTitle">Contacto</h2>
-        <p class="section-desc" id="contactDesc">Cuéntanos qué necesitas y te respondemos con una propuesta clara.</p>
-      </div>
+    <section class="hero">
+      <h1 id="heroTitle">GaschSoft: software y soporte con mentalidad de producto.</h1>
+      <p id="heroDesc">Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover.</p>
     </section>
   </main>
 
   <script>
-
     (function () {
       const elHtml = document.documentElement;
 
@@ -1558,26 +961,14 @@ img {
           nav: { services: "Plataforma", portfolio: "Casos", contact: "Contacto", about: "Empresa" },
           services: { auto:"Automatizaciones", web:"Desarrollo Web", it:"Soporte IT", infra:"Infraestructura", invites:"Invitaciones Web" },
           cases: { sme: "PYMEs", corp: "Corporativo", startups: "Startups" },
-          hero: { badge1:"Entrega rápida", badge2:"Enfoque en conversión", badge3:"Soporte continuo", highlightsLabel:"Puntos clave", optionsLabel:"Opciones", titleA:"Tu empresa ya creció.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", ctaPrimary:"Agendar diagnóstico", ctaSecondary:"Ver casos", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer",heroVariants:[
-  { titleA:"Tu empresa ya creció sólidamente.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer en un año • Preparada para crecer", dash:"growth" },
-  { titleA:"Infraestructura web para empresas", titleB:"que ya facturan y quieren crecer más.", desc:"Diseño profesional respaldado por una arquitectura sólida, preparada para integraciones, estabilidad operativa y evolución sostenida.", proof:"Base mantenible • Integraciones listas • Seguridad estructural • Escalabilidad real", dash:"infra" },
-  { titleA:"Modernizamos la presencia digital", titleB:"de empresas que ya operan en serio.", desc:"Sitios profesionales diseñados para convertir mejor, proyectar autoridad y escalar sobre una arquitectura técnica sólida y mantenible.", proof:"Diseño sobrio • Performance medible • SEO estructural • Mobile impecable", dash:"modern" },
-  { titleA:"Tu empresa ya creció estratégicamente.", titleB:"Tu presencia digital aún no.", desc:"Construimos una base web alineada al nivel real de tu negocio, lista para proyectar autoridad, convertir mejor y sostener crecimiento continuo.", proof:"Mensaje claro • Diagnóstico estratégico • Implementación limpia • Entrega lista para producción", dash:"gap" },
-  { titleA:"No necesitas otra página web.", titleB:"Necesitas presencia online a la altura.", desc:"Proyecta autoridad, convierte mejor y evoluciona sobre una base técnica preparada para crecer junto a tu empresa sin rehacer todo desde cero.", proof:"Arquitectura sólida • Implementación estratégica • Base estable • Lista para escalar", dash:"authority" }
-], sections:{ casesTitle:"Casos", casesDesc:"Ejemplos y resultados (próximamente).", contactTitle:"Contacto", contactDesc:"Cuéntanos qué necesitas y te respondemos con una propuesta clara." } }
+          hero: { title: "GaschSoft: software y soporte con mentalidad de producto.", desc: "Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover." }
         },
         en: {
           brandSub: "",
           nav: { services: "Platform", portfolio: "Use cases", contact: "Contact", about: "Company" },
           services: { auto:"Automations", web:"Web Development", it:"IT Support", infra:"Infrastructure", invites:"Web Invitations" },
           cases: { sme: "SMEs", corp: "Enterprise", startups: "Startups" },
-          hero: { badge1:"Fast delivery", badge2:"Conversion-focused", badge3:"Continuous support", highlightsLabel:"Highlights", optionsLabel:"Options", titleA:"Your business already grew.", titleB:"Your website should too.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", ctaPrimary:"Schedule a diagnostic", ctaSecondary:"View cases", proof:"We plan, we don’t improvise • Clean implementation • No rebuild in a year • Built to grow",heroVariants:[
-  { titleA:"Your business already grew solidly.", titleB:"Your website should grow as well.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", proof:"Planned, not improvised • Clean implementation • No rebuild in a year • Built to grow", dash:"growth" },
-  { titleA:"Web infrastructure for companies", titleB:"that already revenue and want more growth.", desc:"Professional design backed by solid architecture—ready for integrations, operational stability, and sustained evolution.", proof:"Maintainable base • Ready integrations • Structured security • Real scalability", dash:"infra" },
-  { titleA:"We modernize the digital presence", titleB:"of companies that already operate seriously.", desc:"Professional sites designed to convert better, project authority, and scale on a solid, maintainable technical architecture.", proof:"Sober design • Measurable performance • Structured SEO • Mobile done right", dash:"modern" },
-  { titleA:"Your business already grew strategically.", titleB:"Your digital presence still hasn’t.", desc:"We build a web foundation aligned to your real business level—ready to project authority, convert better, and support sustained growth.", proof:"Clear message • Strategic diagnosis • Clean implementation • Production-ready delivery", dash:"gap" },
-  { titleA:"You don’t need another website.", titleB:"You need a presence that matches your company.", desc:"Project authority, convert better, and evolve on a technical foundation built to grow with your company—without rebuilding from scratch.", proof:"Solid architecture • Strategic implementation • Stable foundation • Ready to scale", dash:"authority" }
-], sections:{ casesTitle:"Cases", casesDesc:"Examples and outcomes (coming soon).", contactTitle:"Contact", contactDesc:"Tell us what you need and we’ll reply with a clear proposal." } }
+          hero: { title: "GaschSoft: product-minded software and support.", desc: "Theme cycle System → Dark → Light, language selector, and hover services menu." }
         }
       };
 
@@ -1610,21 +1001,7 @@ img {
       const svcAuto = document.getElementById("svcAuto");
 
       const heroTitle = document.getElementById("heroTitle");
-      const heroTitleA = document.getElementById("heroTitleA");
-      const heroTitleB = document.getElementById("heroTitleB");
       const heroDesc = document.getElementById("heroDesc");
-      const heroBadge1 = document.getElementById("heroBadge1");
-      const heroBadge2 = document.getElementById("heroBadge2");
-      const heroBadge3 = document.getElementById("heroBadge3");
-      const heroBadgesEl = document.getElementById("heroBadges");
-      const heroDotsEl = document.getElementById("heroDots");
-      const heroCtaPrimary = document.getElementById("heroCtaPrimary");
-      const heroCtaSecondary = document.getElementById("heroCtaSecondary");
-      const heroProof = document.getElementById("heroProof");
-      const casesTitle = document.getElementById("casesTitle");
-      const casesDesc = document.getElementById("casesDesc");
-      const contactTitle = document.getElementById("contactTitle");
-      const contactDesc = document.getElementById("contactDesc");
 
       const langBtn = document.getElementById("langBtn");
       const langMenu = document.getElementById("langMenu");
@@ -1749,32 +1126,8 @@ img {
         if (svcInv) svcInv.textContent = t.services.invites;
         if (svcAuto) svcAuto.textContent = t.services.auto;
 
-        // Hero v60
-        if (heroBadge1) heroBadge1.textContent = t.hero.badge1;
-        if (heroBadge2) heroBadge2.textContent = t.hero.badge2;
-        if (heroBadge3) heroBadge3.textContent = t.hero.badge3;
-
-        
-
-        // Labels (i18n)
-        if (heroBadgesEl && t.hero.highlightsLabel) heroBadgesEl.setAttribute("aria-label", t.hero.highlightsLabel);
-        if (heroDotsEl && t.hero.optionsLabel) heroDotsEl.setAttribute("aria-label", t.hero.optionsLabel);
-if (heroTitleA && heroTitleB) {
-          heroTitleA.textContent = t.hero.titleA;
-          heroTitleB.textContent = t.hero.titleB;
-        } else {
-          heroTitle.textContent = (t.hero.titleA ? (t.hero.titleA + " " + t.hero.titleB) : (t.hero.title || ""));
-        }
+        heroTitle.textContent = t.hero.title;
         heroDesc.textContent = t.hero.desc;
-
-        if (heroCtaPrimary) heroCtaPrimary.textContent = t.hero.ctaPrimary;
-        if (heroCtaSecondary) heroCtaSecondary.textContent = t.hero.ctaSecondary;
-        if (heroProof) heroProof.textContent = t.hero.proof;
-
-        if (casesTitle) casesTitle.textContent = t.hero.sections.casesTitle;
-        if (casesDesc) casesDesc.textContent = t.hero.sections.casesDesc;
-        if (contactTitle) contactTitle.textContent = t.hero.sections.contactTitle;
-        if (contactDesc) contactDesc.textContent = t.hero.sections.contactDesc;
 
         langItems.forEach(item => {
           const isSelected = item.getAttribute("data-lang") === lang;
@@ -1782,10 +1135,7 @@ if (heroTitleA && heroTitleB) {
         });
 
         document.documentElement.lang = (lang === "en") ? "en" : "es";
-        // notify other modules
-  window.dispatchEvent(new Event("gs:langChanged"));
-}
-
+      }
 
       // Theme menu
       function closeThemeMenu(){
@@ -2038,270 +1388,7 @@ if (heroTitleA && heroTitleB) {
       applyLang(state.lang);
     
       
-      
-
-      // === v62 Hero rotator (5 positioning options, synced with I18N) ===
-      (function initHeroRotator(){
-        const elTitleA = document.getElementById("heroTitleA");
-        const elTitleB = document.getElementById("heroTitleB");
-        const elDesc   = document.getElementById("heroDesc");
-        const elProof  = document.getElementById("heroProof");
-        const elDots   = document.getElementById("heroDots");
-        const elPrev   = document.getElementById("heroPreview");
-        if(!elTitleA || !elTitleB || !elDesc || !elProof || !elDots || !elPrev) return;
-
-        [elTitleA, elTitleB, elDesc, elProof, elPrev].forEach(e => e.classList.add("hero-rotator-fade"));
-
-        let idx = 0;
-        let timer = null;
-
-        function getLang(){ return (localStorage.getItem(STORAGE.lang) || "es"); }
-        function getVariants(){
-          const lang = getLang();
-          const v = (I18N[lang] && I18N[lang].hero && I18N[lang].hero.heroVariants) ? I18N[lang].hero.heroVariants : null;
-          return Array.isArray(v) && v.length ? v : null;
-        }
-
-        // ===== Hero dashboards (textless mock UI) =====
-        // Rule from you: each option has its own mock dashboard.
-        // 0 => original (v61). 1 => v62.1 style. 2-4 => new unique layouts.
-
-        function mock_dashboard_0(){
-          return `<div class="panel-top">
-              <div class="pill"></div>
-              <div class="pill"></div>
-              <div class="pill"></div>
-            </div>
-
-            <div class="panel-body">
-              <div class="panel-card">
-                <div class="pc-title"></div>
-                <div class="pc-line"></div>
-                <div class="pc-line short"></div>
-              </div>
-              <div class="panel-card">
-                <div class="pc-title"></div>
-                <div class="pc-line"></div>
-                <div class="pc-line short"></div>
-              </div>
-
-              <div class="panel-metrics">
-                <div class="metric">
-                  <div class="metric-k"></div>
-                  <div class="metric-v"></div>
-                </div>
-                <div class="metric">
-                  <div class="metric-k"></div>
-                  <div class="metric-v"></div>
-                </div>
-                <div class="metric">
-                  <div class="metric-k"></div>
-                  <div class="metric-v"></div>
-                </div>
-              </div>
-            </div>`;
-        }
-
-        function mock_dashboard_1(){
-          // From v62.1 (cards + bar chart)
-          return `
-            <div class="panel-top" aria-hidden="true">
-              <div class="pill"></div><div class="pill"></div><div class="pill"></div>
-              <div class="panel-title"></div>
-            </div>
-            <div class="panel-body">
-              <div class="dash-cards" aria-hidden="true">
-                <div class="dash-card">
-                  <div class="dash-line mid"></div>
-                  <div class="dash-line thin short"></div>
-                  <div class="dash-line thin mid"></div>
-                </div>
-                <div class="dash-card">
-                  <div class="dash-line long"></div>
-                  <div class="dash-line thin mid"></div>
-                  <div class="dash-line thin short"></div>
-                </div>
-                <div class="dash-card">
-                  <div class="dash-line short"></div>
-                  <div class="dash-line thin short"></div>
-                  <div class="dash-line thin mid"></div>
-                </div>
-              </div>
-
-              <div class="dash-chart" aria-hidden="true">
-                <div class="dash-bars">
-                  <div class="dash-bar" style="height:28%"></div>
-                  <div class="dash-bar" style="height:46%"></div>
-                  <div class="dash-bar" style="height:62%"></div>
-                  <div class="dash-bar" style="height:40%"></div>
-                  <div class="dash-bar" style="height:76%"></div>
-                </div>
-              </div>
-            </div>`;
-        }
-
-        function mock_dashboard_2(){
-          // New: split layout (list/table skeleton + right mini KPIs)
-          return `
-            <div class="panel-top" aria-hidden="true">
-              <div class="pill"></div><div class="pill"></div><div class="pill"></div>
-              <div class="panel-title"></div>
-            </div>
-            <div class="panel-body dash-split" aria-hidden="true">
-              <div class="dash-table">
-                <div class="dash-row"><span class="dash-cell w-55"></span><span class="dash-cell w-35"></span><span class="dash-chip"></span></div>
-                <div class="dash-row"><span class="dash-cell w-65"></span><span class="dash-cell w-25"></span><span class="dash-chip"></span></div>
-                <div class="dash-row"><span class="dash-cell w-45"></span><span class="dash-cell w-40"></span><span class="dash-chip"></span></div>
-                <div class="dash-row"><span class="dash-cell w-60"></span><span class="dash-cell w-30"></span><span class="dash-chip"></span></div>
-              </div>
-              <div class="dash-kpis">
-                <div class="dash-kpi"><div class="kpi-k"></div><div class="kpi-v"></div></div>
-                <div class="dash-kpi"><div class="kpi-k"></div><div class="kpi-v"></div></div>
-                <div class="dash-kpi"><div class="kpi-k"></div><div class="kpi-v"></div></div>
-              </div>
-            </div>`;
-        }
-
-        function mock_dashboard_3(){
-          // New: timeline + stacked bars (reads as "delivery pipeline", no text)
-          return `
-            <div class="panel-top" aria-hidden="true">
-              <div class="pill"></div><div class="pill"></div><div class="pill"></div>
-              <div class="panel-title"></div>
-            </div>
-            <div class="panel-body dash-flow" aria-hidden="true">
-              <div class="dash-timeline">
-                <div class="tl-dot"></div><div class="tl-line"></div>
-                <div class="tl-dot"></div><div class="tl-line"></div>
-                <div class="tl-dot"></div><div class="tl-line"></div>
-                <div class="tl-dot"></div>
-              </div>
-
-              <div class="dash-stack">
-                <div class="stack-card">
-                  <div class="dash-line mid"></div>
-                  <div class="stack-bars">
-                    <span class="stack-bar" style="width:32%"></span>
-                    <span class="stack-bar" style="width:54%"></span>
-                    <span class="stack-bar" style="width:24%"></span>
-                  </div>
-                </div>
-                <div class="stack-card">
-                  <div class="dash-line long"></div>
-                  <div class="stack-bars">
-                    <span class="stack-bar" style="width:46%"></span>
-                    <span class="stack-bar" style="width:62%"></span>
-                    <span class="stack-bar" style="width:38%"></span>
-                  </div>
-                </div>
-              </div>
-            </div>`;
-        }
-
-        function mock_dashboard_4(){
-          // New: authority/overview (donut + summary cards)
-          return `
-            <div class="panel-top" aria-hidden="true">
-              <div class="pill"></div><div class="pill"></div><div class="pill"></div>
-              <div class="panel-title"></div>
-            </div>
-            <div class="panel-body dash-authority" aria-hidden="true">
-              <div class="dash-donut">
-                <div class="donut"></div>
-                <div class="donut-lines">
-                  <div class="dash-line short"></div>
-                  <div class="dash-line thin mid"></div>
-                  <div class="dash-line thin long"></div>
-                </div>
-              </div>
-
-              <div class="dash-cards two">
-                <div class="dash-card">
-                  <div class="dash-line mid"></div>
-                  <div class="dash-line thin long"></div>
-                  <div class="dash-line thin mid"></div>
-                </div>
-                <div class="dash-card">
-                  <div class="dash-line short"></div>
-                  <div class="dash-line thin mid"></div>
-                  <div class="dash-line thin long"></div>
-                </div>
-              </div>
-            </div>`;
-        }
-
-        function dashboardForIndex(i){
-          if (i === 0) return mock_dashboard_0();
-          if (i === 1) return mock_dashboard_1();
-          if (i === 2) return mock_dashboard_2();
-          if (i === 3) return mock_dashboard_3();
-          return mock_dashboard_4();
-        }
-
-
-        function renderDots(count){
-          elDots.innerHTML = "";
-          for(let i=0;i<count;i++){
-            const b = document.createElement("button");
-            b.type = "button";
-            b.className = "hero-dot";
-            b.setAttribute("role","tab");
-            b.setAttribute("aria-label", `${getLang()==="es" ? "Opción" : "Option"} ${i}`);
-            b.setAttribute("aria-selected", i===idx ? "true":"false");
-            b.addEventListener("click", () => setIndex(i, true));
-            elDots.appendChild(b);
-          }
-        }
-
-        function setSelectedDot(){
-          elDots.querySelectorAll(".hero-dot").forEach((d,i)=> d.setAttribute("aria-selected", i===idx ? "true":"false"));
-        }
-
-        function fadeSet(v){
-          const lang = getLang();
-          const els = [elTitleA, elTitleB, elDesc, elProof, elPrev];
-          els.forEach(e=> e.classList.add("is-fading"));
-          window.setTimeout(()=>{
-            elTitleA.textContent = v.titleA;
-            elTitleB.textContent = v.titleB;
-            elDesc.textContent   = v.desc;
-            elProof.textContent  = v.proof;
-            elPrev.innerHTML     = dashboardForIndex(idx);
-setSelectedDot();
-            els.forEach(e=> e.classList.remove("is-fading"));
-          }, 170);
-        }
-
-        function setIndex(next, userAction=false){
-          const variants = getVariants();
-          if(!variants) return;
-          idx = (next + variants.length) % variants.length;
-          fadeSet(variants[idx]);
-          if(userAction) restartTimer();
-        }
-
-        function restartTimer(){
-          if(timer) clearInterval(timer);
-          timer = setInterval(()=> setIndex(idx+1, false), 7000);
-        }
-
-        const variants = getVariants();
-        if(!variants) return;
-        renderDots(variants.length);
-        fadeSet(variants[idx]);
-        restartTimer();
-
-        window.addEventListener("gs:langChanged", () => {
-          const v2 = getVariants();
-          if(!v2) return;
-          idx = Math.min(idx, v2.length-1);
-          renderDots(v2.length);
-          fadeSet(v2[idx]);
-          restartTimer();
-        }, { passive:true });
-      })();
-
-// Deshabilitar click (focus pegajoso) en dropdown triggers: solo hover
+      // Deshabilitar click (focus pegajoso) en dropdown triggers: solo hover
       const platTrigger = document.getElementById("servicesTestBtn");
       const casesTrigger = document.getElementById("navPortfolio");
 
@@ -2324,7 +1411,6 @@ setSelectedDot();
       });
 
     })();
-  
-</script>
+  </script>
 </body>
 </html>

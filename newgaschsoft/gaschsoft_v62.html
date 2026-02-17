@@ -38,6 +38,7 @@
 
 
   <style>
+
     :root{
       /* Light */
       --bg: #F8FAFC;
@@ -63,6 +64,9 @@
 
       --link-hover-bg: rgba(31, 122, 255, 0.10);
       --link-hover-border: rgba(31, 122, 255, 0.18);
+
+      --badge-bg: rgba(15, 23, 42, 0.04);
+      --badge-border: rgba(15, 23, 42, 0.10);
     }
 
     html[data-theme="dark"]{
@@ -89,6 +93,8 @@
 
       --link-hover-bg: rgba(31, 122, 255, 0.14);
       --link-hover-border: rgba(31, 122, 255, 0.22);
+      --badge-bg: rgba(229, 231, 235, 0.06);
+      --badge-border: rgba(229, 231, 235, 0.12);
     }
 
     *{ box-sizing: border-box; }
@@ -731,23 +737,225 @@
       margin: 0 auto;
       padding: 34px 16px 80px;
     }
+    /* ===== HERO v60 (contenido principal) ===== */
     .hero{
       border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(31,122,255,0.10), transparent);
-      border-radius: 22px;
-      padding: 22px;
+      background:
+        radial-gradient(1200px 420px at 30% -10%, rgba(31,122,255,0.18), transparent 60%),
+        radial-gradient(900px 360px at 90% 10%, rgba(56,189,248,0.14), transparent 55%),
+        linear-gradient(180deg, rgba(31,122,255,0.06), transparent);
+      border-radius: 26px;
+      padding: clamp(18px, 3vw, 34px);
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
-    .hero h1{ margin: 0 0 8px; font-size: 28px; letter-spacing: -0.3px; }
-    .hero p{ margin: 0; color: var(--muted); max-width: 70ch; line-height: 1.5; }
-  
+
+    .hero-inner{
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: clamp(14px, 3vw, 32px);
+      align-items: center;
+    }
+
+    .hero-left{ min-width: 0; }
+    .hero-right{ min-width: 0; display:flex; justify-content:flex-end; }
+
+    .hero-badges{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0;
+      margin: 0 0 16px;
+      list-style: none;
+    }
+
+    .badge{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      border: 1px solid var(--badge-border);
+      background: var(--badge-bg);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .badge-dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--primary);
+      box-shadow: 0 0 0 3px rgba(31,122,255,0.14);
+    }
+
+    .hero-title{
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4.1vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.7px;
+    }
+    .hero-title span{ display: inline-block; }
+    .hero-accent{
+      color: var(--primary);
+    }
+
+    .hero-desc{
+      margin: 0 0 18px;
+      color: var(--muted);
+      max-width: 64ch;
+      line-height: 1.55;
+      font-size: 15.5px;
+    }
+
+    .hero-ctas{
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      flex-wrap: wrap;
+      margin: 0 0 10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      font-weight: 650;
+      font-size: 14px;
+      border: 1px solid transparent;
+      transition: transform 150ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
+      text-decoration: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:focus-visible{
+      outline: 3px solid rgba(31,122,255,0.30);
+      outline-offset: 3px;
+    }
+    .btn.primary{
+      background: var(--text);
+      color: var(--bg);
+      border-color: rgba(0,0,0,0.0);
+    }
+    html[data-theme="dark"] .btn.primary{
+      background: #F3F4F6;
+      color: #0B0F14;
+    }
+    .btn.primary:hover{ transform: translateY(-1px); }
+
+    .btn.ghost{
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .btn.ghost:hover{ background: var(--link-hover-bg); border-color: var(--link-hover-border); }
+
+    .hero-proof{
+      font-size: 12.5px;
+      color: var(--muted);
+      opacity: 0.95;
+    }
+
+    /* Panel (preview) - 100% CSS, sin imágenes externas */
+    .hero-panel{
+      width: min(420px, 100%);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.38);
+      border-radius: 20px;
+      box-shadow: 0 16px 40px rgba(2, 8, 23, 0.16);
+      overflow: hidden;
+    }
+    html[data-theme="dark"] .hero-panel{
+      background: rgba(17,24,39,0.55);
+      box-shadow: 0 18px 46px rgba(0,0,0,0.55);
+    }
+
+    .panel-top{
+      display:flex;
+      gap: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.35);
+    }
+    html[data-theme="dark"] .panel-top{ background: rgba(17,24,39,0.40); }
+
+    .pill{
+      width: 34px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(148,163,184,0.55);
+    }
+    html[data-theme="dark"] .pill{ background: rgba(148,163,184,0.28); }
+
+    .panel-body{ padding: 14px; display:grid; gap: 12px; }
+    .panel-card{
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.45);
+    }
+    html[data-theme="dark"] .panel-card{ background: rgba(11,15,20,0.35); }
+
+    .pc-title{ width: 46%; height: 10px; border-radius: 999px; background: rgba(148,163,184,0.45); margin-bottom: 10px; }
+    .pc-line{ width: 88%; height: 8px; border-radius: 999px; background: rgba(148,163,184,0.30); margin-bottom: 8px; }
+    .pc-line.short{ width: 60%; margin-bottom: 0; }
+
+    html[data-theme="dark"] .pc-title{ background: rgba(148,163,184,0.22); }
+    html[data-theme="dark"] .pc-line{ background: rgba(148,163,184,0.16); }
+
+    .panel-metrics{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .metric{
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.40);
+    }
+    html[data-theme="dark"] .metric{ background: rgba(11,15,20,0.30); }
+    .metric-k{ width: 60%; height: 8px; border-radius: 999px; background: rgba(148,163,184,0.30); margin-bottom: 10px; }
+    .metric-v{ width: 40%; height: 12px; border-radius: 999px; background: rgba(31,122,255,0.22); }
+    html[data-theme="dark"] .metric-k{ background: rgba(148,163,184,0.16); }
+    html[data-theme="dark"] .metric-v{ background: rgba(31,122,255,0.26); }
+
+    @media (max-width: 900px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .hero-right{ justify-content:flex-start; }
+      .hero-panel{ width: 100%; }
+    }
+
+    /* Secciones base (v60) */
+    .section{
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.25);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    html[data-theme="dark"] .section{ background: rgba(17,24,39,0.35); }
+    .section-inner{ padding: 18px; }
+    .section-title{ margin: 0 0 6px; font-size: 18px; letter-spacing: -0.2px; }
+    .section-desc{ margin: 0; color: var(--muted); line-height: 1.55; }
 /* ===== Protección básica contra selección y arrastre ===== */
-html, body, header, nav, main, .drawer {
+html, body, header, nav, .drawer {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
+
+/* Permitir seleccionar texto en el contenido */
+main{ user-select: text; -webkit-user-select: text; }
+main a, main button{ -webkit-tap-highlight-color: transparent; }
+
 
 /* Evitar arrastrar imágenes */
 img {
@@ -771,6 +979,39 @@ img {
 
 
 /* body.drawer-open is handled above (fixed positioning for iOS) */
+
+
+/* v62 Hero rotator (minimal, no flashy animation) */
+.hero-dots{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+  align-items:center;
+}
+.hero-dot{
+  width:10px;height:10px;border-radius:999px;
+  border:1px solid var(--border);
+  background: transparent;
+  padding:0;
+  cursor:pointer;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+.hero-dot[aria-selected="true"]{
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+.hero-dot:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.hero-rotator-fade{ transition: opacity 160ms ease; }
+.hero-rotator-fade.is-fading{ opacity:0; }
+@media (prefers-reduced-motion: reduce){
+  .hero-dot, .hero-rotator-fade{ transition:none; }
+}
+
 </style>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/newgaschsoft/apple-touch-icon.png">
@@ -934,13 +1175,92 @@ img {
 
 
   <main>
-    <section class="hero">
-      <h1 id="heroTitle">GaschSoft: software y soporte con mentalidad de producto.</h1>
-      <p id="heroDesc">Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover.</p>
+    <!-- ===== HERO v60 ===== -->
+    <section class="hero heroV60" aria-labelledby="heroTitle">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <ul class="hero-badges" aria-label="Highlights">
+            <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge1">Entrega rápida</span></li>
+            <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge2">Enfoque en conversión</span></li>
+            <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge3">Soporte continuo</span></li>
+          </ul>
+
+          <h1 class="hero-title" id="heroTitle">
+            <span id="heroTitleA">Tu empresa ya creció.</span>
+            <span class="hero-accent" id="heroTitleB">Tu web debería hacerlo también.</span>
+          </h1>
+
+          <p class="hero-desc" id="heroDesc">
+            Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.
+          </p>
+
+          <div class="hero-ctas">
+            <a class="btn primary" id="heroCtaPrimary" href="#contact">Agendar diagnóstico</a>
+            <a class="btn ghost" id="heroCtaSecondary" href="#cases">Ver casos</a>
+          </div>
+
+          <div class="hero-proof" id="heroProof">Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer</div>
+            <div class="hero-dots" id="heroDots" aria-label="Hero options" role="tablist"></div>
+        </div>
+
+        <div class="hero-right" aria-hidden="true">
+          <div class="hero-panel" id="heroPreview">
+            <div class="panel-top">
+              <div class="pill"></div>
+              <div class="pill"></div>
+              <div class="pill"></div>
+            </div>
+
+            <div class="panel-body">
+              <div class="panel-card">
+                <div class="pc-title"></div>
+                <div class="pc-line"></div>
+                <div class="pc-line short"></div>
+              </div>
+              <div class="panel-card">
+                <div class="pc-title"></div>
+                <div class="pc-line"></div>
+                <div class="pc-line short"></div>
+              </div>
+
+              <div class="panel-metrics">
+                <div class="metric">
+                  <div class="metric-k"></div>
+                  <div class="metric-v"></div>
+                </div>
+                <div class="metric">
+                  <div class="metric-k"></div>
+                  <div class="metric-v"></div>
+                </div>
+                <div class="metric">
+                  <div class="metric-k"></div>
+                  <div class="metric-v"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Placeholder sections for anchors (v60) -->
+    <section class="section" id="cases" aria-label="Casos">
+      <div class="section-inner">
+        <h2 class="section-title" id="casesTitle">Casos</h2>
+        <p class="section-desc" id="casesDesc">Ejemplos y resultados (próximamente).</p>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-label="Contacto">
+      <div class="section-inner">
+        <h2 class="section-title" id="contactTitle">Contacto</h2>
+        <p class="section-desc" id="contactDesc">Cuéntanos qué necesitas y te respondemos con una propuesta clara.</p>
+      </div>
     </section>
   </main>
 
   <script>
+
     (function () {
       const elHtml = document.documentElement;
 
@@ -961,14 +1281,26 @@ img {
           nav: { services: "Plataforma", portfolio: "Casos", contact: "Contacto", about: "Empresa" },
           services: { auto:"Automatizaciones", web:"Desarrollo Web", it:"Soporte IT", infra:"Infraestructura", invites:"Invitaciones Web" },
           cases: { sme: "PYMEs", corp: "Corporativo", startups: "Startups" },
-          hero: { title: "GaschSoft: software y soporte con mentalidad de producto.", desc: "Tema con ciclo Sistema → Oscuro → Claro, selector de idioma, y menú de servicios en hover." }
+          hero: { badge1:"Entrega rápida", badge2:"Enfoque en conversión", badge3:"Soporte continuo", titleA:"Tu empresa ya creció.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", ctaPrimary:"Agendar diagnóstico", ctaSecondary:"Ver casos", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer",heroVariants:[
+  { titleA:"Tu empresa ya creció.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer", dash:"growth" },
+  { titleA:"Tu empresa ya creció.", titleB:"Tu web no.", desc:"Construimos presencia digital al nivel real de tu negocio.", proof:"Mensaje claro • Diagnóstico directo • Implementación limpia • Rápido a producción", dash:"gap" },
+  { titleA:"Modernizamos la presencia digital", titleB:"de empresas establecidas.", desc:"Sitios profesionales listos para convertir y escalar.", proof:"Diseño sobrio • Performance real • SEO suave • Mobile impecable", dash:"modern" },
+  { titleA:"Infraestructura web para", titleB:"empresas que ya facturan.", desc:"Diseño profesional. Arquitectura sólida. Crecimiento real.", proof:"Base mantenible • Integraciones listas • Seguridad básica • Lista para crecer", dash:"infra" },
+  { titleA:"No necesitas otra “página web”.", titleB:"Necesitas una presencia digital a la altura.", desc:"Proyecta autoridad y convierte mejor con una base técnica preparada para evolucionar.", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer", dash:"authority" }
+], sections:{ casesTitle:"Casos", casesDesc:"Ejemplos y resultados (próximamente).", contactTitle:"Contacto", contactDesc:"Cuéntanos qué necesitas y te respondemos con una propuesta clara." } }
         },
         en: {
           brandSub: "",
           nav: { services: "Platform", portfolio: "Use cases", contact: "Contact", about: "Company" },
           services: { auto:"Automations", web:"Web Development", it:"IT Support", infra:"Infrastructure", invites:"Web Invitations" },
           cases: { sme: "SMEs", corp: "Enterprise", startups: "Startups" },
-          hero: { title: "GaschSoft: product-minded software and support.", desc: "Theme cycle System → Dark → Light, language selector, and hover services menu." }
+          hero: { badge1:"Fast delivery", badge2:"Conversion-focused", badge3:"Continuous support", titleA:"Your business already grew.", titleB:"Your website should too.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", ctaPrimary:"Schedule a diagnostic", ctaSecondary:"View cases", proof:"We plan, we don’t improvise • Clean implementation • No rebuild in a year • Built to grow",heroVariants:[
+  { titleA:"Your business already grew.", titleB:"Your website should too.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", proof:"Planned, not improvised • Clean implementation • No rebuild next year • Built to grow", dash:"growth" },
+  { titleA:"Your business already grew.", titleB:"Your website didn’t.", desc:"We build digital presence that matches the real level of your business.", proof:"Clear message • Direct diagnosis • Clean implementation • Fast to production", dash:"gap" },
+  { titleA:"We modernize the digital presence", titleB:"of established companies.", desc:"Professional sites ready to convert and scale.", proof:"Sober design • Real performance • Light SEO • Mobile done right", dash:"modern" },
+  { titleA:"Web infrastructure for", titleB:"companies that already sell.", desc:"Professional design. Solid architecture. Real growth.", proof:"Maintainable base • Ready integrations • Basic security • Built to grow", dash:"infra" },
+  { titleA:"You don’t need another “website”.", titleB:"You need a presence that matches your company.", desc:"Project authority and convert better with a technical foundation built to evolve.", proof:"Planned, not improvised • Clean implementation • No rebuild next year • Built to grow", dash:"authority" }
+], sections:{ casesTitle:"Cases", casesDesc:"Examples and outcomes (coming soon).", contactTitle:"Contact", contactDesc:"Tell us what you need and we’ll reply with a clear proposal." } }
         }
       };
 
@@ -1001,7 +1333,19 @@ img {
       const svcAuto = document.getElementById("svcAuto");
 
       const heroTitle = document.getElementById("heroTitle");
+      const heroTitleA = document.getElementById("heroTitleA");
+      const heroTitleB = document.getElementById("heroTitleB");
       const heroDesc = document.getElementById("heroDesc");
+      const heroBadge1 = document.getElementById("heroBadge1");
+      const heroBadge2 = document.getElementById("heroBadge2");
+      const heroBadge3 = document.getElementById("heroBadge3");
+      const heroCtaPrimary = document.getElementById("heroCtaPrimary");
+      const heroCtaSecondary = document.getElementById("heroCtaSecondary");
+      const heroProof = document.getElementById("heroProof");
+      const casesTitle = document.getElementById("casesTitle");
+      const casesDesc = document.getElementById("casesDesc");
+      const contactTitle = document.getElementById("contactTitle");
+      const contactDesc = document.getElementById("contactDesc");
 
       const langBtn = document.getElementById("langBtn");
       const langMenu = document.getElementById("langMenu");
@@ -1098,6 +1442,11 @@ img {
 
         brandSub.textContent = t.brandSub;
         document.getElementById("navCasesLabel").textContent = t.nav.portfolio;
+        // Casos (header)
+        document.getElementById("caseSME").textContent = t.cases.sme;
+        document.getElementById("caseCorp").textContent = t.cases.corp;
+        document.getElementById("caseStartup").textContent = t.cases.startups;
+
         navContact.textContent = t.nav.contact;
         navAbout.textContent = t.nav.about;
 
@@ -1121,8 +1470,27 @@ img {
         if (svcInv) svcInv.textContent = t.services.invites;
         if (svcAuto) svcAuto.textContent = t.services.auto;
 
-        heroTitle.textContent = t.hero.title;
+        // Hero v60
+        if (heroBadge1) heroBadge1.textContent = t.hero.badge1;
+        if (heroBadge2) heroBadge2.textContent = t.hero.badge2;
+        if (heroBadge3) heroBadge3.textContent = t.hero.badge3;
+
+        if (heroTitleA && heroTitleB) {
+          heroTitleA.textContent = t.hero.titleA;
+          heroTitleB.textContent = t.hero.titleB;
+        } else {
+          heroTitle.textContent = (t.hero.titleA ? (t.hero.titleA + " " + t.hero.titleB) : (t.hero.title || ""));
+        }
         heroDesc.textContent = t.hero.desc;
+
+        if (heroCtaPrimary) heroCtaPrimary.textContent = t.hero.ctaPrimary;
+        if (heroCtaSecondary) heroCtaSecondary.textContent = t.hero.ctaSecondary;
+        if (heroProof) heroProof.textContent = t.hero.proof;
+
+        if (casesTitle) casesTitle.textContent = t.hero.sections.casesTitle;
+        if (casesDesc) casesDesc.textContent = t.hero.sections.casesDesc;
+        if (contactTitle) contactTitle.textContent = t.hero.sections.contactTitle;
+        if (contactDesc) contactDesc.textContent = t.hero.sections.contactDesc;
 
         langItems.forEach(item => {
           const isSelected = item.getAttribute("data-lang") === lang;
@@ -1130,7 +1498,10 @@ img {
         });
 
         document.documentElement.lang = (lang === "en") ? "en" : "es";
-      }
+        // notify other modules
+  window.dispatchEvent(new Event("gs:langChanged"));
+}
+
 
       // Theme menu
       function closeThemeMenu(){
@@ -1383,7 +1754,156 @@ img {
       applyLang(state.lang);
     
       
-      // Deshabilitar click (focus pegajoso) en dropdown triggers: solo hover
+      
+
+      // === v62 Hero rotator (5 positioning options, synced with I18N) ===
+      (function initHeroRotator(){
+        const elTitleA = document.getElementById("heroTitleA");
+        const elTitleB = document.getElementById("heroTitleB");
+        const elDesc   = document.getElementById("heroDesc");
+        const elProof  = document.getElementById("heroProof");
+        const elDots   = document.getElementById("heroDots");
+        const elPrev   = document.getElementById("heroPreview");
+        if(!elTitleA || !elTitleB || !elDesc || !elProof || !elDots || !elPrev) return;
+
+        [elTitleA, elTitleB, elDesc, elProof, elPrev].forEach(e => e.classList.add("hero-rotator-fade"));
+
+        let idx = 0;
+        let timer = null;
+
+        function getLang(){ return (localStorage.getItem("gs_lang") || "es"); }
+        function getVariants(){
+          const lang = getLang();
+          const v = (I18N[lang] && I18N[lang].hero && I18N[lang].hero.heroVariants) ? I18N[lang].hero.heroVariants : null;
+          return Array.isArray(v) && v.length ? v : null;
+        }
+
+        function dashMarkup(kind, lang){
+          const isEs = lang === "es";
+          const commonTop = `
+            <div class="panel-top">
+              <div class="pill"></div>
+              <div class="pill"></div>
+              <div class="pill"></div>
+              <div class="panel-title">${isEs ? "Panel" : "Panel"}</div>
+            </div>`;
+          const row = (k,v) => `<div class="kv"><div class="k">${k}</div><div class="v">${v}</div></div>`;
+          const meter = (a,b,c) => `
+            <div class="meter">
+              <span style="width:${a}%"></span>
+              <span style="width:${b}%"></span>
+              <span style="width:${c}%"></span>
+            </div>`;
+
+          if(kind === "gap"){
+            return commonTop + `
+              <div class="panel-body">
+                ${row(isEs?"Estado":"State", isEs?"Desalineado":"Misaligned")}
+                ${row(isEs?"Impacto":"Impact", isEs?"Baja conversión":"Lower conversion")}
+                ${row(isEs?"Acción":"Action", isEs?"Modernizar":"Modernize")}
+                ${meter(35,60,85)}
+              </div>`;
+          }
+          if(kind === "modern"){
+            return commonTop + `
+              <div class="panel-body">
+                ${row(isEs?"UI":"UI", isEs?"Actualizada":"Updated")}
+                ${row(isEs?"Mobile":"Mobile", isEs?"Impecable":"Polished")}
+                ${row(isEs?"Velocidad":"Speed", isEs?"Alta":"High")}
+                ${meter(70,82,90)}
+              </div>`;
+          }
+          if(kind === "infra"){
+            return commonTop + `
+              <div class="panel-body">
+                ${row(isEs?"Arquitectura":"Architecture", isEs?"Mantenible":"Maintainable")}
+                ${row(isEs?"Integraciones":"Integrations", isEs?"Listas":"Ready")}
+                ${row(isEs?"Operación":"Ops", isEs?"Estable":"Stable")}
+                ${meter(60,78,92)}
+              </div>`;
+          }
+          if(kind === "authority"){
+            return commonTop + `
+              <div class="panel-body">
+                ${row(isEs?"Marca":"Brand", isEs?"Autoridad":"Authority")}
+                ${row(isEs?"Confianza":"Trust", isEs?"Alta":"High")}
+                ${row(isEs?"Conversión":"Conversion", isEs?"Mejor":"Better")}
+                ${meter(55,75,95)}
+              </div>`;
+          }
+          // growth default
+          return commonTop + `
+            <div class="panel-body">
+              ${row(isEs?"Leads":"Leads", "+18%")}
+              ${row(isEs?"Performance":"Performance", "A")}
+              ${row(isEs?"Escala":"Scale", isEs?"Lista":"Ready")}
+              ${meter(50,72,88)}
+            </div>`;
+        }
+
+        function renderDots(count){
+          elDots.innerHTML = "";
+          for(let i=0;i<count;i++){
+            const b = document.createElement("button");
+            b.type = "button";
+            b.className = "hero-dot";
+            b.setAttribute("role","tab");
+            b.setAttribute("aria-label", `${getLang()==="es" ? "Opción" : "Option"} ${i}`);
+            b.setAttribute("aria-selected", i===idx ? "true":"false");
+            b.addEventListener("click", () => setIndex(i, true));
+            elDots.appendChild(b);
+          }
+        }
+
+        function setSelectedDot(){
+          elDots.querySelectorAll(".hero-dot").forEach((d,i)=> d.setAttribute("aria-selected", i===idx ? "true":"false"));
+        }
+
+        function fadeSet(v){
+          const lang = getLang();
+          const els = [elTitleA, elTitleB, elDesc, elProof, elPrev];
+          els.forEach(e=> e.classList.add("is-fading"));
+          window.setTimeout(()=>{
+            elTitleA.textContent = v.titleA;
+            elTitleB.textContent = v.titleB;
+            elDesc.textContent   = v.desc;
+            elProof.textContent  = v.proof;
+            elPrev.innerHTML     = dashMarkup(v.dash, lang);
+            setSelectedDot();
+            els.forEach(e=> e.classList.remove("is-fading"));
+          }, 170);
+        }
+
+        function setIndex(next, userAction=false){
+          const variants = getVariants();
+          if(!variants) return;
+          idx = (next + variants.length) % variants.length;
+          fadeSet(variants[idx]);
+          if(userAction) restartTimer();
+        }
+
+        function restartTimer(){
+          if(timer) clearInterval(timer);
+          timer = setInterval(()=> setIndex(idx+1, false), 7000);
+        }
+
+        const variants = getVariants();
+        if(!variants) return;
+        renderDots(variants.length);
+        fadeSet(variants[idx]);
+        restartTimer();
+
+        window.addEventListener("gs:langChanged", () => {
+          const v2 = getVariants();
+          if(!v2) return;
+          idx = Math.min(idx, v2.length-1);
+          renderDots(v2.length);
+          fadeSet(v2[idx]);
+          restartTimer();
+        }, { passive:true });
+      })();
+
+// Deshabilitar click (focus pegajoso) en dropdown triggers: solo hover
       const platTrigger = document.getElementById("servicesTestBtn");
       const casesTrigger = document.getElementById("navPortfolio");
 
@@ -1406,6 +1926,7 @@ img {
       });
 
     })();
-  </script>
+  
+</script>
 </body>
 </html>
