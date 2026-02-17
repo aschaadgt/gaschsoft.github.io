@@ -1425,35 +1425,14 @@ img {
   clip-path: inset(-8px round 999px); /* hard clip for blur */
 }
 
+#heroCtaPrimary:hover::before{
+  opacity:1;
+}
+
 @keyframes heroGlow{
   0%{ background-position:0 0; }
   50%{ background-position:400% 0; }
   100%{ background-position:0 0; }
-}
-
-
-/* ===== v78 iOS/touch fix: prevent white tap highlight + correct glow trigger ===== */
-/* iOS Safari shows a default tap highlight / focus ring on links. Remove it but keep accessible focus-visible styling. */
-#heroCtaPrimary{
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-/* Show glow on hover only for devices that actually hover (desktop/laptop) */
-@media (hover: hover) and (pointer: fine){
-  #heroCtaPrimary:hover::before{ opacity: 1; }
-}
-
-/* On touch devices, use active/pressed state instead of hover (prevents first-tap white flash) */
-@media (hover: none) and (pointer: coarse){
-  #heroCtaPrimary:active::before{ opacity: 1; }
-}
-
-/* Keep a clean, intentional focus ring (keyboard) */
-#heroCtaPrimary:focus{ outline: none; }
-#heroCtaPrimary:focus-visible{
-  outline: 2px solid rgba(31,122,255,.45);
-  outline-offset: 3px;
 }
 
 </style>
