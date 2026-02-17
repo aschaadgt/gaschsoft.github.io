@@ -758,7 +758,12 @@
     }
 
     .hero-left{ min-width: 0; }
-    .hero-right{ min-width: 0; display:flex; justify-content:flex-end; }
+    .hero-right{
+      min-width: 0;
+      display:flex;
+      justify-content: center;   /* centra horizontal */
+      align-items: center;       /* centra vertical dentro del alto fijo */
+    }
 
     .hero-badges{
       display:flex;
@@ -926,12 +931,83 @@
     html[data-theme="dark"] .metric-v{ background: rgba(31,122,255,0.26); }
 
     @media (max-width: 900px){
-      .hero-inner{ grid-template-columns: 1fr; }
-      .hero-right{ justify-content:flex-start; }
-      .hero-panel{ width: 100%; }
-    }
+      /* Mobile hero: compact + stable positions between options */
+      .hero{ padding: 16px; }
+      .hero-inner{
+        grid-template-columns: 1fr;
+        gap: 14px;
+        height: auto;
+        align-items: start;
+      }
 
-    /* Secciones base (v60) */
+      /* Keep left stack stable even when titles are shorter */
+      .hero-title{
+        height: 4.4em;          /* reserve space for 2 lines */
+        -webkit-line-clamp: 2;
+      }
+      .hero-desc{
+        height: 6.2em;          /* reserve space for 3 lines */
+        -webkit-line-clamp: 3;
+      }
+      .hero-proof{
+        height: 3.2em;          /* reserve space for 2 lines */
+        -webkit-line-clamp: 2;
+      }
+
+      .hero-badges{ margin: 0 0 12px; gap: 8px; }
+      .hero-ctas{ margin: 0 0 8px; gap: 10px; }
+
+      /* Center preview so it doesn't "drift" between variants */
+      .hero-right{
+        justify-content: center;
+        align-items: center;
+        height: auto;
+      }
+
+      /* Make the preview fixed-height on mobile (no percentage sizing) */
+      .hero-panel{ width: 100%; height: auto; }
+      #heroPreview{
+        height: 320px;          /* fixed shell */
+        min-height: 320px;
+        max-height: 320px;
+        overflow: hidden;
+      }
+
+      /* Center the dashboard group inside the fixed preview box */
+      #heroPreview{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+      }
+
+      /* Stabilize mock dashboards: keep cards in 3 columns on mobile to avoid vertical growth */
+      #heroPreview .dash-cards{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+      #heroPreview .dash-card{
+        min-height: 48px;
+        padding: 10px;
+        gap: 8px;
+      }
+      #heroPreview .dash-line{ height: 9px; }
+      #heroPreview .dash-line.thin{ height: 7px; }
+
+      #heroPreview .dash-chart{
+        min-height: 90px;
+        padding: 10px;
+      }
+
+      /* Compact the v61-style dashboard pieces without changing structure */
+      #heroPreview .panel-body{ padding: 10px; gap: 10px; }
+      #heroPreview .panel-card{ padding: 10px; border-radius: 14px; }
+      #heroPreview .pc-title{ height: 9px; margin-bottom: 8px; }
+      #heroPreview .pc-line{ height: 7px; margin-bottom: 7px; }
+
+      /* Dots always centered */
+      .hero-dots{ justify-content: center; margin-top: 14px; }
+    }
+/* Secciones base (v60) */
     .section{
       margin-top: 20px;
       border: 1px solid var(--border);
@@ -986,8 +1062,10 @@ img {
   display:flex;
   flex-wrap:wrap;
   gap:10px;
-  margin-top:14px;
+  margin-top:16px;
   align-items:center;
+  justify-content:center;
+  grid-column: 1 / -1;
 }
 .hero-dot{
   width:10px;height:10px;border-radius:999px;
@@ -1010,6 +1088,351 @@ img {
 .hero-rotator-fade.is-fading{ opacity:0; }
 @media (prefers-reduced-motion: reduce){
   .hero-dot, .hero-rotator-fade{ transition:none; }
+}
+
+
+/* v62.1 Hero stability (no jump across variants) */
+
+/* ===== v64 Hero: fixed container (no size changes between options) ===== */
+
+/* ===== v65 Hero: truly fixed height (no jumps between options on desktop) ===== */
+.hero{
+  /* Fixed shell: content must adapt, not resize the container AQUI*/
+  height: 650px;
+  min-height: 650px;
+  max-height: 650px;
+  overflow: hidden;
+}
+@media (max-width: 900px){
+  .hero{
+    height: auto;
+    min-height: clamp(700px, 84svh, 920px);
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+
+/* v70+ Mobile: keep preview fixed (prevents option jump) */
+@media (max-width: 900px){
+  .hero-panel{ height:auto; }
+  #heroPreview{ height: 320px; min-height: 320px; max-height: 320px; }
+}
+/* Prevent text blocks from changing layout height */
+.hero-title{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* fixed to 2 lines */
+  overflow: hidden;
+}
+.hero-desc{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* fixed to 3 lines */
+  overflow: hidden;
+}
+.hero-proof{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* fixed to 2 lines */
+  overflow: hidden;
+}
+
+/* Make right column adapt inside fixed height */
+.hero-inner{ height: 100%; align-items: stretch; }
+.hero-right{ height: 100%; }
+.hero-panel{ height: 100%; overflow: hidden; }
+#heroPreview{ height: 100%; overflow: hidden; }
+
+/* Keep dots inside shell and centered */
+.hero-dots-wrap{ margin-top: 12px; }
+
+.hero-inner{
+  /* allow children to fill reserved height instead of resizing container */
+  align-items: stretch;
+}
+
+/* Reserve space for the largest variant (option 4) so the hero never jumps */
+.hero{
+  /* clamps keep it professional on desktop + safe on mobile */
+  min-height: clamp(560px, 68vh, 760px);
+}
+@media (max-width: 900px){
+  .hero{
+    min-height: clamp(620px, 78vh, 860px);
+  }
+}
+
+/* Make right panel participate in the fixed height (no pushing) */
+.hero-right{ align-self: stretch; }
+.hero-panel{ height: 100%; display:flex; flex-direction:column; }
+
+
+/* Keep hero block from jumping between variants (reserve space for the LONGEST variant: option 4) */
+.hero-title{ min-height: 3.6em; }          /* up to ~3 lines on desktop */
+.hero-desc{  min-height: 5.6em; }          /* longer description */
+.hero-proof{ min-height: 2.6em; }          /* 1–2 lines */
+@media (max-width: 820px){
+  .hero-title{ min-height: 4.4em; }
+  .hero-desc{  min-height: 6.6em; }
+  .hero-proof{ min-height: 3.2em; }
+}
+
+/* Dashboard: textless shapes */
+#heroPreview{ min-height: 300px; height: 30%; } /* stable height; prevents jump AQUI*/
+@media (max-width: 820px){ #heroPreview{ min-height: 260px; } }
+
+.panel-title{ display:none !important; } /* ensure no words */
+.panel-body{ display:grid; gap:12px; }
+
+.dash-cards{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px; }
+@media (max-width: 820px){ .dash-cards{ grid-template-columns: 1fr; } }
+
+.dash-card{
+  border:1px solid var(--border);
+  background: var(--card);
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 64px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.dash-line{
+  height:10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--text) 16%, transparent);
+}
+.dash-line.thin{ height:8px; opacity:.75; }
+.dash-line.short{ width:52%; }
+.dash-line.mid{ width:72%; }
+.dash-line.long{ width:92%; }
+
+.dash-chart{
+  border:1px solid var(--border);
+  background: var(--card);
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 110px;
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+}
+.dash-bar{
+  width: 100%;
+  border-radius: 10px 10px 6px 6px;
+  background: color-mix(in oklab, var(--accent) 55%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border));
+}
+.dash-bars{ display:flex; gap:10px; width:100%; height:100%; align-items:flex-end; }
+
+/* ===== v63: unique dashboards per option ===== */
+.dash-split{
+  display:grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 12px;
+}
+@media (max-width: 820px){
+  .dash-split{ grid-template-columns: 1fr; }
+}
+
+.dash-table{
+  border:1px solid var(--border);
+  background: var(--card);
+  border-radius: 12px;
+  padding: 10px;
+  display:grid;
+  gap: 10px;
+}
+.dash-row{
+  display:grid;
+  grid-template-columns: 1fr 0.6fr 28px;
+  gap: 10px;
+  align-items:center;
+}
+.dash-cell{
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--text) 14%, transparent);
+}
+.dash-chip{
+  width: 18px;
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 55%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border));
+}
+.w-25{ width:25%; } .w-30{ width:30%; } .w-35{ width:35%; } .w-40{ width:40%; } .w-45{ width:45%; }
+.w-55{ width:55%; } .w-60{ width:60%; } .w-65{ width:65%; }
+
+.dash-kpis{ display:grid; gap: 10px; }
+.dash-kpi{
+  border:1px solid var(--border);
+  background: var(--card);
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 58px;
+  display:grid;
+  gap: 10px;
+  align-content:start;
+}
+.kpi-k{ height: 8px; width: 62%; border-radius: 999px; background: color-mix(in oklab, var(--text) 14%, transparent); }
+.kpi-v{ height: 12px; width: 44%; border-radius: 999px; background: color-mix(in oklab, var(--accent) 55%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border)); }
+
+.dash-flow{
+  display:grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  align-items: stretch;
+}
+.dash-timeline{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding: 6px 0;
+}
+.tl-dot{
+  width: 10px; height: 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 55%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border));
+}
+.tl-line{
+  width: 2px;
+  flex: 1 1 auto;
+  background: color-mix(in oklab, var(--text) 10%, transparent);
+  margin: 6px 0;
+  border-radius: 99px;
+}
+.dash-stack{ display:grid; gap: 10px; }
+.stack-card{
+  border:1px solid var(--border);
+  background: var(--card);
+  border-radius: 12px;
+  padding: 12px;
+  display:grid;
+  gap: 10px;
+}
+.stack-bars{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+}
+.stack-bar{
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 55%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--border));
+}
+
+.dash-authority{
+  display:grid;
+  gap: 12px;
+}
+.dash-donut{
+  display:grid;
+  grid-template-columns: 84px 1fr;
+  gap: 12px;
+  align-items:center;
+  border:1px solid var(--border);
+  background: var(--card);
+  border-radius: 12px;
+  padding: 12px;
+}
+.donut{
+  width: 72px; height: 72px;
+  border-radius: 999px;
+  background: conic-gradient(
+    color-mix(in oklab, var(--accent) 70%, transparent) 0 58%,
+    color-mix(in oklab, var(--text) 10%, transparent) 58% 100%
+  );
+  position: relative;
+}
+.donut::after{
+  content:"";
+  position:absolute;
+  inset: 16px;
+  border-radius: 999px;
+  background: var(--card);
+  border:1px solid var(--border);
+}
+.donut-lines{ display:grid; gap: 10px; }
+.dash-cards.two{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+@media (max-width: 820px){
+  .dash-flow{ grid-template-columns: 1fr; }
+  .dash-timeline{ display:none; }
+  .dash-donut{ grid-template-columns: 1fr; }
+  .donut{ margin: 0 auto; }
+  .dash-cards.two{ grid-template-columns: 1fr; }
+}
+
+
+/* ===== v74 Hero Transform Transition (horizontal slide) ===== */
+.hero-rotator-fade{
+  transition: opacity 180ms ease, transform 180ms ease;
+  will-change: opacity, transform;
+}
+/* exit: slide slightly to the left */
+.hero-rotator-fade.is-fading{
+  opacity:0;
+  transform: translateX(-10px);
+}
+/* enter: come from the right */
+.hero-rotator-fade.is-enter{
+  opacity:0;
+  transform: translateX(10px);
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-rotator-fade{ transition:none; }
+}
+}
+
+
+/* ===== v75 Hero CTA border (Demo style, border only) ===== */
+#heroCtaPrimary{
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+#heroCtaPrimary::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:999px;
+  padding:6px;
+
+  background: linear-gradient(
+    45deg,
+    #1F4ED8,
+    #1F7AFF,
+    #3AB6E6,
+    #A7E3FF,
+    #1F4ED8
+  );
+  background-size:400%;
+  filter:blur(4px);
+
+  opacity:0;
+  transition:opacity .25s ease-in-out;
+  animation:heroGlow 18s linear infinite;
+
+  z-index:-1;
+
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+#heroCtaPrimary:hover::before{
+  opacity:1;
+}
+
+@keyframes heroGlow{
+  0%{ background-position:0 0; }
+  50%{ background-position:400% 0; }
+  100%{ background-position:0 0; }
 }
 
 </style>
@@ -1179,7 +1602,7 @@ img {
     <section class="hero heroV60" aria-labelledby="heroTitle">
       <div class="hero-inner">
         <div class="hero-left">
-          <ul class="hero-badges" aria-label="Highlights">
+          <ul class="hero-badges" id="heroBadges" aria-label="Highlights">
             <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge1">Entrega rápida</span></li>
             <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge2">Enfoque en conversión</span></li>
             <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge3">Soporte continuo</span></li>
@@ -1200,8 +1623,7 @@ img {
           </div>
 
           <div class="hero-proof" id="heroProof">Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer</div>
-            <div class="hero-dots" id="heroDots" aria-label="Hero options" role="tablist"></div>
-        </div>
+</div>
 
         <div class="hero-right" aria-hidden="true">
           <div class="hero-panel" id="heroPreview">
@@ -1240,6 +1662,7 @@ img {
             </div>
           </div>
         </div>
+        <div class="hero-dots" id="heroDots" aria-label="Hero options" role="tablist"></div>
       </div>
     </section>
 
@@ -1281,12 +1704,12 @@ img {
           nav: { services: "Plataforma", portfolio: "Casos", contact: "Contacto", about: "Empresa" },
           services: { auto:"Automatizaciones", web:"Desarrollo Web", it:"Soporte IT", infra:"Infraestructura", invites:"Invitaciones Web" },
           cases: { sme: "PYMEs", corp: "Corporativo", startups: "Startups" },
-          hero: { badge1:"Entrega rápida", badge2:"Enfoque en conversión", badge3:"Soporte continuo", titleA:"Tu empresa ya creció.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", ctaPrimary:"Agendar diagnóstico", ctaSecondary:"Ver casos", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer",heroVariants:[
-  { titleA:"Tu empresa ya creció.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer", dash:"growth" },
-  { titleA:"Tu empresa ya creció.", titleB:"Tu web no.", desc:"Construimos presencia digital al nivel real de tu negocio.", proof:"Mensaje claro • Diagnóstico directo • Implementación limpia • Rápido a producción", dash:"gap" },
-  { titleA:"Modernizamos la presencia digital", titleB:"de empresas establecidas.", desc:"Sitios profesionales listos para convertir y escalar.", proof:"Diseño sobrio • Performance real • SEO suave • Mobile impecable", dash:"modern" },
-  { titleA:"Infraestructura web para", titleB:"empresas que ya facturan.", desc:"Diseño profesional. Arquitectura sólida. Crecimiento real.", proof:"Base mantenible • Integraciones listas • Seguridad básica • Lista para crecer", dash:"infra" },
-  { titleA:"No necesitas otra “página web”.", titleB:"Necesitas una presencia digital a la altura.", desc:"Proyecta autoridad y convierte mejor con una base técnica preparada para evolucionar.", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer", dash:"authority" }
+          hero: { badge1:"Entrega rápida", badge2:"Enfoque en conversión", badge3:"Soporte continuo", highlightsLabel:"Puntos clave", optionsLabel:"Opciones", titleA:"Tu empresa ya creció.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", ctaPrimary:"Agendar diagnóstico", ctaSecondary:"Ver casos", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer",heroVariants:[
+  { titleA:"Tu empresa ya creció sólidamente.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer en un año • Preparada para crecer", dash:"growth" },
+  { titleA:"Infraestructura web para empresas", titleB:"que ya facturan y quieren crecer más.", desc:"Diseño profesional respaldado por una arquitectura sólida, preparada para integraciones, estabilidad operativa y evolución sostenida.", proof:"Base mantenible • Integraciones listas • Seguridad estructural • Escalabilidad real", dash:"infra" },
+  { titleA:"Modernizamos la presencia digital", titleB:"de empresas que ya operan en serio.", desc:"Sitios profesionales diseñados para convertir mejor, proyectar autoridad y escalar sobre una arquitectura técnica sólida y mantenible.", proof:"Diseño sobrio • Performance medible • SEO estructural • Mobile impecable", dash:"modern" },
+  { titleA:"Tu empresa ya creció estratégicamente.", titleB:"Tu presencia digital aún no.", desc:"Construimos una base web alineada al nivel real de tu negocio, lista para proyectar autoridad, convertir mejor y sostener crecimiento continuo.", proof:"Mensaje claro • Diagnóstico estratégico • Implementación limpia • Entrega lista para producción", dash:"gap" },
+  { titleA:"No necesitas otra página web.", titleB:"Necesitas presencia online a la altura.", desc:"Proyecta autoridad, convierte mejor y evoluciona sobre una base técnica preparada para crecer junto a tu empresa sin rehacer todo desde cero.", proof:"Arquitectura sólida • Implementación estratégica • Base estable • Lista para escalar", dash:"authority" }
 ], sections:{ casesTitle:"Casos", casesDesc:"Ejemplos y resultados (próximamente).", contactTitle:"Contacto", contactDesc:"Cuéntanos qué necesitas y te respondemos con una propuesta clara." } }
         },
         en: {
@@ -1294,12 +1717,12 @@ img {
           nav: { services: "Platform", portfolio: "Use cases", contact: "Contact", about: "Company" },
           services: { auto:"Automations", web:"Web Development", it:"IT Support", infra:"Infrastructure", invites:"Web Invitations" },
           cases: { sme: "SMEs", corp: "Enterprise", startups: "Startups" },
-          hero: { badge1:"Fast delivery", badge2:"Conversion-focused", badge3:"Continuous support", titleA:"Your business already grew.", titleB:"Your website should too.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", ctaPrimary:"Schedule a diagnostic", ctaSecondary:"View cases", proof:"We plan, we don’t improvise • Clean implementation • No rebuild in a year • Built to grow",heroVariants:[
-  { titleA:"Your business already grew.", titleB:"Your website should too.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", proof:"Planned, not improvised • Clean implementation • No rebuild next year • Built to grow", dash:"growth" },
-  { titleA:"Your business already grew.", titleB:"Your website didn’t.", desc:"We build digital presence that matches the real level of your business.", proof:"Clear message • Direct diagnosis • Clean implementation • Fast to production", dash:"gap" },
-  { titleA:"We modernize the digital presence", titleB:"of established companies.", desc:"Professional sites ready to convert and scale.", proof:"Sober design • Real performance • Light SEO • Mobile done right", dash:"modern" },
-  { titleA:"Web infrastructure for", titleB:"companies that already sell.", desc:"Professional design. Solid architecture. Real growth.", proof:"Maintainable base • Ready integrations • Basic security • Built to grow", dash:"infra" },
-  { titleA:"You don’t need another “website”.", titleB:"You need a presence that matches your company.", desc:"Project authority and convert better with a technical foundation built to evolve.", proof:"Planned, not improvised • Clean implementation • No rebuild next year • Built to grow", dash:"authority" }
+          hero: { badge1:"Fast delivery", badge2:"Conversion-focused", badge3:"Continuous support", highlightsLabel:"Highlights", optionsLabel:"Options", titleA:"Your business already grew.", titleB:"Your website should too.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", ctaPrimary:"Schedule a diagnostic", ctaSecondary:"View cases", proof:"We plan, we don’t improvise • Clean implementation • No rebuild in a year • Built to grow",heroVariants:[
+  { titleA:"Your business already grew solidly.", titleB:"Your website should grow as well.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", proof:"Planned, not improvised • Clean implementation • No rebuild in a year • Built to grow", dash:"growth" },
+  { titleA:"Web infrastructure for companies", titleB:"that already revenue and want more growth.", desc:"Professional design backed by solid architecture—ready for integrations, operational stability, and sustained evolution.", proof:"Maintainable base • Ready integrations • Structured security • Real scalability", dash:"infra" },
+  { titleA:"We modernize the digital presence", titleB:"of companies that already operate seriously.", desc:"Professional sites designed to convert better, project authority, and scale on a solid, maintainable technical architecture.", proof:"Sober design • Measurable performance • Structured SEO • Mobile done right", dash:"modern" },
+  { titleA:"Your business already grew strategically.", titleB:"Your digital presence still hasn’t.", desc:"We build a web foundation aligned to your real business level—ready to project authority, convert better, and support sustained growth.", proof:"Clear message • Strategic diagnosis • Clean implementation • Production-ready delivery", dash:"gap" },
+  { titleA:"You don’t need another website.", titleB:"You need a presence that matches your company.", desc:"Project authority, convert better, and evolve on a technical foundation built to grow with your company—without rebuilding from scratch.", proof:"Solid architecture • Strategic implementation • Stable foundation • Ready to scale", dash:"authority" }
 ], sections:{ casesTitle:"Cases", casesDesc:"Examples and outcomes (coming soon).", contactTitle:"Contact", contactDesc:"Tell us what you need and we’ll reply with a clear proposal." } }
         }
       };
@@ -1339,6 +1762,8 @@ img {
       const heroBadge1 = document.getElementById("heroBadge1");
       const heroBadge2 = document.getElementById("heroBadge2");
       const heroBadge3 = document.getElementById("heroBadge3");
+      const heroBadgesEl = document.getElementById("heroBadges");
+      const heroDotsEl = document.getElementById("heroDots");
       const heroCtaPrimary = document.getElementById("heroCtaPrimary");
       const heroCtaSecondary = document.getElementById("heroCtaSecondary");
       const heroProof = document.getElementById("heroProof");
@@ -1475,7 +1900,12 @@ img {
         if (heroBadge2) heroBadge2.textContent = t.hero.badge2;
         if (heroBadge3) heroBadge3.textContent = t.hero.badge3;
 
-        if (heroTitleA && heroTitleB) {
+        
+
+        // Labels (i18n)
+        if (heroBadgesEl && t.hero.highlightsLabel) heroBadgesEl.setAttribute("aria-label", t.hero.highlightsLabel);
+        if (heroDotsEl && t.hero.optionsLabel) heroDotsEl.setAttribute("aria-label", t.hero.optionsLabel);
+if (heroTitleA && heroTitleB) {
           heroTitleA.textContent = t.hero.titleA;
           heroTitleB.textContent = t.hero.titleB;
         } else {
@@ -1771,75 +2201,189 @@ img {
         let idx = 0;
         let timer = null;
 
-        function getLang(){ return (localStorage.getItem("gs_lang") || "es"); }
+        function getLang(){ return (localStorage.getItem(STORAGE.lang) || "es"); }
         function getVariants(){
           const lang = getLang();
           const v = (I18N[lang] && I18N[lang].hero && I18N[lang].hero.heroVariants) ? I18N[lang].hero.heroVariants : null;
           return Array.isArray(v) && v.length ? v : null;
         }
 
-        function dashMarkup(kind, lang){
-          const isEs = lang === "es";
-          const commonTop = `
-            <div class="panel-top">
-              <div class="pill"></div>
-              <div class="pill"></div>
-              <div class="pill"></div>
-              <div class="panel-title">${isEs ? "Panel" : "Panel"}</div>
-            </div>`;
-          const row = (k,v) => `<div class="kv"><div class="k">${k}</div><div class="v">${v}</div></div>`;
-          const meter = (a,b,c) => `
-            <div class="meter">
-              <span style="width:${a}%"></span>
-              <span style="width:${b}%"></span>
-              <span style="width:${c}%"></span>
-            </div>`;
+        // ===== Hero dashboards (textless mock UI) =====
+        // Rule from you: each option has its own mock dashboard.
+        // 0 => original (v61). 1 => v62.1 style. 2-4 => new unique layouts.
 
-          if(kind === "gap"){
-            return commonTop + `
-              <div class="panel-body">
-                ${row(isEs?"Estado":"State", isEs?"Desalineado":"Misaligned")}
-                ${row(isEs?"Impacto":"Impact", isEs?"Baja conversión":"Lower conversion")}
-                ${row(isEs?"Acción":"Action", isEs?"Modernizar":"Modernize")}
-                ${meter(35,60,85)}
-              </div>`;
-          }
-          if(kind === "modern"){
-            return commonTop + `
-              <div class="panel-body">
-                ${row(isEs?"UI":"UI", isEs?"Actualizada":"Updated")}
-                ${row(isEs?"Mobile":"Mobile", isEs?"Impecable":"Polished")}
-                ${row(isEs?"Velocidad":"Speed", isEs?"Alta":"High")}
-                ${meter(70,82,90)}
-              </div>`;
-          }
-          if(kind === "infra"){
-            return commonTop + `
-              <div class="panel-body">
-                ${row(isEs?"Arquitectura":"Architecture", isEs?"Mantenible":"Maintainable")}
-                ${row(isEs?"Integraciones":"Integrations", isEs?"Listas":"Ready")}
-                ${row(isEs?"Operación":"Ops", isEs?"Estable":"Stable")}
-                ${meter(60,78,92)}
-              </div>`;
-          }
-          if(kind === "authority"){
-            return commonTop + `
-              <div class="panel-body">
-                ${row(isEs?"Marca":"Brand", isEs?"Autoridad":"Authority")}
-                ${row(isEs?"Confianza":"Trust", isEs?"Alta":"High")}
-                ${row(isEs?"Conversión":"Conversion", isEs?"Mejor":"Better")}
-                ${meter(55,75,95)}
-              </div>`;
-          }
-          // growth default
-          return commonTop + `
+        function mock_dashboard_0(){
+          return `<div class="panel-top">
+              <div class="pill"></div>
+              <div class="pill"></div>
+              <div class="pill"></div>
+            </div>
+
             <div class="panel-body">
-              ${row(isEs?"Leads":"Leads", "+18%")}
-              ${row(isEs?"Performance":"Performance", "A")}
-              ${row(isEs?"Escala":"Scale", isEs?"Lista":"Ready")}
-              ${meter(50,72,88)}
+              <div class="panel-card">
+                <div class="pc-title"></div>
+                <div class="pc-line"></div>
+                <div class="pc-line short"></div>
+              </div>
+              <div class="panel-card">
+                <div class="pc-title"></div>
+                <div class="pc-line"></div>
+                <div class="pc-line short"></div>
+              </div>
+
+              <div class="panel-metrics">
+                <div class="metric">
+                  <div class="metric-k"></div>
+                  <div class="metric-v"></div>
+                </div>
+                <div class="metric">
+                  <div class="metric-k"></div>
+                  <div class="metric-v"></div>
+                </div>
+                <div class="metric">
+                  <div class="metric-k"></div>
+                  <div class="metric-v"></div>
+                </div>
+              </div>
             </div>`;
         }
+
+        function mock_dashboard_1(){
+          // From v62.1 (cards + bar chart)
+          return `
+            <div class="panel-top" aria-hidden="true">
+              <div class="pill"></div><div class="pill"></div><div class="pill"></div>
+              <div class="panel-title"></div>
+            </div>
+            <div class="panel-body">
+              <div class="dash-cards" aria-hidden="true">
+                <div class="dash-card">
+                  <div class="dash-line mid"></div>
+                  <div class="dash-line thin short"></div>
+                  <div class="dash-line thin mid"></div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-line long"></div>
+                  <div class="dash-line thin mid"></div>
+                  <div class="dash-line thin short"></div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-line short"></div>
+                  <div class="dash-line thin short"></div>
+                  <div class="dash-line thin mid"></div>
+                </div>
+              </div>
+
+              <div class="dash-chart" aria-hidden="true">
+                <div class="dash-bars">
+                  <div class="dash-bar" style="height:28%"></div>
+                  <div class="dash-bar" style="height:46%"></div>
+                  <div class="dash-bar" style="height:62%"></div>
+                  <div class="dash-bar" style="height:40%"></div>
+                  <div class="dash-bar" style="height:76%"></div>
+                </div>
+              </div>
+            </div>`;
+        }
+
+        function mock_dashboard_2(){
+          // New: split layout (list/table skeleton + right mini KPIs)
+          return `
+            <div class="panel-top" aria-hidden="true">
+              <div class="pill"></div><div class="pill"></div><div class="pill"></div>
+              <div class="panel-title"></div>
+            </div>
+            <div class="panel-body dash-split" aria-hidden="true">
+              <div class="dash-table">
+                <div class="dash-row"><span class="dash-cell w-55"></span><span class="dash-cell w-35"></span><span class="dash-chip"></span></div>
+                <div class="dash-row"><span class="dash-cell w-65"></span><span class="dash-cell w-25"></span><span class="dash-chip"></span></div>
+                <div class="dash-row"><span class="dash-cell w-45"></span><span class="dash-cell w-40"></span><span class="dash-chip"></span></div>
+                <div class="dash-row"><span class="dash-cell w-60"></span><span class="dash-cell w-30"></span><span class="dash-chip"></span></div>
+              </div>
+              <div class="dash-kpis">
+                <div class="dash-kpi"><div class="kpi-k"></div><div class="kpi-v"></div></div>
+                <div class="dash-kpi"><div class="kpi-k"></div><div class="kpi-v"></div></div>
+                <div class="dash-kpi"><div class="kpi-k"></div><div class="kpi-v"></div></div>
+              </div>
+            </div>`;
+        }
+
+        function mock_dashboard_3(){
+          // New: timeline + stacked bars (reads as "delivery pipeline", no text)
+          return `
+            <div class="panel-top" aria-hidden="true">
+              <div class="pill"></div><div class="pill"></div><div class="pill"></div>
+              <div class="panel-title"></div>
+            </div>
+            <div class="panel-body dash-flow" aria-hidden="true">
+              <div class="dash-timeline">
+                <div class="tl-dot"></div><div class="tl-line"></div>
+                <div class="tl-dot"></div><div class="tl-line"></div>
+                <div class="tl-dot"></div><div class="tl-line"></div>
+                <div class="tl-dot"></div>
+              </div>
+
+              <div class="dash-stack">
+                <div class="stack-card">
+                  <div class="dash-line mid"></div>
+                  <div class="stack-bars">
+                    <span class="stack-bar" style="width:32%"></span>
+                    <span class="stack-bar" style="width:54%"></span>
+                    <span class="stack-bar" style="width:24%"></span>
+                  </div>
+                </div>
+                <div class="stack-card">
+                  <div class="dash-line long"></div>
+                  <div class="stack-bars">
+                    <span class="stack-bar" style="width:46%"></span>
+                    <span class="stack-bar" style="width:62%"></span>
+                    <span class="stack-bar" style="width:38%"></span>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+        }
+
+        function mock_dashboard_4(){
+          // New: authority/overview (donut + summary cards)
+          return `
+            <div class="panel-top" aria-hidden="true">
+              <div class="pill"></div><div class="pill"></div><div class="pill"></div>
+              <div class="panel-title"></div>
+            </div>
+            <div class="panel-body dash-authority" aria-hidden="true">
+              <div class="dash-donut">
+                <div class="donut"></div>
+                <div class="donut-lines">
+                  <div class="dash-line short"></div>
+                  <div class="dash-line thin mid"></div>
+                  <div class="dash-line thin long"></div>
+                </div>
+              </div>
+
+              <div class="dash-cards two">
+                <div class="dash-card">
+                  <div class="dash-line mid"></div>
+                  <div class="dash-line thin long"></div>
+                  <div class="dash-line thin mid"></div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-line short"></div>
+                  <div class="dash-line thin mid"></div>
+                  <div class="dash-line thin long"></div>
+                </div>
+              </div>
+            </div>`;
+        }
+
+        function dashboardForIndex(i){
+          if (i === 0) return mock_dashboard_0();
+          if (i === 1) return mock_dashboard_1();
+          if (i === 2) return mock_dashboard_2();
+          if (i === 3) return mock_dashboard_3();
+          return mock_dashboard_4();
+        }
+
 
         function renderDots(count){
           elDots.innerHTML = "";
@@ -1868,8 +2412,8 @@ img {
             elTitleB.textContent = v.titleB;
             elDesc.textContent   = v.desc;
             elProof.textContent  = v.proof;
-            elPrev.innerHTML     = dashMarkup(v.dash, lang);
-            setSelectedDot();
+            elPrev.innerHTML     = dashboardForIndex(idx);
+setSelectedDot();
             els.forEach(e=> e.classList.remove("is-fading"));
           }, 170);
         }
