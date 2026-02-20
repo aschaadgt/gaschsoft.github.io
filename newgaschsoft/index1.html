@@ -67,6 +67,8 @@
 
       --badge-bg: rgba(15, 23, 42, 0.04);
       --badge-border: rgba(15, 23, 42, 0.10);
+      --section-alt-bg: rgba(15, 23, 42, 0.03);
+      --section-alt-border: rgba(15, 23, 42, 0.08);
     }
 
     html[data-theme="dark"]{
@@ -95,6 +97,8 @@
       --link-hover-border: rgba(31, 122, 255, 0.22);
       --badge-bg: rgba(229, 231, 235, 0.06);
       --badge-border: rgba(229, 231, 235, 0.12);
+      --section-alt-bg: rgba(229, 231, 235, 0.04);
+      --section-alt-border: rgba(229, 231, 235, 0.10);
     }
 
     *{ box-sizing: border-box; }
@@ -1017,6 +1021,230 @@
     .section-inner{ padding: 18px; }
     .section-title{ margin: 0 0 6px; font-size: 18px; letter-spacing: -0.2px; }
     .section-desc{ margin: 0; color: var(--muted); line-height: 1.55; }
+
+    /* ===== Sección "Qué utilizamos" (v78) ===== */
+    .section.section-alt{
+      margin-top: 20px;
+      border: 1px solid var(--section-alt-border);
+      background: var(--section-alt-bg);
+      box-shadow: none;
+    }
+    .section-alt .section-inner{ padding: 22px 18px; }
+
+    .whatuse-head{
+      display:flex;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .whatuse-head > div{
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .whatuse-title{
+      margin:0;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    .whatuse-desc{
+      margin: 10px auto 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 72ch;
+    }
+
+    .marquee-stack{
+      display:flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .marquee{
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      padding: 6px 0;
+    }
+    .marquee::before,
+    .marquee::after{
+      content:"";
+      position:absolute;
+      top:0; bottom:0;
+      width: 64px;
+      pointer-events:none;
+      z-index: 3;
+    }
+    .marquee::before{
+      left:0;
+      background: linear-gradient(to right, var(--section-alt-bg), rgba(0,0,0,0));
+    }
+    .marquee::after{
+      right:0;
+      background: linear-gradient(to left, var(--section-alt-bg), rgba(0,0,0,0));
+    }
+
+    .marquee-track{
+      display:flex;
+      gap: 10px;
+      width: max-content;
+      will-change: transform;
+      animation-name: marquee-left;
+      animation-duration: var(--marquee-dur, 44s);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .marquee[data-dir="right"] .marquee-track{
+      animation-name: marquee-right;
+    }
+
+    /* v78.5 – JS-driven marquee (prevents animation restart on speed changes) */
+    .marquee[data-js="1"] .marquee-track{ animation: none !important; }
+
+    
+    /* v78.5 – Whatuse section: soft full-bleed gradient (no panel/rectangle) */
+    .section-whatuse{
+      position: relative;
+      margin-top: 0;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      /* Blend with hero (top) and next section (bottom) */
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0%,
+        var(--section-alt-bg) 18%,
+        var(--section-alt-bg) 82%,
+        rgba(0,0,0,0) 100%
+      );
+      overflow: visible !important;
+    }
+    .section-whatuse > .section-inner{ padding-top: 64px; }
+
+
+@keyframes marquee-left{
+      from{ transform: translateX(0); }
+      to{ transform: translateX(-50%); }
+    }
+    @keyframes marquee-right{
+      from{ transform: translateX(-50%); }
+      to{ transform: translateX(0); }
+    }
+
+    .cap-card{
+      flex: 0 0 auto;
+      display:flex;
+      align-items:flex-start;
+      gap: 14px;
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      min-height: 136px;
+      min-width: 340px;
+      max-width: 480px;
+    }
+    html[data-theme="dark"] .cap-card{ background: rgba(17,24,39,0.26); }
+
+    /* Subtle dynamism (brand-tinted alternation) — stays minimal, avoids “party colors” */
+    .cap-card:nth-child(even){
+      background: linear-gradient(135deg,
+        rgba(31,122,255,0.10) 0%,
+        rgba(56,189,248,0.06) 55%,
+        rgba(255,255,255,0.14) 100%
+      );
+      border-color: rgba(31,122,255,0.16);
+    }
+    html[data-theme="dark"] .cap-card:nth-child(even){
+      background: linear-gradient(135deg,
+        rgba(31,122,255,0.18) 0%,
+        rgba(56,189,248,0.10) 55%,
+        rgba(17,24,39,0.26) 100%
+      );
+      border-color: rgba(31,122,255,0.22);
+    }
+
+    .cap-ico{
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      border: 1px solid var(--icon-btn-border);
+      background: radial-gradient(circle at 30% 30%, rgba(31,122,255,0.18), var(--icon-btn-bg) 62%);
+      color: var(--primary);
+      flex: 0 0 auto;
+    }
+    .cap-ico svg{
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      opacity: 0.92;
+    }
+
+    .cap-text{
+      font-size: 13px;
+      line-height: 1.28;
+      font-weight: 650;
+      color: var(--text);
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      max-width: 420px;
+    }
+    .cap-body{
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
+      min-width: 0;
+    }
+    .cap-sub{
+      font-size: 12px;
+      line-height: 1.35;
+      color: var(--muted);
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      max-width: 420px;
+    }
+
+    @media (max-width: 520px){
+      .cap-card{
+        min-width: 260px;
+        max-width: 360px;
+        padding: 12px 14px;
+        min-height: 84px;
+      }
+      .cap-ico{ width: 36px; height: 36px; }
+      .cap-text{ max-width: 300px; -webkit-line-clamp: 3; }
+      .marquee{ border-radius: 14px; }
+    }
+
+
+    @media (max-width: 720px){
+      .whatuse-head{ flex-direction: column; align-items:flex-start; }
+      .cap-card{ max-width: 360px; }
+      .marquee::before, .marquee::after{ width: 42px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .marquee{ overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .marquee::before, .marquee::after{ display:none; }
+      .marquee-track{ animation: none !important; padding: 4px 10px; }
+      .cap-text{ white-space: normal; }
+    }
+
+
 /* ===== Protección básica contra selección y arrastre ===== */
 html, body, header, nav, .drawer {
   -webkit-user-select: none;
@@ -1435,6 +1663,24 @@ img {
   100%{ background-position:0 0; }
 }
 
+
+/* v78_18: prevent text selection in marquee cards (UX polish) */
+.section-whatuse, .section-whatuse *{
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.section-whatuse a, .section-whatuse button, .section-whatuse input, .section-whatuse textarea{
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
+/* Prevent text selection in Hero (keeps UI feeling app-like) */
+.hero, .hero *{
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 </style>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/newgaschsoft/apple-touch-icon.png">
@@ -1666,6 +1912,33 @@ img {
       </div>
     </section>
 
+
+    <!-- ===== Qué utilizamos (v78) ===== -->
+    <section class="section-whatuse" id="whatuse" aria-label="Capacidades">
+      <div class="section-inner">
+        <div class="whatuse-head">
+          <div>
+            <h2 class="whatuse-title" id="whatuseTitle">Capacidades que convierten y escalan</h2>
+            <p class="whatuse-desc" id="whatuseDesc">Capacidades que se traducen en operación más simple, mejor conversión y un sistema fácil de evolucionar.</p>
+          </div>
+        </div>
+
+        <div class="marquee-stack" aria-label="Capacidades">
+          <div class="marquee" data-dir="right" id="marqueeTop" tabindex="-1">
+            <div class="marquee-track" id="marqueeTopTrack"></div>
+          </div>
+
+                    <div class="marquee" data-dir="left" id="marqueeMid" tabindex="-1">
+            <div class="marquee-track" id="marqueeMidTrack"></div>
+          </div>
+
+          <div class="marquee" data-dir="right" id="marqueeBottom" tabindex="-1">
+            <div class="marquee-track" id="marqueeBottomTrack"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Placeholder sections for anchors (v60) -->
     <section class="section" id="cases" aria-label="Casos">
       <div class="section-inner">
@@ -1704,6 +1977,46 @@ img {
           nav: { services: "Plataforma", portfolio: "Casos", contact: "Contacto", about: "Empresa" },
           services: { auto:"Automatizaciones", web:"Desarrollo Web", it:"Soporte IT", infra:"Infraestructura", invites:"Invitaciones Web" },
           cases: { sme: "PYMEs", corp: "Corporativo", startups: "Startups" },
+          whatuse: {
+            title: "Capacidades que convierten y escalan",
+            desc: "Capacidades que se traducen en operación más simple, mejor conversión y un sistema fácil de evolucionar.",
+            top: [
+              { icon:"time", text:"Ahorra 500+ horas de trabajo", sub:"Automatiza tareas repetitivas para que tu equipo se enfoque en vender y operar." },
+              { icon:"layout", text:"Arquitectura de mensaje que convierte", sub:"Ordenamos tu narrativa (problema → valor → prueba → CTA) para generar leads." },
+              { icon:"moon", text:"Diseño corporativo consistente", sub:"Sistema visual sobrio y uniforme en toda la experiencia, sin “parches”." },
+              { icon:"mobile", text:"100% móvil responsivo", sub:"Tu sitio se ve y funciona perfecto donde realmente te visitan: en el teléfono." },
+              { icon:"seo", text:"SEO optimizado", sub:"Te encuentran mejor en Google y tus páginas se indexan sin fricción." },
+              { icon:"spark", text:"Interacciones que guían decisiones", sub:"Microseñales que orientan al usuario y aumentan claridad sin distraer." },
+              { icon:"flow", text:"Visualización de flujos de trabajo", sub:"Explicas procesos complejos en simple: pasos claros para clientes y equipo." },
+              { icon:"code", text:"Evolución sin re-trabajo", sub:"Base lista para crecer sin rehacer el sitio cada vez que cambie tu negocio." },
+              { icon:"settings", text:"Configuración global para actualizar fácil", sub:"Cambios de marca/copy en un punto, sin “romper” secciones por accidente." },
+              { icon:"palette", text:"Personalización simple (marca, colores, copy)", sub:"Adaptamos la identidad de tu empresa sin rehacer el sitio desde cero." }
+            ],
+            middle: [
+              { icon:"download", text:"Experiencia tipo app (opcional)", sub:"Cuando aporta valor, habilitamos instalación y comportamiento tipo app." },
+              { icon:"rocket", text:"Lanzamiento rápido y estable", sub:"Publicamos con control y sin fricción para pasar de idea a producción." },
+              { icon:"spark", text:"Feedback UI/UX (toasts, estados, microcopy)", sub:"El usuario entiende qué pasó y qué sigue, reduciendo dudas y abandonos." },
+              { icon:"flow", text:"Flujos guiados (pedidos, pasos y handoffs claros)", sub:"Menos fricción para comprar/solicitar, más claridad en cada paso." },
+              { icon:"layout", text:"Storytelling por secciones (mensaje → prueba → CTA)", sub:"Convierte visitas en conversaciones con una narrativa lógica y persuasiva." },
+              { icon:"forms", text:"Captura de leads con fricción mínima", sub:"Formularios y CTAs optimizados para que el usuario sí te contacte." },
+              { icon:"shield", text:"Buenas prácticas de seguridad base", sub:"Evita configuraciones débiles y reduce superficie de errores comunes." },
+              { icon:"speed", text:"Velocidad que mejora conversión", sub:"Carga rápida en móvil para reducir abandono y mejorar SEO." },
+              { icon:"img", text:"Imágenes optimizadas y lazy loading", sub:"Mantienes calidad visual sin sacrificar velocidad ni consumo de datos." },
+              { icon:"a11y", text:"Accesibilidad y UX consistente", sub:"Más personas pueden usar tu sitio sin barreras; experiencia uniforme en todo." }
+            ],
+            bottom: [
+              { icon:"i18n", text:"I18N ES/EN sin dependencias", sub:"Tu web lista para clientes globales sin duplicar páginas ni complicarte." },
+              { icon:"analytics", text:"Eventos de conversión medibles", sub:"Sabes qué funciona: clics, envíos, CTAs y puntos donde se cae la gente." },
+              { icon:"wa", text:"Canales listos para cerrar ventas", sub:"WhatsApp y CTAs preparados para convertir conversaciones en clientes." },
+              { icon:"version", text:"Versionado + rollback rápido", sub:"Cambios seguros: si algo falla, volvemos atrás sin drama ni downtime." },
+              { icon:"shield", text:"Validación y anti-spam (honeypot)", sub:"Menos basura en formularios, más leads reales para tu equipo." },
+              { icon:"settings", text:"Entrega por fases", sub:"Lanzamos por etapas sin romper lo ya publicado." },
+              { icon:"handoff", text:"Documentación operativa para tu equipo", sub:"Tu equipo entiende cómo actualizar contenido sin depender siempre de nosotros." },
+              { icon:"support", text:"Roadmap y soporte post-lanzamiento", sub:"No te dejamos “tirado”: mejoras continuas alineadas a negocio." },
+              { icon:"spark", text:"Microfeedback e-commerce (carrito, confirmaciones)", sub:"Menos incertidumbre al comprar: confirmaciones claras, menos abandonos." },
+              { icon:"code", text:"Sistema modular fácil de operar", sub:"Componentes claros para iterar rápido y mantener consistencia." }
+            ]
+          },
           hero: { badge1:"Entrega rápida", badge2:"Enfoque en conversión", badge3:"Soporte continuo", highlightsLabel:"Puntos clave", optionsLabel:"Opciones", titleA:"Tu empresa ya creció.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", ctaPrimary:"Agendar diagnóstico", ctaSecondary:"Ver casos", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer",heroVariants:[
   { titleA:"Tu empresa ya creció sólidamente.", titleB:"Tu web debería hacerlo también.", desc:"Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.", proof:"Planeamos, no improvisamos • Implementación limpia • Sin rehacer en un año • Preparada para crecer", dash:"growth" },
   { titleA:"Infraestructura web para empresas", titleB:"que ya facturan y quieren crecer más.", desc:"Diseño profesional respaldado por una arquitectura sólida, preparada para integraciones, estabilidad operativa y evolución sostenida.", proof:"Base mantenible • Integraciones listas • Seguridad estructural • Escalabilidad real", dash:"infra" },
@@ -1717,6 +2030,46 @@ img {
           nav: { services: "Platform", portfolio: "Use cases", contact: "Contact", about: "Company" },
           services: { auto:"Automations", web:"Web Development", it:"IT Support", infra:"Infrastructure", invites:"Web Invitations" },
           cases: { sme: "SMEs", corp: "Enterprise", startups: "Startups" },
+          whatuse: {
+            title: "Capabilities that convert & scale",
+            desc: "Capabilities that turn into simpler operations, better conversion, and a system that stays easy to evolve.",
+            top: [
+              { icon:"time", text:"Save 500+ work hours", sub:"Automate repetitive work so your team can focus on selling and operating." },
+              { icon:"layout", text:"Message architecture that converts", sub:"We shape your narrative (problem → value → proof → CTA) to generate leads." },
+              { icon:"moon", text:"Consistent enterprise design", sub:"A sober, uniform visual system across the experience—no patchwork." },
+              { icon:"mobile", text:"100% mobile responsive", sub:"Looks and works great where most visitors are: on mobile." },
+              { icon:"seo", text:"SEO optimized", sub:"Improves discoverability and keeps indexing clean for search engines." },
+              { icon:"spark", text:"Interactions that guide decisions", sub:"Micro-signals that steer users and improve clarity without distraction." },
+              { icon:"flow", text:"Workflow visualization components", sub:"Explain complex processes simply with clear, visual steps." },
+              { icon:"code", text:"Evolution without rework", sub:"A foundation that grows without rebuilding every time your business changes." },
+              { icon:"settings", text:"Global config for easy updates", sub:"Update brand/copy in one place without breaking sections." },
+              { icon:"palette", text:"Simple customization (brand, colors, copy)", sub:"Adapt your identity without rebuilding from scratch." }
+            ],
+            middle: [
+              { icon:"download", text:"App-like experience (optional)", sub:"When it adds value, we enable installability and app-like behavior." },
+              { icon:"rocket", text:"Fast, stable launch", sub:"Publish with control and minimal friction—from idea to production." },
+              { icon:"spark", text:"UI/UX feedback (toasts, states, microcopy)", sub:"Users know what happened and what’s next—less doubt, less drop-off." },
+              { icon:"flow", text:"Guided flows (orders, steps, clear handoffs)", sub:"Reduce friction to request/buy with clear handoffs at every step." },
+              { icon:"layout", text:"Section storytelling (message → proof → CTA)", sub:"Turn visits into conversations through a logical narrative." },
+              { icon:"forms", text:"Low-friction lead capture", sub:"Optimized CTAs and forms that make contacting you effortless." },
+              { icon:"shield", text:"Baseline security best practices", sub:"Avoid weak setups and reduce common risk surfaces." },
+              { icon:"speed", text:"Speed that improves conversion", sub:"Fast mobile loads to reduce drop-off and improve SEO." },
+              { icon:"img", text:"Optimized images + lazy loading", sub:"High visual quality without sacrificing speed or data usage." },
+              { icon:"a11y", text:"Accessibility and consistent UX", sub:"More people can use it; experience stays consistent across the site." }
+            ],
+            bottom: [
+              { icon:"i18n", text:"ES/EN i18n with no dependencies", sub:"Bilingual-ready without duplicating pages or adding libraries." },
+              { icon:"analytics", text:"Measurable conversion events", sub:"Track what works: clicks, submits, CTAs, and drop-off points." },
+              { icon:"wa", text:"Channels ready to close sales", sub:"WhatsApp and CTAs designed to turn conversations into customers." },
+              { icon:"version", text:"Versioning + quick rollback", sub:"Safe releases—roll back quickly if something breaks." },
+              { icon:"shield", text:"Validation & anti-spam (honeypot)", sub:"Less spam, more real leads for your team." },
+              { icon:"settings", text:"Phased delivery", sub:"Launch in stages without breaking what’s already live." },
+              { icon:"handoff", text:"Operational docs for your team", sub:"Your team can update content without depending on us." },
+              { icon:"support", text:"Roadmap + post-launch support", sub:"Ongoing improvements aligned to business outcomes." },
+              { icon:"spark", text:"E-commerce microfeedback (cart, confirmations)", sub:"Clear confirmations reduce uncertainty and abandonment." },
+              { icon:"code", text:"Modular system that’s easy to operate", sub:"Clear components for fast iteration and a consistent experience." }
+            ]
+          },
           hero: { badge1:"Fast delivery", badge2:"Conversion-focused", badge3:"Continuous support", highlightsLabel:"Highlights", optionsLabel:"Options", titleA:"Your business already grew.", titleB:"Your website should too.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", ctaPrimary:"Schedule a diagnostic", ctaSecondary:"View cases", proof:"We plan, we don’t improvise • Clean implementation • No rebuild in a year • Built to grow",heroVariants:[
   { titleA:"Your business already grew solidly.", titleB:"Your website should grow as well.", desc:"We design professional digital presence for established companies that want to project authority, convert better, and scale on a solid technical foundation.", proof:"Planned, not improvised • Clean implementation • No rebuild in a year • Built to grow", dash:"growth" },
   { titleA:"Web infrastructure for companies", titleB:"that already revenue and want more growth.", desc:"Professional design backed by solid architecture—ready for integrations, operational stability, and sustained evolution.", proof:"Maintainable base • Ready integrations • Structured security • Real scalability", dash:"infra" },
@@ -1921,6 +2274,15 @@ if (heroTitleA && heroTitleB) {
         if (casesDesc) casesDesc.textContent = t.hero.sections.casesDesc;
         if (contactTitle) contactTitle.textContent = t.hero.sections.contactTitle;
         if (contactDesc) contactDesc.textContent = t.hero.sections.contactDesc;
+
+
+        // Qué utilizamos (v78)
+        const whatuseTitle = document.getElementById("whatuseTitle");
+        const whatuseDesc  = document.getElementById("whatuseDesc");
+        if (whatuseTitle && t.whatuse?.title) whatuseTitle.textContent = t.whatuse.title;
+        if (whatuseDesc && t.whatuse?.desc)   whatuseDesc.textContent  = t.whatuse.desc;
+        // re-render marquees
+        try { renderWhatWeUse(); } catch(_) {}
 
         langItems.forEach(item => {
           const isSelected = item.getAttribute("data-lang") === lang;
@@ -2468,6 +2830,226 @@ setSelectedDot();
       document.addEventListener("contextmenu", (e) => {
         e.preventDefault();
       });
+
+
+      /* ===== Qué utilizamos (v78): doble carrusel sin controles ===== */
+      const whatuseSection = document.getElementById("whatuse");
+      const topTrack = document.getElementById("marqueeTopTrack");
+      const midTrack = document.getElementById("marqueeMidTrack");
+      const botTrack = document.getElementById("marqueeBottomTrack");
+      const topMarquee = document.getElementById("marqueeTop");
+      const midMarquee = document.getElementById("marqueeMid");
+      const botMarquee = document.getElementById("marqueeBottom");
+
+      function miniIcon(name){
+      const common = 'viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+      const svg = (p) => `<svg ${common}>${p}</svg>`;
+      switch(name){
+        case "time":      return svg('<path d="M12 7v5l3 2"/><path d="M12 22a10 10 0 1 1 0-20a10 10 0 0 1 0 20Z"/>');
+        case "layout":    return svg('<path d="M4 6h16v12H4Z"/><path d="M9 6v12"/><path d="M4 11h16"/>');
+        case "moon":      return svg('<path d="M21 13a7.5 7.5 0 0 1-10-10a8.5 8.5 0 1 0 10 10Z"/>');
+        case "mobile":    return svg('<path d="M8 5h8v14H8Z"/><path d="M11 18h2"/>');
+        case "seo":       return svg('<path d="M10 14l4-4"/><path d="M10 10h.01"/><path d="M14 14h.01"/><path d="M12 22a10 10 0 1 1 0-20a10 10 0 0 1 0 20Z"/>');
+        case "spark":     return svg('<path d="M12 2l1.4 4.8L18 8.4l-4.6 1.6L12 15l-1.4-5L6 8.4l4.6-1.6Z"/><path d="M19 3l.7 2.3L22 6l-2.3.7L19 9l-.7-2.3L16 6l2.3-.7Z"/>');
+        case "flow":      return svg('<path d="M7 7h4v4H7Z"/><path d="M13 13h4v4h-4Z"/><path d="M11 9h3a2 2 0 0 1 2 2v2"/><path d="M7 9H5a2 2 0 0 0-2 2v6"/>');
+        
+        case "route":     return svg('<circle cx="7" cy="7" r="1.5"/><circle cx="17" cy="17" r="1.5"/><path d="M8.8 7H12a3 3 0 0 1 3 3v3.2"/><path d="M15.2 17H12a3 3 0 0 1-3-3V10.8"/>');case "code":      return svg('<path d="M9 8L6 12l3 4"/><path d="M15 8l3 4-3 4"/><path d="M12 6l-1.5 12"/>');
+        case "settings":  return svg('<path d="M12 15.6a3.6 3.6 0 1 0 0-7.2a3.6 3.6 0 0 0 0 7.2Z"/><path d="M19.3 12a7.6 7.6 0 0 0-.2-1.7l1.9-1.1-1.8-3.1-2.2.6a7.3 7.3 0 0 0-1.5-.9L15 3.6h-6l-.5 2.2c-.5.2-1 .5-1.5.9l-2.2-.6-1.8 3.1 1.9 1.1c-.1.6-.2 1.1-.2 1.7s.1 1.1.2 1.7l-1.9 1.1 1.8 3.1 2.2-.6c.5.4 1 .7 1.5.9l.5 2.2h6l.5-2.2c.5-.2 1-.5 1.5-.9l2.2.6 1.8-3.1-1.9-1.1c.1-.6.2-1.1.2-1.7Z"/>');
+        case "palette":   return svg('<path d="M12 3a9 9 0 1 0 0 18h1.2a2 2 0 0 0 2-2c0-1-.8-1.8-1.8-1.8H13"/><path d="M7.5 11h.01"/><path d="M9.8 7.8h.01"/><path d="M14.2 7.8h.01"/><path d="M16.5 11h.01"/>');
+        case "download":  return svg('<path d="M12 3v10"/><path d="M8.5 10.5L12 14l3.5-3.5"/><path d="M4 20h16"/>');
+        case "rocket":    return svg('<path d="M14 3c4.1.7 7 3.6 7 7-2 1.6-4.6 2.6-7.2 2.9-2.2 2.7-5.3 5.3-9.6 7.6.6-3.1 1.7-5.6 3-7.5-1.1-1.1-2.1-2.1-3.1-3.1C6.4 6.1 9.3 3.7 14 3Z"/><path d="M14.7 8.7h.01"/><path d="M9.8 14.2l-2.3 2.3"/><path d="M11.1 15.5l-1.5 3.5"/>');
+        case "forms":     return svg('<path d="M7 4h10"/><path d="M7 8h7"/><path d="M7 12h10"/><path d="M7 16h7"/><path d="M18 7l2 2-4 4H14v-2Z"/>');
+        case "handoff":   return svg('<path d="M7 7h6v4H7Z"/><path d="M11 13h6v4h-6Z"/><path d="M13 9h4"/><path d="M15.5 7.5L17 9l-1.5 1.5"/><path d="M11 15H7"/><path d="M8.5 13.5L7 15l1.5 1.5"/>');
+        case "shield":    return svg('<path d="M12 3l8 4v6c0 5-3.5 9-8 11C7.5 22 4 18 4 13V7Z"/><path d="M9.5 12.5l1.7 1.7 3.6-3.6"/>');
+        
+        case "lock":     return svg('<rect x="7" y="11" width="10" height="9" rx="2"/><path d="M9 11V9a3 3 0 1 1 6 0v2"/>');case "speed":     return svg('<path d="M6.2 16.5a8 8 0 1 1 11.6 0"/><path d="M12 13l4-2"/><path d="M12 20h.01"/>');
+        case "img":       return svg('<path d="M5 6h14v12H5Z"/><path d="M8 10h.01"/><path d="M6.5 16l4-4 3 3 2-2 2.5 3"/>');
+        case "a11y":      return svg('<circle cx="12" cy="4.7" r="1.2"/><path d="M6.5 7h11"/><path d="M10 21l2-9 2 9"/><path d="M9.3 10.2l2.7 2.2 2.7-2.2"/><path d="M8.2 13h7.6"/>');
+        case "i18n":      return svg('<path d="M5 4h14"/><path d="M7 20h10"/><path d="M9 4v4"/><path d="M15 4v4"/><path d="M8 12h8"/><path d="M10 12l-2 6"/><path d="M14 12l2 6"/>');
+        case "analytics": return svg('<path d="M5 19V9"/><path d="M10 19V5"/><path d="M15 19v-7"/><path d="M20 19v-3"/>');
+        case "wa":        return svg('<path d="M20 12a8 8 0 0 1-11.8 7L4 20l1-4A8 8 0 1 1 20 12Z"/><path d="M9.2 8.9c.3-.7.6-.7 1.1-.7h.5c.2 0 .5.1.7.6l.9 2.1c.1.3.1.6-.1.8l-.6.7c.6 1 1.7 2 2.8 2.6l.7-.6c.2-.2.5-.2.8-.1l2.1.9c.5.2.6.5.6.7v.5c0 .5 0 .8-.7 1.1-.8.3-2.6.6-5.3-.9-2.7-1.5-4.7-4-5.3-5.9-.6-1.9-.5-3.1-.2-3.8Z"/>');
+        case "version":   return svg('<path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v6h-6"/><path d="M12 7v5l3 2"/>');
+        case "support":   return svg('<path d="M4 12a8 8 0 0 1 16 0"/><path d="M6 12v4a2 2 0 0 0 2 2h2"/><path d="M18 12v4a2 2 0 0 1-2 2h-2"/><path d="M12 18h.01"/>');
+        default:          return svg('<path d="M12 3v18"/><path d="M3 12h18"/>');
+      }
+    }
+
+      function buildCapCard(item){
+        const el = document.createElement("div");
+        el.className = "cap-card";
+        el.setAttribute("role","listitem");
+        el.innerHTML = `
+
+          <span class="cap-ico">${miniIcon(item.icon)}</span>
+          <span class="cap-body">
+            <span class="cap-text">${item.text}</span>
+            <span class="cap-sub">${item.sub || ""}</span>
+          </span>
+        
+        `;
+        return el;
+      }
+
+      function fillTrack(trackEl, items){
+        if(!trackEl) return;
+        trackEl.innerHTML = "";
+        trackEl.setAttribute("role","list");
+        const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // En reduce-motion, no duplicamos: se puede scrollear horizontal.
+        const base = items.slice();
+        const data = prefersReduced ? base : base.concat(base);
+
+        for(const it of data){
+          trackEl.appendChild(buildCapCard(it));
+        }
+        trackEl.dataset.baseCount = String(base.length);
+        trackEl.dataset.reduced = prefersReduced ? "1" : "0";
+      }
+
+      function getWhatUse(){
+        const lang = (state && state.lang) ? state.lang : (localStorage.getItem(STORAGE.lang) || "es");
+        const t = I18N[lang] || I18N.es;
+        return t.whatuse || null;
+      }
+
+      /* v78.5 – Marquee engine (rAF) to slow down without restarting position */
+      const marqueeState = new Map(); // key: element id -> state
+
+      function destroyMarquee(marqueeEl){
+        if(!marqueeEl) return;
+        const id = marqueeEl.id || marqueeEl;
+        const st = marqueeState.get(id);
+        if(!st) return;
+        try{
+          cancelAnimationFrame(st.raf);
+          window.removeEventListener("resize", st.onResize);
+          st.el.removeEventListener("pointerenter", st.onEnter);
+          st.el.removeEventListener("pointerleave", st.onLeave);
+          st.el.removeEventListener("focusin", st.onEnter);
+          st.el.removeEventListener("focusout", st.onLeave);
+        }catch(_){}
+        marqueeState.delete(id);
+      }
+
+      function initMarquee(marqueeEl){
+        if(!marqueeEl) return;
+        const id = marqueeEl.id || ("m_" + Math.random().toString(16).slice(2));
+        marqueeEl.id = marqueeEl.id || id;
+
+        // Reset any previous instance
+        destroyMarquee(marqueeEl);
+
+        const track = marqueeEl.querySelector(".marquee-track");
+        if(!track) return;
+
+        const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        // In reduce-motion: no animation, allow manual scroll
+        if(prefersReduced){
+          marqueeEl.removeAttribute("data-js");
+          marqueeEl.style.overflowX = "auto";
+          marqueeEl.style.scrollbarWidth = "none";
+          marqueeEl.style.webkitOverflowScrolling = "touch";
+          track.style.transform = "";
+          return;
+        }
+
+        marqueeEl.setAttribute("data-js","1");
+
+        const dir = (marqueeEl.getAttribute("data-dir") || "left").toLowerCase();
+        const baseSpeed = Number(marqueeEl.getAttribute("data-speed") || 44); // px/s
+        const slowFactor = Number(marqueeEl.getAttribute("data-slow") || 0.35); // 0..1 (smaller = slower)
+        const ease = Number(marqueeEl.getAttribute("data-ease") || 0.10); // smoothing
+
+        const st = {
+          el: marqueeEl,
+          track,
+          dir,
+          baseSpeed,
+          slowFactor,
+          ease,
+          hover: false,
+          offset: 0,
+          half: 0,
+          lastT: 0,
+          curSpeed: baseSpeed,
+          targetSpeed: baseSpeed,
+          raf: 0,
+          onResize: null,
+          onEnter: null,
+          onLeave: null
+        };
+
+        function measure(){
+          // We rely on 2 copies => half width is scrollWidth/2
+          const w = track.scrollWidth;
+          st.half = Math.max(1, Math.floor(w / 2));
+          st.offset = st.offset % st.half;
+        }
+
+        st.onResize = () => {
+          // Measure on next frame (layout stable)
+          requestAnimationFrame(measure);
+        };
+
+        st.onEnter = () => { st.hover = true; st.targetSpeed = st.baseSpeed * st.slowFactor; };
+        st.onLeave = () => { st.hover = false; st.targetSpeed = st.baseSpeed; };
+
+        marqueeEl.addEventListener("pointerenter", st.onEnter, { passive:true });
+        marqueeEl.addEventListener("pointerleave", st.onLeave, { passive:true });
+        marqueeEl.addEventListener("focusin", st.onEnter, { passive:true });
+        marqueeEl.addEventListener("focusout", st.onLeave, { passive:true });
+        window.addEventListener("resize", st.onResize, { passive:true });
+
+        measure();
+
+        function tick(t){
+          if(!st.lastT) st.lastT = t;
+          const dt = Math.min(0.05, (t - st.lastT) / 1000); // clamp dt
+          st.lastT = t;
+
+          // Smooth speed changes to avoid "jump"
+          st.curSpeed += (st.targetSpeed - st.curSpeed) * st.ease;
+
+          // Advance
+          st.offset += st.curSpeed * dt;
+          if(st.offset >= st.half) st.offset -= st.half;
+
+          let x;
+          if(st.dir === "right"){
+            // equivalent to moving from -half -> 0
+            x = -(st.half - st.offset);
+          }else{
+            // left: 0 -> -half
+            x = -st.offset;
+          }
+          track.style.transform = `translate3d(${x}px,0,0)`;
+
+          st.raf = requestAnimationFrame(tick);
+        }
+
+        st.raf = requestAnimationFrame(tick);
+        marqueeState.set(id, st);
+      }
+
+      function renderWhatWeUse(){
+        const cfg = getWhatUse();
+        if(!cfg) return;
+        fillTrack(topTrack, cfg.top || []);
+        fillTrack(midTrack, cfg.middle || []);
+        fillTrack(botTrack, cfg.bottom || []);
+
+        // Init marquees after DOM content paints (so widths are correct)
+        requestAnimationFrame(() => {
+          initMarquee(topMarquee);
+          initMarquee(midMarquee);
+          initMarquee(botMarquee);
+        });
+      }
+// Render inicial + al cambiar idioma
+      renderWhatWeUse();
+      window.addEventListener("gs:langChanged", renderWhatWeUse, { passive:true });
+
 
     })();
   
