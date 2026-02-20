@@ -337,9 +337,6 @@
       50% { background-position: 400% 0; }
       100% { background-position: 0 0; }
     }
-      50% { background-position: 400% 0; }
-      100% { background-position: 0 0; }
-    }
 
     /* Drawer item with left icon */
     .drawer-item.with-icon{ justify-content: flex-start; }
@@ -931,12 +928,83 @@
     html[data-theme="dark"] .metric-v{ background: rgba(31,122,255,0.26); }
 
     @media (max-width: 900px){
-      .hero-inner{ grid-template-columns: 1fr; }
-      .hero-right{ justify-content:flex-start; }
-      .hero-panel{ width: 100%; }
-    }
+      /* Mobile hero: compact + stable positions between options */
+      .hero{ padding: 16px; }
+      .hero-inner{
+        grid-template-columns: 1fr;
+        gap: 14px;
+        height: auto;
+        align-items: start;
+      }
 
-    /* Secciones base (v60) */
+      /* Keep left stack stable even when titles are shorter */
+      .hero-title{
+        height: 4.4em;          /* reserve space for 2 lines */
+        -webkit-line-clamp: 2;
+      }
+      .hero-desc{
+        height: 6.2em;          /* reserve space for 3 lines */
+        -webkit-line-clamp: 3;
+      }
+      .hero-proof{
+        height: 3.2em;          /* reserve space for 2 lines */
+        -webkit-line-clamp: 2;
+      }
+
+      .hero-badges{ margin: 0 0 12px; gap: 8px; }
+      .hero-ctas{ margin: 0 0 8px; gap: 10px; }
+
+      /* Center preview so it doesn't "drift" between variants */
+      .hero-right{
+        justify-content: center;
+        align-items: center;
+        height: auto;
+      }
+
+      /* Make the preview fixed-height on mobile (no percentage sizing) */
+      .hero-panel{ width: 100%; height: auto; }
+      #heroPreview{
+        height: 320px;          /* fixed shell */
+        min-height: 320px;
+        max-height: 320px;
+        overflow: hidden;
+      }
+
+      /* Center the dashboard group inside the fixed preview box */
+      #heroPreview{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+      }
+
+      /* Stabilize mock dashboards: keep cards in 3 columns on mobile to avoid vertical growth */
+      #heroPreview .dash-cards{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+      #heroPreview .dash-card{
+        min-height: 48px;
+        padding: 10px;
+        gap: 8px;
+      }
+      #heroPreview .dash-line{ height: 9px; }
+      #heroPreview .dash-line.thin{ height: 7px; }
+
+      #heroPreview .dash-chart{
+        min-height: 90px;
+        padding: 10px;
+      }
+
+      /* Compact the v61-style dashboard pieces without changing structure */
+      #heroPreview .panel-body{ padding: 10px; gap: 10px; }
+      #heroPreview .panel-card{ padding: 10px; border-radius: 14px; }
+      #heroPreview .pc-title{ height: 9px; margin-bottom: 8px; }
+      #heroPreview .pc-line{ height: 7px; margin-bottom: 7px; }
+
+      /* Dots always centered */
+      .hero-dots{ justify-content: center; margin-top: 14px; }
+    }
+/* Secciones base (v60) */
     .section{
       margin-top: 20px;
       border: 1px solid var(--border);
@@ -1041,6 +1109,12 @@ img {
   }
 }
 
+
+/* v70+ Mobile: keep preview fixed (prevents option jump) */
+@media (max-width: 900px){
+  .hero-panel{ height:auto; }
+  #heroPreview{ height: 320px; min-height: 320px; max-height: 320px; }
+}
 /* Prevent text blocks from changing layout height */
 .hero-title{
   display: -webkit-box;
@@ -1287,6 +1361,78 @@ img {
   .dash-donut{ grid-template-columns: 1fr; }
   .donut{ margin: 0 auto; }
   .dash-cards.two{ grid-template-columns: 1fr; }
+}
+
+
+/* ===== v74 Hero Transform Transition (horizontal slide) ===== */
+.hero-rotator-fade{
+  transition: opacity 180ms ease, transform 180ms ease;
+  will-change: opacity, transform;
+}
+/* exit: slide slightly to the left */
+.hero-rotator-fade.is-fading{
+  opacity:0;
+  transform: translateX(-10px);
+}
+/* enter: come from the right */
+.hero-rotator-fade.is-enter{
+  opacity:0;
+  transform: translateX(10px);
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-rotator-fade{ transition:none; }
+}
+
+/* ===== v75 Hero CTA border (Demo style, border only) ===== */
+#heroCtaPrimary{
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  transform: translateZ(0);
+  contain: paint; /* prevent glow paint from affecting surrounding layout */
+  border-radius: 999px; /* match button radius */
+}
+
+#heroCtaPrimary::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:999px;
+  padding:6px;
+
+  background: linear-gradient(
+    45deg,
+    #1F4ED8,
+    #1F7AFF,
+    #3AB6E6,
+    #A7E3FF,
+    #1F4ED8
+  );
+  background-size:400%;
+  filter:blur(4px);
+
+  opacity:0;
+  transition:opacity .25s ease-in-out;
+  animation:heroGlow 18s linear infinite;
+
+  z-index:-1;
+
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  clip-path: inset(-8px round 999px); /* hard clip for blur */
+}
+
+#heroCtaPrimary:hover::before{
+  opacity:1;
+}
+
+@keyframes heroGlow{
+  0%{ background-position:0 0; }
+  50%{ background-position:400% 0; }
+  100%{ background-position:0 0; }
 }
 
 </style>

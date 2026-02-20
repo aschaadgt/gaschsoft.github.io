@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>GaschSoft — Logos de Cards (v78.16)</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0b1220;
+      --muted:#5c677a;
+      --card:#ffffff;
+      --border: rgba(16,24,40,.12);
+      --shadow: 0 10px 30px rgba(16,24,40,.08);
+      --chip: rgba(17,43,95,.06);
+      --accent:#0c4c7d;
+    }
+    [data-theme="dark"]{
+      --bg:#0b0f18;
+      --text:#eef2ff;
+      --muted:#aab3c4;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.12);
+      --shadow: 0 16px 40px rgba(0,0,0,.35);
+      --chip: rgba(255,255,255,.06);
+      --accent:#60a5fa;
+    }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 40px;}
+    header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px;}
+    h1{font-size:18px;letter-spacing:-.02em;margin:0;}
+    .sub{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.4;max-width:70ch;}
+    .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
+    .btn{border:1px solid var(--border);background:var(--card);color:var(--text);padding:8px 10px;border-radius:10px;cursor:pointer;box-shadow: var(--shadow);font-size:12px;}
+    .btn:active{transform: translateY(1px);}
+    .range{display:flex;gap:10px;align-items:center;border:1px solid var(--border);background:var(--card);padding:8px 10px;border-radius:10px;box-shadow: var(--shadow);}
+    .range label{font-size:12px;color:var(--muted);}
+    input[type="range"]{width:160px;}
+    .grid{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:14px;margin-top:16px;}
+    @media (max-width: 920px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+    @media (max-width: 620px){.grid{grid-template-columns:1fr;}}
+    .card{border:1px solid var(--border);background:var(--card);border-radius:16px;padding:14px 14px;box-shadow: var(--shadow);display:flex;gap:12px;align-items:flex-start;}
+    .ico{width:64px;height:64px;border-radius:999px;display:grid;place-items:center;flex:0 0 auto;color:var(--accent);background: radial-gradient(120% 120% at 30% 25%, rgba(12,76,125,.18), rgba(12,76,125,.06) 55%, rgba(12,76,125,.04) 100%);border:1px solid rgba(12,76,125,.18);box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 10px 30px rgba(16,24,40,.06);transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;}
+    .ico svg{width:34px;height:34px;stroke: currentColor;fill:none;opacity:.98;}
+    .meta{min-width:0;}
+    .title{font-weight:750;letter-spacing:-.01em;font-size:14px;line-height:1.25;margin:0;}
+    .desc{margin:6px 0 0;color:var(--muted);font-size:12.5px;line-height:1.35;}
+    .key{margin-top:10px;font-size:11px;color:var(--muted);display:inline-flex;gap:8px;align-items:center;}
+    .pill{border:1px solid var(--border);background:transparent;padding:2px 8px;border-radius:999px;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+  </style>
+</head>
+<body data-theme="light">
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Logos/íconos de las 30 cards — GaschSoft v78.16</h1>
+        <p class="sub">Este HTML muestra cada icono en grande (con su clave), junto al título y el texto. Úsalo para revisar si algún icono se puede mejorar o si algún objetivo merece un icono más específico.</p>
+      </div>
+      <div class="controls">
+        <button class="btn" id="toggleTheme">Modo oscuro</button>
+        <div class="range">
+          <label for="size">Tamaño</label>
+          <input id="size" type="range" min="40" max="84" value="52"/>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <script>
+    function miniIcon(name){
+      const common = 'viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+      const svg = (p) => `<svg ${common}>${p}</svg>`;
+      switch(name){
+        case "time":      return svg('<path d="M12 7v5l3 2"/><path d="M12 22a10 10 0 1 1 0-20a10 10 0 0 1 0 20Z"/>');
+        case "layout":    return svg('<path d="M4 6h16v12H4Z"/><path d="M9 6v12"/><path d="M4 11h16"/>');
+        case "moon":      return svg('<path d="M21 13a7.5 7.5 0 0 1-10-10a8.5 8.5 0 1 0 10 10Z"/>');
+        case "mobile":    return svg('<path d="M8 5h8v14H8Z"/><path d="M11 18h2"/>');
+        case "seo":       return svg('<path d="M10 14l4-4"/><path d="M10 10h.01"/><path d="M14 14h.01"/><path d="M12 22a10 10 0 1 1 0-20a10 10 0 0 1 0 20Z"/>');
+        case "spark":     return svg('<path d="M12 2l1.4 4.8L18 8.4l-4.6 1.6L12 15l-1.4-5L6 8.4l4.6-1.6Z"/><path d="M19 3l.7 2.3L22 6l-2.3.7L19 9l-.7-2.3L16 6l2.3-.7Z"/>');
+        case "flow":      return svg('<path d="M7 7h4v4H7Z"/><path d="M13 13h4v4h-4Z"/><path d="M11 9h3a2 2 0 0 1 2 2v2"/><path d="M7 9H5a2 2 0 0 0-2 2v6"/>');
+        
+        case "route":     return svg('<circle cx="7" cy="7" r="1.5"/><circle cx="17" cy="17" r="1.5"/><path d="M8.8 7H12a3 3 0 0 1 3 3v3.2"/><path d="M15.2 17H12a3 3 0 0 1-3-3V10.8"/>');case "code":      return svg('<path d="M9 8L6 12l3 4"/><path d="M15 8l3 4-3 4"/><path d="M12 6l-1.5 12"/>');
+        case "settings":  return svg('<path d="M12 15.6a3.6 3.6 0 1 0 0-7.2a3.6 3.6 0 0 0 0 7.2Z"/><path d="M19.3 12a7.6 7.6 0 0 0-.2-1.7l1.9-1.1-1.8-3.1-2.2.6a7.3 7.3 0 0 0-1.5-.9L15 3.6h-6l-.5 2.2c-.5.2-1 .5-1.5.9l-2.2-.6-1.8 3.1 1.9 1.1c-.1.6-.2 1.1-.2 1.7s.1 1.1.2 1.7l-1.9 1.1 1.8 3.1 2.2-.6c.5.4 1 .7 1.5.9l.5 2.2h6l.5-2.2c.5-.2 1-.5 1.5-.9l2.2.6 1.8-3.1-1.9-1.1c.1-.6.2-1.1.2-1.7Z"/>');
+        case "palette":   return svg('<path d="M12 3a9 9 0 1 0 0 18h1.2a2 2 0 0 0 2-2c0-1-.8-1.8-1.8-1.8H13"/><path d="M7.5 11h.01"/><path d="M9.8 7.8h.01"/><path d="M14.2 7.8h.01"/><path d="M16.5 11h.01"/>');
+        case "download":  return svg('<path d="M12 3v10"/><path d="M8.5 10.5L12 14l3.5-3.5"/><path d="M4 20h16"/>');
+        case "rocket":    return svg('<path d="M14 3c4.1.7 7 3.6 7 7-2 1.6-4.6 2.6-7.2 2.9-2.2 2.7-5.3 5.3-9.6 7.6.6-3.1 1.7-5.6 3-7.5-1.1-1.1-2.1-2.1-3.1-3.1C6.4 6.1 9.3 3.7 14 3Z"/><path d="M14.7 8.7h.01"/><path d="M9.8 14.2l-2.3 2.3"/><path d="M11.1 15.5l-1.5 3.5"/>');
+        case "forms":     return svg('<path d="M7 4h10"/><path d="M7 8h7"/><path d="M7 12h10"/><path d="M7 16h7"/><path d="M18 7l2 2-4 4H14v-2Z"/>');
+        case "handoff":   return svg('<path d="M7 7h6v4H7Z"/><path d="M11 13h6v4h-6Z"/><path d="M13 9h4"/><path d="M15.5 7.5L17 9l-1.5 1.5"/><path d="M11 15H7"/><path d="M8.5 13.5L7 15l1.5 1.5"/>');
+        case "shield":    return svg('<path d="M12 3l8 4v6c0 5-3.5 9-8 11C7.5 22 4 18 4 13V7Z"/><path d="M9.5 12.5l1.7 1.7 3.6-3.6"/>');
+        
+        case "lock":     return svg('<rect x="7" y="11" width="10" height="9" rx="2"/><path d="M9 11V9a3 3 0 1 1 6 0v2"/>');case "speed":     return svg('<path d="M6.2 16.5a8 8 0 1 1 11.6 0"/><path d="M12 13l4-2"/><path d="M12 20h.01"/>');
+        case "img":       return svg('<path d="M5 6h14v12H5Z"/><path d="M8 10h.01"/><path d="M6.5 16l4-4 3 3 2-2 2.5 3"/>');
+        case "a11y":      return svg('<circle cx="12" cy="4.7" r="1.2"/><path d="M6.5 7h11"/><path d="M10 21l2-9 2 9"/><path d="M9.3 10.2l2.7 2.2 2.7-2.2"/><path d="M8.2 13h7.6"/>');
+        case "i18n":      return svg('<path d="M5 4h14"/><path d="M7 20h10"/><path d="M9 4v4"/><path d="M15 4v4"/><path d="M8 12h8"/><path d="M10 12l-2 6"/><path d="M14 12l2 6"/>');
+        case "analytics": return svg('<path d="M5 19V9"/><path d="M10 19V5"/><path d="M15 19v-7"/><path d="M20 19v-3"/>');
+        case "wa":        return svg('<path d="M20 12a8 8 0 0 1-11.8 7L4 20l1-4A8 8 0 1 1 20 12Z"/><path d="M9.2 8.9c.3-.7.6-.7 1.1-.7h.5c.2 0 .5.1.7.6l.9 2.1c.1.3.1.6-.1.8l-.6.7c.6 1 1.7 2 2.8 2.6l.7-.6c.2-.2.5-.2.8-.1l2.1.9c.5.2.6.5.6.7v.5c0 .5 0 .8-.7 1.1-.8.3-2.6.6-5.3-.9-2.7-1.5-4.7-4-5.3-5.9-.6-1.9-.5-3.1-.2-3.8Z"/>');
+        case "version":   return svg('<path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v6h-6"/><path d="M12 7v5l3 2"/>');
+        case "support":   return svg('<path d="M4 12a8 8 0 0 1 16 0"/><path d="M6 12v4a2 2 0 0 0 2 2h2"/><path d="M18 12v4a2 2 0 0 1-2 2h-2"/><path d="M12 18h.01"/>');
+        default:          return svg('<path d="M12 3v18"/><path d="M3 12h18"/>');
+      }
+    }
+
+    const ITEMS = [
+  {icon:"time", title:"Ahorra 500+ horas de trabajo", sub:"Automatiza tareas repetitivas para que tu equipo se enfoque en vender y operar."},
+  {icon:"layout", title:"Arquitectura de mensaje que convierte", sub:"Ordenamos tu narrativa (problema \u2192 valor \u2192 prueba \u2192 CTA) para generar leads."},
+  {icon:"moon", title:"Dise\u00f1o corporativo consistente", sub:"Sistema visual sobrio y uniforme en toda la experiencia, sin \u201cparches\u201d."},
+  {icon:"mobile", title:"100% m\u00f3vil responsivo", sub:"Tu sitio se ve y funciona perfecto donde realmente te visitan: en el tel\u00e9fono."},
+  {icon:"seo", title:"SEO optimizado", sub:"Te encuentran mejor en Google y tus p\u00e1ginas se indexan sin fricci\u00f3n."},
+  {icon:"spark", title:"Interacciones que gu\u00edan decisiones", sub:"Microse\u00f1ales que orientan al usuario y aumentan claridad sin distraer."},
+  {icon:"flow", title:"Visualizaci\u00f3n de flujos de trabajo", sub:"Explicas procesos complejos en simple: pasos claros para clientes y equipo."},
+  {icon:"code", title:"Evoluci\u00f3n sin re-trabajo", sub:"Base lista para crecer sin rehacer el sitio cada vez que cambie tu negocio."},
+  {icon:"settings", title:"Configuraci\u00f3n global para actualizar f\u00e1cil", sub:"Cambios de marca/copy en un punto, sin \u201cromper\u201d secciones por accidente."},
+  {icon:"palette", title:"Personalizaci\u00f3n simple (marca, colores, copy)", sub:"Adaptamos la identidad de tu empresa sin rehacer el sitio desde cero."},
+  {icon:"download", title:"Experiencia tipo app (opcional)", sub:"Cuando aporta valor, habilitamos instalaci\u00f3n y comportamiento tipo app."},
+  {icon:"rocket", title:"Lanzamiento r\u00e1pido y estable", sub:"Publicamos con control y sin fricci\u00f3n para pasar de idea a producci\u00f3n."},
+  {icon:"support", title:"Feedback UI/UX (toasts, estados, microcopy)", sub:"El usuario entiende qu\u00e9 pas\u00f3 y qu\u00e9 sigue, reduciendo dudas y abandonos."},
+  {icon:"route", title:"Flujos guiados (pedidos, pasos y handoffs claros)", sub:"Menos fricci\u00f3n para comprar/solicitar, m\u00e1s claridad en cada paso."},
+  {icon:"layout", title:"Storytelling por secciones (mensaje \u2192 prueba \u2192 CTA)", sub:"Convierte visitas en conversaciones con una narrativa l\u00f3gica y persuasiva."},
+  {icon:"forms", title:"Captura de leads con fricci\u00f3n m\u00ednima", sub:"Formularios y CTAs optimizados para que el usuario s\u00ed te contacte."},
+  {icon:"shield", title:"Buenas pr\u00e1cticas de seguridad base", sub:"Evita configuraciones d\u00e9biles y reduce superficie de errores comunes."},
+  {icon:"speed", title:"Velocidad que mejora conversi\u00f3n", sub:"Carga r\u00e1pida en m\u00f3vil para reducir abandono y mejorar SEO."},
+  {icon:"img", title:"Im\u00e1genes optimizadas y lazy loading", sub:"Mantienes calidad visual sin sacrificar velocidad ni consumo de datos."},
+  {icon:"a11y", title:"Accesibilidad y UX consistente", sub:"M\u00e1s personas pueden usar tu sitio sin barreras; experiencia uniforme en todo."},
+  {icon:"i18n", title:"I18N ES/EN sin dependencias", sub:"Tu web lista para clientes globales sin duplicar p\u00e1ginas ni complicarte."},
+  {icon:"analytics", title:"Eventos de conversi\u00f3n medibles", sub:"Sabes qu\u00e9 funciona: clics, env\u00edos, CTAs y puntos donde se cae la gente."},
+  {icon:"wa", title:"Canales listos para cerrar ventas", sub:"WhatsApp y CTAs preparados para convertir conversaciones en clientes."},
+  {icon:"version", title:"Versionado + rollback r\u00e1pido", sub:"Cambios seguros: si algo falla, volvemos atr\u00e1s sin drama ni downtime."},
+  {icon:"lock", title:"Validaci\u00f3n y anti-spam (honeypot)", sub:"Menos basura en formularios, m\u00e1s leads reales para tu equipo."},
+  {icon:"settings", title:"Entrega por fases", sub:"Lanzamos por etapas sin romper lo ya publicado."},
+  {icon:"handoff", title:"Documentaci\u00f3n operativa para tu equipo", sub:"Tu equipo entiende c\u00f3mo actualizar contenido sin depender siempre de nosotros."},
+  {icon:"support", title:"Roadmap y soporte post-lanzamiento", sub:"No te dejamos \u201ctirado\u201d: mejoras continuas alineadas a negocio."},
+  {icon:"analytics", title:"Microfeedback e-commerce (carrito, confirmaciones)", sub:"Menos incertidumbre al comprar: confirmaciones claras, menos abandonos."},
+  {icon:"code", title:"Sistema modular f\u00e1cil de operar", sub:"Componentes claros para iterar r\u00e1pido y mantener consistencia."}
+];
+
+    const grid = document.getElementById('grid');
+    const size = document.getElementById('size');
+    const btn = document.getElementById('toggleTheme');
+
+    function render(){
+      grid.innerHTML = ITEMS.map((it, idx) => {
+        return `
+          <div class="card">
+            <div class="ico" style="width:${size.value}px;height:${size.value}px">${miniIcon(it.icon)}</div>
+            <div class="meta">
+              <p class="title">${idx+1}) ${it.title}</p>
+              <p class="desc">${it.sub}</p>
+              <div class="key">
+                <span>Icon key:</span>
+                <span class="pill">${it.icon}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    size.addEventListener('input', render);
+
+    btn.addEventListener('click', () => {
+      const root = document.body;
+      const dark = root.getAttribute('data-theme') === 'dark';
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+      btn.textContent = dark ? 'Modo oscuro' : 'Modo claro';
+    });
+
+    render();
+  </script>
+</body>
+</html>
