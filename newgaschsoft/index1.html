@@ -43,6 +43,7 @@
       /* Light */
       --bg: #F8FAFC;
       --card: #EEF2F7;
+      --pillars-bg: rgba(31, 122, 255, 0.06);
       --text: #0F172A;
       --muted: #475569;
 
@@ -74,6 +75,7 @@
     html[data-theme="dark"]{
       --bg: #0B0F14;
       --card: #111827;
+      --pillars-bg: rgba(31, 122, 255, 0.10);
       --text: #E5E7EB;
       --muted: #9CA3AF;
 
@@ -1106,22 +1108,35 @@
     
     /* v78.5 – Whatuse section: soft full-bleed gradient (no panel/rectangle) */
     .section-whatuse{
-      position: relative;
-      margin-top: 0;
-      border: 0 !important;
-      box-shadow: none !important;
-      border-radius: 0 !important;
-      /* Blend with hero (top) and next section (bottom) */
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0) 0%,
-        var(--section-alt-bg) 18%,
-        var(--section-alt-bg) 82%,
-        rgba(0,0,0,0) 100%
-      );
-      overflow: visible !important;
-    }
-    .section-whatuse > .section-inner{ padding-top: 64px; }
+  position: relative;
+  margin-top: 0;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background: transparent;
+  overflow: visible !important;
+}
+/* Full-bleed background for the capabilities wall (break out of main max-width) */
+.section-whatuse::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:0;
+  bottom:0;
+  width:100vw;
+  /* Seamless blend from pillars -> capabilities wall */
+  background: linear-gradient(
+    to bottom,
+    var(--pillars-bg) 0%,
+    var(--section-alt-bg) 22%,
+    var(--section-alt-bg) 84%,
+    rgba(0,0,0,0) 100%
+  );
+  z-index:-1;
+  pointer-events:none;
+}
+.section-whatuse > .section-inner{ padding-top: 64px; }
 
 
 @keyframes marquee-left{
@@ -1333,7 +1348,7 @@ img {
     height: auto;
     min-height: clamp(700px, 84svh, 920px);
     max-height: none;
-    overflow: visible;
+    overflow: visible; position: relative;
   }
 }
 
@@ -1681,6 +1696,114 @@ img {
   user-select: none;
 }
 
+
+    /* ===== Pilares de impacto (Section 2) ===== */
+    .section-pillars{ margin-top: 58px; background: transparent; border: none; box-shadow: none; border-radius: 0; overflow: visible; position: relative; }
+    /* Full-bleed soft tint (spans viewport, not container) */
+    .section-pillars::after{ content:""; position:absolute; top:0; bottom:0; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; background: var(--pillars-bg); z-index:-1; pointer-events:none; }
+    /* Seamless fade from Hero into pillars tint */
+    .section-pillars::before{ content:""; position:absolute; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; top:-72px; height:72px; background: linear-gradient(180deg, rgba(31,122,255,0) 0%, var(--pillars-bg) 100%); z-index:-1; pointer-events:none; }
+
+
+    .pillars-head{ text-align:center; max-width: 880px; margin: 6px auto 0; }
+    .pillars-title{ margin: 0; font-size: 30px; letter-spacing: -0.6px; }
+    .pillars-desc{ margin: 10px auto 0; max-width: 760px; color: var(--muted); line-height: 1.5; }
+    .pillars-grid{
+  margin-top: 18px;
+  display: grid;
+  gap: 0;
+  grid-template-columns: 1fr;
+}
+
+/* "Matrix" layout: borders between cells (no card shadows, no rounded rectangles). */
+.pillar-card{
+  display:flex;
+  flex-direction: row;
+  align-items:flex-start;
+  text-align:left;
+  gap: 14px;
+  padding: 18px 18px;
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  border-right: none; /* 1-col default */
+  min-height: 140px;
+}
+
+/* Icon badge in pillars only */
+.pillar-card .cap-ico{
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(31,122,255,0.10), rgba(31,122,255,0.04));
+  border: 1px solid rgba(31,122,255,0.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.30);
+  flex: 0 0 auto;
+}
+html[data-theme="dark"] .pillar-card .cap-ico{
+  background: linear-gradient(180deg, rgba(31,122,255,0.14), rgba(31,122,255,0.06));
+  border-color: rgba(31,122,255,0.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.pillar-card .cap-ico svg{ width: 22px; height: 22px; opacity: .92; }
+
+.pillar-body{ display:flex; flex-direction: column; gap: 8px; min-width: 0; flex: 1; }
+.pillar-title{ margin: 0; font-size: 14px; letter-spacing: -0.2px; font-weight: 700; color: var(--text); }
+.pillar-bullets{
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+  line-height: 1.42;
+  color: var(--muted);
+  display:flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pillar-bullets li{ margin: 0; }
+.pillar-bullets li::marker{ color: rgba(31,122,255,0.85); }
+
+/* 2 columns on small screens to reduce vertical height */
+@media (min-width: 360px){
+  .pillars-grid{ grid-template-columns: repeat(2, 1fr); }
+  .pillar-card{ border-right: 1px solid var(--border); padding: 20px 18px; min-height: 144px; }
+  .pillar-card:nth-child(2n){ border-right: none; }
+  .pillar-card:nth-last-child(-n+2){ border-bottom: none; }
+}
+
+/* 3 columns desktop */
+@media (min-width: 1024px){
+  .pillars-grid{ grid-template-columns: repeat(3, 1fr); }
+  .pillar-card{ padding: 24px 22px; min-height: 148px; }
+  .pillar-card:nth-child(2n){ border-right: 1px solid var(--border); } /* reset 2-col rule */
+  .pillar-card:nth-last-child(-n+2){ border-bottom: 1px solid var(--border); } /* reset 2-col rule */
+  .pillar-card:nth-child(3n){ border-right: none; }
+  .pillar-card:nth-last-child(-n+3){ border-bottom: none; }
+}
+
+/* 1 column: remove last divider */
+.pillar-card:last-child{ border-bottom: none; }
+.pillars-for{ margin-top: 14px; display:flex; flex-direction: column; align-items:center; gap: 10px; }
+    .pillars-for-label{ font-size: 12px; color: var(--muted); letter-spacing: 0.2px; }
+    .pillars-chips{ display:flex; gap: 10px; flex-wrap: wrap; justify-content:center; }
+    .pillars-chip{
+      display:inline-flex;
+      align-items:center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.16);
+      color: var(--text);
+      font-size: 12px;
+      letter-spacing: -0.1px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    html[data-theme="dark"] .pillars-chip{ background: rgba(17,24,39,0.22); }
+    @media (max-width: 420px){
+      .pillars-title{ font-size: 26px; }
+    }
+
 </style>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/newgaschsoft/apple-touch-icon.png">
@@ -1913,13 +2036,35 @@ img {
     </section>
 
 
-    <!-- ===== Qué utilizamos (v78) ===== -->
+    
+    <!-- ===== Pilares de impacto (v78.20) ===== -->
+    <section class="section-pillars" id="pillars" aria-label="Pilares de impacto">
+      <div class="section-inner">
+        <div class="pillars-head">
+          <h2 class="pillars-title" id="pillarsTitle">Pilares de impacto</h2>
+          <p class="pillars-desc" id="pillarsDesc">Resultados medibles para empresas que ya facturan: más conversión, menos fricción operativa y una base lista para crecer.</p>
+        </div>
+
+        <div class="pillars-grid" id="pillarsGrid"></div>
+
+        <div class="pillars-for" aria-label="Diseñado para">
+          <div class="pillars-for-label" id="pillarsForLabel">Diseñado para</div>
+          <div class="pillars-chips">
+            <span class="pillars-chip" id="pillarsFor1">PYMEs</span>
+            <span class="pillars-chip" id="pillarsFor2">Corporativo</span>
+            <span class="pillars-chip" id="pillarsFor3">Startups</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ===== Qué utilizamos (v78) ===== -->
     <section class="section-whatuse" id="whatuse" aria-label="Capacidades">
       <div class="section-inner">
         <div class="whatuse-head">
           <div>
-            <h2 class="whatuse-title" id="whatuseTitle">Capacidades que convierten y escalan</h2>
-            <p class="whatuse-desc" id="whatuseDesc">Capacidades que se traducen en operación más simple, mejor conversión y un sistema fácil de evolucionar.</p>
+            <h2 class="whatuse-title" id="whatuseTitle">Capacidades en producción</h2>
+            <p class="whatuse-desc" id="whatuseDesc">Estándares de ejecución y calidad que convierten tu web en un sistema mantenible, medible y escalable.</p>
           </div>
         </div>
 
@@ -1977,9 +2122,26 @@ img {
           nav: { services: "Plataforma", portfolio: "Casos", contact: "Contacto", about: "Empresa" },
           services: { auto:"Automatizaciones", web:"Desarrollo Web", it:"Soporte IT", infra:"Infraestructura", invites:"Invitaciones Web" },
           cases: { sme: "PYMEs", corp: "Corporativo", startups: "Startups" },
+
+          pillars: {
+            title: "Pilares de impacto",
+            desc: "Resultados medibles para empresas que ya facturan: más conversión, menos fricción operativa y una base lista para crecer.",
+            forLabel: "Diseñado para",
+            for: ["PYMEs","Corporativo","Startups"],
+            bulletsLabel: "Beneficios",
+            items: [
+              { icon:"route", text:"Automatizaciones operativas", bullets:["Reduce trabajo manual y errores","Acelera ciclos en procesos clave"] },
+              { icon:"layout", text:"Web orientada a conversión", bullets:["Mensaje claro + prueba + CTA","Leads consistentes sin fricción"] },
+              { icon:"handoff", text:"Continuidad y soporte", bullets:["Menos incendios y retrabajo","Handoffs claros y respuesta ordenada"] },
+              { icon:"analytics", text:"Integraciones y datos", bullets:["Sistemas conectados, datos centralizados","Mejores decisiones con visibilidad"] },
+              { icon:"speed", text:"Infraestructura y performance", bullets:["Velocidad y estabilidad en móvil","Buenas prácticas desde el día uno"] },
+              { icon:"settings", text:"Evolución con roadmap", bullets:["Mejoras por fases sin rehacer","Prioridades claras y ejecución continua"] }
+            ]
+          },
+
           whatuse: {
-            title: "Capacidades que convierten y escalan",
-            desc: "Capacidades que se traducen en operación más simple, mejor conversión y un sistema fácil de evolucionar.",
+            title: "Capacidades en producción",
+            desc: "Estándares de ejecución y calidad que convierten tu web en un sistema mantenible, medible y escalable.",
             top: [
               { icon:"time", text:"Ahorra 500+ horas de trabajo", sub:"Automatiza tareas repetitivas para que tu equipo se enfoque en vender y operar." },
               { icon:"layout", text:"Arquitectura de mensaje que convierte", sub:"Ordenamos tu narrativa (problema → valor → prueba → CTA) para generar leads." },
@@ -2030,9 +2192,26 @@ img {
           nav: { services: "Platform", portfolio: "Use cases", contact: "Contact", about: "Company" },
           services: { auto:"Automations", web:"Web Development", it:"IT Support", infra:"Infrastructure", invites:"Web Invitations" },
           cases: { sme: "SMEs", corp: "Enterprise", startups: "Startups" },
+
+          pillars: {
+            title: "Impact pillars",
+            desc: "Measurable outcomes for companies already generating revenue: higher conversion, less operational friction, and a foundation built to grow.",
+            forLabel: "Designed for",
+            for: ["SMEs","Corporate","Startups"],
+            bulletsLabel: "Key outcomes",
+            items: [
+              { icon:"route", text:"Operational automations", bullets:["Reduce manual work and errors","Shorten cycle time in key flows"] },
+              { icon:"layout", text:"Conversion-first web", bullets:["Clear message + proof + CTA","Consistent leads with less friction"] },
+              { icon:"handoff", text:"Continuity & support", bullets:["Fewer fires and rework","Clean handoffs and structured response"] },
+              { icon:"analytics", text:"Integrations & data", bullets:["Connected systems, centralized signals","Faster decisions with visibility"] },
+              { icon:"speed", text:"Infrastructure & performance", bullets:["Fast and stable on mobile","Best practices from day one"] },
+              { icon:"settings", text:"Roadmap-driven evolution", bullets:["Phased delivery without rewrites","Clear priorities and continuous execution"] }
+            ]
+          },
+
           whatuse: {
-            title: "Capabilities that convert & scale",
-            desc: "Capabilities that turn into simpler operations, better conversion, and a system that stays easy to evolve.",
+            title: "Capabilities in production",
+            desc: "Execution and quality standards that turn your website into a maintainable, measurable, scalable system.",
             top: [
               { icon:"time", text:"Save 500+ work hours", sub:"Automate repetitive work so your team can focus on selling and operating." },
               { icon:"layout", text:"Message architecture that converts", sub:"We shape your narrative (problem → value → proof → CTA) to generate leads." },
@@ -2282,6 +2461,7 @@ if (heroTitleA && heroTitleB) {
         if (whatuseTitle && t.whatuse?.title) whatuseTitle.textContent = t.whatuse.title;
         if (whatuseDesc && t.whatuse?.desc)   whatuseDesc.textContent  = t.whatuse.desc;
         // re-render marquees
+        try { renderPillars(); } catch(_) {}
         try { renderWhatWeUse(); } catch(_) {}
 
         langItems.forEach(item => {
@@ -2841,38 +3021,81 @@ setSelectedDot();
       const midMarquee = document.getElementById("marqueeMid");
       const botMarquee = document.getElementById("marqueeBottom");
 
-      function miniIcon(name){
+      
+      const pillarsTitleEl = document.getElementById("pillarsTitle");
+      const pillarsDescEl  = document.getElementById("pillarsDesc");
+      const pillarsGridEl  = document.getElementById("pillarsGrid");
+      const pillarsForLabelEl = document.getElementById("pillarsForLabel");
+      const pillarsFor1El = document.getElementById("pillarsFor1");
+      const pillarsFor2El = document.getElementById("pillarsFor2");
+      const pillarsFor3El = document.getElementById("pillarsFor3");
+
+function miniIcon(name){
       const common = 'viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
       const svg = (p) => `<svg ${common}>${p}</svg>`;
       switch(name){
         case "time":      return svg('<path d="M12 7v5l3 2"/><path d="M12 22a10 10 0 1 1 0-20a10 10 0 0 1 0 20Z"/>');
-        case "layout":    return svg('<path d="M4 6h16v12H4Z"/><path d="M9 6v12"/><path d="M4 11h16"/>');
+        case "layout":    return svg('<rect class="ico" x="4.5" y="6" width="15" height="12" rx="2.2"/> <path class="ico" d="M7.5 9h9M7.5 12h6.5M7.5 15h4.5"/> <path class="ico" d="M16.8 16.8l2.2 2.2"/> <circle class="ico" cx="15.5" cy="15.5" r="2.2"/>');
         case "moon":      return svg('<path d="M21 13a7.5 7.5 0 0 1-10-10a8.5 8.5 0 1 0 10 10Z"/>');
         case "mobile":    return svg('<path d="M8 5h8v14H8Z"/><path d="M11 18h2"/>');
         case "seo":       return svg('<path d="M10 14l4-4"/><path d="M10 10h.01"/><path d="M14 14h.01"/><path d="M12 22a10 10 0 1 1 0-20a10 10 0 0 1 0 20Z"/>');
         case "spark":     return svg('<path d="M12 2l1.4 4.8L18 8.4l-4.6 1.6L12 15l-1.4-5L6 8.4l4.6-1.6Z"/><path d="M19 3l.7 2.3L22 6l-2.3.7L19 9l-.7-2.3L16 6l2.3-.7Z"/>');
         case "flow":      return svg('<path d="M7 7h4v4H7Z"/><path d="M13 13h4v4h-4Z"/><path d="M11 9h3a2 2 0 0 1 2 2v2"/><path d="M7 9H5a2 2 0 0 0-2 2v6"/>');
         
-        case "route":     return svg('<circle cx="7" cy="7" r="1.5"/><circle cx="17" cy="17" r="1.5"/><path d="M8.8 7H12a3 3 0 0 1 3 3v3.2"/><path d="M15.2 17H12a3 3 0 0 1-3-3V10.8"/>');case "code":      return svg('<path d="M9 8L6 12l3 4"/><path d="M15 8l3 4-3 4"/><path d="M12 6l-1.5 12"/>');
-        case "settings":  return svg('<path d="M12 15.6a3.6 3.6 0 1 0 0-7.2a3.6 3.6 0 0 0 0 7.2Z"/><path d="M19.3 12a7.6 7.6 0 0 0-.2-1.7l1.9-1.1-1.8-3.1-2.2.6a7.3 7.3 0 0 0-1.5-.9L15 3.6h-6l-.5 2.2c-.5.2-1 .5-1.5.9l-2.2-.6-1.8 3.1 1.9 1.1c-.1.6-.2 1.1-.2 1.7s.1 1.1.2 1.7l-1.9 1.1 1.8 3.1 2.2-.6c.5.4 1 .7 1.5.9l.5 2.2h6l.5-2.2c.5-.2 1-.5 1.5-.9l2.2.6 1.8-3.1-1.9-1.1c.1-.6.2-1.1.2-1.7Z"/>');
+        case "route":     return svg('<path class="ico" d="M7 10.5a5.5 5.5 0 0 1 9.3-1.9"/> <path class="ico" d="M16.3 8.6H13.8"/> <path class="ico" d="M17 13.5a5.5 5.5 0 0 1-9.3 1.9"/> <path class="ico" d="M7.7 15.4v2.5"/> <circle class="ico" cx="12" cy="12" r="2.4"/>');case "code":      return svg('<path d="M9 8L6 12l3 4"/><path d="M15 8l3 4-3 4"/><path d="M12 6l-1.5 12"/>');
+        case "settings":  return svg('<path class="ico" d="M6 16c3.1-4.7 6.7-7.5 12.2-9"/> <path class="ico" d="M18.2 7v3.3h-3.3"/> <circle class="ico" cx="9.4" cy="13.7" r="1.6"/> <circle class="ico" cx="12.8" cy="11.5" r="1.6"/> <circle class="ico" cx="16" cy="9.4" r="1.6"/> <path class="ico" d="M6 19h12"/>');
         case "palette":   return svg('<path d="M12 3a9 9 0 1 0 0 18h1.2a2 2 0 0 0 2-2c0-1-.8-1.8-1.8-1.8H13"/><path d="M7.5 11h.01"/><path d="M9.8 7.8h.01"/><path d="M14.2 7.8h.01"/><path d="M16.5 11h.01"/>');
         case "download":  return svg('<path d="M12 3v10"/><path d="M8.5 10.5L12 14l3.5-3.5"/><path d="M4 20h16"/>');
         case "rocket":    return svg('<path d="M14 3c4.1.7 7 3.6 7 7-2 1.6-4.6 2.6-7.2 2.9-2.2 2.7-5.3 5.3-9.6 7.6.6-3.1 1.7-5.6 3-7.5-1.1-1.1-2.1-2.1-3.1-3.1C6.4 6.1 9.3 3.7 14 3Z"/><path d="M14.7 8.7h.01"/><path d="M9.8 14.2l-2.3 2.3"/><path d="M11.1 15.5l-1.5 3.5"/>');
         case "forms":     return svg('<path d="M7 4h10"/><path d="M7 8h7"/><path d="M7 12h10"/><path d="M7 16h7"/><path d="M18 7l2 2-4 4H14v-2Z"/>');
-        case "handoff":   return svg('<path d="M7 7h6v4H7Z"/><path d="M11 13h6v4h-6Z"/><path d="M13 9h4"/><path d="M15.5 7.5L17 9l-1.5 1.5"/><path d="M11 15H7"/><path d="M8.5 13.5L7 15l1.5 1.5"/>');
+        case "handoff":   return svg('<path class="ico" d="M6.6 12.2V11a5.4 5.4 0 0 1 10.8 0v1.2"/> <path class="ico" d="M6.6 12.2c0 1.7-1 3-2.4 3v-3c1.4 0 2.4-.7 2.4 0z"/> <path class="ico" d="M17.4 12.2c0 1.7 1 3 2.4 3v-3c-1.4 0-2.4-.7-2.4 0z"/> <path class="ico" d="M9.2 17.5h3.8"/> <path class="ico" d="M13 17.5c1.7 0 3.1-1.2 3.4-2.8"/> <path class="ico" d="M8.8 18.9c0-1.1.9-2 2-2h2.2c.9 0 1.7.6 1.9 1.4"/> <path class="ico" d="M15.7 19.2h.01"/>');
         case "shield":    return svg('<path d="M12 3l8 4v6c0 5-3.5 9-8 11C7.5 22 4 18 4 13V7Z"/><path d="M9.5 12.5l1.7 1.7 3.6-3.6"/>');
         
-        case "lock":     return svg('<rect x="7" y="11" width="10" height="9" rx="2"/><path d="M9 11V9a3 3 0 1 1 6 0v2"/>');case "speed":     return svg('<path d="M6.2 16.5a8 8 0 1 1 11.6 0"/><path d="M12 13l4-2"/><path d="M12 20h.01"/>');
+        case "lock":     return svg('<rect x="7" y="11" width="10" height="9" rx="2"/><path d="M9 11V9a3 3 0 1 1 6 0v2"/>');case "speed":     return svg('<path class="ico" d="M12 20a8 8 0 1 0-8-8"/> <path class="ico" d="M12 4v4M20 12h-4"/> <path class="ico" d="M12 12l4.2-2.1"/> <path class="ico" d="M4.2 16.8l2.2-2.2"/> <path class="ico" d="M7.2 20.2l2.1-2.1"/> <path class="ico" d="M4 12h4"/>');
         case "img":       return svg('<path d="M5 6h14v12H5Z"/><path d="M8 10h.01"/><path d="M6.5 16l4-4 3 3 2-2 2.5 3"/>');
         case "a11y":      return svg('<circle cx="12" cy="4.7" r="1.2"/><path d="M6.5 7h11"/><path d="M10 21l2-9 2 9"/><path d="M9.3 10.2l2.7 2.2 2.7-2.2"/><path d="M8.2 13h7.6"/>');
         case "i18n":      return svg('<path d="M5 4h14"/><path d="M7 20h10"/><path d="M9 4v4"/><path d="M15 4v4"/><path d="M8 12h8"/><path d="M10 12l-2 6"/><path d="M14 12l2 6"/>');
-        case "analytics": return svg('<path d="M5 19V9"/><path d="M10 19V5"/><path d="M15 19v-7"/><path d="M20 19v-3"/>');
+        case "analytics": return svg('<circle class="ico" cx="6.5" cy="8" r="1.6"/> <circle class="ico" cx="17.5" cy="8" r="1.6"/> <circle class="ico" cx="12" cy="16.5" r="1.6"/> <path class="ico" d="M8 8h7.8"/> <path class="ico" d="M7.4 9.3l3.6 5.7"/> <path class="ico" d="M16.6 9.3L13 15"/> <path class="ico" d="M4.8 20.2h8.4"/> <path class="ico" d="M14.5 18.2c0-1.1 1.5-2 3.4-2s3.4.9 3.4 2"/> <path class="ico" d="M14.5 18.2v2.3c0 1.1 1.5 2 3.4 2s3.4-.9 3.4-2v-2.3"/>');
         case "wa":        return svg('<path d="M20 12a8 8 0 0 1-11.8 7L4 20l1-4A8 8 0 1 1 20 12Z"/><path d="M9.2 8.9c.3-.7.6-.7 1.1-.7h.5c.2 0 .5.1.7.6l.9 2.1c.1.3.1.6-.1.8l-.6.7c.6 1 1.7 2 2.8 2.6l.7-.6c.2-.2.5-.2.8-.1l2.1.9c.5.2.6.5.6.7v.5c0 .5 0 .8-.7 1.1-.8.3-2.6.6-5.3-.9-2.7-1.5-4.7-4-5.3-5.9-.6-1.9-.5-3.1-.2-3.8Z"/>');
         case "version":   return svg('<path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v6h-6"/><path d="M12 7v5l3 2"/>');
         case "support":   return svg('<path d="M4 12a8 8 0 0 1 16 0"/><path d="M6 12v4a2 2 0 0 0 2 2h2"/><path d="M18 12v4a2 2 0 0 1-2 2h-2"/><path d="M12 18h.01"/>');
         default:          return svg('<path d="M12 3v18"/><path d="M3 12h18"/>');
       }
     }
+
+
+      function renderPillars(){
+        const cfg = (I18N[state.lang] && I18N[state.lang].pillars) ? I18N[state.lang].pillars : null;
+        if(!cfg || !pillarsGridEl) return;
+
+        if(pillarsTitleEl) pillarsTitleEl.textContent = cfg.title || "";
+        if(pillarsDescEl) pillarsDescEl.textContent = cfg.desc || "";
+
+        if(pillarsForLabelEl) pillarsForLabelEl.textContent = cfg.forLabel || "";
+        const seg = cfg.for || [];
+        if(pillarsFor1El) pillarsFor1El.textContent = seg[0] || "";
+        if(pillarsFor2El) pillarsFor2El.textContent = seg[1] || "";
+        if(pillarsFor3El) pillarsFor3El.textContent = seg[2] || "";
+
+        pillarsGridEl.innerHTML = "";
+        for(const it of (cfg.items || [])){
+          const card = document.createElement("div");
+          card.className = "pillar-card";
+          card.innerHTML = `
+            <span class="cap-ico" aria-hidden="true">${miniIcon(it.icon)}</span>
+            <span class="pillar-body">
+              <h3 class="pillar-title">${it.text}</h3>
+              <ul class="pillar-bullets" aria-label="${cfg.bulletsLabel || 'Beneficios'}">
+                <li>${(it.bullets && it.bullets[0]) ? it.bullets[0] : (it.sub || "")}</li>
+                <li>${(it.bullets && it.bullets[1]) ? it.bullets[1] : ""}</li>
+              </ul>
+            </span>
+          `;
+          pillarsGridEl.appendChild(card);
+        }
+      }
+
+
 
       function buildCapCard(item){
         const el = document.createElement("div");
@@ -3047,6 +3270,9 @@ setSelectedDot();
         });
       }
 // Render inicial + al cambiar idioma
+      renderPillars();
+      window.addEventListener("gs:langChanged", renderPillars, { passive:true });
+
       renderWhatWeUse();
       window.addEventListener("gs:langChanged", renderWhatWeUse, { passive:true });
 
