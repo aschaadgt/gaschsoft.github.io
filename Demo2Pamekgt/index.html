@@ -1,0 +1,893 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="PAMEK - Agricultura de precisión. Soluciones, servicios, proyectos y eventos." />
+  <title>PAMEK | Agricultura de precisión</title>
+  <link rel="icon" href="assets/logo-pamek.png" />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --surface:#0f1a2e;
+      --card:#0f1a2e;
+      --text:#e8eefc;
+      --muted:#b8c4e6;
+      --line:rgba(255,255,255,.10);
+      --brand:#2c7be5; /* azul técnico */
+      --accent:#ff4d4d; /* rojo acción */
+      --ok:#2dd4bf;
+      --shadow: 0 16px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1120px;
+      --font: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(44,123,229,.35), transparent 65%),
+        radial-gradient(900px 500px at 95% 10%, rgba(255,77,77,.20), transparent 60%),
+        linear-gradient(180deg, #070b12 0%, #0b1220 25%, #0b1220 100%);
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    /* Header */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: rgba(11,18,32,.70);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width: 220px;
+      text-decoration:none;
+    }
+    .brand img{height:38px; width:auto; display:block}
+    .brand .tag{
+      display:flex; flex-direction:column; line-height:1.05;
+    }
+    .brand .tag b{font-size:14px; letter-spacing:.2px}
+    .brand .tag span{font-size:12px; color:var(--muted)}
+    .links{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .links a{
+      text-decoration:none; color:var(--muted);
+      padding:10px 10px; border-radius:12px;
+      border:1px solid transparent;
+    }
+    .links a:hover{color:var(--text); border-color:var(--line); background:rgba(255,255,255,.04)}
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      box-shadow: none;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color:rgba(255,255,255,.18)}
+    .btn.primary{
+      border-color: rgba(255,77,77,.40);
+      background: linear-gradient(180deg, rgba(255,77,77,.22), rgba(255,77,77,.12));
+    }
+    .btn.primary:hover{border-color: rgba(255,77,77,.65)}
+    .burger{display:none}
+    /* Hero */
+    .hero{
+      position:relative;
+      padding:56px 0 22px;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-20px;
+      background:
+        linear-gradient(90deg, rgba(7,11,18,.88), rgba(7,11,18,.35) 55%, rgba(7,11,18,.88)),
+        url("assets/ref-sima.jpg");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.1) contrast(1.05);
+      transform: scale(1.02);
+      opacity:.95;
+    }
+    .hero .wrap{position:relative}
+    .hero-grid{
+      display:grid; gap:22px; align-items:center;
+      grid-template-columns: 1.25fr .75fr;
+      padding: 24px 0 14px;
+    }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-weight:600; font-size:12px;
+    }
+    .kicker .dot{
+      width:8px; height:8px; border-radius:99px; background:var(--ok);
+      box-shadow: 0 0 0 6px rgba(45,212,191,.15);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 4.2vw, 46px);
+      letter-spacing:-.6px;
+      line-height:1.04;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(232,238,252,.86);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 60ch;
+    }
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .mini{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 10px; border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+    }
+    .hero-card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(15,26,46,.62);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    .hero-card h3{margin:0 0 8px; font-size:14px}
+    .hero-card p{margin:0; color:var(--muted); font-size:13px; line-height:1.5}
+    .grid2{display:grid; gap:12px; grid-template-columns:1fr 1fr; margin-top:12px}
+    /* Sections */
+    section{padding:46px 0}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin-bottom:18px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: clamp(22px, 2.4vw, 30px);
+      letter-spacing:-.3px;
+    }
+    .section-title p{
+      margin:0; color:var(--muted); max-width: 68ch; line-height:1.5;
+      font-size:14px;
+    }
+    .cards{display:grid; gap:14px; grid-template-columns: repeat(12, 1fr)}
+    .card{
+      grid-column: span 4;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(15,26,46,.68);
+      box-shadow: 0 10px 26px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .card .pad{padding:16px}
+    .card h3{margin:0 0 8px; font-size:16px}
+    .card p{margin:0; color:var(--muted); font-size:13px; line-height:1.55}
+    .icon{
+      width:40px; height:40px; border-radius:14px;
+      display:grid; place-items:center;
+      background: rgba(44,123,229,.16);
+      border:1px solid rgba(44,123,229,.22);
+      margin-bottom:12px;
+    }
+    .icon svg{width:20px; height:20px}
+    .two{grid-column: span 6}
+    .full{grid-column: span 12}
+    .split{
+      display:grid; gap:18px; grid-template-columns: 1fr 1fr; align-items:center;
+    }
+    .panel{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(15,26,46,.60);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .panel h3{margin:0 0 10px; font-size:16px}
+    .panel ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.7; font-size:13px}
+    .band{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 18px 0;
+    }
+    .stats{
+      display:grid; gap:12px; grid-template-columns: repeat(4, 1fr);
+    }
+    .stat{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:14px;
+      background: rgba(15,26,46,.40);
+    }
+    .stat b{display:block; font-size:18px}
+    .stat span{color:var(--muted); font-size:12px}
+    /* Eventos / Casos */
+    .toolbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin: 10px 0 16px;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      padding:8px 10px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:600; font-size:12px;
+      user-select:none;
+    }
+    .chip[aria-pressed="true"]{color:var(--text); border-color: rgba(44,123,229,.35); background: rgba(44,123,229,.14)}
+    .event{
+      grid-column: span 4;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(15,26,46,.68);
+      overflow:hidden;
+    }
+    .thumb{
+      height: 168px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55)),
+        url("assets/ref-agricolus.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    .event .pad{padding:14px}
+    .meta{
+      display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;
+      color: var(--muted); font-size:12px;
+    }
+    .badge{
+      border:1px solid var(--line);
+      border-radius: 999px;
+      padding:6px 8px;
+      background: rgba(255,255,255,.03);
+    }
+    /* Video */
+    .video{
+      aspect-ratio: 16/9;
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      overflow:hidden;
+      background: rgba(255,255,255,.03);
+    }
+    .clips{display:grid; gap:12px; grid-template-columns: repeat(3, 1fr); margin-top:12px}
+    .clip{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:12px;
+      color: var(--muted);
+      background: rgba(15,26,46,.55);
+    }
+    .clip b{color:var(--text); display:block; margin-bottom:6px; font-size:13px}
+    /* Contact */
+    form{display:grid; gap:10px}
+    .row{display:grid; gap:10px; grid-template-columns: 1fr 1fr}
+    label{font-size:12px; color:var(--muted)}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      outline:none;
+    }
+    textarea{min-height:120px; resize:vertical}
+    input:focus, textarea:focus{border-color: rgba(44,123,229,.45)}
+    .note{color:var(--muted); font-size:12px; line-height:1.5}
+    .map{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+      aspect-ratio: 16/9;
+      background: rgba(255,255,255,.03);
+    }
+    /* Footer */
+    footer{
+      border-top:1px solid var(--line);
+      padding: 26px 0 40px;
+      color: var(--muted);
+    }
+    .foot{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .social{display:flex; gap:8px; flex-wrap:wrap}
+    .social a{color:var(--muted); text-decoration:none; padding:8px 10px; border:1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.03)}
+    .social a:hover{color:var(--text)}
+    /* WhatsApp floating */
+    .wa{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:60;
+      display:flex; gap:10px; align-items:center;
+      text-decoration:none;
+      padding:12px 14px;
+      border-radius: 999px;
+      border:1px solid rgba(45,212,191,.35);
+      background: rgba(11,18,32,.72);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+    .wa .wicon{
+      width:38px; height:38px; border-radius:999px;
+      display:grid; place-items:center;
+      background: rgba(45,212,191,.18);
+      border:1px solid rgba(45,212,191,.25);
+      flex: 0 0 auto;
+    }
+    .wa b{font-size:13px}
+    .wa span{display:block; color:var(--muted); font-size:12px}
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero-grid{grid-template-columns: 1fr}
+      .brand .tag{display:none}
+      .cards .card{grid-column: span 6}
+      .event{grid-column: span 6}
+      .split{grid-template-columns: 1fr}
+      .clips{grid-template-columns: 1fr}
+      .stats{grid-template-columns: 1fr 1fr}
+      .row{grid-template-columns: 1fr}
+    }
+    @media (max-width: 620px){
+      .links{display:none}
+      .burger{display:inline-flex}
+      .cards .card{grid-column: span 12}
+      .event{grid-column: span 12}
+      .stats{grid-template-columns: 1fr}
+      .wa{right:12px; bottom:12px}
+    }
+    /* Mobile drawer */
+    .drawer{
+      position:fixed; inset:0; z-index:80;
+      background: rgba(0,0,0,.55);
+      display:none;
+    }
+    .drawer[aria-hidden="false"]{display:block}
+    .sheet{
+      position:absolute; right:0; top:0; height:100%; width:min(360px, 92vw);
+      background: rgba(11,18,32,.98);
+      border-left: 1px solid var(--line);
+      padding: 16px;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .sheet a{display:block; padding:12px; border-radius:14px; border:1px solid var(--line); text-decoration:none; color:var(--muted); background: rgba(255,255,255,.02)}
+    .sheet a:hover{color:var(--text)}
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio">
+          <img src="assets/logo-pamek.png" alt="PAMEK" loading="eager" />
+          <div class="tag">
+            <b>PAMEK</b>
+            <span>Agricultura de precisión</span>
+          </div>
+        </a>
+
+        <nav class="links" aria-label="Navegación principal">
+          <a href="#que-resolvemos">Qué resolvemos</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#eventos">Casos / Eventos</a>
+          <a href="#media">Videos</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="#eventos">Ver eventos</a>
+          <a class="btn primary" id="ctaWhatsAppTop" href="https://wa.me/50200000000" target="_blank" rel="noreferrer">WhatsApp</a>
+          <button class="btn burger" id="openDrawer" type="button" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="inicio">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker"><span class="dot"></span> Soluciones para campo real • Guatemala</div>
+            <h1>Agricultura de precisión para <span style="color:var(--ok)">ahorrar</span>, <span style="color:var(--brand)">medir</span> y <span style="color:var(--accent)">producir más</span>.</h1>
+            <p class="lead">
+              Integramos tecnología y servicio para que tu operación sea más eficiente: asesoría, equipos, capacitación, soporte y proyectos en campo.
+            </p>
+            <div class="hero-actions">
+              <a class="btn primary" href="https://wa.me/50200000000" target="_blank" rel="noreferrer">Cotizar por WhatsApp</a>
+              <a class="btn" href="#que-resolvemos">Ver qué resolvemos</a>
+              <a class="btn" href="#contacto">Contactar</a>
+            </div>
+
+            <div class="mini" aria-label="Promesas de valor">
+              <span class="pill">⚡ Respuesta rápida</span>
+              <span class="pill">🛰️ Precisión y control</span>
+              <span class="pill">🧰 Soporte y capacitación</span>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Resumen rápido">
+            <h3>¿Qué incluye el enfoque?</h3>
+            <p>Una estructura comercial moderna para vender mejor: propuesta clara, servicios, evidencia (eventos/casos), media, y contacto que sí funciona.</p>
+            <div class="grid2">
+              <div class="panel" style="padding:14px">
+                <h3 style="margin:0 0 8px; font-size:14px">Tiempo al valor</h3>
+                <p style="margin:0; color:var(--muted); font-size:12px; line-height:1.5">Secciones pensadas para convertir visitas en llamadas y cotizaciones.</p>
+              </div>
+              <div class="panel" style="padding:14px">
+                <h3 style="margin:0 0 8px; font-size:14px">Velocidad</h3>
+                <p style="margin:0; color:var(--muted); font-size:12px; line-height:1.5">Optimización WebP + Lazy Load + estructura ligera.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="band" id="que-resolvemos">
+      <div class="wrap">
+        <div class="section-title" style="margin-bottom:12px">
+          <div>
+            <h2>Qué resolvemos</h2>
+            <p>Dolores típicos que atacamos con tecnología + servicio: decisiones más rápidas, menos desperdicio y mejores resultados.</p>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="card two">
+            <div class="pad">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M5 9l7-7 7 7"/><path d="M5 15l7 7 7-7"/></svg>
+              </div>
+              <h3>Eficiencia operativa</h3>
+              <p>Menos tiempo perdido: procesos claros, medición, y soporte para que el equipo ejecute sin fricción.</p>
+            </div>
+          </div>
+          <div class="card two">
+            <div class="pad">
+              <div class="icon" aria-hidden="true" style="background:rgba(255,77,77,.14); border-color:rgba(255,77,77,.22)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18"/><path d="M3 12h18"/><path d="M7 7l10 10"/><path d="M17 7L7 17"/></svg>
+              </div>
+              <h3>Ahorro y control</h3>
+              <p>Reduce desperdicio con decisiones basadas en datos: aplicación precisa, registro y seguimiento.</p>
+            </div>
+          </div>
+          <div class="card two">
+            <div class="pad">
+              <div class="icon" aria-hidden="true" style="background:rgba(45,212,191,.14); border-color:rgba(45,212,191,.22)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4-9 4-9-4 9-4z"/><path d="M3 10l9 4 9-4"/><path d="M3 14l9 4 9-4"/></svg>
+              </div>
+              <h3>Precisión y productividad</h3>
+              <p>Mejor distribución, mejor lectura del terreno, y acciones puntuales para mejorar el rendimiento.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="servicios">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <h2>Servicios principales</h2>
+            <p>Bloques claros y comerciales (3–6). Cada servicio con un microbeneficio para que el cliente entienda “qué gana” en 5 segundos.</p>
+          </div>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="pad">
+              <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16"/><path d="M6 19V9l6-5 6 5v10"/></svg></div>
+              <h3>Asesoría y capacitación</h3>
+              <p>Entrenamiento práctico para que tu equipo use la tecnología correctamente y de forma consistente.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="pad">
+              <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V6l-8-4-8 4v6c0 6 8 10 8 10z"/></svg></div>
+              <h3>Equipos y repuestos</h3>
+              <p>Selección adecuada según operación y soporte para mantener disponibilidad y rendimiento.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="pad">
+              <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2"/></svg></div>
+              <h3>Proyectos en campo</h3>
+              <p>Instalación, configuración y acompañamiento para lograr resultados medibles en operación real.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="pad">
+              <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg></div>
+              <h3>Soporte y mantenimiento</h3>
+              <p>Atención post-implementación con checklist, seguimiento y mejoras continuas.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="pad">
+              <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h16"/><path d="M16 10l4 2-4 2z"/></svg></div>
+              <h3>Monitoreo y reportes</h3>
+              <p>Resumenes claros: qué se hizo, dónde, cuándo y qué impacto tuvo (para decisiones rápidas).</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="pad">
+              <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z"/></svg></div>
+              <h3>Integraciones</h3>
+              <p>Conecta contenido (eventos, videos, redes) y deja lista la base para crecer (CRM/automatizaciones).</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="band">
+      <div class="wrap">
+        <div class="stats" aria-label="Indicadores (editable)">
+          <div class="stat"><b>+10</b><span>Años de experiencia (editable)</span></div>
+          <div class="stat"><b>+100</b><span>Proyectos / visitas a campo (editable)</span></div>
+          <div class="stat"><b>+50</b><span>Capacitaciones (editable)</span></div>
+          <div class="stat"><b>Soporte</b><span>Atención y acompañamiento</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section id="eventos">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <h2>Casos / Eventos</h2>
+            <p>Sección clave para vender: evidencia. En WordPress esto sería un “tipo de contenido” (Eventos/Casos). En HTML lo manejamos como una lista editable.</p>
+          </div>
+        </div>
+
+        <div class="toolbar" role="toolbar" aria-label="Filtros de eventos">
+          <button class="chip" data-filter="todos" aria-pressed="true" type="button">Todos</button>
+          <button class="chip" data-filter="capacitacion" aria-pressed="false" type="button">Capacitación</button>
+          <button class="chip" data-filter="demo" aria-pressed="false" type="button">Demostración</button>
+          <button class="chip" data-filter="feria" aria-pressed="false" type="button">Feria / Evento</button>
+          <button class="chip" data-filter="implementacion" aria-pressed="false" type="button">Implementación</button>
+        </div>
+
+        <div class="cards" id="eventGrid" aria-live="polite"></div>
+
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" href="#contacto">Quiero una cotización</a>
+          <a class="btn" href="#media">Ver videos</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="media">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <h2>Video destacado + clips</h2>
+            <p>Un video principal y una mini-galería de clips (sin saturar). Aquí se pega un link de YouTube/Vimeo o un video propio.</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="panel">
+            <h3>Video destacado</h3>
+            <div class="video" id="videoBox">
+              <!-- Reemplaza el src con tu video -->
+              <iframe
+                title="Video destacado"
+                width="100%" height="100%"
+                src="https://www.youtube.com/embed/VIDEO_ID"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"></iframe>
+            </div>
+            <p class="note" style="margin-top:10px">
+              Nota: cambia <b>VIDEO_ID</b> por el ID real del video. Si prefieres un archivo mp4 propio, lo cambiamos por un &lt;video&gt; con poster.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>Galería de clips</h3>
+            <div class="clips">
+              <div class="clip"><b>Clip 1</b><span>Instalación / demostración (link)</span></div>
+              <div class="clip"><b>Clip 2</b><span>Evento / feria (link)</span></div>
+              <div class="clip"><b>Clip 3</b><span>Resultados / testimonio (link)</span></div>
+            </div>
+
+            <div style="margin-top:14px">
+              <a class="btn" href="#contacto">Quiero agendar visita</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <h2>Contacto</h2>
+            <p>Form funcionando (no shortcode). WhatsApp flotante, mapa, horarios y ubicación. Todo listo para convertir.</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="panel">
+            <h3>Envíanos un mensaje</h3>
+            <form id="contactForm" action="https://formspree.io/f/XXXXXXXX" method="POST">
+              <div class="row">
+                <div>
+                  <label for="name">Nombre</label>
+                  <input id="name" name="name" required placeholder="Tu nombre" autocomplete="name" />
+                </div>
+                <div>
+                  <label for="phone">Teléfono</label>
+                  <input id="phone" name="phone" required placeholder="Ej. 5555 5555" inputmode="tel" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label for="email">Correo</label>
+                  <input id="email" name="email" type="email" required placeholder="tu@correo.com" autocomplete="email" />
+                </div>
+                <div>
+                  <label for="topic">Tema</label>
+                  <input id="topic" name="topic" placeholder="Cotización / Soporte / Información" />
+                </div>
+              </div>
+
+              <div>
+                <label for="message">Mensaje</label>
+                <textarea id="message" name="message" required placeholder="Cuéntanos qué necesitas (equipo, proyecto, capacitación, etc.)"></textarea>
+              </div>
+
+              <!-- Honeypot (antispam) -->
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+              <button class="btn primary" type="submit">Enviar mensaje</button>
+              <p class="note">
+                • Si usan WordPress, el formulario puede quedar con Contact Form 7 bien configurado.<br/>
+                • Si es HTML, recomendamos Formspree o un endpoint propio (plan Pro).
+              </p>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h3>Ubicación y horarios</h3>
+            <div class="cards" style="margin-bottom:12px">
+              <div class="card full" style="background: rgba(15,26,46,.55)">
+                <div class="pad">
+                  <p style="margin:0; color:var(--muted); line-height:1.6">
+                    <b style="color:var(--text)">Horario:</b> Lun – Vie • 08:00 – 17:00<br/>
+                    <b style="color:var(--text)">Tel:</b> +502 4804-8109 (editable)<br/>
+                    <b style="color:var(--text)">Correo:</b> info@pamek.com.gt (editable)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="map">
+              <!-- Reemplaza el src por tu mapa real -->
+              <iframe
+                title="Mapa"
+                width="100%" height="100%"
+                src="https://www.google.com/maps?q=Guatemala&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+              <a class="btn primary" href="https://wa.me/50200000000" target="_blank" rel="noreferrer">WhatsApp</a>
+              <a class="btn" href="#inicio">Volver arriba</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section aria-label="CTA final" style="padding-top:0">
+      <div class="wrap">
+        <div class="panel" style="background: linear-gradient(180deg, rgba(44,123,229,.14), rgba(15,26,46,.60));">
+          <div class="split" style="align-items:flex-start">
+            <div>
+              <h3 style="margin:0 0 8px; font-size:18px">¿Listos para llevar su operación a otro nivel?</h3>
+              <p class="note" style="margin:0">
+                Agenda una llamada breve y armamos una propuesta según tu operación, zona y necesidad. 
+                Esta página está diseñada para crecer: eventos, videos, redes, y futuras integraciones.
+              </p>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
+              <a class="btn primary" href="https://wa.me/50200000000" target="_blank" rel="noreferrer">Agendar por WhatsApp</a>
+              <a class="btn" href="#eventos">Ver casos/eventos</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div style="display:flex; align-items:center; gap:10px">
+          <img src="assets/logo-pamek.png" alt="PAMEK" style="height:28px; width:auto" loading="lazy" />
+          <div>
+            <div style="font-weight:700; color:var(--text)">PAMEK</div>
+            <div style="font-size:12px">Agricultura de precisión • © <span id="year"></span></div>
+          </div>
+        </div>
+
+        <div class="social" aria-label="Redes sociales (editable)">
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="YouTube">YouTube</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top:14px">
+        Editables rápidos: WhatsApp, teléfonos, links a redes, video destacado, lista de eventos, y mapa.
+      </p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating -->
+  <a class="wa" id="waFloat" href="https://wa.me/50200000000" target="_blank" rel="noreferrer" aria-label="Abrir WhatsApp">
+    <span class="wicon" aria-hidden="true">
+      <!-- simple WA icon -->
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 12a8 8 0 0 1-12.9 6.3L4 20l1.8-3.1A8 8 0 1 1 20 12z"/>
+        <path d="M8.5 9.5c.4 2.3 3.3 5.2 5.6 5.6.4.1 1.1 0 1.4-.3l.8-.8c.2-.2.2-.6 0-.8l-1.2-1.2c-.2-.2-.6-.2-.8 0l-.5.5c-.2.2-.5.3-.8.2-1.2-.4-2.5-1.7-2.9-2.9-.1-.3 0-.6.2-.8l.5-.5c.2-.2.2-.6 0-.8L9.6 6.7c-.2-.2-.6-.2-.8 0l-.8.8c-.3.3-.4 1-.3 1.4z"/>
+      </svg>
+    </span>
+    <div>
+      <b>¿Cotizamos?</b>
+      <span>Responderemos rápido</span>
+    </div>
+  </a>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="sheet" role="dialog" aria-label="Menú">
+      <a href="#inicio" data-close>Inicio</a>
+      <a href="#que-resolvemos" data-close>Qué resolvemos</a>
+      <a href="#servicios" data-close>Servicios</a>
+      <a href="#eventos" data-close>Casos / Eventos</a>
+      <a href="#media" data-close>Videos</a>
+      <a href="#contacto" data-close>Contacto</a>
+      <a class="btn primary" style="margin-top:8px; width:100%; justify-content:center" href="https://wa.me/50200000000" target="_blank" rel="noreferrer">WhatsApp</a>
+      <button class="btn" id="closeDrawer" type="button" style="margin-top:6px">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    // ========= EDITABLES RÁPIDOS =========
+    // Cambia este número (formato: 502XXXXXXXX)
+    const WHATSAPP_NUMBER = "50200000000";
+
+    // Cambia este texto si quieres un mensaje prellenado
+    const WHATSAPP_TEXT = "Hola%20PAMEK,%20me%20gustaria%20una%20cotizacion.";
+
+    // ========= WhatsApp links =========
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_TEXT}`;
+    ["ctaWhatsAppTop","waFloat"].forEach(id=>{
+      const el = document.getElementById(id);
+      if (el) el.href = waUrl;
+    });
+
+    // ========= Eventos / Casos (editable) =========
+    const events = [
+      { title:"Capacitación técnica RAVEN", place:"Guatemala", year:"2024", type:"capacitacion", img:"assets/ref-agricolus.jpg", link:"#"},
+      { title:"Demostración en campo (piloto)", place:"Costa Sur", year:"2023", type:"demo", img:"assets/ref-cnh.jpg", link:"#"},
+      { title:"Feria / exposición agrícola", place:"Occidente", year:"2022", type:"feria", img:"assets/ref-sima.jpg", link:"#"},
+      { title:"Implementación y seguimiento", place:"Oriente", year:"2024", type:"implementacion", img:"assets/ref-agricolus.jpg", link:"#"},
+      { title:"Capacitación de operación", place:"Guatemala", year:"2021", type:"capacitacion", img:"assets/ref-cnh.jpg", link:"#"},
+      { title:"Demo de equipos y ajuste", place:"Costa Sur", year:"2020", type:"demo", img:"assets/ref-sima.jpg", link:"#"},
+    ];
+
+    const grid = document.getElementById("eventGrid");
+    function renderEvents(filter){
+      const list = filter==="todos" ? events : events.filter(e=>e.type===filter);
+      grid.innerHTML = list.map(e=>`
+        <article class="event">
+          <div class="thumb" style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.62)),
+            url('${e.img}')"></div>
+          <div class="pad">
+            <h3 style="margin:0 0 6px; font-size:15px">${e.title}</h3>
+            <p style="margin:0; color:var(--muted); font-size:13px; line-height:1.5">
+              Evidencia breve: qué se hizo, resultado, y por qué importa.
+            </p>
+            <div class="meta">
+              <span class="badge">${e.place}</span>
+              <span class="badge">${e.year}</span>
+              <span class="badge">${labelType(e.type)}</span>
+            </div>
+            <div style="margin-top:10px">
+              <a class="btn" href="${e.link}">Ver detalle</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+    function labelType(t){
+      return ({
+        capacitacion:"Capacitación",
+        demo:"Demostración",
+        feria:"Feria / Evento",
+        implementacion:"Implementación"
+      })[t] || "Evento";
+    }
+    renderEvents("todos");
+
+    // Filters
+    document.querySelectorAll(".chip").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-pressed","false"));
+        btn.setAttribute("aria-pressed","true");
+        renderEvents(btn.dataset.filter);
+      });
+    });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Drawer
+    const drawer = document.getElementById("drawer");
+    const openDrawer = document.getElementById("openDrawer");
+    const closeDrawer = document.getElementById("closeDrawer");
+    function setDrawer(open){
+      drawer.setAttribute("aria-hidden", open ? "false" : "true");
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+    openDrawer?.addEventListener("click", ()=>setDrawer(true));
+    closeDrawer?.addEventListener("click", ()=>setDrawer(false));
+    drawer?.addEventListener("click", (e)=>{
+      if (e.target === drawer) setDrawer(false);
+    });
+    drawer?.querySelectorAll("[data-close]")?.forEach(a=>{
+      a.addEventListener("click", ()=>setDrawer(false));
+    });
+
+    // Contact form minimal validation (client-side)
+    document.getElementById("contactForm")?.addEventListener("submit", (e)=>{
+      const email = document.getElementById("email").value.trim();
+      if (!email.includes("@")) {
+        e.preventDefault();
+        alert("Por favor ingresa un correo válido.");
+      }
+    });
+  </script>
+</body>
+</html>

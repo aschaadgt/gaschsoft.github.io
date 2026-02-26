@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAMEK - Agricultura de Precisión | Servicio con Excelencia</title>
+  <meta name="description" content="PAMEK ofrece soluciones integrales de agricultura de precisión para maximizar la productividad, eficiencia y rentabilidad de tu campo.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="LogoPamek.png">
+  
+  <!-- Open Graph / WhatsApp -->
+  <meta property="og:title" content="PAMEK - Agricultura de Precisión">
+  <meta property="og:description" content="Soluciones tecnológicas para agricultura de precisión">
+  <meta property="og:image" content="LogoPamek.png">
+  <meta property="og:type" content="website">
+  
+  <style>
+    :root {
+      --primary: #1e5ba8;
+      --primary-dark: #14437d;
+      --secondary: #38b2ac;
+      --accent: #4a90e2;
+      --bg: #ffffff;
+      --bg-alt: #f7fafc;
+      --bg-dark: #0f1a2b;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: rgba(15, 23, 42, 0.1);
+      --shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 60px rgba(15, 23, 42, 0.15);
+      --green: #22c55e;
+      --green-light: #86efac;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== Header ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: var(--primary);
+    }
+
+    .cta-btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(30, 91, 168, 0.3);
+    }
+
+    .cta-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(30, 91, 168, 0.4);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      background: linear-gradient(135deg, #1e5ba8 0%, #2563eb 100%);
+      color: white;
+      padding: 5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)" /></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      margin-bottom: 2rem;
+      opacity: 0.95;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ===== Stats Bar ===== */
+    .stats {
+      background: var(--bg-alt);
+      padding: 3rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* ===== Section Styles ===== */
+    .section {
+      padding: 5rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-alt {
+      background: var(--bg-alt);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ===== Problems Section ===== */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .problem-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .problem-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .problem-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .problem-desc {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ===== Services Section ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .service-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .service-content {
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .service-desc {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .service-benefits {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-benefits li {
+      padding: 0.5rem 0;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .service-benefits li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .service-btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .service-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* ===== Projects Section ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .project-badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: var(--bg-alt);
+      color: var(--text-muted);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== Video Section ===== */
+    .video-section {
+      background: var(--bg-dark);
+      color: white;
+      padding: 5rem 1.5rem;
+    }
+
+    .video-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .featured-video {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      margin-bottom: 3rem;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1e3a8a, #1e40af);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .play-button {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .video-placeholder:hover .play-button {
+      transform: scale(1.1);
+      background: white;
+    }
+
+    .video-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .video-thumb {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #334155, #475569);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-thumb:hover {
+      transform: scale(1.05);
+    }
+
+    .video-thumb .play-button {
+      width: 50px;
+      height: 50px;
+    }
+
+    /* ===== Partners Section ===== */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      align-items: center;
+    }
+
+    .partner-logo {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+      opacity: 0.7;
+    }
+
+    .partner-logo:hover {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+
+    .partner-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* ===== Testimonials ===== */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .testimonial-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .quote-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      opacity: 0.2;
+      position: absolute;
+      top: 1rem;
+      left: 1.5rem;
+    }
+
+    .testimonial-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .author-info h4 {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .author-info p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* ===== Contact Section ===== */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .contact-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-info {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .contact-details h3 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .contact-details p {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .contact-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 91, 168, 0.1);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .form-submit:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(30, 91, 168, 0.3);
+    }
+
+    .form-success {
+      display: none;
+      padding: 1rem;
+      background: #d1fae5;
+      color: #065f46;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .form-success.show {
+      display: block;
+    }
+
+    /* ===== Map Section ===== */
+    .map-container {
+      width: 100%;
+      height: 400px;
+      background: var(--bg-alt);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #e0e7ff, #dbeafe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--primary);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: var(--bg-dark);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+      text-decoration: none;
+      display: block;
+      transition: color 0.3s;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* ===== WhatsApp Float Button ===== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+    }
+
+    .whatsapp-btn {
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+      color: white;
+      font-size: 2rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
+    }
+
+    /* ===== Mobile Responsive ===== */
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero {
+        padding: 3rem 1.5rem;
+      }
+
+      .section {
+        padding: 3rem 1.5rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .whatsapp-btn {
+        width: 55px;
+        height: 55px;
+      }
+    }
+
+    /* ===== Animations ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    /* ===== Scroll Reveal ===== */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <img src="LogoPamek.png" alt="PAMEK Logo">
+      </div>
+      <nav class="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#soluciones">Soluciones</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a href="#contacto" class="cta-btn">
+        💬 Contáctanos
+      </a>
+      <button class="menu-toggle" aria-label="Menú">☰</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="inicio">
+    <div class="hero-content fade-in">
+      <h1>Agricultura de Precisión para Maximizar tu Productividad</h1>
+      <p>Tecnología avanzada y servicios especializados para optimizar cada hectárea de tu campo. Aumenta rendimientos, reduce costos y toma decisiones basadas en datos.</p>
+      <div class="hero-cta">
+        <a href="https://wa.me/50212345678?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20agricultura%20de%20precisi%C3%B3n" class="btn-primary" target="_blank">
+          📱 WhatsApp
+        </a>
+        <a href="#servicios" class="btn-secondary">🌾 Ver Servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-item scroll-reveal">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Años de Experiencia</div>
+      </div>
+      <div class="stat-item scroll-reveal">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Proyectos Realizados</div>
+      </div>
+      <div class="stat-item scroll-reveal">
+        <div class="stat-number">30%</div>
+        <div class="stat-label">Aumento en Eficiencia</div>
+      </div>
+      <div class="stat-item scroll-reveal">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Soporte Técnico</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Solve Section -->
+  <section class="section" id="soluciones">
+    <div class="section-header">
+      <h2 class="section-title">¿Qué Resolvemos?</h2>
+      <p class="section-subtitle">Transformamos los desafíos del campo en oportunidades de crecimiento con tecnología de precisión</p>
+    </div>
+    <div class="problems-grid">
+      <div class="problem-card scroll-reveal">
+        <div class="problem-icon">💰</div>
+        <h3 class="problem-title">Optimización de Costos</h3>
+        <p class="problem-desc">Reducimos el desperdicio de insumos mediante aplicación variable de fertilizantes, pesticidas y agua, ahorrando hasta 30% en costos operativos.</p>
+      </div>
+      <div class="problem-card scroll-reveal">
+        <div class="problem-icon">⚡</div>
+        <h3 class="problem-title">Máxima Eficiencia</h3>
+        <p class="problem-desc">Automatización de procesos y monitoreo en tiempo real para optimizar cada operación en el campo y aumentar la productividad.</p>
+      </div>
+      <div class="problem-card scroll-reveal">
+        <div class="problem-icon">🎯</div>
+        <h3 class="problem-title">Precisión en Aplicaciones</h3>
+        <p class="problem-desc">Tecnología GPS y sensores avanzados para aplicaciones exactas donde y cuando se necesitan, eliminando zonas sobre o sub-aplicadas.</p>
+      </div>
+      <div class="problem-card scroll-reveal">
+        <div class="problem-icon">📊</div>
+        <h3 class="problem-title">Decisiones Basadas en Datos</h3>
+        <p class="problem-desc">Análisis predictivo y mapas de rendimiento para tomar decisiones informadas que maximicen la rentabilidad de cada lote.</p>
+      </div>
+      <div class="problem-card scroll-reveal">
+        <div class="problem-icon">🌱</div>
+        <h3 class="problem-title">Mayor Productividad</h3>
+        <p class="problem-desc">Identificación temprana de problemas y gestión proactiva para aumentar rendimientos por hectárea hasta un 25%.</p>
+      </div>
+      <div class="problem-card scroll-reveal">
+        <div class="problem-icon">🛰️</div>
+        <h3 class="problem-title">Monitoreo Continuo</h3>
+        <p class="problem-desc">Vigilancia 24/7 de tus cultivos mediante imágenes satelitales y drones, detectando problemas antes de que se propaguen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section section-alt" id="servicios">
+    <div class="section-header">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-subtitle">Soluciones integrales de agricultura de precisión adaptadas a las necesidades de tu operación</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card scroll-reveal">
+        <div class="service-image">🛰️</div>
+        <div class="service-content">
+          <h3 class="service-title">Mapeo y Análisis de Suelos</h3>
+          <p class="service-desc">Caracterización detallada de la variabilidad del suelo en tu campo.</p>
+          <ul class="service-benefits">
+            <li>Muestreo georeferenciado de suelos</li>
+            <li>Análisis químico y físico completo</li>
+            <li>Mapas de fertilidad y recomendaciones</li>
+            <li>Diseño de zonas de manejo</li>
+          </ul>
+          <a href="#contacto" class="service-btn">Solicitar Información</a>
+        </div>
+      </div>
+
+      <div class="service-card scroll-reveal">
+        <div class="service-image">🚜</div>
+        <div class="service-content">
+          <h3 class="service-title">Agricultura Variable</h3>
+          <p class="service-desc">Aplicación diferenciada de insumos según las necesidades específicas de cada zona.</p>
+          <ul class="service-benefits">
+            <li>Prescripciones de siembra variable</li>
+            <li>Mapas de aplicación de fertilizantes</li>
+            <li>Control de pulverización variable</li>
+            <li>Sistemas de autoguiado y piloto automático</li>
+          </ul>
+          <a href="#contacto" class="service-btn">Solicitar Información</a>
+        </div>
+      </div>
+
+      <div class="service-card scroll-reveal">
+        <div class="service-image">📡</div>
+        <div class="service-content">
+          <h3 class="service-title">Monitoreo con Drones</h3>
+          <p class="service-desc">Vigilancia aérea de alta resolución para detección temprana de problemas.</p>
+          <ul class="service-benefits">
+            <li>Imágenes multiespectrales y RGB</li>
+            <li>Índices de vegetación (NDVI, NDRE)</li>
+            <li>Detección de plagas y enfermedades</li>
+            <li>Estimación de rendimientos</li>
+          </ul>
+          <a href="#contacto" class="service-btn">Solicitar Información</a>
+        </div>
+      </div>
+
+      <div class="service-card scroll-reveal">
+        <div class="service-image">💧</div>
+        <div class="service-content">
+          <h3 class="service-title">Riego de Precisión</h3>
+          <p class="service-desc">Optimización del uso del agua con sistemas de riego inteligente.</p>
+          <ul class="service-benefits">
+            <li>Sensores de humedad del suelo</li>
+            <li>Automatización de sistemas de riego</li>
+            <li>Programación basada en clima</li>
+            <li>Reducción de consumo hasta 40%</li>
+          </ul>
+          <a href="#contacto" class="service-btn">Solicitar Información</a>
+        </div>
+      </div>
+
+      <div class="service-card scroll-reveal">
+        <div class="service-image">📊</div>
+        <div class="service-content">
+          <h3 class="service-title">Plataforma de Gestión</h3>
+          <p class="service-desc">Software integral para administrar toda tu operación agrícola.</p>
+          <ul class="service-benefits">
+            <li>Monitoreo en tiempo real</li>
+            <li>Reportes de productividad</li>
+            <li>Gestión de maquinaria y personal</li>
+            <li>Trazabilidad completa</li>
+          </ul>
+          <a href="#contacto" class="service-btn">Solicitar Información</a>
+        </div>
+      </div>
+
+      <div class="service-card scroll-reveal">
+        <div class="service-image">🎓</div>
+        <div class="service-content">
+          <h3 class="service-title">Capacitación y Soporte</h3>
+          <p class="service-desc">Entrenamiento técnico y acompañamiento continuo para tu equipo.</p>
+          <ul class="service-benefits">
+            <li>Cursos de agricultura de precisión</li>
+            <li>Capacitación en uso de equipos</li>
+            <li>Interpretación de datos</li>
+            <li>Soporte técnico 24/7</li>
+          </ul>
+          <a href="#contacto" class="service-btn">Solicitar Información</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects/Events Section -->
+  <section class="section" id="proyectos">
+    <div class="section-header">
+      <h2 class="section-title">Proyectos y Eventos</h2>
+      <p class="section-subtitle">Casos de éxito y participación en los principales eventos del sector agrícola</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card scroll-reveal">
+        <div class="project-image">🌾</div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-badge">📍 Escuintla</span>
+            <span class="project-badge">📅 2024</span>
+          </div>
+          <h3 class="project-title">Implementación en Cultivo de Caña</h3>
+          <p class="project-desc">Sistema completo de agricultura de precisión en 2,500 hectáreas, logrando 28% de aumento en rendimiento y 35% de reducción en costos de fertilización.</p>
+        </div>
+      </div>
+
+      <div class="project-card scroll-reveal">
+        <div class="project-image">🌽</div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-badge">📍 Petén</span>
+            <span class="project-badge">📅 2024</span>
+          </div>
+          <h3 class="project-title">Proyecto Maíz Tecnificado</h3>
+          <p class="project-desc">Mapeo de suelos, siembra variable y monitoreo con drones en 1,800 hectáreas. Incremento del 32% en productividad por hectárea.</p>
+        </div>
+      </div>
+
+      <div class="project-card scroll-reveal">
+        <div class="project-image">☕</div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-badge">📍 Huehuetenango</span>
+            <span class="project-badge">📅 2023</span>
+          </div>
+          <h3 class="project-title">Café de Especialidad con Drones</h3>
+          <p class="project-desc">Monitoreo multiespectral y gestión de plagas en 450 hectáreas de café, mejorando calidad del grano y reduciendo aplicaciones químicas en 40%.</p>
+        </div>
+      </div>
+
+      <div class="project-card scroll-reveal">
+        <div class="project-image">🎤</div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-badge">📍 Ciudad de Guatemala</span>
+            <span class="project-badge">📅 2024</span>
+          </div>
+          <h3 class="project-title">Expo Agro Guatemala 2024</h3>
+          <p class="project-desc">Participación como expositores con demostraciones en vivo de tecnología de drones y sistemas de guiado. Más de 500 visitantes en nuestro stand.</p>
+        </div>
+      </div>
+
+      <div class="project-card scroll-reveal">
+        <div class="project-image">🌴</div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-badge">📍 Izabal</span>
+            <span class="project-badge">📅 2023</span>
+          </div>
+          <h3 class="project-title">Palma Africana Sostenible</h3>
+          <p class="project-desc">Implementación de riego de precisión y fertilización variable en 3,200 hectáreas, ahorrando 2.5 millones de litros de agua mensualmente.</p>
+        </div>
+      </div>
+
+      <div class="project-card scroll-reveal">
+        <div class="project-image">🎓</div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-badge">📍 Virtual</span>
+            <span class="project-badge">📅 2024</span>
+          </div>
+          <h3 class="project-title">Webinar Agricultura 4.0</h3>
+          <p class="project-desc">Serie de capacitaciones en línea sobre agricultura de precisión con más de 1,200 participantes de toda Centroamérica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <div class="video-container">
+      <div class="section-header">
+        <h2 class="section-title" style="color: white;">Tecnología en Acción</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Conoce cómo transformamos el campo con agricultura de precisión</p>
+      </div>
+      
+      <div class="featured-video">
+        <div class="video-placeholder">
+          <div class="play-button">▶</div>
+        </div>
+      </div>
+
+      <div class="video-gallery">
+        <div class="video-thumb">
+          <div class="play-button">▶</div>
+        </div>
+        <div class="video-thumb">
+          <div class="play-button">▶</div>
+        </div>
+        <div class="video-thumb">
+          <div class="play-button">▶</div>
+        </div>
+        <div class="video-thumb">
+          <div class="play-button">▶</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <h2 class="section-title">Nuestros Aliados Tecnológicos</h2>
+      <p class="section-subtitle">Trabajamos con las mejores marcas globales en tecnología agrícola</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-logo scroll-reveal">
+        <div style="font-weight: 700; font-size: 1.5rem; color: var(--primary);">John Deere</div>
+      </div>
+      <div class="partner-logo scroll-reveal">
+        <div style="font-weight: 700; font-size: 1.5rem; color: var(--primary);">Trimble</div>
+      </div>
+      <div class="partner-logo scroll-reveal">
+        <div style="font-weight: 700; font-size: 1.5rem; color: var(--primary);">DJI Agro</div>
+      </div>
+      <div class="partner-logo scroll-reveal">
+        <div style="font-weight: 700; font-size: 1.5rem; color: var(--primary);">Climate FieldView</div>
+      </div>
+      <div class="partner-logo scroll-reveal">
+        <div style="font-weight: 700; font-size: 1.5rem; color: var(--primary);">Topcon</div>
+      </div>
+      <div class="partner-logo scroll-reveal">
+        <div style="font-weight: 700; font-size: 1.5rem; color: var(--primary);">Ag Leader</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+      <p class="section-subtitle">Testimonios reales de productores que han transformado su operación</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card scroll-reveal">
+        <div class="quote-icon">"</div>
+        <p class="testimonial-text">Desde que implementamos agricultura de precisión con PAMEK, hemos aumentado nuestros rendimientos en 30% y reducido costos significativamente. El retorno de inversión fue en menos de dos cosechas.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JM</div>
+          <div class="author-info">
+            <h4>Juan Martínez</h4>
+            <p>Productor de Caña - Escuintla</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card scroll-reveal">
+        <div class="quote-icon">"</div>
+        <p class="testimonial-text">El soporte técnico es excepcional. El equipo de PAMEK nos acompañó en todo el proceso y la capacitación fue clave para que nuestro personal pudiera operar la tecnología sin problemas.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">CR</div>
+          <div class="author-info">
+            <h4>Carlos Ramírez</h4>
+            <p>Gerente Agrícola - Petén</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card scroll-reveal">
+        <div class="quote-icon">"</div>
+        <p class="testimonial-text">Los mapas de rendimiento nos permitieron identificar zonas problemáticas que antes no veíamos. Ahora tomamos decisiones basadas en datos reales y hemos mejorado la uniformidad de nuestros cultivos.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MP</div>
+          <div class="author-info">
+            <h4>María Pérez</h4>
+            <p>Productora de Café - Huehuetenango</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section section-alt" id="contacto">
+    <div class="section-header">
+      <h2 class="section-title">Contáctanos</h2>
+      <p class="section-subtitle">Estamos listos para ayudarte a transformar tu operación agrícola</p>
+    </div>
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3 style="font-size: 1.5rem; margin-bottom: 2rem;">Información de Contacto</h3>
+        
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-details">
+            <h3>Dirección</h3>
+            <p>Zona 10, Ciudad de Guatemala<br>Guatemala, C.A.</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-details">
+            <h3>Teléfono</h3>
+            <p>+502 1234-5678<br>+502 9876-5432</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-details">
+            <h3>Email</h3>
+            <p>info@pamek.com.gt<br>ventas@pamek.com.gt</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">🕒</div>
+          <div class="contact-details">
+            <h3>Horario de Atención</h3>
+            <p>Lunes a Viernes: 8:00 AM - 6:00 PM<br>Sábados: 8:00 AM - 12:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-success" id="formSuccess">
+          ¡Gracias por contactarnos! Te responderemos pronto.
+        </div>
+        <form id="contactForm">
+          <div class="form-group">
+            <label class="form-label">Nombre Completo *</label>
+            <input type="text" class="form-input" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Email *</label>
+            <input type="email" class="form-input" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Teléfono *</label>
+            <input type="tel" class="form-input" name="phone" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Servicio de Interés</label>
+            <select class="form-input" name="service">
+              <option value="">Selecciona un servicio</option>
+              <option value="mapeo">Mapeo y Análisis de Suelos</option>
+              <option value="agricultura-variable">Agricultura Variable</option>
+              <option value="drones">Monitoreo con Drones</option>
+              <option value="riego">Riego de Precisión</option>
+              <option value="plataforma">Plataforma de Gestión</option>
+              <option value="capacitacion">Capacitación y Soporte</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Mensaje *</label>
+            <textarea class="form-textarea" name="message" required></textarea>
+          </div>
+          
+          <button type="submit" class="form-submit">Enviar Mensaje</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-container">
+      <div class="map-placeholder">
+        🗺️
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>PAMEK</h3>
+        <p>Líderes en agricultura de precisión con más de 15 años transformando el campo guatemalteco con tecnología de vanguardia.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook">📘</a>
+          <a href="#" class="social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
+          <a href="#" class="social-link" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Servicios</h3>
+        <a href="#servicios">Mapeo de Suelos</a>
+        <a href="#servicios">Agricultura Variable</a>
+        <a href="#servicios">Monitoreo con Drones</a>
+        <a href="#servicios">Riego de Precisión</a>
+        <a href="#servicios">Plataforma de Gestión</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Recursos</h3>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#" onclick="alert('Blog próximamente')">Blog</a>
+        <a href="#" onclick="alert('Casos de éxito próximamente')">Casos de Éxito</a>
+        <a href="#" onclick="alert('Descargas próximamente')">Descargas</a>
+        <a href="#contacto">Soporte</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p>Zona 10, Ciudad de Guatemala</p>
+        <p>+502 1234-5678</p>
+        <p>info@pamek.com.gt</p>
+        <a href="https://wa.me/50212345678" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 PAMEK - Servicio con Excelencia. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <div class="whatsapp-float">
+    <a href="https://wa.me/50212345678?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20servicios%20de%20agricultura%20de%20precisi%C3%B3n" 
+       class="whatsapp-btn" 
+       target="_blank"
+       aria-label="Contactar por WhatsApp">
+      💬
+    </a>
+  </div>
+
+  <script>
+    // Scroll Reveal Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth Scroll for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Contact Form Handling
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      
+      // Create WhatsApp message
+      const message = `Nuevo contacto desde PAMEK Website:
+      
+Nombre: ${data.name}
+Email: ${data.email}
+Teléfono: ${data.phone}
+Servicio: ${data.service || 'No especificado'}
+Mensaje: ${data.message}`;
+      
+      // Open WhatsApp with pre-filled message
+      const whatsappUrl = `https://wa.me/50212345678?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+      
+      // Show success message
+      document.getElementById('formSuccess').classList.add('show');
+      this.reset();
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        document.getElementById('formSuccess').classList.remove('show');
+      }, 5000);
+    });
+
+    // Video placeholder click handlers
+    document.querySelectorAll('.video-placeholder, .video-thumb').forEach(video => {
+      video.addEventListener('click', function() {
+        alert('Aquí se reproducirá el video. Puedes integrar YouTube, Vimeo o videos propios.');
+      });
+    });
+
+    // Mobile Menu Toggle (basic implementation)
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      const nav = document.querySelector('.nav');
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Header shadow on scroll
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 50) {
+        header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+      } else {
+        header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+      }
+    });
+
+    // Stat counter animation
+    function animateCounter(element, target, duration = 2000) {
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target + (element.textContent.includes('+') ? '+' : '') + (element.textContent.includes('%') ? '%' : '');
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : '') + (element.textContent.includes('%') ? '%' : '');
+        }
+      }, 16);
+    }
+
+    // Trigger counter animation when stats section is visible
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statNumber = entry.target.querySelector('.stat-number');
+          if (statNumber && !statNumber.classList.contains('animated')) {
+            statNumber.classList.add('animated');
+            const text = statNumber.textContent;
+            const number = parseInt(text.replace(/\D/g, ''));
+            if (number) {
+              statNumber.textContent = '0' + (text.includes('+') ? '+' : '') + (text.includes('%') ? '%' : '');
+              animateCounter(statNumber, number);
+            }
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-item').forEach(stat => {
+      statsObserver.observe(stat);
+    });
+
+    console.log('🌾 PAMEK - Agricultura de Precisión loaded successfully!');
+  </script>
+</body>
+</html>
