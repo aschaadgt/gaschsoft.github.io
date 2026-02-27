@@ -1046,6 +1046,7 @@
     }
     .whatuse-title{
       margin:0;
+      color: var(--primary);
       font-size: clamp(22px, 3vw, 34px);
       line-height: 1.08;
       letter-spacing: -0.6px;
@@ -1699,6 +1700,7 @@ img {
 
     /* ===== Pilares de impacto (Section 2) ===== */
     .section-pillars{ margin-top: 58px; background: transparent; border: none; box-shadow: none; border-radius: 0; overflow: visible; position: relative; }
+    .section-pillars, .section-pillars *{ -webkit-user-select:none; user-select:none; }
     /* Full-bleed soft tint (spans viewport, not container) */
     .section-pillars::after{ content:""; position:absolute; top:0; bottom:0; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; background: var(--pillars-bg); z-index:-1; pointer-events:none; }
     /* Seamless fade from Hero into pillars tint */
@@ -1763,8 +1765,8 @@ html[data-theme="dark"] .pillar-card .cap-ico{
 .pillar-bullets li{ margin: 0; }
 .pillar-bullets li::marker{ color: rgba(31,122,255,0.85); }
 
-/* 2 columns on small screens to reduce vertical height */
-@media (min-width: 360px){
+/* 2 columns on tablets */
+@media (min-width: 768px){
   .pillars-grid{ grid-template-columns: repeat(2, 1fr); }
   .pillar-card{ border-right: 1px solid var(--border); padding: 20px 18px; min-height: 144px; }
   .pillar-card:nth-child(2n){ border-right: none; }
