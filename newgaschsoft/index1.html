@@ -1806,6 +1806,558 @@ html[data-theme="dark"] .pillar-card .cap-ico{
       .pillars-title{ font-size: 26px; }
     }
 
+
+        /* ===== Casos (v79) ===== */
+    .section-cases{
+      position: relative;
+      margin-top: 0;
+      border: 0;
+      box-shadow: none;
+      border-radius: 0;
+      background: transparent;
+      overflow: visible;
+    }
+    .section-cases, .section-cases *{ -webkit-user-select:none; user-select:none; }
+
+    /* Full-bleed tint (match Pillars) */
+    .section-cases::after{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:50%;
+      right:50%;
+      margin-left:-50vw;
+      margin-right:-50vw;
+      background: var(--pillars-bg);
+      z-index:-1;
+      pointer-events:none;
+    }
+
+    /* Seam blending: fade from previous section into this tint */
+    .section-cases::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      right:50%;
+      margin-left:-50vw;
+      margin-right:-50vw;
+      top:-72px;
+      height:72px;
+      background: linear-gradient(180deg, rgba(31,122,255,0) 0%, var(--pillars-bg) 100%);
+      z-index:-1;
+      pointer-events:none;
+    }
+
+    .cases-anchor{
+      position: relative;
+      display:block;
+      height: 0;
+      top: -84px; /* offset for sticky header */
+    }
+
+    .cases-inner{
+      padding-top: 64px;
+      padding-bottom: 34px;
+      position: relative;
+    }
+
+    /* Seam blending: fade out to next section */
+    .cases-inner::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      right:50%;
+      margin-left:-50vw;
+      margin-right:-50vw;
+      bottom:-72px;
+      height:72px;
+      background: linear-gradient(180deg, var(--pillars-bg) 0%, rgba(31,122,255,0) 100%);
+      pointer-events:none;
+      z-index:-1;
+    }
+.cases-anchor{
+      position: relative;
+      display:block;
+      height: 0;
+      top: -84px; /* offset for sticky header */
+    }
+    .cases-inner{ padding-top: 64px; padding-bottom: 34px; }
+    .cases-inner{ position: relative; }
+    .cases-inner::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:-42px;
+      height: 64px;
+      width:100vw;
+      background: linear-gradient(to top, rgba(0,0,0,0), var(--cases-bg));
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .cases-head{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 14px;
+      max-width: 980px;
+      margin: 0 auto 18px;
+    }
+    .cases-head-copy{ min-width: 0;  text-align:center; }
+    .cases-title{
+      margin:0;
+      color: #0B0F14;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    html[data-theme="dark"] .cases-title{ color: #FFFFFF; }
+    .cases-desc{
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 74ch;
+    }
+
+    .cases-head .cases-seg{ align-self: center; }
+
+    /* Segmented control (Linear-ish, center) */
+    .cases-seg{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 2px;
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      user-select:none;
+      -webkit-user-select:none;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    html[data-theme="dark"] .cases-seg{
+      background: rgba(17,24,39,0.22);
+    }
+    .cases-seg-btn{
+      appearance:none;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text);
+      font-weight: 750;
+      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+    }
+    .cases-seg-btn:hover{
+      background: var(--link-hover-bg);
+      border-color: var(--link-hover-border);
+    }
+    .cases-seg-btn:active{ transform: translateY(1px); }
+    .cases-seg-btn[aria-selected="true"]{
+      background: rgba(31,122,255,0.14);
+      border-color: rgba(31,122,255,0.26);
+    }
+    html[data-theme="dark"] .cases-seg-btn[aria-selected="true"]{
+      background: rgba(31,122,255,0.20);
+      border-color: rgba(31,122,255,0.32);
+    }
+    .cases-seg-btn:focus-visible{
+      outline: 3px solid rgba(31,122,255,0.30);
+      outline-offset: 2px;
+    }
+
+    .cases-body{
+      max-width: 980px;
+      margin: 0 auto;
+      display:grid;
+      gap: 14px;
+    }
+
+    /* Transition container (respect reduced motion) */
+    .cases-fade{
+      transition: opacity 180ms ease, transform 180ms ease;
+      will-change: opacity, transform;
+    }
+    .cases-fade.is-fading{
+      opacity:0;
+      transform: translateX(-10px);
+    }
+    .cases-fade.is-enter{
+      opacity:0;
+      transform: translateX(10px);
+    }
+    @media (prefers-reduced-motion: reduce){
+      .cases-fade{ transition:none; }
+    }
+
+    .cases-row{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 900px){
+      .cases-row{ grid-template-columns: 1.2fr 0.8fr; align-items:start; }
+    }
+
+    .case-card{
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 16px 16px;
+      overflow:hidden;
+    }
+    html[data-theme="dark"] .case-card{ background: rgba(17,24,39,0.26); }
+
+    .case-kpis{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 520px){
+      .case-kpis{ grid-template-columns: 1fr; }
+    }
+    .kpi{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 12px;
+      background: rgba(255,255,255,0.14);
+    }
+    html[data-theme="dark"] .kpi{ background: rgba(11,15,20,0.22); }
+    .kpi-label{
+      font-size: 11px;
+      letter-spacing: 0.2px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .kpi-dot{
+      width: 7px; height: 7px;
+      border-radius: 999px;
+      background: var(--primary);
+      box-shadow: 0 0 0 3px rgba(31,122,255,0.14);
+      flex: 0 0 auto;
+    }
+    .kpi-value{
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .case-title{
+      margin: 6px 0 10px;
+      font-size: 14px;
+      font-weight: 850;
+      letter-spacing: -0.2px;
+    }
+    .case-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.12);
+      color: var(--text);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    html[data-theme="dark"] .chip{ background: rgba(11,15,20,0.20); }
+
+    .case-block{
+      display:grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style:none;
+    }
+    .case-block li{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .case-bullet{
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(31,122,255,0.18);
+      background: radial-gradient(circle at 30% 30%, rgba(31,122,255,0.14), rgba(255,255,255,0.10) 62%);
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+    html[data-theme="dark"] .case-bullet{
+      background: radial-gradient(circle at 30% 30%, rgba(31,122,255,0.18), rgba(11,15,20,0.18) 62%);
+    }
+
+    .case-aside{
+      display:grid;
+      gap: 12px;
+    }
+    .aside-card{
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px 14px;
+      background: rgba(255,255,255,0.14);
+    }
+    html[data-theme="dark"] .aside-card{ background: rgba(11,15,20,0.22); }
+    .aside-title{
+      font-size: 12px;
+      letter-spacing: 0.2px;
+      color: var(--muted);
+      margin: 0 0 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .aside-list{
+      margin: 0;
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+      display:grid;
+      gap: 6px;
+    }
+    .aside-list li::marker{ color: rgba(31,122,255,0.85); }
+
+    .cases-cta{
+      max-width: 980px;
+      margin: 18px auto 0;
+      display:flex;
+      justify-content:center;
+    }
+    /* ===== Casos: showcase (fixed, independent of segment) ===== */
+    .cases-showcase{
+      max-width: 980px;
+      margin: 16px auto 0;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      overflow: hidden;
+    }
+    html[data-theme="dark"] .cases-showcase{ background: rgba(11,15,20,0.22); }
+
+    .showcase-top{
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(148,163,184,0.18);
+      flex-wrap: wrap;
+    }
+    .showcase-title{
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .showcase-meta{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .showcase-link{
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid rgba(31,122,255,0.18);
+      background: rgba(31,122,255,0.10);
+      padding: 6px 10px;
+      border-radius: 999px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .showcase-link:hover{
+      border-color: rgba(31,122,255,0.26);
+      background: rgba(31,122,255,0.14);
+    }
+    .showcase-sep{ opacity: 0.6; }
+
+    .showcase-frame{
+      position: relative;
+      width: 100%;
+      height: clamp(307px, 40.12vw, 614px);
+      background: rgba(0,0,0,0.02);
+    }
+    @media (max-width: 720px){
+      .showcase-frame{ height: clamp(520px, 130vw, 920px); }
+    }
+
+    .showcase-stage{
+      position:absolute;
+      inset: 0;
+    }
+    .showcase-iframe{
+      position:absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 220ms ease, transform 220ms ease;
+      background: transparent;
+    }
+    .showcase-iframe.is-active{
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .showcase-progress{
+      position:absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 3px;
+      background: rgba(148,163,184,0.18);
+      z-index: 3;
+      overflow:hidden;
+    }
+    .showcase-progress::after{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, rgba(31,122,255,0.0), rgba(31,122,255,0.90), rgba(56,189,248,0.80));
+      animation: none;
+    }
+    .showcase-progress.kick::after{
+      animation: showcaseFill var(--showcase-dur, 8s) linear 1;
+    }
+    @keyframes showcaseFill{
+      from{ width:0%; }
+      to{ width:100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .showcase-iframe{ transition:none; transform:none; }
+      .showcase-progress::after{ animation:none; width:100%; }
+    }
+
+    /* ===== Casos layout v79.6 (timeline + media) ===== */
+    .cases-body{ max-width: 980px; margin: 0 auto; display:block; }
+
+    .cases-flow{ max-width: 980px; margin: 0 auto; }
+    .cases-flow-grid{
+      display:grid;
+      gap: 18px;
+      grid-template-columns: 1fr;
+      align-items:start;
+    }
+    @media (min-width: 980px){
+      .cases-flow-grid{ grid-template-columns: 1.1fr 0.9fr; gap: 22px; }
+    }
+
+    .cases-steps{
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 16px 16px;
+      overflow:hidden;
+    }
+    html[data-theme="dark"] .cases-steps{ background: rgba(17,24,39,0.26); }
+
+    .case-step{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      padding: 10px 4px;
+    }
+
+    .step-rail{
+      width: 34px;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      flex: 0 0 auto;
+    }
+    .step-dot{
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 850;
+      font-size: 12px;
+      color: var(--text);
+      border: 1px solid rgba(31,122,255,0.24);
+      background: radial-gradient(circle at 30% 30%, rgba(31,122,255,0.18), rgba(255,255,255,0.10) 62%);
+      box-shadow: 0 0 0 3px rgba(31,122,255,0.10);
+      user-select:none;
+      -webkit-user-select:none;
+    }
+    html[data-theme="dark"] .step-dot{
+      background: radial-gradient(circle at 30% 30%, rgba(31,122,255,0.20), rgba(11,15,20,0.18) 62%);
+    }
+    .step-line{
+      width: 1px;
+      flex: 1 1 auto;
+      background: rgba(148,163,184,0.45);
+      margin-top: 10px;
+      min-height: 26px;
+    }
+    html[data-theme="dark"] .step-line{ background: rgba(148,163,184,0.35); }
+
+    .step-content{ padding-top: 1px; }
+    .step-title{
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .step-text{
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .cases-media{
+      display:grid;
+      gap: 12px;
+    }
+
+    .cases-media-card{
+      background: rgba(255,255,255,0.14);
+    }
+    html[data-theme="dark"] .cases-media-card{
+      background: rgba(11,15,20,0.22);
+    }
+
+
 </style>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/newgaschsoft/apple-touch-icon.png">
@@ -2086,11 +2638,69 @@ html[data-theme="dark"] .pillar-card .cap-ico{
       </div>
     </section>
 
-    <!-- Placeholder sections for anchors (v60) -->
-    <section class="section" id="cases" aria-label="Casos">
-      <div class="section-inner">
-        <h2 class="section-title" id="casesTitle">Casos</h2>
-        <p class="section-desc" id="casesDesc">Ejemplos y resultados (próximamente).</p>
+    <!-- ===== Casos (v79) ===== -->
+    <section class="section-cases" id="cases" aria-label="Casos">
+      <!-- anchors for header/drawer deep-links -->
+      <span class="cases-anchor" id="cases-sme" aria-hidden="true"></span>
+      <span class="cases-anchor" id="cases-corp" aria-hidden="true"></span>
+      <span class="cases-anchor" id="cases-startups" aria-hidden="true"></span>
+
+      <div class="section-inner cases-inner">
+        <div class="cases-head">
+          <div class="cases-head-copy">
+            <h2 class="cases-title" id="casesTitle">Casos</h2>
+            <p class="cases-desc" id="casesDesc">No son páginas. Son sistemas. Elige tu escenario y mira resultados en conversión, operación y continuidad.</p>
+          </div>
+
+          <div class="cases-seg" id="casesSeg" role="tablist" aria-label="Segmento">
+            <button class="cases-seg-btn" type="button" data-seg="sme" role="tab" aria-selected="true">PYMEs</button>
+            <button class="cases-seg-btn" type="button" data-seg="corp" role="tab" aria-selected="false">Corporativo</button>
+            <button class="cases-seg-btn" type="button" data-seg="startup" role="tab" aria-selected="false">Startups</button>
+          </div>
+        </div>
+
+        <div class="cases-body" id="casesBody" aria-live="polite">
+          <!-- injected by JS -->
+        </div>
+
+        
+
+        <div class="cases-showcase" id="casesShowcase" aria-label="Proyectos">
+          <div class="showcase-top">
+            <div class="showcase-title" id="showcaseTitle">Proyectos reales en vivo</div>
+            <div class="showcase-meta">
+              <a class="showcase-link" href="https://gaschsoft.com/mrpizzasgt/" target="_blank" rel="noopener">Mr Pizzas GT</a>
+              <span class="showcase-sep" aria-hidden="true">•</span>
+              <a class="showcase-link" href="https://gaschsoft.com/villacaninagt/" target="_blank" rel="noopener">Villa Canina</a>
+            </div>
+          </div>
+
+          <div class="showcase-frame" id="showcaseFrame" aria-hidden="true">
+            <div class="showcase-progress kick" id="showcaseProgress" aria-hidden="true"></div>
+
+            <div class="showcase-stage">
+              <iframe class="showcase-iframe is-active" data-idx="0"
+                src="https://gaschsoft.com/mrpizzasgt/"
+                title="Mr Pizzas GT"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+              </iframe>
+
+              <iframe class="showcase-iframe" data-idx="1"
+                src="https://gaschsoft.com/villacaninagt/"
+                title="Villa Canina"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+              </iframe>
+            </div>
+          </div>
+        </div>
+
+<div class="cases-cta">
+          <a class="btn ghost" id="casesCta" href="#contact">Agregar esto a mi proyecto</a>
+        </div>
       </div>
     </section>
 
@@ -2594,6 +3204,16 @@ if (heroTitleA && heroTitleB) {
       
       const drawerServicesBtn = document.getElementById("drawerServicesBtn");
       const drawerServicesMenu = document.getElementById("drawerServicesMenu");
+
+      // Drawer: Casos (fix undefined vars; keeps console clean)
+      const drawerCasesBtn = document.getElementById("drawerCasesBtn");
+      const drawerCasesMenu = document.getElementById("drawerCasesMenu");
+      const drawerCasesChev = document.getElementById("drawerCasesChev");
+      const drawerCaseSME = document.getElementById("drawerCaseSME");
+      const drawerCaseCorp = document.getElementById("drawerCaseCorp");
+      const drawerCaseStartup = document.getElementById("drawerCaseStartup");
+      const drawerDemo = document.getElementById("drawerDemo");
+
 
       const drawerPortfolio = document.getElementById("drawerCasesLabel");
       const drawerAbout = document.getElementById("drawerAbout");
@@ -3271,11 +3891,355 @@ function miniIcon(name){
           initMarquee(botMarquee);
         });
       }
+
+      /* ===== Casos (v79): segmented control + contenido (I18N) ===== */
+      function ensureCasesI18N(){
+        // Attach without touching the big I18N literal (safer diff)
+        if(!I18N.es.casesSection){
+          I18N.es.casesSection = {
+            title: "Casos",
+            desc: "No son páginas. Son sistemas. Elige tu escenario y mira resultados en conversión, operación y continuidad.",
+            segAria: "Segmento",
+            segs: {
+              sme: {
+                label: "PYMEs",
+                kpis: [
+                  { k:"Conversión", v:"Más leads con menos pasos" },
+                  { k:"Velocidad", v:"Carga rápida en móvil" },
+                  { k:"Operación", v:"Menos tareas manuales" }
+                ],
+                title: "Captación + operación lista para vender",
+                meta: ["Servicios", "Retail", "Reservas", "WhatsApp"],
+                bullets: [
+                  "Contexto: empresas que ya venden, pero el sitio no acompaña (mensaje difuso, fricción al contactar).",
+                  "Sistema: narrativa por secciones + CTAs claros + captura de leads + canales de cierre listos (WhatsApp / formulario).",
+                  "Continuidad: base mantenible con cambios de copy/brand sin romper producción."
+                ],
+                asideTitle: "Entrega típica",
+                aside: ["Landing + secciones clave", "Eventos medibles (CTA / formularios)", "Optimización de imágenes + performance", "Checklist de publicación"]
+              },
+              corp: {
+                label: "Corporativo",
+                kpis: [
+                  { k:"Gobernanza", v:"Consistencia y control" },
+                  { k:"Estandarización", v:"Componentes reutilizables" },
+                  { k:"Continuidad", v:"Releases sin drama" }
+                ],
+                title: "Ejecución ordenada para operación y reputación",
+                meta: ["Multi-sección", "I18N", "Políticas", "QA"],
+                bullets: [
+                  "Contexto: presencia digital con múltiples stakeholders y necesidad de consistencia (no más parches).",
+                  "Sistema: estándares de UI/UX + estructura modular + flujos documentados para handoffs claros.",
+                  "Operación: cambios seguros con versionado y rollback rápido."
+                ],
+                asideTitle: "Estándares aplicados",
+                aside: ["Performance budget", "Accesibilidad base", "Estados UI consistentes", "Documentación operativa"]
+              },
+              startup: {
+                label: "Startups",
+                kpis: [
+                  { k:"Velocidad", v:"Ship rápido" },
+                  { k:"Medición", v:"Eventos y embudo" },
+                  { k:"Iteración", v:"Mejoras por fases" }
+                ],
+                title: "MVP medible, iteraciones rápidas",
+                meta: ["MVP", "Funnels", "Experimentación", "Roadmap"],
+                bullets: [
+                  "Contexto: necesitas lanzar ya, pero con datos para decidir (no solo “se ve bonito”).",
+                  "Sistema: embudo simple + puntos de medición + iteraciones por fases sin rehacer todo.",
+                  "Evolución: base lista para sumar integraciones cuando el negocio lo pida."
+                ],
+                asideTitle: "Qué queda listo",
+                aside: ["Instrumentación básica (eventos)", "Secciones convertibles (prueba + CTA)", "Escalabilidad técnica", "Plan de siguientes releases"]
+              }
+            },
+            cta: "Agregar esto a mi proyecto"
+          };
+        }
+        if(!I18N.en.casesSection){
+          I18N.en.casesSection = {
+            title: "Cases",
+            desc: "Not just pages. Systems. Pick your scenario and see outcomes in conversion, operations, and continuity.",
+            segAria: "Segment",
+            segs: {
+              sme: {
+                label: "SMEs",
+                kpis: [
+                  { k:"Conversion", v:"More leads, fewer steps" },
+                  { k:"Speed", v:"Fast mobile load" },
+                  { k:"Ops", v:"Less manual work" }
+                ],
+                title: "Acquisition + operations ready to sell",
+                meta: ["Services", "Retail", "Bookings", "WhatsApp"],
+                bullets: [
+                  "Context: companies already selling, but the site adds friction (unclear message, weak contact flow).",
+                  "System: section narrative + clear CTAs + lead capture + closing channels (WhatsApp / form).",
+                  "Continuity: maintainable base—update copy/brand without breaking production."
+                ],
+                asideTitle: "Typical delivery",
+                aside: ["Landing + key sections", "Measurable events (CTA / forms)", "Image optimization + performance", "Publish checklist"]
+              },
+              corp: {
+                label: "Enterprise",
+                kpis: [
+                  { k:"Governance", v:"Consistency and control" },
+                  { k:"Standardization", v:"Reusable components" },
+                  { k:"Continuity", v:"Safe releases" }
+                ],
+                title: "Structured execution for operations and reputation",
+                meta: ["Multi-section", "I18N", "Policies", "QA"],
+                bullets: [
+                  "Context: multi-stakeholder web presence that needs consistency (no more patchwork).",
+                  "System: UI/UX standards + modular structure + documented flows for clean handoffs.",
+                  "Operations: safe changes with versioning and quick rollback."
+                ],
+                asideTitle: "Standards applied",
+                aside: ["Performance budget", "Baseline accessibility", "Consistent UI states", "Operational docs"]
+              },
+              startup: {
+                label: "Startups",
+                kpis: [
+                  { k:"Speed", v:"Ship fast" },
+                  { k:"Measurement", v:"Events and funnel" },
+                  { k:"Iteration", v:"Phased improvements" }
+                ],
+                title: "Measurable MVP, fast iterations",
+                meta: ["MVP", "Funnels", "Iteration", "Roadmap"],
+                bullets: [
+                  "Context: launch now—but with signals to decide (not just “looks nice”).",
+                  "System: simple funnel + measurement points + phased iterations without rewrites.",
+                  "Evolution: foundation ready for integrations when the business demands it."
+                ],
+                asideTitle: "What’s ready",
+                aside: ["Basic instrumentation (events)", "Convertible sections (proof + CTA)", "Technical scalability", "Next releases plan"]
+              }
+            },
+            cta: "Add this to my project"
+          };
+        }
+      }
+
+      
+      /* ===== Casos: showcase rotator (fixed, independent of segment) ===== */
+      function initShowcase(){
+        if (window.__gsShowcaseInit) return;
+        window.__gsShowcaseInit = true;
+
+        const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function setup(){
+          const frame = document.getElementById("showcaseFrame");
+          if(!frame) return;
+          const iframes = Array.from(frame.querySelectorAll(".showcase-iframe"));
+          if(iframes.length < 2) return;
+
+          let idx = 0;
+          const dur = 10000; // ms
+          document.documentElement.style.setProperty("--showcase-dur", (dur/1000) + "s");
+
+          const prog = document.getElementById("showcaseProgress");
+
+          const titleEl = document.getElementById("showcaseTitle");
+          if(titleEl){ titleEl.textContent = (state.lang === "en") ? "Live projects" : "Proyectos reales en vivo"; }
+
+
+          function setActive(next){
+            iframes.forEach((el, i) => el.classList.toggle("is-active", i === next));
+
+            if(prog && !prefersReduced){
+              prog.classList.remove("kick");
+              void prog.offsetWidth; // reflow to restart
+              prog.classList.add("kick");
+            }
+          }
+
+          setActive(0);
+
+          if(prefersReduced) return;
+
+          window.setInterval(() => {
+            idx = (idx + 1) % iframes.length;
+            setActive(idx);
+          }, dur);
+        }
+
+        // Run after initial render paints
+        requestAnimationFrame(setup);
+      }
+
+function initCases(){
+        if (window.__gsCasesInit) return;
+        window.__gsCasesInit = true;
+
+        ensureCasesI18N();
+
+        const segWrap = document.getElementById("casesSeg");
+        const body = document.getElementById("casesBody");
+        const titleEl = document.getElementById("casesTitle");
+        const descEl = document.getElementById("casesDesc");
+        const ctaEl = document.getElementById("casesCta");
+        if(!segWrap || !body) return;
+
+        body.classList.add("cases-fade");
+
+        let seg = "sme";
+
+        function getCfg(){
+          const lang = (state && state.lang) ? state.lang : (localStorage.getItem(STORAGE.lang) || "es");
+          return (I18N[lang] && I18N[lang].casesSection) ? I18N[lang].casesSection : I18N.es.casesSection;
+        }
+
+        function setSelectedButtons(){
+          segWrap.querySelectorAll(".cases-seg-btn").forEach(btn => {
+            const is = btn.getAttribute("data-seg") === seg;
+            btn.setAttribute("aria-selected", is ? "true" : "false");
+          });
+        }
+
+        function render(){
+          const cfg = getCfg();
+          ensureCasesI18N();
+
+          if(titleEl) titleEl.textContent = cfg.title || "Casos";
+          if(descEl) descEl.textContent = cfg.desc || "";
+          if(ctaEl) ctaEl.textContent = cfg.cta || (state.lang === "en" ? "Add this to my project" : "Agregar esto a mi proyecto");
+          if(segWrap) segWrap.setAttribute("aria-label", cfg.segAria || (state.lang === "en" ? "Segment" : "Segmento"));
+
+          // Update seg labels (header + segmented)
+          const map = cfg.segs || {};
+          segWrap.querySelectorAll(".cases-seg-btn").forEach(btn => {
+            const k = btn.getAttribute("data-seg");
+            if (map[k] && map[k].label) btn.textContent = map[k].label;
+          });
+
+          const s = (cfg.segs && cfg.segs[seg]) ? cfg.segs[seg] : cfg.segs.sme;
+
+          const kpis = (s.kpis || []).slice(0,3).map(k => `
+            <div class="kpi">
+              <div class="kpi-label"><span class="kpi-dot" aria-hidden="true"></span>${k.k}</div>
+              <div class="kpi-value">${k.v}</div>
+            </div>
+          `).join("");
+
+          const chips = (s.meta || []).slice(0,6).map(c => `<span class="chip">${c}</span>`).join("");
+
+          const bullets = (s.bullets || []).slice(0,4).map(b => `
+            <li><span class="case-bullet" aria-hidden="true"></span><span>${b}</span></li>
+          `).join("");
+
+          const aside = (s.aside || []).slice(0,6).map(i => `<li>${i}</li>`).join("");
+
+          
+          const steps = (s.bullets || []).slice(0,4);
+          const stepTitles = [
+            (state.lang === "en" ? "Context" : "Contexto"),
+            (state.lang === "en" ? "System" : "Sistema"),
+            (state.lang === "en" ? "Continuity" : "Continuidad"),
+            (state.lang === "en" ? "System updated" : "Sistema actualizado")
+          ];
+
+          const stepsHtml = steps.map((text, idx) => {
+            const title = stepTitles[idx] || ((state.lang === "en") ? `Step ${idx+1}` : `Paso ${idx+1}`);
+            const isLast = idx === steps.length - 1;
+            return `
+              <div class="case-step">
+                <div class="step-rail" aria-hidden="true">
+                  <div class="step-dot">${idx+1}</div>
+                  ${isLast ? "" : "<div class=\"step-line\"></div>"}
+                </div>
+                <div class="step-content">
+                  <div class="step-title">${title}</div>
+                  <div class="step-text">${text}</div>
+                </div>
+              </div>
+            `;
+          }).join("");
+
+
+
+          body.innerHTML = `<div class="cases-flow">
+              <div class="cases-flow-grid">
+                <div class="cases-steps" aria-label="Flujo">
+                  ${stepsHtml}
+                </div>
+
+                <div class="cases-media" aria-label="${s.asideTitle || ""}">
+                  <div class="aside-card cases-media-card">
+                    <div class="aside-title">${s.asideTitle || ""}</div>
+                    <ul class="aside-list">${aside}</ul>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+setSelectedButtons();
+        }
+
+        function swapTo(next){
+          if(next === seg) return;
+          seg = next;
+
+          // transition (matches hero timing)
+          body.classList.add("is-fading");
+          window.setTimeout(() => {
+            render();
+            body.classList.remove("is-fading");
+            body.classList.add("is-enter");
+            requestAnimationFrame(() => body.classList.remove("is-enter"));
+          }, 170);
+        }
+
+        segWrap.addEventListener("click", (e) => {
+          const btn = e.target && e.target.closest ? e.target.closest(".cases-seg-btn") : null;
+          if(!btn) return;
+          swapTo(btn.getAttribute("data-seg"));
+        });
+
+        function setFromHash(){
+          const h = (location.hash || "").toLowerCase();
+          if (h === "#cases-sme") return swapTo("sme");
+          if (h === "#cases-corp") return swapTo("corp");
+          if (h === "#cases-startups") return swapTo("startup");
+        }
+
+        window.addEventListener("hashchange", setFromHash, { passive:true });
+
+        // Header dropdown buttons: scroll + select segment (no duplicate listeners)
+        const mapBtn = (id, hash, segKey) => {
+          const el = document.getElementById(id);
+          if(!el) return;
+          el.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            try { closeLangMenu(); closeThemeMenu(); } catch(_) {}
+            const anchor = document.getElementById(hash.replace("#",""));
+            if(anchor) anchor.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start" });
+            // set hash (so deep-links work)
+            try{ history.replaceState(null, "", hash); } catch(_){ location.hash = hash; }
+            swapTo(segKey);
+          }, { passive:false });
+        };
+
+        mapBtn("caseSME", "#cases-sme", "sme");
+        mapBtn("caseCorp", "#cases-corp", "corp");
+        mapBtn("caseStartup", "#cases-startups", "startup");
+
+        // Render initial
+        render();
+        setFromHash();
+
+        window.addEventListener("gs:langChanged", () => {
+          ensureCasesI18N();
+          render();
+        }, { passive:true });
+      }
+
+
 // Render inicial + al cambiar idioma
       renderPillars();
       window.addEventListener("gs:langChanged", renderPillars, { passive:true });
 
       renderWhatWeUse();
+      initCases();
+      initShowcase();
       window.addEventListener("gs:langChanged", renderWhatWeUse, { passive:true });
 
 
