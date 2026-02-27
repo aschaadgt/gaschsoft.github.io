@@ -108,7 +108,7 @@
     background: var(--header-bg);
     border-bottom: 1px solid var(--line);
     backdrop-filter: saturate(180%) blur(10px);
-    isolation: isolate; /* v64: evita glitches de stacking (Android) */
+    isolation: isolate; /* v63: evita glitches de stacking (Android) */
     transform: translateZ(0); /* v63: fuerza capa propia para sticky */
   }
   .row{ display:flex; align-items:center; gap:12px; }
@@ -2207,23 +2207,6 @@ html[data-theme="dark"] h2.menu-section-title,
   .revNav{ width: 40px; height: 40px; }
   .googleReviewCard{ flex-basis: 78%; }
 }
-
-/* ===== v64: iframe-safe scrolling (do not affect normal browsing) ===== */
-html.in-iframe body.is-app-loading{
-  overflow: auto !important;
-}
-html.in-iframe #appLoading{
-  pointer-events: none !important;
-}
-html.in-iframe body.modal-lock{
-  position: static !important;
-  overflow: auto !important;
-  width: auto !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-}
-
 </style>
 <link as="image" href="Fotosempresa/Flayer 1.webp" rel="preload"/>
 <!-- Open Graph / WhatsApp -->
@@ -5008,50 +4991,6 @@ function hideAppLoading(){
 
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ62QQZoJNn0Lx3XngxG2uedtBZ2QIwew&libraries=places&v=weekly&callback=initGoogleReviews">
-</script>
-
-
-<script>
-/* ===== v64: iframe-safe mode (preview embeds) ===== */
-(function(){
-  var inIframe = false;
-  try { inIframe = window.self !== window.top; } catch(e) { inIframe = true; }
-  if(!inIframe) return;
-
-  // Mark for CSS overrides
-  try { document.documentElement.classList.add('in-iframe'); } catch(e) {}
-  try { document.body && document.body.classList.add('in-iframe'); } catch(e) {}
-
-  function releaseLocks(){
-    try{
-      if(document.body){
-        document.body.classList.remove('is-app-loading');
-        // If a modal lock got stuck, do not freeze the page inside iframe previews
-        document.body.classList.remove('modal-lock');
-      }
-    }catch(e){}
-    try{
-      var el = document.getElementById('appLoading');
-      if(el){
-        el.style.pointerEvents = 'none';
-        // Do not fully hide to avoid layout flashes; make it inert and transparent.
-        el.style.opacity = '0';
-      }
-    }catch(e){}
-  }
-
-  // Run a few times to survive async init / iOS quirks
-  document.addEventListener('DOMContentLoaded', function(){
-    releaseLocks();
-    setTimeout(releaseLocks, 250);
-    setTimeout(releaseLocks, 900);
-  }, { passive:true });
-
-  window.addEventListener('load', function(){
-    releaseLocks();
-    setTimeout(releaseLocks, 350);
-  }, { passive:true });
-})();
 </script>
 
 </body>
