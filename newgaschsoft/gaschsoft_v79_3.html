@@ -1807,7 +1807,7 @@ html[data-theme="dark"] .pillar-card .cap-ico{
     }
 
 
-        /* ===== Casos (v79) ===== */
+    /* ===== Casos (v79) ===== */
     .section-cases{
       position: relative;
       margin-top: 0;
@@ -1816,67 +1816,40 @@ html[data-theme="dark"] .pillar-card .cap-ico{
       border-radius: 0;
       background: transparent;
       overflow: visible;
+      /* local tint (match Pillars tone) */
+      --cases-bg: rgba(31,122,255,0.07);
     }
-    .section-cases, .section-cases *{ -webkit-user-select:none; user-select:none; }
-
-    /* Full-bleed tint (match Pillars) */
-    .section-cases::after{
-      content:"";
-      position:absolute;
-      top:0;
-      bottom:0;
-      left:50%;
-      right:50%;
-      margin-left:-50vw;
-      margin-right:-50vw;
-      background: var(--pillars-bg);
-      z-index:-1;
-      pointer-events:none;
-    }
-
-    /* Seam blending: fade from previous section into this tint */
     .section-cases::before{
       content:"";
       position:absolute;
       left:50%;
-      right:50%;
-      margin-left:-50vw;
-      margin-right:-50vw;
-      top:-72px;
-      height:72px;
-      background: linear-gradient(180deg, rgba(31,122,255,0) 0%, var(--pillars-bg) 100%);
+      transform:translateX(-50%);
+      top:0;
+      bottom:0;
+      width:100vw;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0%,
+        var(--cases-bg) 18%,
+        var(--cases-bg) 82%,
+        rgba(0,0,0,0) 100%
+      );
+      z-index:-1;
+      pointer-events:none;
+    }    .section-cases::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      top:-42px;
+      height: 64px;
+      width:100vw;
+      background: linear-gradient(to bottom, rgba(0,0,0,0), var(--cases-bg));
       z-index:-1;
       pointer-events:none;
     }
 
     .cases-anchor{
-      position: relative;
-      display:block;
-      height: 0;
-      top: -84px; /* offset for sticky header */
-    }
-
-    .cases-inner{
-      padding-top: 64px;
-      padding-bottom: 34px;
-      position: relative;
-    }
-
-    /* Seam blending: fade out to next section */
-    .cases-inner::after{
-      content:"";
-      position:absolute;
-      left:50%;
-      right:50%;
-      margin-left:-50vw;
-      margin-right:-50vw;
-      bottom:-72px;
-      height:72px;
-      background: linear-gradient(180deg, var(--pillars-bg) 0%, rgba(31,122,255,0) 100%);
-      pointer-events:none;
-      z-index:-1;
-    }
-.cases-anchor{
       position: relative;
       display:block;
       height: 0;
@@ -1909,12 +1882,11 @@ html[data-theme="dark"] .pillar-card .cap-ico{
     .cases-head-copy{ min-width: 0;  text-align:center; }
     .cases-title{
       margin:0;
-      color: #0B0F14;
+      color: var(--primary);
       font-size: clamp(22px, 3vw, 34px);
       line-height: 1.08;
       letter-spacing: -0.6px;
     }
-    html[data-theme="dark"] .cases-title{ color: #FFFFFF; }
     .cases-desc{
       margin: 10px 0 0;
       color: var(--muted);
@@ -2148,221 +2120,6 @@ html[data-theme="dark"] .pillar-card .cap-ico{
       display:flex;
       justify-content:center;
     }
-    /* ===== Casos: showcase (fixed, independent of segment) ===== */
-    .cases-showcase{
-      max-width: 980px;
-      margin: 16px auto 0;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.14);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      overflow: hidden;
-    }
-    html[data-theme="dark"] .cases-showcase{ background: rgba(11,15,20,0.22); }
-
-    .showcase-top{
-      display:flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(148,163,184,0.18);
-      flex-wrap: wrap;
-    }
-    .showcase-title{
-      font-weight: 900;
-      letter-spacing: -0.2px;
-      font-size: 13px;
-      color: var(--text);
-    }
-    .showcase-meta{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 750;
-    }
-    .showcase-link{
-      color: var(--primary);
-      text-decoration: none;
-      border: 1px solid rgba(31,122,255,0.18);
-      background: rgba(31,122,255,0.10);
-      padding: 6px 10px;
-      border-radius: 999px;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .showcase-link:hover{
-      border-color: rgba(31,122,255,0.26);
-      background: rgba(31,122,255,0.14);
-    }
-
-    .showcase-link.is-active{
-      border-color: rgba(31,122,255,0.34);
-      background: rgba(31,122,255,0.14);
-      box-shadow: inset 0 -2px 0 0 rgba(31,122,255,0.75);
-    }
-    .showcase-sep{ opacity: 0.6; }
-
-    .showcase-frame{
-      position: relative;
-      width: 100%;
-      height: clamp(307px, 40.12vw, 614px);
-      background: rgba(0,0,0,0.02);
-    }
-    @media (max-width: 720px){
-      .showcase-frame{ height: clamp(520px, 130vw, 920px); }
-    }
-
-    .showcase-stage{
-      position:absolute;
-      inset: 0;
-    }
-    .showcase-iframe{
-      position:absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(10px);
-      transition: opacity 220ms ease, transform 220ms ease;
-      background: transparent;
-    }
-    .showcase-iframe.is-active{
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .showcase-progress{
-      position:absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 3px;
-      background: rgba(148,163,184,0.18);
-      z-index: 3;
-      overflow:hidden;
-    }
-    .showcase-progress::after{
-      content:"";
-      position:absolute;
-      left:0;
-      top:0;
-      height:100%;
-      width:0%;
-      background: linear-gradient(90deg, rgba(31,122,255,0.0), rgba(31,122,255,0.90), rgba(56,189,248,0.80));
-      animation: none;
-    }
-    .showcase-progress.kick::after{
-      animation: showcaseFill var(--showcase-dur, 8s) linear 1;
-    }
-    @keyframes showcaseFill{
-      from{ width:0%; }
-      to{ width:100%; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .showcase-iframe{ transition:none; transform:none; }
-      .showcase-progress::after{ animation:none; width:100%; }
-    }
-
-    /* ===== Casos layout v79.6 (timeline + media) ===== */
-    .cases-body{ max-width: 980px; margin: 0 auto; display:block; }
-
-    .cases-flow{ max-width: 980px; margin: 0 auto; }
-    .cases-flow-grid{
-      display:grid;
-      gap: 18px;
-      grid-template-columns: 1fr;
-      align-items:start;
-    }
-    @media (min-width: 980px){
-      .cases-flow-grid{ grid-template-columns: 1.1fr 0.9fr; gap: 22px; }
-    }
-
-    .cases-steps{
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      padding: 16px 16px;
-      overflow:hidden;
-    }
-    html[data-theme="dark"] .cases-steps{ background: rgba(17,24,39,0.26); }
-
-    .case-step{
-      display:flex;
-      gap: 12px;
-      align-items:flex-start;
-      padding: 10px 4px;
-    }
-
-    .step-rail{
-      width: 34px;
-      display:flex;
-      flex-direction: column;
-      align-items:center;
-      flex: 0 0 auto;
-    }
-    .step-dot{
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight: 850;
-      font-size: 12px;
-      color: var(--text);
-      border: 1px solid rgba(31,122,255,0.24);
-      background: radial-gradient(circle at 30% 30%, rgba(31,122,255,0.18), rgba(255,255,255,0.10) 62%);
-      box-shadow: 0 0 0 3px rgba(31,122,255,0.10);
-      user-select:none;
-      -webkit-user-select:none;
-    }
-    html[data-theme="dark"] .step-dot{
-      background: radial-gradient(circle at 30% 30%, rgba(31,122,255,0.20), rgba(11,15,20,0.18) 62%);
-    }
-    .step-line{
-      width: 1px;
-      flex: 1 1 auto;
-      background: rgba(148,163,184,0.45);
-      margin-top: 10px;
-      min-height: 26px;
-    }
-    html[data-theme="dark"] .step-line{ background: rgba(148,163,184,0.35); }
-
-    .step-content{ padding-top: 1px; }
-    .step-title{
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: -0.2px;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-    .step-text{
-      font-size: 12.5px;
-      line-height: 1.55;
-      color: var(--muted);
-    }
-
-    .cases-media{
-      display:grid;
-      gap: 12px;
-    }
-
-    .cases-media-card{
-      background: rgba(255,255,255,0.14);
-    }
-    html[data-theme="dark"] .cases-media-card{
-      background: rgba(11,15,20,0.22);
-    }
-
 
 </style>
 
@@ -2669,42 +2426,7 @@ html[data-theme="dark"] .pillar-card .cap-ico{
           <!-- injected by JS -->
         </div>
 
-        
-
-        <div class="cases-showcase" id="casesShowcase" aria-label="Proyectos">
-          <div class="showcase-top">
-            <div class="showcase-title" id="showcaseTitle">Proyectos reales en vivo</div>
-            <div class="showcase-meta">
-              <a class="showcase-link" data-idx="0" href="https://gaschsoft.com/mrpizzasgt/" target="_blank" rel="noopener">Mr Pizzas GT</a>
-              <span class="showcase-sep" aria-hidden="true">•</span>
-              <a class="showcase-link" data-idx="1" href="https://gaschsoft.com/villacaninagt/" target="_blank" rel="noopener">Villa Canina</a>
-            </div>
-          </div>
-
-          <div class="showcase-frame" id="showcaseFrame" aria-hidden="true">
-            <div class="showcase-progress kick" id="showcaseProgress" aria-hidden="true"></div>
-
-            <div class="showcase-stage">
-              <iframe class="showcase-iframe is-active" data-idx="0"
-                src="https://gaschsoft.com/mrpizzasgt/"
-                title="Mr Pizzas GT"
-                loading="lazy"
-                referrerpolicy="no-referrer"
-                sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
-              </iframe>
-
-              <iframe class="showcase-iframe" data-idx="1"
-                src="https://gaschsoft.com/villacaninagt/"
-                title="Villa Canina"
-                loading="lazy"
-                referrerpolicy="no-referrer"
-                sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
-              </iframe>
-            </div>
-          </div>
-        </div>
-
-<div class="cases-cta">
+        <div class="cases-cta">
           <a class="btn ghost" id="casesCta" href="#contact">Agregar esto a mi proyecto</a>
         </div>
       </div>
@@ -4025,92 +3747,7 @@ function miniIcon(name){
         }
       }
 
-      
-      /* ===== Casos: showcase rotator (fixed, independent of segment) ===== */
-      
-      /* ===== Casos: showcase rotator (fixed, independent of segment) ===== */
-      function initShowcase(){
-        if (window.__gsShowcaseInit) return;
-        window.__gsShowcaseInit = true;
-
-        const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        function setup(){
-          const frame = document.getElementById("showcaseFrame");
-          if(!frame) return;
-          const iframes = Array.from(frame.querySelectorAll(".showcase-iframe"));
-          if(iframes.length < 2) return;
-
-          const links = Array.from(document.querySelectorAll(".showcase-link[data-idx]"));
-
-          let idx = 0;
-          const dur = 10000; // ms
-          document.documentElement.style.setProperty("--showcase-dur", (dur/1000) + "s");
-
-          const prog = document.getElementById("showcaseProgress");
-
-          const titleEl = document.getElementById("showcaseTitle");
-          if(titleEl){ titleEl.textContent = (state.lang === "en") ? "Live projects" : "Proyectos reales en vivo"; }
-
-          function setActive(next, restartProgress=true){
-            idx = next;
-            iframes.forEach((el, i) => el.classList.toggle("is-active", i === next));
-
-            links.forEach(a => {
-              const is = String(a.getAttribute("data-idx")) === String(next);
-              a.classList.toggle("is-active", is);
-              if(is) a.setAttribute("aria-current","true"); else a.removeAttribute("aria-current");
-            });
-
-            if(prog && !prefersReduced && restartProgress){
-              prog.classList.remove("kick");
-              void prog.offsetWidth; // reflow to restart
-              prog.classList.add("kick");
-            }
-          }
-
-          setActive(0, true);
-
-          if(prefersReduced) return;
-
-          // RAF-based scheduler (more resilient than setInterval on iOS)
-          let last = performance.now();
-          let acc = 0;
-
-          function tick(now){
-            const dt = now - last;
-            last = now;
-            acc += Math.min(dt, 200);
-
-            if(acc >= dur){
-              acc = 0;
-              const next = (idx + 1) % iframes.length;
-              setActive(next, true);
-            }
-            requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
-
-          // Recover after visibility changes (iOS throttles timers)
-          document.addEventListener("visibilitychange", () => {
-            if(document.hidden) return;
-            last = performance.now();
-            acc = 0;
-            setActive(idx, true);
-          }, { passive:true });
-
-          // Keep language title in sync
-          window.addEventListener("gs:langChanged", () => {
-            const t = document.getElementById("showcaseTitle");
-            if(t){ t.textContent = (state.lang === "en") ? "Live projects" : "Proyectos reales en vivo"; }
-          }, { passive:true });
-        }
-
-        requestAnimationFrame(setup);
-      }
-
-
-function initCases(){
+      function initCases(){
         if (window.__gsCasesInit) return;
         window.__gsCasesInit = true;
 
@@ -4172,49 +3809,25 @@ function initCases(){
 
           const aside = (s.aside || []).slice(0,6).map(i => `<li>${i}</li>`).join("");
 
-          
-          const steps = (s.bullets || []).slice(0,4);
-          const stepTitles = [
-            (state.lang === "en" ? "Context" : "Contexto"),
-            (state.lang === "en" ? "System" : "Sistema"),
-            (state.lang === "en" ? "Continuity" : "Continuidad"),
-            (state.lang === "en" ? "System updated" : "Sistema actualizado")
-          ];
+          body.innerHTML = `
+            <div class="cases-row">
+              <div class="case-card">
+                <div class="case-kpis">${kpis}</div>
+                <div class="case-title">${s.title || ""}</div>
+                <div class="case-meta">${chips}</div>
+                <ul class="case-block">${bullets}</ul>
+              </div>
 
-          const stepsHtml = steps.map((text, idx) => {
-            const title = stepTitles[idx] || ((state.lang === "en") ? `Step ${idx+1}` : `Paso ${idx+1}`);
-            const isLast = idx === steps.length - 1;
-            return `
-              <div class="case-step">
-                <div class="step-rail" aria-hidden="true">
-                  <div class="step-dot">${idx+1}</div>
-                  ${isLast ? "" : "<div class=\"step-line\"></div>"}
-                </div>
-                <div class="step-content">
-                  <div class="step-title">${title}</div>
-                  <div class="step-text">${text}</div>
+              <div class="case-aside">
+                <div class="aside-card">
+                  <div class="aside-title">${s.asideTitle || ""}</div>
+                  <ul class="aside-list">${aside}</ul>
                 </div>
               </div>
-            `;
-          }).join("");
+            </div>
+          `;
 
-
-
-          body.innerHTML = `<div class="cases-flow">
-              <div class="cases-flow-grid">
-                <div class="cases-steps" aria-label="Flujo">
-                  ${stepsHtml}
-                </div>
-
-                <div class="cases-media" aria-label="${s.asideTitle || ""}">
-                  <div class="aside-card cases-media-card">
-                    <div class="aside-title">${s.asideTitle || ""}</div>
-                    <ul class="aside-list">${aside}</ul>
-                  </div>
-                </div>
-              </div>
-            </div>`;
-setSelectedButtons();
+          setSelectedButtons();
         }
 
         function swapTo(next){
@@ -4282,7 +3895,6 @@ setSelectedButtons();
 
       renderWhatWeUse();
       initCases();
-      initShowcase();
       window.addEventListener("gs:langChanged", renderWhatWeUse, { passive:true });
 
 

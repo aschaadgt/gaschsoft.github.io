@@ -2020,7 +2020,110 @@ html[data-theme="dark"] .pillar-card .cap-ico{
     }
     html[data-theme="dark"] .case-card{ background: rgba(17,24,39,0.26); }
 
-    .case-kpis{
+    
+    /* ===== Casos cards v2 (más producto, menos “IA”) ===== */
+    .cases-row--v2{ gap: 16px; }
+    @media (min-width: 900px){
+      .cases-row--v2{ grid-template-columns: 1.15fr 0.85fr; }
+    }
+
+    .case-card--v2{ padding: 16px 16px; }
+    .case-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .case-head-left{
+      display:flex;
+      align-items:flex-start;
+      gap: 12px;
+      min-width: 0;
+    }
+    .case-mark{
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      border: 1px solid rgba(31,122,255,0.22);
+      background:
+        radial-gradient(14px 14px at 30% 30%, rgba(31,122,255,0.22), rgba(0,0,0,0) 70%),
+        radial-gradient(18px 18px at 70% 70%, rgba(56,189,248,0.16), rgba(0,0,0,0) 70%),
+        rgba(255,255,255,0.10);
+      box-shadow: 0 0 0 3px rgba(31,122,255,0.10);
+      flex: 0 0 auto;
+    }
+    html[data-theme="dark"] .case-mark{
+      background:
+        radial-gradient(14px 14px at 30% 30%, rgba(31,122,255,0.26), rgba(0,0,0,0) 70%),
+        radial-gradient(18px 18px at 70% 70%, rgba(56,189,248,0.18), rgba(0,0,0,0) 70%),
+        rgba(11,15,20,0.20);
+    }
+    .case-overline{
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.22px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .case-card--v2 .case-title{
+      margin: 0;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: -0.25px;
+      color: var(--text);
+    }
+    .case-kpis--v2{ margin-bottom: 12px; }
+    @media (max-width: 520px){
+      .case-kpis--v2{ grid-template-columns: 1fr; }
+    }
+
+    .case-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(148,163,184,0.18);
+    }
+    @media (min-width: 720px){
+      .case-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    .case-block2{
+      border: 1px solid rgba(148,163,184,0.18);
+      border-radius: 16px;
+      padding: 12px 12px;
+      background: rgba(255,255,255,0.10);
+    }
+    html[data-theme="dark"] .case-block2{ background: rgba(11,15,20,0.18); }
+    .case-label{
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .case-text{
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text);
+      opacity: 0.92;
+    }
+
+    .aside-card--v2{
+      padding: 14px 14px;
+    }
+    .aside-footnote{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(148,163,184,0.18);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+.case-kpis{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
@@ -2196,12 +2299,6 @@ html[data-theme="dark"] .pillar-card .cap-ico{
     .showcase-link:hover{
       border-color: rgba(31,122,255,0.26);
       background: rgba(31,122,255,0.14);
-    }
-
-    .showcase-link.is-active{
-      border-color: rgba(31,122,255,0.34);
-      background: rgba(31,122,255,0.14);
-      box-shadow: inset 0 -2px 0 0 rgba(31,122,255,0.75);
     }
     .showcase-sep{ opacity: 0.6; }
 
@@ -2669,42 +2766,7 @@ html[data-theme="dark"] .pillar-card .cap-ico{
           <!-- injected by JS -->
         </div>
 
-        
-
-        <div class="cases-showcase" id="casesShowcase" aria-label="Proyectos">
-          <div class="showcase-top">
-            <div class="showcase-title" id="showcaseTitle">Proyectos reales en vivo</div>
-            <div class="showcase-meta">
-              <a class="showcase-link" data-idx="0" href="https://gaschsoft.com/mrpizzasgt/" target="_blank" rel="noopener">Mr Pizzas GT</a>
-              <span class="showcase-sep" aria-hidden="true">•</span>
-              <a class="showcase-link" data-idx="1" href="https://gaschsoft.com/villacaninagt/" target="_blank" rel="noopener">Villa Canina</a>
-            </div>
-          </div>
-
-          <div class="showcase-frame" id="showcaseFrame" aria-hidden="true">
-            <div class="showcase-progress kick" id="showcaseProgress" aria-hidden="true"></div>
-
-            <div class="showcase-stage">
-              <iframe class="showcase-iframe is-active" data-idx="0"
-                src="https://gaschsoft.com/mrpizzasgt/"
-                title="Mr Pizzas GT"
-                loading="lazy"
-                referrerpolicy="no-referrer"
-                sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
-              </iframe>
-
-              <iframe class="showcase-iframe" data-idx="1"
-                src="https://gaschsoft.com/villacaninagt/"
-                title="Villa Canina"
-                loading="lazy"
-                referrerpolicy="no-referrer"
-                sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
-              </iframe>
-            </div>
-          </div>
-        </div>
-
-<div class="cases-cta">
+        <div class="cases-cta">
           <a class="btn ghost" id="casesCta" href="#contact">Agregar esto a mi proyecto</a>
         </div>
       </div>
@@ -3917,9 +3979,10 @@ function miniIcon(name){
                 title: "Captación + operación lista para vender",
                 meta: ["Servicios", "Retail", "Reservas", "WhatsApp"],
                 bullets: [
-                  "Contexto: empresas que ya venden, pero el sitio no acompaña (mensaje difuso, fricción al contactar).",
-                  "Sistema: narrativa por secciones + CTAs claros + captura de leads + canales de cierre listos (WhatsApp / formulario).",
-                  "Continuidad: base mantenible con cambios de copy/brand sin romper producción."
+                  "Context: the business sells already, but the site isn’t tuned for conversion (message, CTA, friction).",
+                  "System: section narrative + CTAs + capture (form/WhatsApp) with measurable events.",
+                  "Continuity: maintainable base (copy, pricing, promos) without breaking production.",
+                  "System updated: iterative upgrades (performance, technical SEO, new sections)."
                 ],
                 asideTitle: "Entrega típica",
                 aside: ["Landing + secciones clave", "Eventos medibles (CTA / formularios)", "Optimización de imágenes + performance", "Checklist de publicación"]
@@ -3934,9 +3997,10 @@ function miniIcon(name){
                 title: "Ejecución ordenada para operación y reputación",
                 meta: ["Multi-sección", "I18N", "Políticas", "QA"],
                 bullets: [
-                  "Contexto: presencia digital con múltiples stakeholders y necesidad de consistencia (no más parches).",
-                  "Sistema: estándares de UI/UX + estructura modular + flujos documentados para handoffs claros.",
-                  "Operación: cambios seguros con versionado y rollback rápido."
+                  "Context: many stakeholders request changes and the site becomes patchwork.",
+                  "System: modular structure + UI standards + clean handoff (what, where, who).",
+                  "Continuity: versioning and QA for safe, reversible changes.",
+                  "System updated: gradual releases without rebuilding everything."
                 ],
                 asideTitle: "Estándares aplicados",
                 aside: ["Performance budget", "Accesibilidad base", "Estados UI consistentes", "Documentación operativa"]
@@ -3951,9 +4015,10 @@ function miniIcon(name){
                 title: "MVP medible, iteraciones rápidas",
                 meta: ["MVP", "Funnels", "Experimentación", "Roadmap"],
                 bullets: [
-                  "Contexto: necesitas lanzar ya, pero con datos para decidir (no solo “se ve bonito”).",
-                  "Sistema: embudo simple + puntos de medición + iteraciones por fases sin rehacer todo.",
-                  "Evolución: base lista para sumar integraciones cuando el negocio lo pida."
+                  "Context: you must launch fast—but with signals to decide (not only aesthetics).",
+                  "System: simple funnel + event tracking + action-driven CTAs.",
+                  "Continuity: phased iterations (MVP → upgrades) without rewrites.",
+                  "System updated: ready for integrations when the business demands it."
                 ],
                 asideTitle: "Qué queda listo",
                 aside: ["Instrumentación básica (eventos)", "Secciones convertibles (prueba + CTA)", "Escalabilidad técnica", "Plan de siguientes releases"]
@@ -4027,8 +4092,6 @@ function miniIcon(name){
 
       
       /* ===== Casos: showcase rotator (fixed, independent of segment) ===== */
-      
-      /* ===== Casos: showcase rotator (fixed, independent of segment) ===== */
       function initShowcase(){
         if (window.__gsShowcaseInit) return;
         window.__gsShowcaseInit = true;
@@ -4041,74 +4104,35 @@ function miniIcon(name){
           const iframes = Array.from(frame.querySelectorAll(".showcase-iframe"));
           if(iframes.length < 2) return;
 
-          const links = Array.from(document.querySelectorAll(".showcase-link[data-idx]"));
-
           let idx = 0;
           const dur = 10000; // ms
           document.documentElement.style.setProperty("--showcase-dur", (dur/1000) + "s");
 
           const prog = document.getElementById("showcaseProgress");
 
-          const titleEl = document.getElementById("showcaseTitle");
-          if(titleEl){ titleEl.textContent = (state.lang === "en") ? "Live projects" : "Proyectos reales en vivo"; }
-
-          function setActive(next, restartProgress=true){
-            idx = next;
+          function setActive(next){
             iframes.forEach((el, i) => el.classList.toggle("is-active", i === next));
 
-            links.forEach(a => {
-              const is = String(a.getAttribute("data-idx")) === String(next);
-              a.classList.toggle("is-active", is);
-              if(is) a.setAttribute("aria-current","true"); else a.removeAttribute("aria-current");
-            });
-
-            if(prog && !prefersReduced && restartProgress){
+            if(prog && !prefersReduced){
               prog.classList.remove("kick");
               void prog.offsetWidth; // reflow to restart
               prog.classList.add("kick");
             }
           }
 
-          setActive(0, true);
+          setActive(0);
 
           if(prefersReduced) return;
 
-          // RAF-based scheduler (more resilient than setInterval on iOS)
-          let last = performance.now();
-          let acc = 0;
-
-          function tick(now){
-            const dt = now - last;
-            last = now;
-            acc += Math.min(dt, 200);
-
-            if(acc >= dur){
-              acc = 0;
-              const next = (idx + 1) % iframes.length;
-              setActive(next, true);
-            }
-            requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
-
-          // Recover after visibility changes (iOS throttles timers)
-          document.addEventListener("visibilitychange", () => {
-            if(document.hidden) return;
-            last = performance.now();
-            acc = 0;
-            setActive(idx, true);
-          }, { passive:true });
-
-          // Keep language title in sync
-          window.addEventListener("gs:langChanged", () => {
-            const t = document.getElementById("showcaseTitle");
-            if(t){ t.textContent = (state.lang === "en") ? "Live projects" : "Proyectos reales en vivo"; }
-          }, { passive:true });
+          window.setInterval(() => {
+            idx = (idx + 1) % iframes.length;
+            setActive(idx);
+          }, dur);
         }
 
+        // Run after initial render paints
         requestAnimationFrame(setup);
       }
-
 
 function initCases(){
         if (window.__gsCasesInit) return;
@@ -4172,49 +4196,89 @@ function initCases(){
 
           const aside = (s.aside || []).slice(0,6).map(i => `<li>${i}</li>`).join("");
 
-          
-          const steps = (s.bullets || []).slice(0,4);
-          const stepTitles = [
-            (state.lang === "en" ? "Context" : "Contexto"),
-            (state.lang === "en" ? "System" : "Sistema"),
-            (state.lang === "en" ? "Continuity" : "Continuidad"),
-            (state.lang === "en" ? "System updated" : "Sistema actualizado")
-          ];
 
-          const stepsHtml = steps.map((text, idx) => {
-            const title = stepTitles[idx] || ((state.lang === "en") ? `Step ${idx+1}` : `Paso ${idx+1}`);
-            const isLast = idx === steps.length - 1;
-            return `
-              <div class="case-step">
-                <div class="step-rail" aria-hidden="true">
-                  <div class="step-dot">${idx+1}</div>
-                  ${isLast ? "" : "<div class=\"step-line\"></div>"}
-                </div>
-                <div class="step-content">
-                  <div class="step-title">${title}</div>
-                  <div class="step-text">${text}</div>
-                </div>
-              </div>
-            `;
-          }).join("");
-
-
-
-          body.innerHTML = `<div class="cases-flow">
-              <div class="cases-flow-grid">
-                <div class="cases-steps" aria-label="Flujo">
-                  ${stepsHtml}
+          body.innerHTML = `
+            <div class="cases-row cases-row--v2">
+              <div class="case-card case-card--v2">
+                <div class="case-head">
+                  <div class="case-head-left">
+                    <div class="case-mark" aria-hidden="true"></div>
+                    <div>
+                      <div class="case-overline">${(state.lang === "en") ? "Pattern" : "Patrón"}</div>
+                      <div class="case-title">${s.title || ""}</div>
+                    </div>
+                  </div>
+                  <div class="case-meta">${chips}</div>
                 </div>
 
-                <div class="cases-media" aria-label="${s.asideTitle || ""}">
-                  <div class="aside-card cases-media-card">
-                    <div class="aside-title">${s.asideTitle || ""}</div>
-                    <ul class="aside-list">${aside}</ul>
+                <div class="case-kpis case-kpis--v2">${kpis}</div>
+
+                <div class="case-grid">
+                  <div class="case-block2">
+                    <div class="case-label">${(state.lang === "en") ? "Context" : "Contexto"}</div>
+                    <div class="case-text">${(s.bullets && s.bullets[0]) ? s.bullets[0] : ""}</div>
+                  </div>
+                  <div class="case-block2">
+                    <div class="case-label">${(state.lang === "en") ? "System" : "Sistema"}</div>
+                    <div class="case-text">${(s.bullets && s.bullets[1]) ? s.bullets[1] : ""}</div>
+                  </div>
+                  <div class="case-block2">
+                    <div class="case-label">${(state.lang === "en") ? "Continuity" : "Continuidad"}</div>
+                    <div class="case-text">${(s.bullets && s.bullets[2]) ? s.bullets[2] : ""}</div>
+                  </div>
+                  <div class="case-block2">
+                    <div class="case-label">${(state.lang === "en") ? "System updated" : "Sistema actualizado"}</div>
+                    <div class="case-text">${(s.bullets && s.bullets[3]) ? s.bullets[3] : ""}</div>
                   </div>
                 </div>
               </div>
-            </div>`;
-setSelectedButtons();
+
+              <div class="case-aside case-aside--v2">
+                <div class="aside-card aside-card--v2">
+                  <div class="aside-title">${s.asideTitle || ""}</div>
+                  <ul class="aside-list">${aside}</ul>
+                  <div class="aside-footnote">
+                    ${(state.lang === "en") ? "Delivered with versioning, QA and clean handoff." : "Entregado con versionado, QA y handoff limpio."}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cases-showcase" aria-label="Proyectos">
+              <div class="showcase-top">
+                <div class="showcase-title" id="showcaseTitle">${(state.lang === "en") ? "Live projects" : "Proyectos reales en vivo"}</div>
+                <div class="showcase-meta">
+                  <a class="showcase-link" href="https://gaschsoft.com/mrpizzasgt/" target="_blank" rel="noopener">Mr Pizzas GT</a>
+                  <span class="showcase-sep" aria-hidden="true">•</span>
+                  <a class="showcase-link" href="https://gaschsoft.com/villacaninagt/" target="_blank" rel="noopener">Villa Canina</a>
+                </div>
+              </div>
+
+              <div class="showcase-frame" id="showcaseFrame" aria-hidden="true">
+                <div class="showcase-progress kick" id="showcaseProgress" aria-hidden="true"></div>
+
+                <div class="showcase-stage">
+                  <iframe class="showcase-iframe is-active" data-idx="0"
+                    src="https://gaschsoft.com/mrpizzasgt/"
+                    title="Mr Pizzas GT"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+                  </iframe>
+
+                  <iframe class="showcase-iframe" data-idx="1"
+                    src="https://gaschsoft.com/villacaninagt/"
+                    title="Villa Canina"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+                  </iframe>
+                </div>
+              </div>
+            </div>
+          `;
+
+          setSelectedButtons();
         }
 
         function swapTo(next){

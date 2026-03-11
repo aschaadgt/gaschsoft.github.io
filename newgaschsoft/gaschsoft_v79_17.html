@@ -1979,6 +1979,7 @@ html[data-theme="dark"] .pillar-card .cap-ico{
     .cases-body{
       max-width: 980px;
       margin: 0 auto;
+      margin-bottom: 10px;
       display:grid;
       gap: 14px;
     }
@@ -2151,7 +2152,7 @@ html[data-theme="dark"] .pillar-card .cap-ico{
     /* ===== Casos: showcase (fixed, independent of segment) ===== */
     .cases-showcase{
       max-width: 980px;
-      margin: 16px auto 0;
+      margin: 10px auto 0;
       border: 1px solid var(--border);
       border-radius: 18px;
       background: rgba(255,255,255,0.14);
@@ -2203,6 +2204,11 @@ html[data-theme="dark"] .pillar-card .cap-ico{
       background: rgba(31,122,255,0.14);
       box-shadow: inset 0 -2px 0 0 rgba(31,122,255,0.75);
     }
+    .showcase-link.is-active:hover{
+      border-color: rgba(31,122,255,0.40);
+      background: rgba(31,122,255,0.16);
+    }
+
     .showcase-sep{ opacity: 0.6; }
 
     .showcase-frame{
@@ -2260,6 +2266,11 @@ html[data-theme="dark"] .pillar-card .cap-ico{
     .showcase-progress.kick::after{
       animation: showcaseFill var(--showcase-dur, 8s) linear 1;
     }
+    
+    .showcase-progress.is-paused::after{
+      animation-play-state: paused;
+    }
+
     @keyframes showcaseFill{
       from{ width:0%; }
       to{ width:100%; }
@@ -4027,8 +4038,6 @@ function miniIcon(name){
 
       
       /* ===== Casos: showcase rotator (fixed, independent of segment) ===== */
-      
-      /* ===== Casos: showcase rotator (fixed, independent of segment) ===== */
       function initShowcase(){
         if (window.__gsShowcaseInit) return;
         window.__gsShowcaseInit = true;
@@ -4041,8 +4050,6 @@ function miniIcon(name){
           const iframes = Array.from(frame.querySelectorAll(".showcase-iframe"));
           if(iframes.length < 2) return;
 
-          const links = Array.from(document.querySelectorAll(".showcase-link[data-idx]"));
-
           let idx = 0;
           const dur = 10000; // ms
           document.documentElement.style.setProperty("--showcase-dur", (dur/1000) + "s");
@@ -4052,63 +4059,101 @@ function miniIcon(name){
           const titleEl = document.getElementById("showcaseTitle");
           if(titleEl){ titleEl.textContent = (state.lang === "en") ? "Live projects" : "Proyectos reales en vivo"; }
 
-          function setActive(next, restartProgress=true){
-            idx = next;
+
+          function setActive(next){
             iframes.forEach((el, i) => el.classList.toggle("is-active", i === next));
 
+            const links = document.querySelectorAll(".showcase-link[data-idx]");
             links.forEach(a => {
               const is = String(a.getAttribute("data-idx")) === String(next);
               a.classList.toggle("is-active", is);
-              if(is) a.setAttribute("aria-current","true"); else a.removeAttribute("aria-current");
+              if(is) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
             });
 
-            if(prog && !prefersReduced && restartProgress){
+            if(prog && !prefersReduced){
               prog.classList.remove("kick");
               void prog.offsetWidth; // reflow to restart
               prog.classList.add("kick");
             }
           }
 
-          setActive(0, true);
+          setActive(0);
 
           if(prefersReduced) return;
 
-          // RAF-based scheduler (more resilient than setInterval on iOS)
-          let last = performance.now();
-          let acc = 0;
+          let intervalId = null;
+          let resumeT = null;
+          let paused = false;
 
-          function tick(now){
-            const dt = now - last;
-            last = now;
-            acc += Math.min(dt, 200);
-
-            if(acc >= dur){
-              acc = 0;
-              const next = (idx + 1) % iframes.length;
-              setActive(next, true);
-            }
-            requestAnimationFrame(tick);
+          function start(){
+            if(prefersReduced) return;
+            if(intervalId) window.clearInterval(intervalId);
+            intervalId = window.setInterval(() => {
+              idx = (idx + 1) % iframes.length;
+              setActive(idx);
+            }, dur);
           }
-          requestAnimationFrame(tick);
 
-          // Recover after visibility changes (iOS throttles timers)
-          document.addEventListener("visibilitychange", () => {
-            if(document.hidden) return;
-            last = performance.now();
-            acc = 0;
-            setActive(idx, true);
-          }, { passive:true });
+          function pause(){
+            if(prefersReduced) return;
+            if(paused) return;
+            paused = true;
+            if(intervalId){ window.clearInterval(intervalId); intervalId = null; }
+            if(prog) prog.classList.add("is-paused");
+          }
 
-          // Keep language title in sync
-          window.addEventListener("gs:langChanged", () => {
-            const t = document.getElementById("showcaseTitle");
-            if(t){ t.textContent = (state.lang === "en") ? "Live projects" : "Proyectos reales en vivo"; }
-          }, { passive:true });
+          function scheduleResume(){
+            if(prefersReduced) return;
+            // resume shortly after last interaction
+            if(resumeT) window.clearTimeout(resumeT);
+            resumeT = window.setTimeout(() => {
+              paused = false;
+              if(prog) prog.classList.remove("is-paused");
+              // restart progress bar + timer cleanly
+              if(prog){
+                prog.classList.remove("kick");
+                void prog.offsetWidth;
+                prog.classList.add("kick");
+              }
+              start();
+            }, 1400);
+          }
+
+          function markInteraction(){
+            pause();
+            scheduleResume();
+          }
+
+          // Pause on direct interaction with the iframe element (works everywhere)
+          iframes.forEach((ifr) => {
+            ifr.addEventListener("wheel", markInteraction, { passive:true });
+            ifr.addEventListener("touchstart", markInteraction, { passive:true });
+            ifr.addEventListener("touchmove", markInteraction, { passive:true });
+            ifr.addEventListener("pointerdown", markInteraction, { passive:true });
+            ifr.addEventListener("mouseenter", markInteraction, { passive:true });
+            ifr.addEventListener("focus", markInteraction, { passive:true });
+
+            // Best-effort: also listen inside same-origin iframe for scroll/touch
+            try{
+              const w = ifr.contentWindow;
+              const d = w && w.document;
+              if(d){
+                w.addEventListener("scroll", markInteraction, { passive:true });
+                d.addEventListener("scroll", markInteraction, { passive:true });
+                d.addEventListener("touchstart", markInteraction, { passive:true });
+                d.addEventListener("touchmove", markInteraction, { passive:true });
+                d.addEventListener("wheel", markInteraction, { passive:true });
+              }
+            }catch(_){}
+          });
+
+          // Start rotation
+          start();
         }
 
+        // Run after initial render paints
         requestAnimationFrame(setup);
       }
-
 
 function initCases(){
         if (window.__gsCasesInit) return;
