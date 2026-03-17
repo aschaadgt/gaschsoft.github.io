@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Motos.GT | Catálogo de Motocicletas</title>
+
+<meta name="description" content="Catálogo de motocicletas en Guatemala. Encuentra Yamaha, Honda, Suzuki, Bajaj, AKT y Hero disponibles en Motos.GT.">
+
+<meta property="og:title" content="Motos.GT | Catálogo de Motocicletas">
+<meta property="og:description" content="Encuentra tu próxima moto en Motos.GT. Catálogo moderno de motocicletas disponibles en Guatemala.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2972/2972185.png">
+
+<style>
+
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+background:#f4f6f8;
+color:#222;
+line-height:1.6;
+}
+
+/* HEADER */
+
+header{
+background:#111;
+color:white;
+padding:16px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+font-weight:500;
+}
+
+nav a:hover{
+color:#00d2ff;
+}
+
+/* HERO */
+
+.hero{
+height:60vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+background:
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+url("https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:12px;
+}
+
+.hero p{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.btn{
+display:inline-block;
+padding:12px 22px;
+background:#00c853;
+color:white;
+text-decoration:none;
+border-radius:6px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#009624;
+}
+
+/* CATALOGO */
+
+.catalogo{
+padding:60px 30px;
+max-width:1200px;
+margin:auto;
+}
+
+.catalogo h2{
+text-align:center;
+margin-bottom:40px;
+font-size:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+/* TARJETAS */
+
+.card{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card-body{
+padding:16px;
+}
+
+.card-body h3{
+margin-bottom:6px;
+}
+
+.price{
+font-weight:bold;
+color:#00a650;
+margin-bottom:8px;
+}
+
+.card-buttons{
+margin-top:12px;
+display:flex;
+gap:10px;
+}
+
+.card-buttons button,
+.card-buttons a{
+flex:1;
+padding:8px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-size:14px;
+}
+
+.btn-details{
+background:#333;
+color:white;
+}
+
+.btn-whatsapp{
+background:#25D366;
+color:white;
+text-decoration:none;
+text-align:center;
+}
+
+/* MODAL */
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:2000;
+}
+
+.modal-content{
+background:white;
+max-width:700px;
+width:100%;
+border-radius:10px;
+padding:20px;
+position:relative;
+}
+
+.close{
+position:absolute;
+top:12px;
+right:15px;
+font-size:20px;
+cursor:pointer;
+}
+
+.modal-images{
+display:flex;
+gap:10px;
+margin-bottom:15px;
+}
+
+.modal-images img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:6px;
+}
+
+/* CONTACTO */
+
+.contacto{
+padding:60px 30px;
+text-align:center;
+background:#111;
+color:white;
+}
+
+.contacto p{
+margin:15px 0;
+}
+
+/* FOOTER */
+
+footer{
+background:#000;
+color:#bbb;
+text-align:center;
+padding:20px;
+font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+.hero h1{
+font-size:28px;
+}
+
+.modal-images{
+flex-direction:column;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">Motos.GT</div>
+
+<nav>
+<a href="#">Inicio</a>
+<a href="#catalogo">Catálogo</a>
+<a href="#contacto">Contacto</a>
+</nav>
+</header>
+
+<section class="hero">
+
+<div>
+<h1>Encuentra tu próxima moto en Motos.GT</h1>
+<p>Motocicletas seleccionadas listas para rodar en Guatemala.</p>
+
+<a href="#catalogo" class="btn">Ver catálogo</a>
+</div>
+
+</section>
+
+
+<section class="catalogo" id="catalogo">
+
+<h2>Catálogo de Motocicletas</h2>
+
+<div class="grid">
+
+<!-- Yamaha -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80">
+
+<div class="card-body">
+
+<h3>Yamaha FZ 2023</h3>
+
+<div class="price">Q18,500</div>
+
+<p>Moto deportiva urbana 150cc ideal para ciudad.</p>
+
+<div class="card-buttons">
+
+<button class="btn-details" onclick="openModal('yamaha')">Ver detalles</button>
+
+<a class="btn-whatsapp"
+href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20deseo%20informaci%C3%B3n%20sobre%20la%20moto%20Yamaha%20FZ%202023"
+target="_blank">
+WhatsApp
+</a>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- Honda -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&w=800&q=80">
+
+<div class="card-body">
+
+<h3>Honda Navi 2024</h3>
+
+<div class="price">Q14,900</div>
+
+<p>Compacta, divertida y automática.</p>
+
+<div class="card-buttons">
+
+<button class="btn-details" onclick="openModal('navi')">Ver detalles</button>
+
+<a class="btn-whatsapp"
+href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20me%20interesa%20la%20moto%20Honda%20Navi%202024"
+target="_blank">
+WhatsApp
+</a>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- Suzuki -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1615172282427-9a57ef2d142b?auto=format&fit=crop&w=800&q=80">
+
+<div class="card-body">
+
+<h3>Suzuki Gixxer 2022</h3>
+
+<div class="price">Q19,750</div>
+
+<p>Potente y deportiva 155cc.</p>
+
+<div class="card-buttons">
+
+<button class="btn-details" onclick="openModal('gixxer')">Ver detalles</button>
+
+<a class="btn-whatsapp"
+href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20quisiera%20cotizar%20la%20moto%20Suzuki%20Gixxer%202022"
+target="_blank">
+WhatsApp
+</a>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- Bajaj -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1622185135505-2d795b1c15a9?auto=format&fit=crop&w=800&q=80">
+
+<div class="card-body">
+
+<h3>Bajaj Pulsar NS 2023</h3>
+
+<div class="price">Q21,300</div>
+
+<p>Potente 200cc con diseño agresivo.</p>
+
+<div class="card-buttons">
+
+<button class="btn-details" onclick="openModal('pulsar')">Ver detalles</button>
+
+<a class="btn-whatsapp"
+href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20Bajaj%20Pulsar%20NS%202023"
+target="_blank">
+WhatsApp
+</a>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- AKT -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1580310614729-ccd69652491d?auto=format&fit=crop&w=800&q=80">
+
+<div class="card-body">
+
+<h3>AKT CR4 2021</h3>
+
+<div class="price">Q12,800</div>
+
+<p>Excelente opción económica 125cc.</p>
+
+<div class="card-buttons">
+
+<button class="btn-details" onclick="openModal('akt')">Ver detalles</button>
+
+<a class="btn-whatsapp"
+href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20AKT%20CR4%202021"
+target="_blank">
+WhatsApp
+</a>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- Hero -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80">
+
+<div class="card-body">
+
+<h3>Hero Hunk 2022</h3>
+
+<div class="price">Q16,400</div>
+
+<p>150cc confiable para uso diario.</p>
+
+<div class="card-buttons">
+
+<button class="btn-details" onclick="openModal('hero')">Ver detalles</button>
+
+<a class="btn-whatsapp"
+href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20me%20interesa%20la%20Hero%20Hunk%202022"
+target="_blank">
+WhatsApp
+</a>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="contacto" id="contacto">
+
+<h2>Contáctanos</h2>
+
+<p>¿Buscas una moto específica o deseas más información?</p>
+
+<a class="btn"
+href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20deseo%20informaci%C3%B3n%20sobre%20las%20motos%20disponibles%20en%20Motos.GT"
+target="_blank">
+Escribir por WhatsApp
+</a>
+
+</section>
+
+
+<footer>
+
+<p>Motos.GT — Catálogo de motocicletas en Guatemala</p>
+
+</footer>
+
+
+<!-- MODAL DETALLE -->
+
+<div id="modal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">✖</span>
+
+<h2 id="modal-title"></h2>
+
+<div class="modal-images">
+
+<img src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&w=800&q=80">
+
+<img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80">
+
+<img src="https://images.unsplash.com/photo-1615172282427-9a57ef2d142b?auto=format&fit=crop&w=800&q=80">
+
+</div>
+
+<div id="modal-info"></div>
+
+<br>
+
+<a id="modal-whatsapp" class="btn" target="_blank">Preguntar por WhatsApp</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* Datos de motos */
+
+const motos = {
+
+yamaha:{
+nombre:"Yamaha FZ 2023",
+marca:"Yamaha",
+modelo:"FZ",
+anio:"2023",
+precio:"Q18,500",
+cilindrada:"150cc",
+color:"Negro",
+transmision:"Mecánica"
+},
+
+navi:{
+nombre:"Honda Navi 2024",
+marca:"Honda",
+modelo:"Navi",
+anio:"2024",
+precio:"Q14,900",
+cilindrada:"110cc",
+color:"Rojo",
+transmision:"Automática"
+},
+
+gixxer:{
+nombre:"Suzuki Gixxer 2022",
+marca:"Suzuki",
+modelo:"Gixxer",
+anio:"2022",
+precio:"Q19,750",
+cilindrada:"155cc",
+color:"Azul",
+transmision:"Mecánica"
+},
+
+pulsar:{
+nombre:"Bajaj Pulsar NS 2023",
+marca:"Bajaj",
+modelo:"Pulsar NS",
+anio:"2023",
+precio:"Q21,300",
+cilindrada:"200cc",
+color:"Gris",
+transmision:"Mecánica"
+},
+
+akt:{
+nombre:"AKT CR4 2021",
+marca:"AKT",
+modelo:"CR4",
+anio:"2021",
+precio:"Q12,800",
+cilindrada:"125cc",
+color:"Blanco",
+transmision:"Mecánica"
+},
+
+hero:{
+nombre:"Hero Hunk 2022",
+marca:"Hero",
+modelo:"Hunk",
+anio:"2022",
+precio:"Q16,400",
+cilindrada:"150cc",
+color:"Negro/Rojo",
+transmision:"Mecánica"
+}
+
+};
+
+
+/* Abrir modal */
+
+function openModal(id){
+
+const moto = motos[id];
+
+document.getElementById("modal-title").innerText = moto.nombre;
+
+document.getElementById("modal-info").innerHTML = `
+<p><b>Marca:</b> ${moto.marca}</p>
+<p><b>Modelo:</b> ${moto.modelo}</p>
+<p><b>Año:</b> ${moto.anio}</p>
+<p><b>Precio:</b> ${moto.precio}</p>
+<p><b>Cilindrada:</b> ${moto.cilindrada}</p>
+<p><b>Color:</b> ${moto.color}</p>
+<p><b>Transmisión:</b> ${moto.transmision}</p>
+`;
+
+const mensaje = encodeURIComponent("Hola, deseo información sobre la moto " + moto.nombre);
+
+document.getElementById("modal-whatsapp").href =
+`https://api.whatsapp.com/send/?phone=50251174129&text=${mensaje}`;
+
+document.getElementById("modal").style.display="flex";
+
+}
+
+/* Cerrar modal */
+
+function closeModal(){
+
+document.getElementById("modal").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>

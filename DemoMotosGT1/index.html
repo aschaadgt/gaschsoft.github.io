@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motos.GT — Tu próxima moto está aquí</title>
+  <meta name="description" content="Motos.GT — Catálogo de motocicletas nuevas y usadas en Guatemala. Yamaha, Honda, Suzuki, Bajaj y más. Consulta por WhatsApp." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Motos.GT — Tu próxima moto está aquí" />
+  <meta property="og:description" content="Catálogo de motocicletas en Guatemala. Precios directos, atención por WhatsApp." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80" />
+
+  <!-- Google Fonts: Barlow Condensed (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       VARIABLES & RESET
+    ========================================================= */
+    :root {
+      --bg:        #0a0a0b;
+      --bg2:       #111114;
+      --bg3:       #18181d;
+      --card:      #1c1c22;
+      --border:    rgba(255,255,255,0.07);
+      --accent:    #f97316;       /* vivid orange */
+      --accent2:   #fb923c;
+      --accent-dim:#7c3b12;
+      --text:      #f0f0f0;
+      --text-muted:#888899;
+      --text-dim:  #555566;
+      --white:     #ffffff;
+      --green-wa:  #25d366;
+      --radius:    14px;
+      --radius-sm: 8px;
+      --shadow:    0 8px 40px rgba(0,0,0,0.6);
+      --transition:0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* =========================================================
+       UTILITY CLASSES
+    ========================================================= */
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.25);
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+
+    .section-title span { color: var(--accent); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(249,115,22,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .btn-wa {
+      background: var(--green-wa);
+      color: #fff;
+    }
+    .btn-wa:hover {
+      background: #1ebe5d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+    }
+
+    /* =========================================================
+       HEADER / NAV
+    ========================================================= */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10,10,11,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta { margin-left: 8px; }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    /* =========================================================
+       HERO SECTION
+    ========================================================= */
+    #inicio {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 68px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.25) saturate(0.6);
+    }
+
+    /* orange gradient overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,10,11,0.9) 40%, rgba(249,115,22,0.08) 100%);
+    }
+
+    /* decorative geometric accent */
+    .hero-shape {
+      position: absolute;
+      right: -120px; top: 50%;
+      transform: translateY(-50%);
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      border: 1px solid rgba(249,115,22,0.12);
+      pointer-events: none;
+    }
+    .hero-shape::before {
+      content: '';
+      position: absolute;
+      inset: 60px;
+      border-radius: 50%;
+      border: 1px solid rgba(249,115,22,0.08);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.3);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent2);
+      margin-bottom: 28px;
+      animation: fadeInDown 0.6s ease both;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(48px, 8vw, 90px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      color: var(--white);
+      margin-bottom: 20px;
+      animation: fadeInDown 0.7s 0.1s ease both;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      font-weight: 400;
+      line-height: 1.7;
+      max-width: 500px;
+      margin-bottom: 36px;
+      animation: fadeInDown 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeInDown 0.7s 0.3s ease both;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 60px;
+      animation: fadeInDown 0.7s 0.4s ease both;
+    }
+    .hero-stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    /* scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      animation: fadeIn 1s 0.8s ease both;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollLine 2s infinite;
+    }
+
+    /* =========================================================
+       CATALOG SECTION
+    ========================================================= */
+    #catalogo {
+      padding: 100px 0;
+      background: var(--bg2);
+    }
+
+    .catalog-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+
+    /* filter chips */
+    .filter-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      padding: 7px 18px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition);
+      background: transparent;
+    }
+    .chip:hover, .chip.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(249,115,22,0.08);
+    }
+
+    /* GRID */
+    .moto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    /* CARD */
+    .moto-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+    .moto-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(249,115,22,0.2);
+      border-color: rgba(249,115,22,0.2);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      z-index: 2;
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .card-img-wrap {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      background: #0f0f13;
+    }
+    .card-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .moto-card:hover .card-img-wrap img {
+      transform: scale(1.05);
+    }
+    .card-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,28,34,0.7) 0%, transparent 60%);
+    }
+
+    .card-body {
+      padding: 22px 24px 20px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .card-brand {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .card-year {
+      font-size: 12px;
+      color: var(--text-dim);
+      background: var(--bg3);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .card-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .card-specs {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .spec-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .spec-icon {
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .card-price small {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .card-actions .btn {
+      padding: 9px 16px;
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       MODAL
+    ========================================================= */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: scale(0.94) translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .modal-backdrop.open .modal {
+      transform: scale(1) translateY(0);
+    }
+
+    /* custom scrollbar for modal */
+    .modal::-webkit-scrollbar { width: 4px; }
+    .modal::-webkit-scrollbar-track { background: transparent; }
+    .modal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      z-index: 10;
+      width: 40px; height: 40px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+    .modal-close:hover { color: var(--white); border-color: var(--accent); }
+
+    .modal-gallery {
+      position: relative;
+      height: 320px;
+      background: #0a0a0b;
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+    }
+    .modal-gallery img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .modal-gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--bg3) 0%, transparent 50%);
+    }
+
+    .gallery-nav {
+      position: absolute;
+      bottom: 20px; right: 20px;
+      display: flex;
+      gap: 8px;
+    }
+    .gallery-btn {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: 14px;
+      transition: all var(--transition);
+    }
+    .gallery-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+    .gallery-dots {
+      position: absolute;
+      bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 6px;
+    }
+    .gallery-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .gallery-dot.active {
+      background: var(--accent);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    .modal-body {
+      padding: 32px 36px 36px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .modal-brand-chip {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .modal-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .modal-price-block {
+      text-align: right;
+    }
+    .modal-price-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .modal-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .modal-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .spec-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+    }
+    .spec-card-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .spec-card-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      padding: 20px;
+      background: var(--bg2);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--accent);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .modal-actions .btn {
+      flex: 1;
+      justify-content: center;
+      min-width: 160px;
+    }
+
+    /* =========================================================
+       CONTACT SECTION
+    ========================================================= */
+    #contacto {
+      padding: 100px 0;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* decorative */
+    #contacto::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(249,115,22,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 60px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+    .contact-inner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), transparent);
+    }
+
+    .contact-text { max-width: 480px; }
+    .contact-text p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 200px;
+    }
+    .contact-actions .btn {
+      justify-content: center;
+    }
+
+    .contact-info {
+      margin-top: 28px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .contact-info-item span { font-size: 16px; }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--accent); }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+
+      /* mobile nav open */
+      .nav-links.nav-open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 68px; left: 0; right: 0;
+        background: rgba(10,10,11,0.98);
+        backdrop-filter: blur(16px);
+        padding: 32px 24px;
+        gap: 24px;
+        border-bottom: 1px solid var(--border);
+        animation: fadeIn 0.2s ease;
+      }
+      .nav-links.nav-open + .nav-cta {
+        display: flex;
+        justify-content: flex-start;
+        padding: 0 24px 24px;
+        position: fixed;
+        top: calc(68px + 188px);
+        left: 0; right: 0;
+        background: rgba(10,10,11,0.98);
+      }
+
+      .hero-stats { gap: 20px; }
+      .hero-shape { display: none; }
+
+      .moto-grid { grid-template-columns: 1fr; }
+
+      .catalog-header { flex-direction: column; align-items: flex-start; }
+
+      .contact-inner { padding: 36px 28px; }
+
+      .modal-body { padding: 24px 20px 28px; }
+      .modal-title { font-size: 32px; }
+      .modal-price { font-size: 36px; }
+      .modal-header { flex-direction: column; }
+      .modal-price-block { text-align: left; }
+
+      .footer-inner { flex-direction: column; gap: 24px; }
+      .footer-links { flex-wrap: wrap; gap: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { justify-content: center; }
+      .card-footer { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .card-actions { width: 100%; }
+      .card-actions .btn { flex: 1; justify-content: center; }
+      .modal-actions .btn { min-width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       HEADER
+  ========================================================= -->
+  <header>
+    <nav class="container">
+      <a href="#inicio" class="nav-logo">Motos<span>.GT</span></a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+
+      <a href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20deseo%20informaci%C3%B3n%20sobre%20las%20motos%20disponibles%20en%20Motos.GT"
+         target="_blank" class="btn btn-wa nav-cta" id="navCta">
+        💬 WhatsApp
+      </a>
+
+      <!-- Hamburger for mobile -->
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- =========================================================
+       HERO
+  ========================================================= -->
+  <section id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-shape"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Más de 50 modelos disponibles en Guatemala
+        </div>
+
+        <h1 class="hero-title">
+          Encuentra tu
+          <em>próxima moto</em>
+          en Motos.GT
+        </h1>
+
+        <p class="hero-subtitle">
+          Las mejores marcas al mejor precio. Yamaha, Honda, Suzuki, Bajaj y más.
+          Financiamiento disponible. Entrega inmediata.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#catalogo" class="btn btn-primary">
+            🏍️ Ver Catálogo
+          </a>
+          <a href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20deseo%20informaci%C3%B3n%20sobre%20las%20motos%20disponibles%20en%20Motos.GT"
+             target="_blank" class="btn btn-outline">
+            💬 Consultar ahora
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">50+</div>
+            <div class="hero-stat-label">Modelos</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">6</div>
+            <div class="hero-stat-label">Marcas top</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">Q12K</div>
+            <div class="hero-stat-label">Desde</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CATALOG SECTION
+  ========================================================= -->
+  <section id="catalogo">
+    <div class="container">
+      <div class="catalog-header">
+        <div>
+          <span class="section-label">Catálogo</span>
+          <h2 class="section-title">Motos <span>disponibles</span></h2>
+        </div>
+        <div class="filter-chips" id="filterChips">
+          <button class="chip active" data-filter="all">Todas</button>
+          <button class="chip" data-filter="125cc">125cc</button>
+          <button class="chip" data-filter="150cc">150cc</button>
+          <button class="chip" data-filter="200cc+">200cc+</button>
+          <button class="chip" data-filter="automatica">Automática</button>
+        </div>
+      </div>
+
+      <!-- Cards rendered by JS -->
+      <div class="moto-grid" id="motoGrid"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACT SECTION
+  ========================================================= -->
+  <section id="contacto">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-text">
+          <span class="section-label">Contacto</span>
+          <h2 class="section-title">¿Listo para tu <span>nueva moto?</span></h2>
+          <p>
+            Estamos para ayudarte. Escríbenos por WhatsApp y recibe asesoría personalizada,
+            cotizaciones y opciones de financiamiento sin costo.
+          </p>
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <span>📍</span> Guatemala City, GT
+            </div>
+            <div class="contact-info-item">
+              <span>📞</span> +502 5117 4129
+            </div>
+            <div class="contact-info-item">
+              <span>⏰</span> Lun–Sáb 8:00–18:00
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-actions">
+          <a href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20deseo%20informaci%C3%B3n%20sobre%20las%20motos%20disponibles%20en%20Motos.GT"
+             target="_blank" class="btn btn-wa">
+            💬 WhatsApp ahora
+          </a>
+          <a href="#catalogo" class="btn btn-outline">
+            🏍️ Ver catálogo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Motos<span>.GT</span></div>
+          <div class="footer-tagline">Tu próxima moto te está esperando.</div>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li>
+            <a href="https://api.whatsapp.com/send/?phone=50251174129&text=Hola%2C%20deseo%20informaci%C3%B3n%20sobre%20las%20motos%20disponibles%20en%20Motos.GT"
+               target="_blank">WhatsApp</a>
+          </li>
+        </ul>
+
+        <div class="footer-copy">
+          © 2024 Motos.GT — Guatemala
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       MODAL (populated by JS)
+  ========================================================= -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
+  <script>
+    /* ----------------------------------------------------------
+       DATOS DE LAS MOTOS
+    ---------------------------------------------------------- */
+    const WA_BASE = 'https://api.whatsapp.com/send/?phone=50251174129&text=';
+
+    const motos = [
+      {
+        id: 1,
+        marca:       'Yamaha',
+        modelo:      'FZ',
+        anio:        2023,
+        precio:      'Q18,500',
+        cilindrada:  '150cc',
+        color:       'Negro',
+        transmision: 'Mecánica',
+        badge:       'Popular',
+        desc:        'La Yamaha FZ domina las calles con su estilo agresivo y motor de alta eficiencia. Perfecta para el día a día en ciudad y carretera.',
+        descLarga:   'La Yamaha FZ 2023 combina potencia y eficiencia en un diseño musculoso e intimidante. Su motor monocilíndrico de 150cc entrega la respuesta exacta que necesitas, ya sea en el tráfico de la ciudad o en carretera abierta. Frenos de disco delanteros y traseros, suspensión telescópica y asiento ergonómico aseguran comodidad y control total.',
+        imgs: [
+          'https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=900&q=80',
+          'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',
+          'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=900&q=80',
+        ],
+        filter: ['all', '150cc'],
+      },
+      {
+        id: 2,
+        marca:       'Honda',
+        modelo:      'Navi',
+        anio:        2024,
+        precio:      'Q14,900',
+        cilindrada:  '110cc',
+        color:       'Rojo',
+        transmision: 'Automática',
+        badge:       'Nuevo',
+        desc:        'La Honda Navi 2024 es compacta, alegre y perfecta para moverse en ciudad sin complicaciones. Transmisión automática ideal para principiantes.',
+        descLarga:   'La Honda Navi 2024 redefine la movilidad urbana con su diseño aventurero y funcional. Con transmisión automática es perfecta para quienes buscan practicidad sin sacrificar estilo. Su motor de 110cc es altamente eficiente en combustible, garantizando bajos costos operativos. Ideal para uso diario en ciudad, fácil de aparcar y muy confiable.',
+        imgs: [
+          'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=900&q=80',
+          'https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=900&q=80',
+          'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',
+        ],
+        filter: ['all', '125cc', 'automatica'],
+      },
+      {
+        id: 3,
+        marca:       'Suzuki',
+        modelo:      'Gixxer',
+        anio:        2022,
+        precio:      'Q19,750',
+        cilindrada:  '155cc',
+        color:       'Azul',
+        transmision: 'Mecánica',
+        badge:       'Oferta',
+        desc:        'La Suzuki Gixxer trae la adrenalina del circuito a las calles. Aerodinámica sport, motor potente y acabados premium para el piloto exigente.',
+        descLarga:   'La Suzuki Gixxer 2022 es una naked sport que no pide disculpas. Su motor de 155cc está afinado para dar lo mejor de sí en cada acelerada. Diseño inspirado en las motos de carrera, con instrumentación digital, LED en todo el conjunto lumínico y un chasis rígido que transmite seguridad en cada curva. Para quienes quieren más que una simple moto.',
+        imgs: [
+          'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',
+          'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=900&q=80',
+          'https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=900&q=80',
+        ],
+        filter: ['all', '150cc'],
+      },
+      {
+        id: 4,
+        marca:       'Bajaj',
+        modelo:      'Pulsar NS',
+        anio:        2023,
+        precio:      'Q21,300',
+        cilindrada:  '200cc',
+        color:       'Gris',
+        transmision: 'Mecánica',
+        badge:       'Top',
+        desc:        'La Bajaj Pulsar NS 200 es la reina de las naked en su categoría. Motor potente, doble disco y suspensión nitrox para los que van en serio.',
+        descLarga:   'La Bajaj Pulsar NS 200 llega con toda la potencia que su motor de 200cc promete. Doble disco de freno, suspensión trasera tipo nitrox, instrumentación digital full y una postura de manejo agresiva que pone al piloto en modo deportivo desde el primer arranque. Si buscas la moto con más carácter por el precio, esta es tu respuesta.',
+        imgs: [
+          'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=900&q=80',
+          'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',
+          'https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=900&q=80',
+        ],
+        filter: ['all', '200cc+'],
+      },
+      {
+        id: 5,
+        marca:       'AKT',
+        modelo:      'CR4',
+        anio:        2021,
+        precio:      'Q12,800',
+        cilindrada:  '125cc',
+        color:       'Blanco',
+        transmision: 'Mecánica',
+        badge:       'Precio',
+        desc:        'La AKT CR4 es la entrada ideal al mundo de las motos. Económica, confiable y fácil de mantener. Perfecta para quienes inician su vida sobre dos ruedas.',
+        descLarga:   'La AKT CR4 2021 demuestra que no necesitas gastar mucho para tener calidad. Con su motor de 125cc es suficientemente potente para ciudad y carreteras secundarias. Su consumo de combustible es excelente y el mantenimiento asequible. Un excelente primer modelo para quienes están comenzando o buscan una moto de uso diario sin complicarse la vida.',
+        imgs: [
+          'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=900&q=80',
+          'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=900&q=80',
+          'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',
+        ],
+        filter: ['all', '125cc'],
+      },
+      {
+        id: 6,
+        marca:       'Hero',
+        modelo:      'Hunk',
+        anio:        2022,
+        precio:      'Q16,400',
+        cilindrada:  '150cc',
+        color:       'Negro/Rojo',
+        transmision: 'Mecánica',
+        badge:       'Nuevo',
+        desc:        'La Hero Hunk tiene el nombre que merece. Diseño musculoso, torque considerable y equipamiento completo para dominar cada tramo de asfalto.',
+        descLarga:   'La Hero Hunk 2022 es una moto que no pasa desapercibida. Su diseño robusto y lleno de detalles agresivos combina con un motor de 150cc que entrega potencia y par motor notables para su categoría. Freno de disco delantero, suspensión telescópica delantera y amortiguador trasero de doble efecto. Una propuesta completa a un precio muy competitivo.',
+        imgs: [
+          'https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=900&q=80',
+          'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=900&q=80',
+          'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=900&q=80',
+        ],
+        filter: ['all', '150cc'],
+      },
+    ];
+
+    /* ----------------------------------------------------------
+       WHATSAPP URL BUILDER
+    ---------------------------------------------------------- */
+    function waUrl(moto) {
+      const msg = `Hola, deseo información sobre la moto ${moto.marca} ${moto.modelo} ${moto.anio}`;
+      return WA_BASE + encodeURIComponent(msg);
+    }
+
+    /* ----------------------------------------------------------
+       RENDER CARDS
+    ---------------------------------------------------------- */
+    function renderCards(filter = 'all') {
+      const grid = document.getElementById('motoGrid');
+      const filtered = motos.filter(m => m.filter.includes(filter));
+      grid.innerHTML = filtered.map(moto => `
+        <article class="moto-card" data-id="${moto.id}">
+          <span class="card-badge">${moto.badge}</span>
+          <div class="card-img-wrap">
+            <img src="${moto.imgs[0]}" alt="${moto.marca} ${moto.modelo}" loading="lazy" />
+            <div class="card-img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-brand">${moto.marca}</span>
+              <span class="card-year">${moto.anio}</span>
+            </div>
+            <h3 class="card-name">${moto.marca} ${moto.modelo}</h3>
+            <p class="card-desc">${moto.desc}</p>
+            <div class="card-specs">
+              <div class="spec-item"><span class="spec-icon">⚙️</span>${moto.cilindrada}</div>
+              <div class="spec-item"><span class="spec-icon">🎨</span>${moto.color}</div>
+              <div class="spec-item"><span class="spec-icon">🔄</span>${moto.transmision}</div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-price">${moto.precio}<small>GTQ</small></div>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline btn-ver" data-id="${moto.id}">Ver detalles</button>
+                <a href="${waUrl(moto)}" target="_blank" class="btn btn-wa" onclick="event.stopPropagation()">💬</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      // Bind card click → open modal
+      document.querySelectorAll('.moto-card').forEach(card => {
+        card.addEventListener('click', () => openModal(parseInt(card.dataset.id)));
+      });
+      document.querySelectorAll('.btn-ver').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openModal(parseInt(btn.dataset.id));
+        });
+      });
+    }
+
+    /* ----------------------------------------------------------
+       MODAL LOGIC
+    ---------------------------------------------------------- */
+    let currentImgIndex = 0;
+    let currentMoto = null;
+
+    function openModal(id) {
+      const moto = motos.find(m => m.id === id);
+      if (!moto) return;
+      currentMoto = moto;
+      currentImgIndex = 0;
+      renderModal(moto);
+      document.getElementById('modalBackdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalBackdrop').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function renderModal(moto) {
+      const dots = moto.imgs.map((_, i) =>
+        `<span class="gallery-dot ${i === 0 ? 'active' : ''}" data-idx="${i}"></span>`
+      ).join('');
+
+      document.getElementById('modalContent').innerHTML = `
+        <div class="modal-gallery">
+          <img id="modalGalleryImg" src="${moto.imgs[0]}" alt="${moto.marca} ${moto.modelo}" />
+          <div class="modal-gallery-overlay"></div>
+          <div class="gallery-dots">${dots}</div>
+          <div class="gallery-nav">
+            <button class="gallery-btn" id="galleryPrev">◀</button>
+            <button class="gallery-btn" id="galleryNext">▶</button>
+          </div>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-header">
+            <div>
+              <div class="modal-brand-chip">${moto.marca}</div>
+              <h2 class="modal-title">${moto.marca} ${moto.modelo}</h2>
+            </div>
+            <div class="modal-price-block">
+              <div class="modal-price-label">Precio</div>
+              <div class="modal-price">${moto.precio}</div>
+            </div>
+          </div>
+
+          <div class="modal-specs-grid">
+            <div class="spec-card">
+              <div class="spec-card-label">Año</div>
+              <div class="spec-card-value">${moto.anio}</div>
+            </div>
+            <div class="spec-card">
+              <div class="spec-card-label">Cilindrada</div>
+              <div class="spec-card-value">${moto.cilindrada}</div>
+            </div>
+            <div class="spec-card">
+              <div class="spec-card-label">Color</div>
+              <div class="spec-card-value">${moto.color}</div>
+            </div>
+            <div class="spec-card">
+              <div class="spec-card-label">Transmisión</div>
+              <div class="spec-card-value">${moto.transmision}</div>
+            </div>
+            <div class="spec-card">
+              <div class="spec-card-label">Marca</div>
+              <div class="spec-card-value">${moto.marca}</div>
+            </div>
+            <div class="spec-card">
+              <div class="spec-card-label">Modelo</div>
+              <div class="spec-card-value">${moto.modelo}</div>
+            </div>
+          </div>
+
+          <div class="modal-desc">${moto.descLarga}</div>
+
+          <div class="modal-actions">
+            <a href="${waUrl(moto)}" target="_blank" class="btn btn-wa">
+              💬 Preguntar por esta moto
+            </a>
+            <button class="btn btn-outline" onclick="closeModal()">← Volver al catálogo</button>
+          </div>
+        </div>
+      `;
+
+      // Gallery navigation
+      const img = document.getElementById('modalGalleryImg');
+
+      function updateGallery(idx) {
+        currentImgIndex = (idx + moto.imgs.length) % moto.imgs.length;
+        img.src = moto.imgs[currentImgIndex];
+        document.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentImgIndex);
+        });
+      }
+
+      document.getElementById('galleryNext').addEventListener('click', () => updateGallery(currentImgIndex + 1));
+      document.getElementById('galleryPrev').addEventListener('click', () => updateGallery(currentImgIndex - 1));
+      document.querySelectorAll('.gallery-dot').forEach(dot => {
+        dot.addEventListener('click', () => updateGallery(parseInt(dot.dataset.idx)));
+      });
+    }
+
+    // Close modal on backdrop click
+    document.getElementById('modalBackdrop').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modalBackdrop')) closeModal();
+    });
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    /* ----------------------------------------------------------
+       FILTER CHIPS
+    ---------------------------------------------------------- */
+    document.getElementById('filterChips').addEventListener('click', (e) => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      renderCards(chip.dataset.filter);
+    });
+
+    /* ----------------------------------------------------------
+       MOBILE NAV TOGGLE
+    ---------------------------------------------------------- */
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+    const navCta    = document.getElementById('navCta');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('nav-open');
+    });
+
+    // Close nav when a link is clicked
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('nav-open'));
+    });
+
+    /* ----------------------------------------------------------
+       INIT
+    ---------------------------------------------------------- */
+    renderCards('all');
+  </script>
+
+</body>
+</html>
