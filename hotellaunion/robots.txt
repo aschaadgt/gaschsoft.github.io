@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /hotellaunion/
+
+Sitemap: https://gaschsoft.com/hotellaunion/sitemap.xml

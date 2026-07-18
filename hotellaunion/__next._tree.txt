@@ -1,0 +1,12 @@
+:HL["/hotellaunion/_next/static/chunks/14vpt_w~fp1j5.css","style"]
+:HL["/hotellaunion/assets/logo-hotel.webp","image"]
+:HL["/hotellaunion/assets/hotel-flores.webp","image"]
+:HL["/hotellaunion/assets/habitacion-doble-vista-1.webp","image"]
+:HL["/hotellaunion/assets/habitacion-triple-vista.webp","image"]
+:HL["/hotellaunion/assets/habitacion-sencilla.webp","image"]
+:HL["/hotellaunion/assets/isla-flores-aerea.webp","image"]
+:HL["/hotellaunion/assets/book-exchange.webp","image"]
+:HL["/hotellaunion/assets/hotel-frente-lago.webp","image"]
+:HL["/hotellaunion/assets/historia-hotel.webp","image"]
+:HL["/hotellaunion/assets/atardecer-terraza.webp","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"YxLPGcIeyedsQDCky59Di"}

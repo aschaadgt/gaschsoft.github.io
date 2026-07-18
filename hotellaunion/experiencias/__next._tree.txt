@@ -1,0 +1,13 @@
+:HL["/hotellaunion/_next/static/chunks/14vpt_w~fp1j5.css","style"]
+:HL["/hotellaunion/assets/logo-hotel.webp","image"]
+:HL["/hotellaunion/assets/tour-tikal.webp","image"]
+:HL["/hotellaunion/assets/tour-yaxha.webp","image"]
+:HL["/hotellaunion/assets/tour-crater-azul.webp","image"]
+:HL["/hotellaunion/assets/kayak-flores.webp","image"]
+:HL["/hotellaunion/assets/hotel-vista-aerea.webp","image"]
+:HL["/hotellaunion/assets/transporte-privado.webp","image"]
+:HL["/hotellaunion/assets/tour-semuc-champey.webp","image"]
+:HL["/hotellaunion/assets/tour-rio-dulce.webp","image"]
+:HL["/hotellaunion/assets/conexion-belize.webp","image"]
+:HL["/hotellaunion/assets/vista-balcon.webp","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"experiencias","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"YxLPGcIeyedsQDCky59Di"}
