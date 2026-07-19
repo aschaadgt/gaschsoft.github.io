@@ -1,4 +1,4 @@
-:HL["/hotellaunion/_next/static/chunks/0mo022maxa18w.css","style"]
+:HL["/hotellaunion/_next/static/chunks/12zstef6nmjy5.css","style"]
 :HL["/hotellaunion/assets/google-logo.svg","image"]
 :HL["/hotellaunion/assets/solo-logo-transparente.jpg","image"]
 :HL["/hotellaunion/assets/whatsapp-logo.svg","image"]
@@ -12,4 +12,4 @@
 :HL["/hotellaunion/assets/historia-hotel.webp","image"]
 :HL["/hotellaunion/assets/atardecer-terraza.webp","image"]
 :HL["/hotellaunion/assets/logo-con-slogan.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"n-xNjDeWBG128wIoVKZ4Q"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"U-dhNPHg-t6M8TfQeNau8"}
