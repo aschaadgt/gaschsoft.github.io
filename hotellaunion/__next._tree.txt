@@ -11,4 +11,4 @@
 :HL["/hotellaunion/assets/hotel-frente-lago.webp","image"]
 :HL["/hotellaunion/assets/historia-hotel.webp","image"]
 :HL["/hotellaunion/assets/atardecer-terraza.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"w2eYllNnHJooaTQkDHXw7"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"QhwH1dBOXunwWu-jRpLpX"}
