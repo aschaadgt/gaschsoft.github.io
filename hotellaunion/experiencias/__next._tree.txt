@@ -1,5 +1,7 @@
-:HL["/hotellaunion/_next/static/chunks/14vpt_w~fp1j5.css","style"]
-:HL["/hotellaunion/assets/logo-hotel.webp","image"]
+:HL["/hotellaunion/_next/static/chunks/0mo022maxa18w.css","style"]
+:HL["/hotellaunion/assets/google-logo.svg","image"]
+:HL["/hotellaunion/assets/logo-con-slogan.webp","image"]
+:HL["/hotellaunion/assets/whatsapp-logo.svg","image"]
 :HL["/hotellaunion/assets/tour-tikal.webp","image"]
 :HL["/hotellaunion/assets/tour-yaxha.webp","image"]
 :HL["/hotellaunion/assets/tour-crater-azul.webp","image"]
@@ -10,4 +12,4 @@
 :HL["/hotellaunion/assets/tour-rio-dulce.webp","image"]
 :HL["/hotellaunion/assets/conexion-belize.webp","image"]
 :HL["/hotellaunion/assets/vista-balcon.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"experiencias","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"YxLPGcIeyedsQDCky59Di"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"experiencias","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"w2eYllNnHJooaTQkDHXw7"}
