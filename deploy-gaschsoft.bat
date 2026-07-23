@@ -1,5 +1,4 @@
 @echo off
-title GASCHSOFT Deploy - Ejecutando PowerShell...
-echo Ejecutando script de deploy en PowerShell...
-powershell -ExecutionPolicy Bypass -File "deploy-gaschsoft.ps1"
+title GaschSoft - Validacion de publicacion
+powershell -ExecutionPolicy Bypass -File "%~dp0deploy-gaschsoft.ps1"
 pause

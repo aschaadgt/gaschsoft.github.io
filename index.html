@@ -1,22 +1,375 @@
 <!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GaschSoft</title>
-    <meta name="description" content="Impulsa tu negocio con soluciones digitales. Desarrollo web, automatización de procesos y consultoría tecnológica en Guatemala.">
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GaschSoft</title>
+  <meta name="description" content="Infraestructura digital para empresas que ya facturan: estrategia, desarrollo, automatización y continuidad.">
+  <meta name="theme-color" content="#F8FAFC" id="metaThemeColor">
+  <link rel="canonical" href="https://gaschsoft.com/">
+  <link rel="icon" type="image/png" sizes="32x32" href="/newgaschsoft/favicon-32x32.png" id="favicon32">
+  <link rel="icon" type="image/png" sizes="16x16" href="/newgaschsoft/favicon-16x16.png" id="favicon16">
+  <link rel="apple-touch-icon" sizes="180x180" href="/newgaschsoft/apple-touch-icon.png" id="appleTouchIcon">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:site_name" content="GaschSoft">
+  <meta property="og:title" content="GaschSoft | Infraestructura digital para empresas">
+  <meta property="og:description" content="Estrategia, desarrollo, automatización y continuidad para empresas que quieren crecer.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gaschsoft.com/">
+  <meta property="og:image" content="https://gaschsoft.com/newgaschsoft/Logos/Ico%20GaschSoft.png">
+  <meta property="og:image:alt" content="Logo de GaschSoft">
+  <meta property="og:locale" content="es_GT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GaschSoft | Infraestructura digital para empresas">
+  <meta name="twitter:description" content="Estrategia, desarrollo, automatización y continuidad para empresas que quieren crecer.">
+  <meta name="twitter:image" content="https://gaschsoft.com/newgaschsoft/Logos/Ico%20GaschSoft.png">
+  <link rel="stylesheet" href="/newgaschsoft/assets/gaschsoft.css">
+</head>
+<body><header class="header" role="banner">
+    <div class="header-inner">
+      <div class="brand" aria-label="GaschSoft">
+        <img id="brandLogo" class="brand-logo" src="/newgaschsoft/Logos/Ico GaschSoft.png" alt="GaschSoft logo" />
+        <div class="brand-text">
+          <div class="brand-typing" aria-label="GaschSoft">
+            <span id="typingText">Gaschsoft</span>
 
-    <!-- SEO OpenGraph -->
-    <meta property="og:title" content="Gaschsoft | Impulsamos tu crecimiento digital">
-    <meta property="og:description" content="Creamos soluciones tecnológicas modernas y eficientes en Guatemala.">
-    <meta property="og:image" content="https://gaschsoft.com/og-image.png">
-    <meta property="og:url" content="https://gaschsoft.com/">
-    <meta name="twitter:card" content="summary_large_image">
-    <script type="module" crossorigin src="/assets/index-VSuXaPLb.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-glkJmpnr.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+          </div>
+          <div class="brand-sub" id="brandSub"></div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Navegación principal">
+<div class="nav-links" id="navLinks">
+
+
+
+          <div class="dropdown services services-test" id="servicesTestDD">
+            <a class="nav-link nav-dd-link" href="#services-test" id="servicesTestBtn" aria-haspopup="true" aria-expanded="false">
+              <span>Plataforma</span>
+              <span class="chev" aria-hidden="true"></span>
+            </a>
+            <div class="menu" role="menu" aria-label="Plataforma">
+              <button class="menu-item" id="svcAuto" role="menuitem" type="button">Automatizaciones</button>
+              <button class="menu-item" id="svcWeb" role="menuitem" type="button">Web Apps</button>
+              <button class="menu-item" id="svcIT" role="menuitem" type="button">Integraciones</button>
+              <button class="menu-item" id="svcInfra" role="menuitem" type="button">Infraestructura</button>
+              <button class="menu-item" id="svcInv" role="menuitem" type="button">Invitaciones Web</button>
+            </div>
+          </div>
+
+          <div class="dropdown services services-test" id="casesDD">
+            <a class="nav-link nav-dd-link" href="#cases" id="navPortfolio" aria-haspopup="true" aria-expanded="false">
+              <span id="navCasesLabel">Casos</span>
+              <span class="chev" aria-hidden="true"></span>
+            </a>
+            <div class="menu" role="menu" aria-label="Casos">
+              <button class="menu-item" id="caseSME" role="menuitem" type="button">PYMEs</button>
+              <button class="menu-item" id="caseCorp" role="menuitem" type="button">Corporativo</button>
+              <button class="menu-item" id="caseStartup" role="menuitem" type="button">Startups</button>
+</div>
+          </div>
+<a class="nav-link" href="#about" id="navAbout">Empresa</a>
+          <a class="nav-link" href="#contact" id="navContact">Contacto</a>
+        </div>
+
+        <div class="icon-actions">
+          <!-- Demo (desktop only; moves into drawer on mobile) -->
+          <div id="demoWrap">
+            <a class="demo-btn" id="demoBtn" href="mailto:contacto@gaschsoft.com?subject=Solicitud%20de%20demo%20GaschSoft" aria-label="Demo">
+              <img id="demoIcon" src="/newgaschsoft/Logos/agendar.png" alt="">
+              <span>Demo</span>
+            </a>
+          </div>
+
+          <!-- Idioma -->
+          <div class="dropdown" id="langDD">
+            <button class="icon-btn" id="langBtn" type="button" aria-label="Idioma" aria-haspopup="true" aria-expanded="false">
+              <img id="langIcon" src="/newgaschsoft/Logos/idiomas.png" alt="" />
+            </button>
+
+            <div class="menu" role="menu" aria-label="Selector de idioma" id="langMenu">
+              <button class="menu-item" role="menuitem" type="button" data-lang="es" aria-selected="true">
+                <img class="flag" src="/newgaschsoft/Logos/ES.png" alt="ES" />
+                <span>Español</span>
+              </button>
+              <button class="menu-item" role="menuitem" type="button" data-lang="en" aria-selected="false">
+                <img class="flag" src="/newgaschsoft/Logos/US.png" alt="US" />
+                <span>English</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tema / Aspecto -->
+          <div class="dropdown" id="themeDD">
+            <button class="icon-btn" id="themeBtn" type="button" aria-label="Tema" aria-haspopup="true" aria-expanded="false">
+              <img id="themeIcon" src="/newgaschsoft/Logos/sistema.png" alt="" />
+            </button>
+
+            <div class="menu" role="menu" aria-label="Selector de tema" id="themeMenu">
+              <button class="menu-item theme-item" role="menuitem" type="button" data-theme="system" aria-selected="true">
+                <img src="/newgaschsoft/Logos/sistema.png" class="theme-item-icon" alt="">
+                <span>Sistema</span>
+              </button>
+              <button class="menu-item theme-item" role="menuitem" type="button" data-theme="light" aria-selected="false">
+                <img src="/newgaschsoft/Logos/claro.png" class="theme-item-icon" alt="">
+                <span>Claro</span>
+              </button>
+              <button class="menu-item theme-item" role="menuitem" type="button" data-theme="dark" aria-selected="false">
+                <img src="/newgaschsoft/Logos/obscuro.png" class="theme-item-icon" alt="">
+                <span>Oscuro</span>
+              </button>
+            </div>
+          </div>
+          <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menú" aria-expanded="false">
+          <div class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+        </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <aside class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menú">
+
+      <div class="drawer-header">
+
+      </div>
+
+
+      <div class="drawer-body">
+        <a class="drawer-item with-icon" href="mailto:contacto@gaschsoft.com?subject=Solicitud%20de%20demo%20GaschSoft" id="drawerDemo">
+          <span class="drawer-left">
+            <img class="drawer-icon" id="drawerDemoIcon" src="/newgaschsoft/Logos/agendar.png" alt="">
+            <span>Demo</span>
+          </span>
+        </a>
+        <div class="drawer-section">
+          <button class="drawer-item drawer-item-dd" id="drawerServicesBtn" type="button" aria-expanded="true">
+            <span id="drawerServicesLabel">Plataforma</span>
+            <span class="chev drawer-chev" id="drawerServicesChev" aria-hidden="true"></span>
+          </button>
+          <div class="drawer-submenu open" id="drawerServicesMenu">
+            <a class="drawer-subitem" href="#plat-auto" id="drawerSvcAuto">Automatizaciones</a>
+            <a class="drawer-subitem" href="#plat-webapps" id="drawerSvcWeb">Web Apps</a>
+            <a class="drawer-subitem" href="#plat-int" id="drawerSvcIT">Integraciones</a>
+            <a class="drawer-subitem" href="#plat-infra" id="drawerSvcInfra">Infraestructura</a>
+            <a class="drawer-subitem" href="#plat-inv" id="drawerSvcInv">Invitaciones Web</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-item drawer-item-dd" id="drawerCasesBtn" type="button" aria-expanded="true">
+            <span id="drawerCasesLabel">Casos</span>
+            <span class="chev drawer-chev rot" id="drawerCasesChev" aria-hidden="true"></span>
+          </button>
+          <div class="drawer-submenu open" id="drawerCasesMenu">
+            <a class="drawer-subitem" href="#cases-sme" id="drawerCaseSME">PYMEs</a>
+            <a class="drawer-subitem" href="#cases-corp" id="drawerCaseCorp">Corporativo</a>
+            <a class="drawer-subitem" href="#cases-startups" id="drawerCaseStartup">Startups</a>
+          </div>
+        </div>
+
+<a class="drawer-item" href="#about" id="drawerAbout">Empresa</a>
+        <a class="drawer-item" href="#contact" id="drawerContact">Contacto</a>
+
+      </div>
+    </aside>
+  </div>
+
+
+  <main>
+    <!-- ===== HERO v60 ===== -->
+    <section class="hero heroV60" aria-labelledby="heroTitle">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <ul class="hero-badges" id="heroBadges" aria-label="Highlights">
+            <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge1">Entrega rápida</span></li>
+            <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge2">Enfoque en conversión</span></li>
+            <li class="badge"><span class="badge-dot" aria-hidden="true"></span><span id="heroBadge3">Soporte continuo</span></li>
+          </ul>
+
+          <h1 class="hero-title" id="heroTitle">
+            <span id="heroTitleA">Tu empresa ya creció.</span>
+            <span class="hero-accent" id="heroTitleB">Tu web debería hacerlo también.</span>
+          </h1>
+
+          <p class="hero-desc" id="heroDesc">
+            Diseñamos presencia digital profesional para empresas establecidas que quieren proyectar autoridad, convertir mejor y escalar con una base técnica sólida.
+          </p>
+
+          <div class="hero-ctas">
+            <a class="btn primary" id="heroCtaPrimary" href="#contact">Agendar diagnóstico</a>
+            <a class="btn ghost" id="heroCtaSecondary" href="#cases">Ver casos</a>
+          </div>
+
+          <div class="hero-proof" id="heroProof">Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer</div>
+</div>
+
+        <div class="hero-right" aria-hidden="true">
+          <div class="hero-panel" id="heroPreview">
+            <div class="panel-top">
+              <div class="pill"></div>
+              <div class="pill"></div>
+              <div class="pill"></div>
+            </div>
+
+            <div class="panel-body">
+              <div class="panel-card">
+                <div class="pc-title"></div>
+                <div class="pc-line"></div>
+                <div class="pc-line short"></div>
+              </div>
+              <div class="panel-card">
+                <div class="pc-title"></div>
+                <div class="pc-line"></div>
+                <div class="pc-line short"></div>
+              </div>
+
+              <div class="panel-metrics">
+                <div class="metric">
+                  <div class="metric-k"></div>
+                  <div class="metric-v"></div>
+                </div>
+                <div class="metric">
+                  <div class="metric-k"></div>
+                  <div class="metric-v"></div>
+                </div>
+                <div class="metric">
+                  <div class="metric-k"></div>
+                  <div class="metric-v"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-dots" id="heroDots" aria-label="Hero options" role="tablist"></div>
+      </div>
+    </section>
+
+
+
+    <!-- ===== Pilares de impacto (v78.20) ===== -->
+    <section class="section-pillars" id="pillars" aria-label="Pilares de impacto">
+      <div class="section-inner">
+        <div class="pillars-head">
+          <h2 class="pillars-title" id="pillarsTitle">Pilares de impacto</h2>
+          <p class="pillars-desc" id="pillarsDesc">Resultados medibles para empresas que ya facturan: más conversión, menos fricción operativa y una base lista para crecer.</p>
+        </div>
+
+        <div class="pillars-grid" id="pillarsGrid"></div>
+
+        <div class="pillars-for" aria-label="Diseñado para">
+          <div class="pillars-for-label" id="pillarsForLabel">Diseñado para</div>
+          <div class="pillars-chips">
+            <span class="pillars-chip" id="pillarsFor1">PYMEs</span>
+            <span class="pillars-chip" id="pillarsFor2">Corporativo</span>
+            <span class="pillars-chip" id="pillarsFor3">Startups</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ===== Qué utilizamos (v78) ===== -->
+    <section class="section-whatuse" id="whatuse" aria-label="Capacidades">
+      <div class="section-inner">
+        <div class="whatuse-head">
+          <div>
+            <h2 class="whatuse-title" id="whatuseTitle">Capacidades en producción</h2>
+            <p class="whatuse-desc" id="whatuseDesc">Estándares de ejecución y calidad que convierten tu web en un sistema mantenible, medible y escalable.</p>
+          </div>
+        </div>
+
+        <div class="marquee-stack" aria-label="Capacidades">
+          <div class="marquee" data-dir="right" id="marqueeTop" tabindex="-1">
+            <div class="marquee-track" id="marqueeTopTrack"></div>
+          </div>
+
+                    <div class="marquee" data-dir="left" id="marqueeMid" tabindex="-1">
+            <div class="marquee-track" id="marqueeMidTrack"></div>
+          </div>
+
+          <div class="marquee" data-dir="right" id="marqueeBottom" tabindex="-1">
+            <div class="marquee-track" id="marqueeBottomTrack"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Casos (v79) ===== -->
+    <section class="section-cases" id="cases" aria-label="Casos">
+      <!-- anchors for header/drawer deep-links -->
+      <span class="cases-anchor" id="cases-sme" aria-hidden="true"></span>
+      <span class="cases-anchor" id="cases-corp" aria-hidden="true"></span>
+      <span class="cases-anchor" id="cases-startups" aria-hidden="true"></span>
+
+      <div class="section-inner cases-inner">
+        <div class="cases-head">
+          <div class="cases-head-copy">
+            <h2 class="cases-title" id="casesTitle">Casos</h2>
+            <p class="cases-desc" id="casesDesc">No son páginas. Son sistemas. Elige tu escenario y mira resultados en conversión, operación y continuidad.</p>
+          </div>
+
+          <div class="cases-seg" id="casesSeg" role="tablist" aria-label="Segmento">
+            <button class="cases-seg-btn" type="button" data-seg="sme" role="tab" aria-selected="true">PYMEs</button>
+            <button class="cases-seg-btn" type="button" data-seg="corp" role="tab" aria-selected="false">Corporativo</button>
+            <button class="cases-seg-btn" type="button" data-seg="startup" role="tab" aria-selected="false">Startups</button>
+          </div>
+        </div>
+
+        <div class="cases-body" id="casesBody" aria-live="polite">
+          <!-- injected by JS -->
+        </div>
+
+
+
+        <div class="cases-showcase" id="casesShowcase" aria-label="Proyectos">
+          <div class="showcase-top">
+            <div class="showcase-title" id="showcaseTitle">Proyectos reales en vivo</div>
+            <div class="showcase-meta">
+              <a class="showcase-link" data-idx="0" href="https://gaschsoft.com/mrpizzasgt/" target="_blank" rel="noopener">Mr Pizzas GT</a>
+              <span class="showcase-sep" aria-hidden="true">•</span>
+              <a class="showcase-link" data-idx="1" href="https://gaschsoft.com/villacaninagt/" target="_blank" rel="noopener">Villa Canina</a>
+            </div>
+          </div>
+
+          <div class="showcase-frame" id="showcaseFrame" aria-hidden="true">
+            <div class="showcase-progress kick" id="showcaseProgress" aria-hidden="true"></div>
+
+            <div class="showcase-stage">
+              <iframe class="showcase-iframe is-active" data-idx="0"
+                src="https://gaschsoft.com/mrpizzasgt/"
+                title="Mr Pizzas GT"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+              </iframe>
+
+              <iframe class="showcase-iframe" data-idx="1"
+                src="https://gaschsoft.com/villacaninagt/"
+                title="Villa Canina"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+              </iframe>
+            </div>
+          </div>
+        </div>
+
+<div class="cases-cta">
+          <a class="btn ghost" id="casesCta" href="#contact">Agregar esto a mi proyecto</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-label="Contacto">
+      <div class="section-inner">
+        <h2 class="section-title" id="contactTitle">Contacto</h2>
+        <p class="section-desc" id="contactDesc">Cuéntanos qué necesitas y te respondemos con una propuesta clara.</p>
+      </div>
+    </section>
+  </main>
+  <script src="/newgaschsoft/assets/gaschsoft.js"></script>
+</body>
 </html>

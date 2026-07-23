@@ -1,59 +1,35 @@
-# ================================
-# Script PRO para automatizar deploy de Gaschsoft Landing Page
-# ================================
+# Validación de publicación de GaschSoft
+# La portada se sirve directamente desde la raíz del repositorio.
+# Este script reemplaza el despliegue legado de Vite/React y no elimina archivos.
 
-Write-Host "[Inicio] Iniciando el proceso de deploy..." -ForegroundColor Green
+$repoPath = Split-Path -Parent $MyInvocation.MyCommand.Path
+$gitSafePath = $repoPath -replace "\\", "/"
+Set-Location $repoPath
 
-# Rutas
-$landingPath = "C:\Proyectos\gaschsoft.github.io\landing-gaschsoft"
-$deployPath  = "C:\Proyectos\gaschsoft.github.io"
-
-# Carpetas/archivos que JAMAS deben borrarse del root
-$preserve = @(
-  ".git",
-  "CNAME",
-  "landing-gaschsoft",
-  "mrpizzasgt",
-  "villacaninagt",
-  "newgaschsoft",
-  "assets",
-  "Script Arbol.txt",
-  "deploy-gaschsoft.ps1",
-  "deploy-gaschsoft.bat",
-  "README.md"
+$requiredFiles = @(
+  "index.html",
+  "site.webmanifest",
+  "sw.js",
+  "newgaschsoft/assets/gaschsoft.css",
+  "newgaschsoft/assets/gaschsoft.js"
 )
 
-# Ir a la carpeta de trabajo
-Set-Location $landingPath
+$childProjects = @(
+  "Demo1Pamekgt",
+  "Demo2Pamekgt",
+  "DemoMotosGT1",
+  "DemoMotosGT2",
+  "HotelLaUnion",
+  "mrpizzasgt",
+  "villacaninagt"
+)
 
-# Paso 1: Construir el proyecto
-Write-Host "[Paso 1] Ejecutando build del proyecto..." -ForegroundColor Cyan
-npm run build
+foreach ($path in $requiredFiles + $childProjects) {
+  if (-not (Test-Path -LiteralPath (Join-Path $repoPath $path))) {
+    throw "Falta la ruta requerida: $path"
+  }
+}
 
-Start-Sleep -Seconds 2
-
-# Volver a la raiz
-Set-Location $deployPath
-
-# Paso 2: Borrar SOLO lo que no se debe preservar
-Write-Host "[Paso 2] Limpiando raiz (preservando subpaginas)..." -ForegroundColor Cyan
-Get-ChildItem -Force |
-  Where-Object { $_.Name -notin $preserve } |
-  Remove-Item -Recurse -Force
-
-# Paso 3: Copiar nuevo contenido del build (landing principal)
-Write-Host "[Paso 3] Copiando archivos nuevos desde dist/..." -ForegroundColor Cyan
-Copy-Item -Path "$landingPath\dist\*" -Destination "$deployPath" -Recurse -Force
-
-# Paso 4: Git Add
-Write-Host "[Paso 4] Preparando cambios para Git..." -ForegroundColor Cyan
-git add -A
-
-# Commit message
-$commitMessage = Read-Host "Escribe el detalle del commit despues de 'Deploy:' (ejemplo: 'Actualizacion de servicios')"
-git commit -m "Deploy: $commitMessage" --allow-empty
-
-# Push
-git push origin main
-
-Write-Host "[Exito] Deploy completo y publicado en GitHub Pages!" -ForegroundColor Green
+Write-Host "[OK] La portada GaschSoft y los proyectos hijos están presentes." -ForegroundColor Green
+Write-Host "Revisa los cambios y publica con GitHub: git add -A; git commit; git push origin main" -ForegroundColor Cyan
+git -c safe.directory="$gitSafePath" status --short
