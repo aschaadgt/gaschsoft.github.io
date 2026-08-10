@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Julio Paz y Jackeline Túchez//Boda 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:julio-jackeline-20261205@weddingjuliojackeline
+DTSTAMP:20260809T000000Z
+DTSTART:20261205T210000Z
+DTEND:20261205T220000Z
+SUMMARY:Boda de Julio y Jackeline
+LOCATION:Hacienda San Miguel\, Calle Guillen\, Villa Nueva
+DESCRIPTION:Horario de inicio: 3:00 PM.\nUbicación: https://maps.app.goo.gl/iG32DUoSZJ9Cp66CA?g_st=ic
+URL:https://gaschsoft.com/weddingJulioPazandJackelineTuchez/
+END:VEVENT
+END:VCALENDAR
