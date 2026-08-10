@@ -34,16 +34,26 @@ html.js .prelude { align-items: center; background: var(--ivory); color: var(--d
 html.js .prelude.dismiss { opacity: 0; pointer-events: none; visibility: hidden; }
 .prelude__ornament { color: var(--sage); font-family: var(--font-serif); font-size: 2rem; margin-bottom: .75rem; }
 .prelude__names { align-items: center; display: flex; flex-direction: column; font-family: var(--font-script); font-size: clamp(3.4rem, 12vw, 6.5rem); line-height: .76; position: relative; text-align: center; z-index: 1; }
-.prelude__line { display: block; opacity: 0; padding: .12em .2em; transform: translateY(.12em); }
-.prelude__line--one { animation: name-write .62s ease-out .08s forwards; }
-.prelude__line--two { animation: name-write .72s ease-out .68s forwards; }
+.prelude__line {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(90deg, var(--deep) 0 49.5%, rgba(52,78,65,.08) 50.5% 100%);
+  background-position: 100% 0;
+  background-size: 205% 100%;
+  color: transparent;
+  display: block;
+  padding: .12em .2em;
+}
+.prelude__line--one { animation: name-write .7s steps(18, end) .06s forwards; }
+.prelude__line--two { animation: name-write .82s steps(24, end) .68s forwards; }
 .prelude__amp { color: var(--sage); font-size: .62em; opacity: 0; animation: amp-appear .25s ease .58s forwards; }
 .prelude__stroke { background: rgba(163,177,138,.25); height: 1px; margin-top: 1.25rem; overflow: hidden; width: min(52vw, 250px); }
 .prelude__stroke i { animation: loading-stroke 1.75s ease forwards; background: var(--moss); display: block; height: 100%; transform-origin: left; }
 .prelude > p { color: #77816f; font: 500 .55rem var(--font-sans); letter-spacing: .15em; margin: 1rem 0 0; text-transform: uppercase; }
 @keyframes name-write {
-  from { filter: blur(3px); opacity: 0; transform: translateY(.12em); }
-  to { filter: blur(0); opacity: 1; transform: none; }
+  from { background-position: 100% 0; }
+  to { background-position: 0 0; }
 }
 @keyframes amp-appear { to { opacity: 1; } }
 @keyframes loading-stroke { from { transform: scaleX(0); } to { transform: scaleX(1); } }
