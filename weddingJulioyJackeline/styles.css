@@ -40,7 +40,7 @@ a { color: inherit; }
 .opening__paper { background: url('/weddingJulioyJackeline/assets/ai-botanical-parchment.png') center / cover; inset: 0; opacity: .12; position: absolute; mix-blend-mode: screen; }
 .opening__glow { background: radial-gradient(ellipse, rgba(248,221,153,.22), transparent 60%); height: min(48rem, 100vw); position: absolute; width: min(48rem, 100vw); }
 .opening.is-opening .envelope { overflow: visible; pointer-events: none; }
-.opening.is-opening { opacity: 0; transition-delay: 1.15s; visibility: hidden; }
+.opening.is-opening { opacity: 0; transition-delay: 2.05s; visibility: hidden; }
 
 .envelope { aspect-ratio: 1.42 / 1; background: #a6aa90; border: 1px solid rgba(251,244,219,.7); box-shadow: 0 1.4rem 2.8rem rgba(25,32,20,.33); cursor: pointer; margin: 2.8rem 0 2.4rem; overflow: hidden; padding: 0; perspective: 1200px; position: relative; transform: translateZ(0); transform-style: preserve-3d; width: min(25rem, 86vw); }
 .envelope > span { display: block; position: absolute; }
@@ -61,15 +61,14 @@ a { color: inherit; }
 .envelope__front::before { left: 0; transform: rotate(-27deg); transform-origin: left bottom; }
 .envelope__front::after { right: 0; transform: rotate(27deg); transform-origin: right bottom; }
 .envelope__flap { backface-visibility: hidden; background: linear-gradient(135deg, #c4cab8, #9ea58d); clip-path: polygon(0 0, 100% 0, 50% 100%); height: 63%; inset: 0 0 auto; transform: rotateX(0deg); transform-origin: center top; transform-style: preserve-3d; transition: transform .45s ease; z-index: 25; }
-.envelope__seal { align-items: center; background: radial-gradient(circle at 30% 25%, #ead088, #a56c24 72%); border: 4px double #f3d993; border-radius: 50%; box-shadow: 0 4px 10px rgba(49,37,17,.43), inset 0 0 0 2px rgba(112,71,22,.3); color: #fff0b7; display: flex !important; font: 1.45rem var(--script); height: 4.25rem; justify-content: center; left: calc(50% - 2.125rem); top: 45%; width: 4.25rem; z-index: 40; }
-.envelope__seal span { font-size: .65em; margin: 0 .08em; }
+.envelope__seal { align-items: center; background: radial-gradient(circle at 30% 25%, #ead088, #a56c24 72%); border: 4px double #f3d993; border-radius: 50%; box-shadow: 0 4px 10px rgba(49,37,17,.43), inset 0 0 0 2px rgba(112,71,22,.3); color: #fff0b7; display: flex !important; font: 1.28rem var(--script); height: 4.25rem; justify-content: center; left: calc(50% - 2.125rem); letter-spacing: -.08em; padding: .12rem .22rem 0 0; text-align: center; top: 45%; width: 4.25rem; z-index: 40; }
+.envelope__seal span { font-size: .62em; margin: 0 .04em; }
 .envelope:hover .envelope__flap, .envelope:focus-visible .envelope__flap { transform: rotateX(15deg); }
-.envelope__note { bottom: 8%; color: #4c4c3d; font: 500 .69rem/1.45 var(--serif); left: 0; letter-spacing: .03em; right: 0; z-index: 41; }
-.envelope__note i { color: var(--gold); display: block; font-size: 1.1rem; font-style: normal; margin-top: .45rem; }
-.opening.is-opening .envelope__seal { animation: seal-release .18s ease-out forwards; }
-.opening.is-opening .envelope__note { animation: envelope-note-out .15s ease forwards; }
-.opening.is-opening .envelope__flap { animation: article-flap .48s .08s cubic-bezier(.22,.7,.2,1) forwards; }
-.opening.is-opening .envelope__letter { animation: card-peek .42s .45s cubic-bezier(.22,.72,.2,1) forwards; }
+.envelope__note { bottom: 5%; color: #4c4c3d; font: 500 .69rem/1.45 var(--serif); left: 0; letter-spacing: .03em; right: 0; z-index: 41; }
+.opening.is-opening .envelope__seal { animation: seal-release .25s ease-out forwards; }
+.opening.is-opening .envelope__note { animation: envelope-note-out .22s ease forwards; }
+.opening.is-opening .envelope__flap { animation: article-flap .72s .12s cubic-bezier(.22,.7,.2,1) forwards; }
+.opening.is-opening .envelope__letter { animation: card-peek .7s .72s cubic-bezier(.22,.72,.2,1) forwards; }
 .opening__invitation, .opening__hint { color: #f8f0db; font-family: var(--sans); font-size: .58rem; letter-spacing: .12em; line-height: 1.8; margin: 0; position: relative; text-transform: uppercase; }
 .opening__invitation { margin-bottom: .15rem; }
 .opening__invitation strong { color: #f5d995; display: block; font-size: 1em; }
@@ -102,7 +101,7 @@ body.is-open .site-header, body.is-open .music-control { opacity: 1; pointer-eve
 .hero__botanical { bottom: -4%; max-width: none; opacity: .72; pointer-events: none; position: absolute; right: -9%; width: min(82%, 29rem); z-index: 0; }
 .kicker { color: var(--ink); font: 500 clamp(.62rem, 2vw, .75rem) var(--sans); letter-spacing: .15em; line-height: 1.8; margin: 0; position: relative; text-transform: uppercase; z-index: 1; }
 h1, h2, h3, p { position: relative; z-index: 1; }
-.hero h1 { color: #a97924; font: clamp(4.3rem, 15vw, 7.2rem)/.78 var(--script); letter-spacing: -.03em; margin: .2rem 0 .6rem; text-shadow: 0 1px 1px rgba(132,90,24,.12); }
+.hero h1 { color: #a97924; font: clamp(4.3rem, 15vw, 7.2rem)/.78 var(--script); letter-spacing: -.03em; margin: 1rem 0 .6rem; text-shadow: 0 1px 1px rgba(132,90,24,.12); }
 .hero h1 span { color: var(--gold); font-size: .65em; }
 .leaf-divider { color: #bf9140; height: 2rem; margin: .35rem auto 1.15rem; overflow: visible; position: relative; width: min(14rem, 65vw); z-index: 1; }
 .divider-line { background: linear-gradient(90deg, transparent, var(--gold-soft), transparent); height: 1px; margin: 1rem auto 1.5rem; position: relative; width: 6.25rem; z-index: 1; }
@@ -161,7 +160,11 @@ h1, h2, h3, p { position: relative; z-index: 1; }
 .dress-guidance p { font-size: .92rem; line-height: 1.2; }
 .dress-guidance p + p { border-top: 1px solid rgba(172,134,62,.2); padding-top: .5rem; }
 .dress-guidance b { color: var(--forest); display: block; font: 600 .56rem var(--sans); letter-spacing: .11em; margin-bottom: .18rem; text-transform: uppercase; }
-.hashtag { color: var(--gold); font-weight: 700; margin-top: .4rem !important; }
+.gift-registry { border-top: 1px solid rgba(172,134,62,.22); color: #675b49; font-size: .92rem !important; margin-top: .75rem !important; padding-top: .7rem; }
+.gift-registry a { color: #9b6c20; font-weight: 700; text-decoration-color: rgba(155,108,32,.45); text-underline-offset: .16em; }
+.detail-item__icon--quote { color: #b58635; font: 4.8rem/.8 var(--serif); padding-bottom: .4rem; }
+.detail-item--message { align-items: center; }
+.guest-message { font-style: italic; line-height: 1.35 !important; }
 
 .countdown { background-color: #eff0e7; background-image: linear-gradient(rgba(246,246,237,.79), rgba(246,246,237,.83)), url('/weddingJulioyJackeline/assets/ai-botanical-parchment.png'); min-height: auto; padding-bottom: 4rem; }
 .countdown .kicker { font-size: .72rem; }
@@ -192,7 +195,7 @@ h1, h2, h3, p { position: relative; z-index: 1; }
 .form-note { color: #76654e; font-size: .9rem; margin: .9rem 0 0; }
 .closing { align-items: center; background-color: #ede9db; background-image: linear-gradient(rgba(248,244,234,.73), rgba(248,244,234,.73)), url('/weddingJulioyJackeline/assets/ai-botanical-parchment.png'); display: flex; flex-direction: column; justify-content: center; min-height: 65svh; }
 .closing .script { color: var(--gold); font: 3.6rem var(--script); margin: 0; }
-.closing h2 { color: #aa7929; font: clamp(3.2rem, 12vw, 5rem)/.9 var(--script); margin: .1rem 0 1.1rem; }
+.closing h2 { color: #aa7929; font: clamp(2.65rem, 10vw, 4.3rem)/.9 var(--script); margin: .1rem 0 1.1rem; max-width: 100%; white-space: nowrap; }
 .closing h2 span { font-size: .55em; }
 .closing > p:last-child { font: .65rem var(--sans); letter-spacing: .2em; margin: 0; text-transform: uppercase; }
 

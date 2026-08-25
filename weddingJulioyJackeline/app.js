@@ -5,6 +5,8 @@
   const guests = allowedGuestCounts.has(Number(pathSegment)) ? Number(pathSegment) : (allowedGuestCounts.has(requestedGuests) ? requestedGuests : 1);
   const guestLabel = guests === 1 ? 'persona' : 'personas';
 
+  if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+
   const preloader = document.getElementById('preloader');
   const opening = document.getElementById('opening');
   const invitation = document.getElementById('invitation');
@@ -70,11 +72,16 @@
   };
 
   const open = () => {
+    const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    document.getElementById('inicio').scrollIntoView({ behavior: 'auto', block: 'start' });
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#inicio`);
+    document.documentElement.style.scrollBehavior = previousScrollBehavior;
     opening.classList.add('is-opening');
     document.body.classList.add('is-open');
     invitation.setAttribute('aria-hidden', 'false');
     playMusic();
-    window.setTimeout(() => opening.remove(), 2000);
+    window.setTimeout(() => opening.remove(), 3000);
   };
 
   openInvitation.addEventListener('click', open, { once: true });
@@ -97,7 +104,7 @@
   }));
 
   const countdown = document.getElementById('countdown');
-  const weddingDate = new Date('2026-12-05T16:00:00-06:00').getTime();
+  const weddingDate = new Date('2026-12-05T15:00:00-06:00').getTime();
   const renderCountdown = () => {
     const remaining = Math.max(0, weddingDate - Date.now());
     const values = [

@@ -6,11 +6,11 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:julio-jackeline-20261205@weddingjulioyjackeline
 DTSTAMP:20260815T000000Z
-DTSTART:20261205T220000Z
-DTEND:20261206T040000Z
+DTSTART:20261205T210000Z
+DTEND:20261206T030000Z
 SUMMARY:Boda de Julio y Jackeline
 LOCATION:Hacienda San Miguel\, Calle Guillén\, Villa Nueva\, Guatemala
-DESCRIPTION:Celebración de boda de Julio y Jackeline.\nInicio: 4:00 PM.\nUbicación: https://www.google.com/maps/search/?api=1&query=Hacienda%20San%20Miguel%2C%20Calle%20Guill%C3%A9n%2C%20Villa%20Nueva
+DESCRIPTION:Celebración de boda de Julio y Jackeline.\nInicio: 3:00 PM.\nUbicación: https://www.google.com/maps/search/?api=1&query=Hacienda%20San%20Miguel%2C%20Calle%20Guill%C3%A9n%2C%20Villa%20Nueva
 URL:https://gaschsoft.com/weddingJulioyJackeline/
 END:VEVENT
 END:VCALENDAR
