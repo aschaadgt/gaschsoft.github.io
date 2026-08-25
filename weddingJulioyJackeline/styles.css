@@ -39,11 +39,11 @@ a { color: inherit; }
 .opening::after { border-width: 0 0 1px 1px; inset: 20px; }
 .opening__paper { background: url('/weddingJulioyJackeline/assets/ai-botanical-parchment.png') center / cover; inset: 0; opacity: .12; position: absolute; mix-blend-mode: screen; }
 .opening__glow { background: radial-gradient(ellipse, rgba(248,221,153,.22), transparent 60%); height: min(48rem, 100vw); position: absolute; width: min(48rem, 100vw); }
-.opening.is-opening .envelope { overflow: visible; pointer-events: none; }
+.opening.is-opening .envelope { pointer-events: none; }
 .opening.is-opening { pointer-events: none; }
 .opening.is-leaving { opacity: 0; transition: opacity .7s ease; }
 
-.envelope { aspect-ratio: 1.42 / 1; background: #a6aa90; border: 1px solid rgba(251,244,219,.7); box-shadow: 0 1.4rem 2.8rem rgba(25,32,20,.33); cursor: pointer; margin: 2.8rem 0 2.4rem; overflow: hidden; padding: 0; perspective: 1200px; position: relative; transform: translateZ(0); transform-style: preserve-3d; width: min(25rem, 86vw); }
+.envelope { -webkit-appearance: none; appearance: none; aspect-ratio: 1.42 / 1; background: #a6aa90; border: 1px solid rgba(251,244,219,.7); box-shadow: 0 1.4rem 2.8rem rgba(25,32,20,.33); cursor: pointer; margin: 2.8rem 0 2.4rem; overflow: visible; padding: 0; position: relative; width: min(25rem, 86vw); }
 .envelope > span { display: block; position: absolute; }
 .envelope::before { background: url('/weddingJulioyJackeline/assets/botanical-corner.png') bottom right / contain no-repeat; bottom: -8%; content: ''; height: 38%; left: -12%; opacity: .65; position: absolute; transform: scaleX(-1); width: 58%; z-index: 22; }
 .envelope__shadow { background: rgba(24,32,19,.4); border-radius: 50%; filter: blur(11px); height: 8%; left: 9%; top: 91%; width: 82%; z-index: 0; }
@@ -51,25 +51,26 @@ a { color: inherit; }
 .envelope__back::after { background: url('/weddingJulioyJackeline/assets/botanical-corner.png') bottom right / contain no-repeat; bottom: -2%; content: ''; height: 34%; opacity: .7; position: absolute; right: -7%; width: 52%; }
 .envelope__date { color: #a37327; font: 600 clamp(1.2rem, 5vw, 1.55rem) var(--serif); letter-spacing: .1em; position: static !important; z-index: 5; }
 .envelope__date i { font-size: .65em; font-style: normal; padding: 0 .05em; }
-.envelope__letter { align-items: center; background: linear-gradient(145deg, #fffdf6, #eee7d3); border: 1px solid rgba(184,139,60,.45); box-shadow: 0 .3rem .8rem rgba(52,43,28,.2); display: flex !important; flex-direction: column; height: 68%; justify-content: center; left: 8%; overflow: hidden; padding: 8% 7%; top: 27%; transform: translateY(0); transform-origin: center center; transform-style: flat; width: 84%; z-index: 0; }
+.envelope__letter { -webkit-transform: translateY(0); align-items: center; background: linear-gradient(145deg, #fffdf6, #eee7d3); border: 1px solid rgba(184,139,60,.45); box-shadow: 0 .3rem .8rem rgba(52,43,28,.2); display: flex !important; flex-direction: column; height: 68%; justify-content: center; left: 8%; overflow: hidden; padding: 8% 7%; top: 27%; transform: translateY(0); transition: -webkit-transform .82s cubic-bezier(.22,.72,.2,1), transform .82s cubic-bezier(.22,.72,.2,1); width: 84%; will-change: transform; z-index: 0; }
 .envelope__letter::before { border: 1px solid rgba(184,139,60,.28); content: ''; inset: .38rem; pointer-events: none; position: absolute; }
 .envelope__card-content { align-items: center; display: flex !important; flex-direction: column; justify-content: center; transform: translateY(-1.25rem); width: 100%; }
 .envelope__monogram { color: var(--gold); display: block !important; font: 2.8rem/.9 var(--script); margin-top: .65rem; opacity: 1; }
 .envelope__monogram i { color: var(--forest); font-size: .72em; font-style: normal; }
 .envelope__names { color: var(--ink); display: block !important; font: .56rem var(--sans); letter-spacing: .16em; margin-top: .5rem; opacity: 1; text-transform: uppercase; }
-.envelope__front { background: linear-gradient(145deg, #aeb49b, #8d957d); clip-path: polygon(0 28%, 50% 62%, 100% 28%, 100% 100%, 0 100%); inset: 0; z-index: 20; }
+.envelope__front { -webkit-clip-path: polygon(0 28%, 50% 62%, 100% 28%, 100% 100%, 0 100%); background: linear-gradient(145deg, #aeb49b, #8d957d); clip-path: polygon(0 28%, 50% 62%, 100% 28%, 100% 100%, 0 100%); inset: 0; z-index: 20; }
 .envelope__front::before, .envelope__front::after { background: rgba(245,235,204,.25); bottom: 0; content: ''; height: 1px; position: absolute; width: 61%; }
 .envelope__front::before { left: 0; transform: rotate(-27deg); transform-origin: left bottom; }
 .envelope__front::after { right: 0; transform: rotate(27deg); transform-origin: right bottom; }
-.envelope__flap { backface-visibility: hidden; background: linear-gradient(135deg, #c4cab8, #9ea58d); clip-path: polygon(0 0, 100% 0, 50% 100%); height: 63%; inset: 0 0 auto; transform: rotateX(0deg); transform-origin: center top; transform-style: preserve-3d; transition: transform .45s ease; z-index: 25; }
+.envelope__flap { -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%); -webkit-transform: scaleY(1); -webkit-transform-origin: center top; background: linear-gradient(135deg, #c4cab8, #9ea58d); clip-path: polygon(0 0, 100% 0, 50% 100%); height: 63%; inset: 0 0 auto; transform: scaleY(1); transform-origin: center top; transition: -webkit-transform .72s cubic-bezier(.32,.02,.2,1), transform .72s cubic-bezier(.32,.02,.2,1); will-change: transform; z-index: 25; }
 .envelope__seal { align-items: center; background: radial-gradient(circle at 30% 25%, #ead088, #a56c24 72%); border: 4px double #f3d993; border-radius: 50%; box-shadow: 0 4px 10px rgba(49,37,17,.43), inset 0 0 0 2px rgba(112,71,22,.3); color: #fff0b7; display: flex !important; font: 1.28rem var(--script); height: 4.25rem; justify-content: center; left: calc(50% - 2.125rem); letter-spacing: -.08em; padding: .12rem .22rem 0 0; text-align: center; top: 45%; width: 4.25rem; z-index: 40; }
 .envelope__seal span { font-size: .62em; margin: 0 .04em; }
-.envelope:hover .envelope__flap, .envelope:focus-visible .envelope__flap { transform: rotateX(15deg); }
+.envelope:hover .envelope__flap, .envelope:focus-visible .envelope__flap { -webkit-transform: scaleY(.94); transform: scaleY(.94); }
 .envelope__note { bottom: 5%; color: #4c4c3d; font: 500 .69rem/1.45 var(--serif); left: 0; letter-spacing: .03em; right: 0; z-index: 41; }
 .opening.is-opening .envelope__seal { animation: seal-release .25s ease-out forwards; }
 .opening.is-opening .envelope__note { animation: envelope-note-out .22s ease forwards; }
-.opening.is-opening .envelope__flap { animation: article-flap .72s .12s cubic-bezier(.22,.7,.2,1) forwards; }
-.opening.is-opening .envelope__letter { animation: card-peek .7s .72s cubic-bezier(.22,.72,.2,1) forwards; }
+.opening.is-opening .envelope__flap { -webkit-transform: scaleY(-.86); transform: scaleY(-.86); transition-delay: .12s; }
+.opening.is-card-rising .envelope__flap { z-index: 4; }
+.opening.is-card-rising .envelope__letter { -webkit-transform: translateY(-28%); transform: translateY(-28%); z-index: 10; }
 .opening__invitation, .opening__hint { color: #f8f0db; font-family: var(--sans); font-size: .58rem; letter-spacing: .12em; line-height: 1.8; margin: 0; position: relative; text-transform: uppercase; }
 .opening__invitation { margin-bottom: .15rem; }
 .opening__invitation strong { color: #f5d995; display: block; font-size: 1em; }
@@ -205,17 +206,6 @@ h1, h2, h3, p { position: relative; z-index: 1; }
 @keyframes bounce { 50% { transform: translateY(4px); } }
 @keyframes seal-release { to { opacity: 0; transform: translateY(3.2rem) rotate(18deg) scale(.7); } }
 @keyframes envelope-note-out { to { opacity: 0; transform: translateY(.8rem); } }
-@keyframes article-flap {
-  0% { transform: rotateX(0deg); transform-origin: center top; z-index: 25; }
-  33% { transform: rotateX(60deg); transform-origin: center top; }
-  66% { transform: rotateX(120deg); transform-origin: center top; }
-  100% { transform: rotateX(180deg); transform-origin: center top; z-index: 0; }
-}
-@keyframes card-peek {
-  0% { transform: translateY(0); transform-style: flat; z-index: 2; }
-  100% { transform: translateY(-28%); transform-style: flat; z-index: 2; }
-}
-
 @media (min-width: 720px) {
   .site-header { padding-inline: max(2rem, calc((100vw - 650px) / 2)); }
   .menu-toggle { display: none; }

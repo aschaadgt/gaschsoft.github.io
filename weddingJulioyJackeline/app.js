@@ -79,6 +79,7 @@
     document.documentElement.style.scrollBehavior = previousScrollBehavior;
     opening.classList.add('is-opening');
     playMusic();
+    window.setTimeout(() => opening.classList.add('is-card-rising'), 900);
     window.setTimeout(() => {
       document.body.classList.add('is-open');
       invitation.setAttribute('aria-hidden', 'false');
