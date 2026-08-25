@@ -78,10 +78,13 @@
     window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#inicio`);
     document.documentElement.style.scrollBehavior = previousScrollBehavior;
     opening.classList.add('is-opening');
-    document.body.classList.add('is-open');
-    invitation.setAttribute('aria-hidden', 'false');
     playMusic();
-    window.setTimeout(() => opening.remove(), 3000);
+    window.setTimeout(() => {
+      document.body.classList.add('is-open');
+      invitation.setAttribute('aria-hidden', 'false');
+      opening.classList.add('is-leaving');
+    }, 3000);
+    window.setTimeout(() => opening.remove(), 3800);
   };
 
   openInvitation.addEventListener('click', open, { once: true });

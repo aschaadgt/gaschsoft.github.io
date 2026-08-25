@@ -34,13 +34,14 @@ a { color: inherit; }
 .preloader.is-complete .preloader__line i { transform: scaleX(1); }
 .preloader__copy { color: #6f765f; font: 500 .53rem var(--sans); letter-spacing: .15em; margin: 0; text-transform: uppercase; }
 
-.opening { align-items: center; background: linear-gradient(145deg, #69715d, #4b5445); display: flex; flex-direction: column; inset: 0; justify-content: center; overflow: hidden; padding: 1rem; position: fixed; text-align: center; transition: opacity .7s ease, visibility .7s ease; z-index: 20; }
+.opening { align-items: center; background: linear-gradient(145deg, #69715d, #4b5445); display: flex; flex-direction: column; inset: 0; justify-content: center; overflow: hidden; padding: 1rem; position: fixed; text-align: center; transition: opacity .7s ease; z-index: 20; }
 .opening::before, .opening::after { border: 1px solid rgba(241,224,178,.55); content: ''; inset: 13px; pointer-events: none; position: absolute; }
 .opening::after { border-width: 0 0 1px 1px; inset: 20px; }
 .opening__paper { background: url('/weddingJulioyJackeline/assets/ai-botanical-parchment.png') center / cover; inset: 0; opacity: .12; position: absolute; mix-blend-mode: screen; }
 .opening__glow { background: radial-gradient(ellipse, rgba(248,221,153,.22), transparent 60%); height: min(48rem, 100vw); position: absolute; width: min(48rem, 100vw); }
 .opening.is-opening .envelope { overflow: visible; pointer-events: none; }
-.opening.is-opening { opacity: 0; transition-delay: 2.05s; visibility: hidden; }
+.opening.is-opening { pointer-events: none; }
+.opening.is-leaving { opacity: 0; transition: opacity .7s ease; }
 
 .envelope { aspect-ratio: 1.42 / 1; background: #a6aa90; border: 1px solid rgba(251,244,219,.7); box-shadow: 0 1.4rem 2.8rem rgba(25,32,20,.33); cursor: pointer; margin: 2.8rem 0 2.4rem; overflow: hidden; padding: 0; perspective: 1200px; position: relative; transform: translateZ(0); transform-style: preserve-3d; width: min(25rem, 86vw); }
 .envelope > span { display: block; position: absolute; }
