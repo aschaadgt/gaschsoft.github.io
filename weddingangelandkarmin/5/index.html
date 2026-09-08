@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#995c46" />
+  <meta name="description" content="Ángel y Karmin se casan. 7 de noviembre de 2026, Jardín Tierra Linda. Acompáñanos y confirma tu asistencia." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ángel &amp; Karmin | Nuestra boda" />
+  <meta property="og:description" content="7 de noviembre de 2026 · Jardín Tierra Linda. ¡Queremos celebrarlo contigo!" />
+  <meta property="og:url" content="https://gaschsoft.com/weddingangelandkarmin/5/" />
+  <meta property="og:locale" content="es_GT" />
+  <link rel="canonical" href="https://gaschsoft.com/weddingangelandkarmin/5/" />
+  <title>Ángel &amp; Karmin | Nuestra boda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Great+Vibes&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/weddingangelandkarmin/assets/photo-7.webp" />
+  <link rel="stylesheet" href="/weddingangelandkarmin/styles.css?v=1" />
+  <script defer src="/weddingangelandkarmin/config.js?v=1"></script>
+  <script defer src="/weddingangelandkarmin/app.js?v=1"></script>
+</head>
+<body>
+  <div class="opening" id="opening" role="dialog" aria-modal="true" aria-labelledby="openingTitle">
+    <div class="opening__paper" aria-hidden="true"></div>
+    <p class="opening__eyebrow">¡Nos casamos!</p>
+    <h2 class="opening__title" id="openingTitle">Ángel <span>&amp;</span> Karmin</h2>
+    <button class="envelope" id="openInvitation" type="button" aria-label="Abrir la invitación de Ángel y Karmin" aria-describedby="openingHint">
+      <span class="envelope__shadow"></span><span class="envelope__back"></span>
+      <span class="envelope__letter"><span class="envelope__card-content"><span class="envelope__date">07 <i>·</i> 11 <i>·</i> 2026</span><span class="envelope__monogram">A <i>&amp;</i> K</span><span class="envelope__names">Ángel &amp; Karmin</span></span></span>
+      <span class="envelope__flap"></span><span class="envelope__front"></span><span class="envelope__seal">A<span>&amp;</span>K</span>
+      <span class="envelope__note">Toca el sobre para abrir</span>
+    </button>
+    <p class="opening__invitation" id="openingGuests">Una celebración para compartir contigo</p>
+    <p class="opening__hint" id="openingHint">Abre tu invitación y escucha nuestra canción</p>
+  </div>
+
+  <header class="site-header" id="siteHeader" inert>
+    <a class="site-header__brand" href="#inicio" aria-label="Ángel y Karmin, inicio">A <span>&amp;</span> K</a>
+    <nav aria-label="Navegación principal"><a href="#celebracion">El gran día</a><a href="#confirmar">Confirmar</a></nav>
+  </header>
+  <button class="music-control" id="musicToggle" type="button" aria-label="Reproducir música" aria-pressed="false" inert>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 23V8l12-3v14"/><circle cx="8" cy="23" r="4"/><circle cx="20" cy="20" r="4"/></svg>
+  </button>
+  <audio id="backgroundMusic" preload="metadata" loop><source src="/weddingangelandkarmin/assets/angel-y-karmin.mp3" type="audio/mpeg" /></audio>
+
+  <main id="invitation" inert>
+    <section class="hero" id="inicio" aria-labelledby="coupleNames">
+      <img class="hero__photo" src="/weddingangelandkarmin/assets/photo-7.webp" alt="Ángel y Karmin abrazados frente al Arco de Santa Catalina" width="1280" height="1920" fetchpriority="high" />
+      <div class="hero__content"><p class="kicker">El comienzo de nuestro para siempre</p><h1 id="coupleNames" tabindex="-1">Ángel <span>&amp;</span> Karmin</h1><p class="hero__date">07 · 11 · 2026</p></div>
+      <a class="scroll-cue" href="#historia">Descubre nuestra invitación <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="paper-section story" id="historia">
+      <img class="botanical botanical--right" src="/weddingangelandkarmin/assets/botanical-corner.png" alt="" loading="lazy" />
+      <p class="kicker">Con la bendición de Dios</p>
+      <h2>¡Nos casamos!</h2>
+      <p class="intro">Hay momentos que cambian la vida<br />y personas que la hacen más bonita.<br />Queremos compartir este día contigo.</p>
+      <figure class="story__photo"><img src="/weddingangelandkarmin/assets/photo-2.webp" alt="Ángel y Karmin mirándose en una calle de Antigua Guatemala" width="1280" height="1920" loading="lazy" /></figure>
+      <p class="love-note">De tu mano,<br /><em>todos los caminos son hogar.</em></p>
+      <div class="song"><button id="songToggle" class="song__play" aria-label="Reproducir nuestra canción" aria-pressed="false" type="button"><span aria-hidden="true">▶</span></button><div><p>Nuestra canción</p><span id="songStatus">Dale play a nuestra historia</span></div></div>
+    </section>
+
+    <section class="date-section" id="fecha" aria-labelledby="dateTitle">
+      <p class="kicker">Reserva este día</p><h2 id="dateTitle">El gran día</h2>
+      <p class="date-line">Sábado <strong>07</strong> Noviembre · 2026</p>
+      <table class="calendar" aria-label="Calendario de noviembre de 2026"><caption>Noviembre 2026</caption><thead><tr><th scope="col"><abbr title="Lunes">LUN</abbr></th><th scope="col"><abbr title="Martes">MAR</abbr></th><th scope="col"><abbr title="Miércoles">MIÉ</abbr></th><th scope="col"><abbr title="Jueves">JUE</abbr></th><th scope="col"><abbr title="Viernes">VIE</abbr></th><th scope="col"><abbr title="Sábado">SÁB</abbr></th><th scope="col"><abbr title="Domingo">DOM</abbr></th></tr></thead><tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td>1</td></tr>
+        <tr><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td class="wedding-day"><span aria-label="7 de noviembre, nuestra boda">7</span></td><td>8</td></tr>
+        <tr><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+        <tr><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td></tr>
+        <tr><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td></tr>
+        <tr><td>30</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody></table>
+      <a class="text-link" href="/weddingangelandkarmin/calendar.ics" download>Guardar la fecha en mi calendario <span aria-hidden="true">↗</span></a>
+      <div class="countdown-wrap"><p class="kicker" id="countdownLabel">Faltan</p><div class="countdown" id="countdown" role="timer" aria-label="Tiempo restante para la ceremonia"><div><strong>—</strong><span>Días</span></div><div><strong>—</strong><span>Horas</span></div><div><strong>—</strong><span>Minutos</span></div><div><strong>—</strong><span>Segundos</span></div></div></div>
+    </section>
+
+    <section class="paper-section celebration" id="celebracion">
+      <p class="kicker">Un jardín, una promesa, una vida juntos</p><h2>Nos vemos en</h2><h3 class="venue">Jardín Tierra Linda</h3><div class="fine-rule" aria-hidden="true"></div>
+      <div class="schedule"><div><span class="schedule__number">01</span><h3>Ceremonia</h3><p><time datetime="2026-11-07T16:30:00-06:00">4:30 <small>pm</small></time></p></div><div><span class="schedule__number">02</span><h3>Recepción</h3><p><time datetime="2026-11-07T17:30:00-06:00">5:30 <small>pm</small></time></p></div></div>
+      <p>La ceremonia y la recepción se celebrarán<br />en el mismo jardín.</p>
+      <div class="map-buttons"><a class="button button--outline" href="https://ul.waze.com/ul?ll=14.58638689%2C-90.65405130&amp;navigate=yes&amp;zoom=17&amp;utm_campaign=default&amp;utm_source=waze_website&amp;utm_medium=lm_share_location" target="_blank" rel="noopener noreferrer"><img src="/weddingangelandkarmin/assets/waze-logo.png" alt="" width="24" height="24" />Waze</a><a class="button button--outline" href="https://maps.app.goo.gl/vDHdZkXS88YGtHvf6" target="_blank" rel="noopener noreferrer"><img src="/weddingangelandkarmin/assets/google-maps-logo.png" alt="" width="24" height="24" />Google Maps</a></div>
+    </section>
+
+    <section class="moments" id="fotos" aria-labelledby="galleryTitle">
+      <div class="moments__heading"><p class="kicker">Instantes que son nuestros</p><h2 id="galleryTitle">Así se ve el amor</h2></div>
+      <div class="carousel" role="region" aria-roledescription="carrusel" aria-label="Siete fotos de Ángel y Karmin">
+        <div class="carousel__track" id="carouselTrack" tabindex="0" aria-label="Galería: desliza o usa las flechas para cambiar de foto">
+          <figure class="carousel__slide" role="group" aria-roledescription="diapositiva" aria-label="1 de 7"><img src="/weddingangelandkarmin/assets/photo-95.webp" alt="Ángel y Karmin entre los árboles de la plaza" width="1600" height="1067" loading="lazy" /></figure>
+          <figure class="carousel__slide" role="group" aria-roledescription="diapositiva" aria-label="2 de 7"><img src="/weddingangelandkarmin/assets/photo-32.webp" alt="Juntos frente a una puerta colonial de Antigua" width="1600" height="1067" loading="lazy" /></figure>
+          <figure class="carousel__slide" role="group" aria-roledescription="diapositiva" aria-label="3 de 7"><img src="/weddingangelandkarmin/assets/photo-48.webp" alt="Ángel sostiene a Karmin en sus brazos" width="1600" height="1067" loading="lazy" /></figure>
+          <figure class="carousel__slide" role="group" aria-roledescription="diapositiva" aria-label="4 de 7"><img src="/weddingangelandkarmin/assets/photo-52.webp" alt="Karmin abraza a Ángel y muestra su anillo" width="1280" height="1920" loading="lazy" /></figure>
+          <figure class="carousel__slide" role="group" aria-roledescription="diapositiva" aria-label="5 de 7"><img src="/weddingangelandkarmin/assets/photo-119.webp" alt="Una risa compartida junto a las columnas de Antigua" width="1600" height="1067" loading="lazy" /></figure>
+          <figure class="carousel__slide" role="group" aria-roledescription="diapositiva" aria-label="6 de 7"><img src="/weddingangelandkarmin/assets/photo-61.webp" alt="Retrato en blanco y negro de Ángel y Karmin junto a una columna" width="1280" height="1920" loading="lazy" /></figure>
+          <figure class="carousel__slide" role="group" aria-roledescription="diapositiva" aria-label="7 de 7"><img src="/weddingangelandkarmin/assets/photo-140.webp" alt="Sus manos unidas y el anillo de compromiso" width="1280" height="1920" loading="lazy" /></figure>
+        </div>
+        <div class="carousel__controls"><button id="previousPhoto" type="button" aria-label="Foto anterior">←</button><p id="photoCounter" aria-live="polite" aria-atomic="true">01 / 07</p><button id="nextPhoto" type="button" aria-label="Foto siguiente">→</button></div>
+      </div>
+    </section>
+
+    <section class="paper-section details" id="detalles">
+      <img class="botanical botanical--right" src="/weddingangelandkarmin/assets/botanical-corner.png" alt="" loading="lazy" />
+      <p class="kicker">Para disfrutar juntos</p><h2>Los detalles</h2>
+      <article class="detail dress"><img class="attire" src="/weddingangelandkarmin/assets/attire.png" alt="Ilustración de vestimenta formal" width="100" height="100" loading="lazy" /><h3>Código de vestimenta</h3><p class="script">Formal</p><p>Para todos nuestros invitados, agradecemos evitar los siguientes colores:</p><ul class="swatches" aria-label="Colores no permitidos"><li><span style="--swatch:#a32c33"></span>Rojo</li><li><span style="--swatch:#d9c6a6"></span>Beige</li><li><span style="--swatch:#fff"></span>Blanco</li><li><span style="--swatch:#f4e8c9"></span>Crema</li><li><span style="--swatch:#242424"></span>Negro</li></ul></article>
+      <article class="detail adults"><span class="detail__symbol" aria-hidden="true">♡</span><h3>Reservado para adultos</h3><p>Amamos a los pequeños, pero esta celebración será solo para adultos. Gracias por acompañarnos y disfrutar de una noche especial con nosotros.</p></article>
+    </section>
+
+    <section class="gift-section"><span class="gift-icon" aria-hidden="true">✉</span><p class="kicker">Un detalle con amor</p><h2>Lluvia de sobres</h2><p>Tu presencia es nuestro mejor regalo.<br />Si deseas obsequiarnos un detalle, agradeceremos con mucho cariño tu regalo en efectivo en un sobre.</p></section>
+
+    <section class="photo-moment"><img src="/weddingangelandkarmin/assets/photo-69.webp" alt="Un abrazo y el anillo que simboliza su compromiso" width="1280" height="1920" loading="lazy" /><p>Lo más bonito<br /><em>está por comenzar.</em></p></section>
+
+    <section class="paper-section rsvp" id="confirmar">
+      <p class="kicker">Nos encantaría contar contigo</p><h2>Confirma tu asistencia</h2><p id="guestCount" class="guest-count">Confirma de 1 a 5 invitados.</p><p class="rsvp__adults">Celebración reservada para adultos.</p>
+      <form class="rsvp-form" id="rsvpForm">
+        <label for="attendeeCount">¿Cuántas personas asistirán?</label><select id="attendeeCount" name="attendeeCount" required><option value="1">1 persona</option><option value="2">2 personas</option><option value="3">3 personas</option><option value="4">4 personas</option><option value="5">5 personas</option></select>
+        <label for="attendeeNames">Nombres de los asistentes</label><input id="attendeeNames" name="attendeeNames" required autocomplete="name" maxlength="400" placeholder="Escribe los nombres completos" />
+        <label for="guestMessage">Un mensaje para los novios <small>(opcional)</small></label><textarea id="guestMessage" name="guestMessage" rows="3" maxlength="1000" placeholder="Comparte tus buenos deseos"></textarea>
+        <button class="button button--forest" type="submit">Confirmar por WhatsApp <span aria-hidden="true">↗</span></button>
+      </form><p class="form-note">Se abrirá WhatsApp con tu confirmación lista para enviar.</p>
+    </section>
+
+    <section class="album-section"><img src="/weddingangelandkarmin/assets/google-photos.png" alt="" width="55" height="54" loading="lazy" /><p class="kicker">Los recuerdos se comparten</p><h2>Tu mirada, nuestros recuerdos</h2><p>Comparte con nosotros las fotos que tomaste.<br />¡Queremos revivir este día a través de tus ojos!</p><a class="button button--outline" href="https://photos.app.goo.gl/StUzRjaKuormLkBZ7" target="_blank" rel="noopener noreferrer">Compartir mis fotos <span aria-hidden="true">↗</span></a></section>
+
+    <footer class="closing"><img src="/weddingangelandkarmin/assets/photo-137.webp" alt="Ángel besa cariñosamente la frente de Karmin" width="1280" height="1920" loading="lazy" /><div><p class="kicker">Gracias por ser parte de nuestra historia</p><p class="closing__names">Ángel <span>&amp;</span> Karmin</p><p>07 · 11 · 2026</p><p class="script">Con amor, para siempre.</p></div></footer>
+  </main>
+  <noscript><style>.opening,.site-header,.music-control{display:none!important}body{overflow:auto!important}</style><p class="noscript-note">Activa JavaScript para abrir la invitación, escuchar la canción y confirmar tu asistencia.</p></noscript>
+</body>
+</html>
