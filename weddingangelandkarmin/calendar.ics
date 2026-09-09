@@ -1,6 +1,6 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//GaschSoft//Boda Angel y Karmin//ES
+PRODID:-//GaschSoft//Boda Karmín y Angel//ES
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
@@ -8,7 +8,7 @@ UID:angel-karmin-20261107-ceremonia@gaschsoft.com
 DTSTAMP:20260908T000000Z
 DTSTART:20261107T223000Z
 DTEND:20261107T233000Z
-SUMMARY:Ceremonia de boda de Ángel y Karmin
+SUMMARY:Ceremonia de boda de Karmín y Angel
 LOCATION:Jardín Tierra Linda
 DESCRIPTION:Celebración reservada para adultos. Vestimenta formal.
 URL:https://gaschsoft.com/weddingangelandkarmin/
@@ -17,7 +17,7 @@ BEGIN:VEVENT
 UID:angel-karmin-20261107-recepcion@gaschsoft.com
 DTSTAMP:20260908T000000Z
 DTSTART:20261107T233000Z
-SUMMARY:Recepción de boda de Ángel y Karmin
+SUMMARY:Recepción de boda de Karmín y Angel
 LOCATION:Jardín Tierra Linda
 DESCRIPTION:Acompáñanos a celebrar nuestra boda.
 URL:https://gaschsoft.com/weddingangelandkarmin/

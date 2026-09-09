@@ -11,7 +11,7 @@ Para continuar, reutiliza este proyecto (no crees otro). El propietario ya autor
 ## Nueva implementación o actualización
 
 1. Abre la hoja `https://docs.google.com/spreadsheets/d/1ogqNS8Zvr41IcYi4Rwm2t_s1MlrmgO_rZFcVCFc8-YM/edit` con tu cuenta.
-2. En **Extensiones → Apps Script**, pega el contenido de `Code.gs` en el editor y guarda el proyecto como `Confirmaciones Ángel y Karmin`.
+2. En **Extensiones → Apps Script**, pega el contenido de `Code.gs` en el editor y guarda el proyecto como `Confirmaciones Karmín y Angel`.
 3. En Configuración del proyecto, activa la visualización del manifiesto `appsscript.json` y usa el archivo incluido. El único permiso solicitado es Google Sheets; el código utiliza únicamente la hoja indicada.
 4. Selecciona **Implementar → Nueva implementación → Aplicación web**. Ejecutar como: **tu cuenta**. Acceso: **Cualquier persona** para que los invitados no tengan que iniciar sesión. Autoriza el script con tu cuenta cuando Google lo solicite. Esto publica un receptor de respuestas, no una vista de los invitados; no cambies la visibilidad de la hoja.
 5. Copia la URL terminada en `/exec` a `rsvpEndpoint` en `../config.js` si cambia la implementación.

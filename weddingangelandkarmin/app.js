@@ -17,7 +17,7 @@
 
   if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
   if (reservedGuests) {
-    $('openingGuests').textContent = `Una invitación para ${guests} ${guestLabel}`;
+    $('openingGuests').textContent = `Invitación para ${guests} ${guestLabel}`;
     $('guestCount').textContent = `Hemos reservado ${guests === 1 ? 'un lugar' : `${guests} lugares`} para ti${guests === 1 ? '.' : ' y tus acompañantes.'}`;
   }
   attendeeCount.replaceChildren(...Array.from({ length: guests }, (_, i) => {

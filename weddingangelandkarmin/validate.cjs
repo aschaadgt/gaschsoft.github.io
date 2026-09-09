@@ -73,6 +73,17 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.match(html, /assets\/apple-calendar\.webp/, `${route} needs the iOS calendar logo`);
   assert.match(html, /assets\/google-calendar\.png/, `${route} needs the Android calendar logo`);
   assert.match(html, /calendar\.google\.com\/calendar\/render/, `${route} needs the Google Calendar action`);
+  assert.match(html, /Karmín <span>&amp;<\/span> Angel/, `${route} must show Karmín before Angel`);
+  assert.doesNotMatch(html, /Ángel|>Karmin</, `${route} contains an obsolete name spelling`);
+  assert.match(html, /social-preview-karmin-angel\.jpg/, `${route} must use the refreshed social preview URL`);
+  assert.doesNotMatch(html, /Reserva este día|Noviembre · 2026/, `${route} contains removed date copy`);
+  assert.doesNotMatch(html, /schedule__number/, `${route} still shows schedule numbering`);
+  assert.match(html, />Plateado<\//, `${route} must block plateado`);
+  assert.match(html, />Café<\//, `${route} must block café`);
+  assert.doesNotMatch(html, />Negro<\/|>Terracota<\//, `${route} blocks a color that should now be available`);
+  assert.match(html, /class="kicker location-intro">Nos vemos en<\/p><h2 class="venue">Tierra Linda<\/h2>/, `${route} needs the revised venue hierarchy`);
+  assert.match(html, /Adoramos a los más pequeños de nuestras vidas/, `${route} needs the revised adults-only copy`);
+  assert.match(html, /Su compañía en el momento de dar el 'sí'/, `${route} needs the revised gift copy`);
 }
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window } = setup(`/weddingangelandkarmin/${guests}/`);
@@ -85,7 +96,7 @@ for (let guests = 1; guests <= 5; guests++) {
   assert.equal(destination.origin, 'https://api.whatsapp.com');
   assert.equal(destination.searchParams.get('phone'), '50251232754');
   assert.match(destination.searchParams.get('text'), /Nombre\(s\): María & José/);
-  assert.match(destination.searchParams.get('text'), /Ángel y Karmin/);
+  assert.match(destination.searchParams.get('text'), /Karmín y Angel/);
   assert.match(destination.searchParams.get('text'), new RegExp(`Cupos de la invitación: ${guests}`));
   window.location.href = '';
   get('attendeeCount').value = String(guests + 1);
@@ -94,6 +105,7 @@ for (let guests = 1; guests <= 5; guests++) {
 }
 const base = setup('/weddingangelandkarmin/');
 assert.equal(base.get('attendeeCount').children.length, 5);
+assert.equal(setup('/weddingangelandkarmin/1/').get('openingGuests').textContent, 'Invitación para 1 persona');
 assert.equal(setup('/weddingangelandkarmin/', '?invitados=3').get('attendeeCount').children.length, 3);
 assert.equal(setup('/weddingangelandkarmin/2/', '?invitados=5').get('attendeeCount').children.length, 2);
 for (const invalid of ['0', '6', '-1', '1.5', 'abc']) assert.equal(setup('/weddingangelandkarmin/', `?invitados=${invalid}`).get('attendeeCount').children.length, 5);

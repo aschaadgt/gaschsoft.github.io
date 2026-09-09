@@ -38,7 +38,7 @@
     if (!['yes', 'no'].includes(attendance.value) || !Number.isInteger(confirmed) || confirmed < (attendance.value === 'yes' ? 1 : 0) || confirmed > guestLimit) return;
     const note = noteInput.value.trim();
     const message = [
-      attendance.value === 'yes' ? '¡Hola! Confirmo asistencia a la boda de Ángel y Karmin.' : '¡Hola! No podremos asistir a la boda de Ángel y Karmin.',
+      attendance.value === 'yes' ? '¡Hola! Confirmo asistencia a la boda de Karmín y Angel.' : '¡Hola! No podremos asistir a la boda de Karmín y Angel.',
       'Sábado 7 de noviembre de 2026 · Jardín Tierra Linda.', '',
       `Personas confirmadas: ${confirmed}.`, `Nombre(s): ${names}`,
       `Cupos de la invitación: ${guestLimit}.`,
