@@ -7,6 +7,7 @@ const { randomUUID } = require('node:crypto');
 const configSource = fs.readFileSync(path.join(__dirname, 'config.js'), 'utf8');
 const appSource = fs.readFileSync(path.join(__dirname, 'app.js'), 'utf8');
 const rsvpSource = fs.readFileSync(path.join(__dirname, 'rsvp.js'), 'utf8');
+const stylesSource = fs.readFileSync(path.join(__dirname, 'styles.css'), 'utf8');
 
 function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
   const elements = new Map();
@@ -76,6 +77,7 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.match(html, /Karmín <span>&amp;<\/span> Angel/, `${route} must show Karmín before Angel`);
   assert.doesNotMatch(html, /Ángel|>Karmin</, `${route} contains an obsolete name spelling`);
   assert.match(html, /social-preview-karmin-angel\.jpg/, `${route} must use the refreshed social preview URL`);
+  assert.doesNotMatch(html, /weddingangelandkarmin/, `${route} still references the previous public route`);
   assert.doesNotMatch(html, /Reserva este día|Noviembre · 2026/, `${route} contains removed date copy`);
   assert.doesNotMatch(html, /schedule__number/, `${route} still shows schedule numbering`);
   assert.match(html, />Plateado<\//, `${route} must block plateado`);
@@ -85,8 +87,10 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.match(html, /Adoramos a los más pequeños de nuestras vidas/, `${route} needs the revised adults-only copy`);
   assert.match(html, /Su compañía en el momento de dar el 'sí'/, `${route} needs the revised gift copy`);
 }
+assert.match(stylesSource, /\.moments \{[^}]*background: #faf6ef;/, 'Carousel section must use #faf6ef');
+assert.match(stylesSource, /\.carousel__slide \{[^}]*background: #faf6ef;/, 'Carousel slides must use #faf6ef');
 for (let guests = 1; guests <= 5; guests++) {
-  const { get, window } = setup(`/weddingangelandkarmin/${guests}/`);
+  const { get, window } = setup(`/weddingkarminandangel/${guests}/`);
   assert.equal(get('attendeeCount').children.length, guests);
   get('attendeeCount').value = String(guests);
   get('attendeeNames').value = '  María & José  ';
@@ -103,18 +107,18 @@ for (let guests = 1; guests <= 5; guests++) {
   await get('rsvpForm').events.submit({ preventDefault() {}, currentTarget: get('rsvpForm') });
   assert.equal(window.location.href, '', 'Over-limit RSVP must be rejected');
 }
-const base = setup('/weddingangelandkarmin/');
+const base = setup('/weddingkarminandangel/');
 assert.equal(base.get('attendeeCount').children.length, 5);
-assert.equal(setup('/weddingangelandkarmin/1/').get('openingGuests').textContent, 'Invitación para 1 persona');
-assert.equal(setup('/weddingangelandkarmin/', '?invitados=3').get('attendeeCount').children.length, 3);
-assert.equal(setup('/weddingangelandkarmin/2/', '?invitados=5').get('attendeeCount').children.length, 2);
-for (const invalid of ['0', '6', '-1', '1.5', 'abc']) assert.equal(setup('/weddingangelandkarmin/', `?invitados=${invalid}`).get('attendeeCount').children.length, 5);
+assert.equal(setup('/weddingkarminandangel/1/').get('openingGuests').textContent, 'Invitación para 1 persona');
+assert.equal(setup('/weddingkarminandangel/', '?invitados=3').get('attendeeCount').children.length, 3);
+assert.equal(setup('/weddingkarminandangel/2/', '?invitados=5').get('attendeeCount').children.length, 2);
+for (const invalid of ['0', '6', '-1', '1.5', 'abc']) assert.equal(setup('/weddingkarminandangel/', `?invitados=${invalid}`).get('attendeeCount').children.length, 5);
 base.get('attendeeNames').value = '   ';
 await base.get('rsvpForm').events.submit({ preventDefault() {}, currentTarget: base.get('rsvpForm') });
 assert.equal(base.window.location.href, '');
 assert.ok(base.get('attendeeNames').invalid);
 assert.deepEqual(base.get('countdown').querySelectorAll().map(n => n.textContent), ['01', '00', '00', '00']);
-const expired = setup('/weddingangelandkarmin/', '', '2026-11-08T00:00:00Z');
+const expired = setup('/weddingkarminandangel/', '', '2026-11-08T00:00:00Z');
 assert.deepEqual(expired.get('countdown').querySelectorAll().map(n => n.textContent), ['00', '00', '00', '00']);
 assert.equal(expired.get('countdownLabel').textContent, '¡Llegó el gran día!');
 base.get('openInvitation').events.click();

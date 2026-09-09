@@ -34,9 +34,9 @@ Una respuesta modificada es una nueva respuesta. Si alguien cambia su decisión 
 
 ## Verificación local
 
-`node weddingangelandkarmin/validate.cjs`
+`node weddingkarminandangel/validate.cjs`
 
-`node weddingangelandkarmin/backend/validate.cjs`
+`node weddingkarminandangel/backend/validate.cjs`
 
 Las pruebas locales usan servicios simulados y no escriben en la hoja real. La autorización y el despliegue inicial se completaron el 8 de septiembre de 2026. Una escritura real debe comprobarse después de cada cambio del receptor.
 

@@ -3,7 +3,7 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parent
 source = (root / 'index.html').read_text(encoding='utf-8')
-base_url = 'https://gaschsoft.com/weddingangelandkarmin/'
+base_url = 'https://gaschsoft.com/weddingkarminandangel/'
 for guests in range(1, 6):
     destination = root / str(guests)
     destination.mkdir(exist_ok=True)
