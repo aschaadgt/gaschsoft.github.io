@@ -68,6 +68,11 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.equal((html.match(/id="carouselDots"/g) || []).length, 1, `${route} needs one carousel indicator row`);
   assert.doesNotMatch(html, />Nuestra canción</, `${route} still shows the removed song title`);
   assert.doesNotMatch(html, /id="songStatus"/, `${route} still contains the removed song status`);
+  assert.doesNotMatch(html, /id="songToggle"/, `${route} still contains the removed inline music control`);
+  assert.equal((html.match(/music-control__note"/g) || []).length, 3, `${route} needs three animated music notes`);
+  assert.match(html, /assets\/apple-calendar\.webp/, `${route} needs the iOS calendar logo`);
+  assert.match(html, /assets\/google-calendar\.png/, `${route} needs the Android calendar logo`);
+  assert.match(html, /calendar\.google\.com\/calendar\/render/, `${route} needs the Google Calendar action`);
 }
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window } = setup(`/weddingangelandkarmin/${guests}/`);
@@ -106,7 +111,7 @@ assert.equal(base.get('invitation').inert, false);
 assert.equal(base.get('opening').removed, true);
 assert.equal(Boolean(base.get('coupleNames').focused), false, 'The hero title should not receive a visible focus rectangle');
 assert.equal(base.get('musicToggle').attributes['aria-pressed'], 'true');
-base.get('songToggle').events.click();
+base.get('musicToggle').events.click();
 assert.equal(base.get('musicToggle').attributes['aria-pressed'], 'false');
 const track = base.get('carouselTrack');
 assert.equal(base.get('carouselDots').children.length, 7, 'Carousel should expose one indicator for each photo');

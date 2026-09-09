@@ -12,7 +12,6 @@
   const opening = $('opening');
   const music = $('backgroundMusic');
   const musicToggle = $('musicToggle');
-  const songToggle = $('songToggle');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const attendeeCount = $('attendeeCount');
 
@@ -30,12 +29,9 @@
 
   const updateMusic = () => {
     const playing = !music.paused;
-    for (const button of [musicToggle, songToggle]) {
-      button.setAttribute('aria-pressed', String(playing));
-      button.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
-    }
+    musicToggle.setAttribute('aria-pressed', String(playing));
+    musicToggle.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
     musicToggle.classList.toggle('is-playing', playing);
-    songToggle.classList.toggle('is-playing', playing);
   };
   const playMusic = () => music.play().catch(() => {
     updateMusic();
@@ -44,9 +40,7 @@
   music.addEventListener('playing', updateMusic);
   music.addEventListener('pause', updateMusic);
   music.addEventListener('error', updateMusic);
-  for (const button of [musicToggle, songToggle]) {
-    button.addEventListener('click', () => music.paused ? playMusic() : music.pause());
-  }
+  musicToggle.addEventListener('click', () => music.paused ? playMusic() : music.pause());
 
   const openInvitation = () => {
     $('openInvitation').disabled = true;

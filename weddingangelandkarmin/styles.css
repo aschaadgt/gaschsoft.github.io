@@ -56,9 +56,18 @@ h3 { font-weight: 500; line-height: 1.2; }
 .site-header__brand span { font-size: .65em; }
 .site-header nav { display: flex; gap: 1.25rem; }
 .site-header nav a { font: 500 .75rem var(--sans); text-decoration: none; }
-.music-control { position: fixed; right: 1rem; bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 11; border: 1px solid #faf6ef; border-radius: 50%; width: 3rem; height: 3rem; display: grid; place-items: center; color: var(--paper); background: var(--forest); box-shadow: 0 3px 15px #26352430; }
-.music-control svg { width: 1.45rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.music-control { position: fixed; right: 1rem; bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 11; border: 1px solid #faf6ef; border-radius: 50%; width: 3.25rem; height: 3.25rem; display: grid; place-items: center; color: var(--paper); background: var(--forest); box-shadow: 0 3px 15px #26352430; overflow: visible; }
+.music-control__icon { width: 1.5rem; fill: none; stroke: currentColor; stroke-width: 1.5; transform-origin: center; }
 .music-control.is-playing { animation: music-pulse 2.5s infinite; }
+.music-control.is-playing .music-control__icon { animation: disc-spin 1.8s linear infinite; }
+.music-control__notes { position: absolute; inset: 0; pointer-events: none; }
+.music-control__note { position: absolute; width: .9rem; height: .9rem; fill: none; stroke: #d79a78; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; opacity: 0; }
+.music-control__note:nth-child(1) { left: 2.15rem; top: .3rem; }
+.music-control__note:nth-child(2) { left: 2.35rem; top: 1.25rem; }
+.music-control__note:nth-child(3) { left: 1.7rem; top: 1.75rem; }
+.music-control.is-playing .music-control__note { animation: music-note 1.45s ease-out infinite; }
+.music-control.is-playing .music-control__note:nth-child(2) { animation-delay: .45s; }
+.music-control.is-playing .music-control__note:nth-child(3) { animation-delay: .9s; }
 main { max-width: 760px; margin: auto; background: var(--paper); box-shadow: 0 0 70px #46372c15; }
 .hero { position: relative; height: max(760px, 100svh); max-height: 1100px; background: var(--forest-deep); color: #fffaf2; }
 .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(#25322685, #25322605 60%, #1725198c); pointer-events: none; }
@@ -79,11 +88,6 @@ main { max-width: 760px; margin: auto; background: var(--paper); box-shadow: 0 0
 .story__photo img { width: 100%; height: auto; aspect-ratio: 2/3; object-fit: cover; }
 .love-note { margin: 2.25rem 0 1.8rem; font-size: 1.55rem; line-height: 1.3; }
 .love-note em { color: var(--terracotta); }
-.song { display: flex; justify-content: center; }
-.song__play { border: 1px solid var(--terracotta); border-radius: 50%; width: 3.2rem; height: 3.2rem; color: var(--paper); background: var(--terracotta); display: grid; place-items: center; font-size: .875rem; }
-.song__play-icon { position: relative; width: 1rem; height: 1rem; display: block; }
-.song__play-icon::before { content: ''; position: absolute; left: .28rem; top: .08rem; border-top: .42rem solid transparent; border-bottom: .42rem solid transparent; border-left: .64rem solid currentColor; }
-.song__play.is-playing .song__play-icon::before { left: .17rem; top: .08rem; width: .2rem; height: .84rem; border: 0; background: currentColor; box-shadow: .46rem 0 0 currentColor; }
 
 .date-section { background: var(--terracotta); color: var(--paper); text-align: center; padding: 4.5rem clamp(1.25rem, 7vw, 4.75rem); }
 .date-section h2 { color: inherit; }
@@ -108,6 +112,10 @@ main { max-width: 760px; margin: auto; background: var(--paper); box-shadow: 0 0
 .button { min-height: 3.4rem; display: inline-flex; align-items: center; justify-content: center; gap: .75rem; padding: .8rem 1.25rem; font: 500 .875rem/1.5 var(--sans); border: 1px solid transparent; border-radius: 3px; text-decoration: none; transition: background .2s, transform .2s; }
 .button:hover { transform: translateY(-2px); }.button--outline { border-color: var(--line); background: #fffaf54d; }
 .button--outline:hover { background: #eadfcf; }.button--forest { background: var(--forest); color: #fffaf2; }.button--forest:hover { background: var(--forest-deep); }
+.calendar-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin: 1.7rem auto 0; max-width: 430px; }
+.calendar-buttons .button { flex: 1; min-width: 160px; max-width: 205px; background: #fffaf5; border-color: #f0d6c4; color: #754632; }
+.calendar-buttons .button:hover { background: #f6eadf; }
+.calendar-buttons img { width: 2rem; height: 2rem; border-radius: .42rem; object-fit: contain; }
 .map-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-top: 1.8rem; }.map-buttons .button { flex: 1; max-width: 210px; }.map-buttons img { height: 24px; width: 24px; object-fit: contain; }
 
 .moments { padding: 3.5rem 0 2rem; color: var(--paper); background: var(--forest-deep); text-align: center; }
@@ -133,6 +141,8 @@ main { max-width: 760px; margin: auto; background: var(--paper); box-shadow: 0 0
 @keyframes seal-release { to { opacity: 0; transform: translateY(3.2rem) rotate(18deg) scale(.7); } }
 @keyframes envelope-note-out { to { opacity: 0; transform: translateY(.8rem); } }
 @keyframes music-pulse { 50% { box-shadow: 0 0 0 .4rem #4a594625; } }
+@keyframes disc-spin { to { transform: rotate(360deg); } }
+@keyframes music-note { 0% { opacity: 0; transform: translate(0, 0) scale(.7); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(.7rem, -1.9rem) scale(1.15); } }
 @media (min-width: 800px) { .site-header { padding-inline: max(2rem, calc((100vw - 680px) / 2)); }.hero { height: 1000px; }.hero__content { top: 13%; } }
 @media (max-width: 380px) { .site-header { padding-inline: 1rem; }.site-header nav { gap: .85rem; }.date-line { gap: .5rem; font-size: 1rem; }.date-line strong { padding-inline: .6rem; }.countdown span { font-size: .75rem; }.map-buttons { flex-direction: column; }.map-buttons .button { max-width: none; }.opening .envelope { margin-block: 2.2rem 1.5rem; } }
 @media (max-height: 650px) { .opening { justify-content: flex-start; overflow-y: auto; }.opening__title { font-size: 2.6rem; }.opening .envelope { width: min(19rem, 70vw); flex-shrink: 0; margin-block: 2rem 1rem; } }
