@@ -32,8 +32,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Great+Vibes&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="/weddingangelandkarmin/assets/photo-7.webp" />
   <link rel="stylesheet" href="/weddingangelandkarmin/styles.css?v=2" />
-  <script defer src="/weddingangelandkarmin/config.js?v=1"></script>
-  <script defer src="/weddingangelandkarmin/app.js?v=1"></script>
+  <link rel="stylesheet" href="/weddingangelandkarmin/rsvp.css?v=1" />
+  <script defer src="/weddingangelandkarmin/config.js?v=2"></script>
+  <script defer src="/weddingangelandkarmin/app.js?v=2"></script>
+  <script defer src="/weddingangelandkarmin/rsvp.js?v=1"></script>
 </head>
 <body>
   <div class="opening" id="opening" role="dialog" aria-modal="true" aria-labelledby="openingTitle">
@@ -128,11 +130,15 @@
     <section class="paper-section rsvp" id="confirmar">
       <p class="kicker">Nos encantaría contar contigo</p><h2>Confirma tu asistencia</h2><p id="guestCount" class="guest-count">Confirma de 1 a 5 invitados.</p><p class="rsvp__adults">Celebración reservada para adultos.</p>
       <form class="rsvp-form" id="rsvpForm">
-        <label for="attendeeCount">¿Cuántas personas asistirán?</label><select id="attendeeCount" name="attendeeCount" required><option value="1">1 persona</option><option value="2">2 personas</option><option value="3">3 personas</option><option value="4">4 personas</option><option value="5">5 personas</option></select>
-        <label for="attendeeNames">Nombres de los asistentes</label><input id="attendeeNames" name="attendeeNames" required autocomplete="name" maxlength="400" placeholder="Escribe los nombres completos" />
+        <label for="attendance">¿Podrás acompañarnos?</label><select id="attendance" name="attendance" required><option value="" selected disabled>Selecciona una opción</option><option value="yes">Sí, asistiré</option><option value="no">No podré asistir</option></select>
+        <label id="attendeeCountLabel" for="attendeeCount">¿Cuántas personas asistirán?</label><select id="attendeeCount" name="attendeeCount" required><option value="1">1 persona</option><option value="2">2 personas</option><option value="3">3 personas</option><option value="4">4 personas</option><option value="5">5 personas</option></select>
+        <label id="attendeeNamesLabel" for="attendeeNames">Nombres de los asistentes</label><input id="attendeeNames" name="attendeeNames" required autocomplete="name" maxlength="400" placeholder="Escribe los nombres completos" />
         <label for="guestMessage">Un mensaje para los novios <small>(opcional)</small></label><textarea id="guestMessage" name="guestMessage" rows="3" maxlength="1000" placeholder="Comparte tus buenos deseos"></textarea>
-        <button class="button button--forest" type="submit">Confirmar por WhatsApp <span aria-hidden="true">↗</span></button>
-      </form><p class="form-note">Se abrirá WhatsApp con tu confirmación lista para enviar.</p>
+        <div class="rsvp-trap" aria-hidden="true"><label for="rsvpWebsite">Deja este campo vacío</label><input id="rsvpWebsite" name="website" tabindex="-1" autocomplete="off" /></div>
+        <button class="button button--forest" id="rsvpSubmit" type="submit">Enviar respuesta</button>
+        <p class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></p>
+        <a id="rsvpWhatsapp" class="button button--outline" hidden rel="noopener" href="#confirmar">Enviar también por WhatsApp <span aria-hidden="true">↗</span></a>
+      </form><p class="form-note">Tu respuesta nos ayudará a organizar la celebración. También podrás enviarla por WhatsApp.</p>
     </section>
 
     <section class="album-section"><img src="/weddingangelandkarmin/assets/google-photos.png" alt="" width="55" height="54" loading="lazy" /><p class="kicker">Los recuerdos se comparten</p><h2>Tu mirada, nuestros recuerdos</h2><p>Comparte con nosotros las fotos que tomaste.<br />¡Queremos revivir este día a través de tus ojos!</p><a class="button button--outline" href="https://photos.app.goo.gl/StUzRjaKuormLkBZ7" target="_blank" rel="noopener noreferrer">Compartir mis fotos <span aria-hidden="true">↗</span></a></section>

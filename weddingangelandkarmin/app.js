@@ -105,24 +105,5 @@
   }, { passive: true });
   new ResizeObserver(() => track.scrollTo({ left: currentPhoto * track.clientWidth, behavior: 'instant' })).observe(track);
 
-  const namesInput = $('attendeeNames');
-  namesInput.addEventListener('input', () => namesInput.setCustomValidity(''));
-  $('rsvpForm').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const count = Number(attendeeCount.value);
-    const names = namesInput.value.trim();
-    namesInput.setCustomValidity(names ? '' : 'Escribe los nombres de los asistentes.');
-    if (!event.currentTarget.reportValidity() || !allowedGuestCounts.has(count) || count > guests) return;
-    const note = $('guestMessage').value.trim();
-    const message = [
-      '¡Hola! Confirmo asistencia a la boda de Ángel y Karmin.',
-      'Sábado 7 de noviembre de 2026 · Jardín Tierra Linda.',
-      '',
-      `${count} ${count === 1 ? 'persona confirma' : 'personas confirman'} asistencia.`,
-      `Nombre(s): ${names}`,
-      ...(reservedGuests ? [`Invitación válida para: ${guests} ${guestLabel}.`] : []),
-      ...(note ? ['', `Mensaje: ${note}`] : []),
-    ].join('\n');
-    window.location.href = `https://api.whatsapp.com/send?phone=${config.whatsappPhone}&text=${encodeURIComponent(message)}`;
-  });
+  // RSVP submission and the Google Sheets receipt are handled in rsvp.js.
 })();

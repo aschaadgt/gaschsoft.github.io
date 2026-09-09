@@ -1,0 +1,7 @@
+.rsvp-form [hidden] { display: none !important; }
+.rsvp-form .rsvp-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.rsvp-form button:disabled { opacity: .65; cursor: wait; transform: none; }
+.rsvp-status { margin-top: 1rem; font-size: 1rem; line-height: 1.5; }
+.rsvp-status:empty { display: none; }
+.rsvp-status[data-state="success"] { color: var(--forest-deep); }
+.rsvp-status[data-state="error"] { color: #853e2f; }
