@@ -5,3 +5,4 @@
 .rsvp-status:empty { display: none; }
 .rsvp-status[data-state="success"] { color: var(--forest-deep); }
 .rsvp-status[data-state="error"] { color: #853e2f; }
+.whatsapp-icon { width: 1.45rem; height: 1.45rem; object-fit: contain; flex: 0 0 auto; }

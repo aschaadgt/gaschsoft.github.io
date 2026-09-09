@@ -14,7 +14,7 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
     return {
       value: '', textContent: '', children: [], events: {}, attributes: {}, dataset: {}, clientWidth: 400, scrollLeft: 0,
       get options() { return this.children; },
-      inert: true, paused: true, classList: { add() {}, toggle() {} },
+      inert: true, paused: true, classList: { add() {}, remove() {}, toggle() {} },
       addEventListener(name, callback) { this.events[name] = callback; },
       setAttribute(name, value) { this.attributes[name] = value; },
       replaceChildren(...children) { this.children = children; this.value = children[0]?.value; },
@@ -33,12 +33,16 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
   get('attendance').value = 'yes';
   get('rsvpForm').elements = { website: { value: '' } };
   const timers = [];
+  const intervals = new Map();
+  let intervalId = 0;
   const storage = new Map();
   const window = {
-    location: { pathname, search, href: '' }, history: {}, matchMedia: () => ({ matches: true }),
-    setTimeout: callback => timers.push(callback), clearTimeout() {}, setInterval() {}, scrollTo() {}
+    location: { pathname, search, href: '' }, history: {}, matchMedia: () => ({ matches: false }),
+    setTimeout: callback => timers.push(callback), clearTimeout() {},
+    setInterval: callback => { intervals.set(++intervalId, callback); return intervalId; },
+    clearInterval: id => intervals.delete(id), scrollTo() {}
   };
-  const document = { getElementById: get, createElement: element, body: element() };
+  const document = { getElementById: get, createElement: element, body: element(), hidden: false, addEventListener() {} };
   class FakeDate extends Date { static now() { return new Date(now).getTime(); } }
   const context = vm.createContext({
     window, document, Date: FakeDate, URLSearchParams, AbortController,
@@ -48,12 +52,14 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
       const requestId = new URLSearchParams(options.body).get('requestId');
       return { ok: true, json: async () => ({ ok: true, requestId }) };
     },
-    ResizeObserver: class { observe() {} }, requestAnimationFrame: callback => callback(), cancelAnimationFrame() {}
+    ResizeObserver: class { observe() {} },
+    IntersectionObserver: class { constructor(callback) { this.callback = callback; } observe() { this.callback([{ isIntersecting: true }]); } },
+    requestAnimationFrame: callback => callback(), cancelAnimationFrame() {}
   });
   vm.runInContext(configSource, context);
   vm.runInContext(appSource, context);
   vm.runInContext(rsvpSource, context);
-  return { get, window, timers };
+  return { get, window, timers, intervals };
 }
 
 async function run() {
@@ -64,16 +70,16 @@ for (let guests = 1; guests <= 5; guests++) {
   get('attendeeNames').value = '  María & José  ';
   get('guestMessage').value = '¡Nos vemos! ♥';
   await get('rsvpForm').events.submit({ preventDefault() {}, currentTarget: get('rsvpForm') });
-  const destination = new URL(get('rsvpWhatsapp').href);
+  const destination = new URL(window.location.href);
   assert.equal(destination.origin, 'https://api.whatsapp.com');
-  assert.equal(destination.searchParams.get('phone'), '50255138916');
+  assert.equal(destination.searchParams.get('phone'), '50251232754');
   assert.match(destination.searchParams.get('text'), /Nombre\(s\): María & José/);
   assert.match(destination.searchParams.get('text'), /Ángel y Karmin/);
   assert.match(destination.searchParams.get('text'), new RegExp(`Cupos de la invitación: ${guests}`));
-  get('rsvpWhatsapp').href = '';
+  window.location.href = '';
   get('attendeeCount').value = String(guests + 1);
   await get('rsvpForm').events.submit({ preventDefault() {}, currentTarget: get('rsvpForm') });
-  assert.equal(get('rsvpWhatsapp').href, '', 'Over-limit RSVP must be rejected');
+  assert.equal(window.location.href, '', 'Over-limit RSVP must be rejected');
 }
 const base = setup('/weddingangelandkarmin/');
 assert.equal(base.get('attendeeCount').children.length, 5);
@@ -95,12 +101,20 @@ assert.equal(base.get('opening').removed, true);
 assert.equal(base.get('musicToggle').attributes['aria-pressed'], 'true');
 base.get('songToggle').events.click();
 assert.equal(base.get('musicToggle').attributes['aria-pressed'], 'false');
-base.get('previousPhoto').events.click();
-assert.equal(base.get('photoCounter').textContent, '07 / 07');
-base.get('nextPhoto').events.click();
-assert.equal(base.get('photoCounter').textContent, '01 / 07');
-base.get('carouselTrack').events.keydown({ key: 'ArrowRight', preventDefault() {} });
-assert.equal(base.get('photoCounter').textContent, '02 / 07');
-console.log('PASS: 1–5 guest routes, query limits, WhatsApp recipient/encoding, validation, Guatemala countdown, opening, music controls, gallery navigation.');
+const track = base.get('carouselTrack');
+assert.equal(base.intervals.size, 2, 'Countdown and visible carousel should be running');
+let carouselTick = [...base.intervals.values()][1];
+carouselTick();
+assert.equal(track.scrollLeft, 400, 'Carousel should advance automatically');
+track.events.pointerdown();
+assert.equal(base.intervals.size, 1, 'Touching the carousel should pause it');
+track.events.pointerup();
+assert.equal(base.intervals.size, 2, 'Carousel should resume after touch');
+carouselTick = [...base.intervals.values()][1];
+for (let i = 0; i < 6; i++) carouselTick();
+assert.equal(track.scrollLeft, 0, 'Carousel should loop from the last photo to the first');
+track.events.keydown({ key: 'ArrowRight', preventDefault() {} });
+assert.equal(track.scrollLeft, 400, 'Keyboard navigation should remain available');
+console.log('PASS: 1–5 guest routes, WhatsApp recipient/encoding, validation, Guatemala countdown, opening, music controls, and automatic touch-paused gallery loop.');
 }
 run().catch(error => { console.error(error); process.exitCode = 1; });

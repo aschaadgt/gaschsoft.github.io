@@ -84,7 +84,8 @@ async function frontendChecks() {
     if (!elements.has(id)) elements.set(id, {
       value: '', dataset: {}, events: {}, disabled: false, hidden: false, options: Array(5),
       addEventListener(name, cb) { this.events[name] = cb; }, setCustomValidity(message) { this.invalid = message; },
-      reportValidity() { return !get('attendeeNames').invalid; }, setAttribute() {}, focus() {}
+      reportValidity() { return !get('attendeeNames').invalid; }, setAttribute() {}, focus() {},
+      querySelector() { return this.label ??= { textContent: '' }; }
     });
     return elements.get(id);
   };
@@ -98,9 +99,10 @@ async function frontendChecks() {
   const storage = new Map();
   let networkMode = 'success';
   let fetchResolve;
+  const browserWindow = { WEDDING_CONFIG: { whatsappPhone: '50251232754', rsvpEndpoint: endpoint }, location: { href: '' }, setTimeout, clearTimeout };
   const context = vm.createContext({
     document: { getElementById: get },
-    window: { WEDDING_CONFIG: { whatsappPhone: '50255138916', rsvpEndpoint: endpoint }, setTimeout, clearTimeout },
+    window: browserWindow,
     sessionStorage: { getItem: k => storage.get(k) || null, setItem: (k, v) => storage.set(k, v) },
     crypto: { randomUUID }, AbortController, URLSearchParams,
     fetch: async (url, options) => {
@@ -116,10 +118,10 @@ async function frontendChecks() {
   const submit = () => get('rsvpForm').events.submit({ preventDefault() {} });
   await submit();
   assert.equal(get('rsvpStatus').dataset.state, 'success');
-  assert.equal(get('rsvpWhatsapp').hidden, false);
-  const destination = new URL(get('rsvpWhatsapp').href);
-  assert.equal(destination.searchParams.get('phone'), '50255138916');
+  const destination = new URL(browserWindow.location.href);
+  assert.equal(destination.searchParams.get('phone'), '50251232754');
   assert.match(destination.searchParams.get('text'), /Personas confirmadas: 3/);
+  browserWindow.location.href = '';
   const previous = values.length;
   await submit();
   assert.equal(requests[0].requestId, requests[1].requestId);
@@ -135,7 +137,7 @@ async function frontendChecks() {
   await submit();
   assert.equal(get('rsvpStatus').dataset.state, 'error');
   assert.equal(get('rsvpSubmit').disabled, false);
-  assert.equal(get('rsvpWhatsapp').hidden, false);
+  assert.equal(new URL(browserWindow.location.href).origin, 'https://api.whatsapp.com');
   const retryId = requests.at(-1).requestId;
   networkMode = 'success';
   await submit();

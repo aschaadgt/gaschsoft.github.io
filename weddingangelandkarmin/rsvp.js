@@ -8,7 +8,7 @@
   const noteInput = document.getElementById('guestMessage');
   const status = document.getElementById('rsvpStatus');
   const submit = document.getElementById('rsvpSubmit');
-  const whatsapp = document.getElementById('rsvpWhatsapp');
+  const submitLabel = submit.querySelector('.rsvp-submit-label');
   const guestLimit = countInput.options.length;
   let busy = false;
   let receipt = null;
@@ -26,7 +26,7 @@
   attendance.addEventListener('change', updateAttendance);
   updateAttendance();
   namesInput.addEventListener('input', () => namesInput.setCustomValidity(''));
-  form.addEventListener('input', () => { if (!busy) { status.textContent = ''; whatsapp.hidden = true; } });
+  form.addEventListener('input', () => { if (!busy) status.textContent = ''; });
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -45,13 +45,12 @@
       ...(note ? ['', `Mensaje: ${note}`] : [])
     ].join('\n');
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${config.whatsappPhone}&text=${encodeURIComponent(message)}`;
-    whatsapp.href = whatsappUrl;
 
     // Never report a successful Sheets write without a positive server receipt.
     if (!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(config.rsvpEndpoint || '')) {
-      status.textContent = 'El registro automático aún no está disponible. Puedes enviar tu respuesta por WhatsApp.';
+      status.textContent = 'El registro automático no está disponible. Abriendo WhatsApp para confirmar directamente.';
       status.dataset.state = 'error';
-      whatsapp.hidden = false;
+      window.location.href = whatsappUrl;
       return;
     }
     const data = { event: 'weddingangelandkarmin', names, guests: String(guestLimit), confirmed: String(confirmed), attendance: attendance.value, message: note, website: form.elements.website.value };
@@ -67,10 +66,9 @@
     submit.disabled = true;
     form.setAttribute('aria-busy', 'true');
     status.dataset.state = 'pending';
-    status.textContent = 'Guardando tu respuesta…';
-    submit.textContent = 'Guardando…';
+    status.textContent = 'Guardando tu respuesta antes de abrir WhatsApp.';
+    submitLabel.textContent = 'Guardando respuesta';
     for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = true;
-    whatsapp.hidden = true;
     try {
       const response = await fetch(config.rsvpEndpoint, {
         method: 'POST', body: new URLSearchParams({ ...data, requestId: receipt.requestId }),
@@ -80,20 +78,18 @@
       const result = await response.json();
       if (result.ok !== true || result.requestId !== receipt.requestId) throw new Error(result.code || 'SAVE_FAILED');
       status.dataset.state = 'success';
-      status.textContent = 'Tu respuesta quedó registrada. Ya puedes enviarla también por WhatsApp.';
-      whatsapp.hidden = false;
-      // A direct link avoids mobile popup blockers after the asynchronous save.
-      whatsapp.focus({ preventScroll: true });
+      status.textContent = 'Respuesta registrada. Abriendo WhatsApp.';
+      window.location.href = whatsappUrl;
     } catch (_) {
       status.dataset.state = 'error';
-      status.textContent = 'No pudimos comprobar que tu respuesta se guardó. Intenta de nuevo o envíala por WhatsApp.';
-      whatsapp.hidden = false;
+      status.textContent = 'No pudimos guardar la respuesta. Abriendo WhatsApp para confirmar directamente.';
+      window.location.href = whatsappUrl;
     } finally {
       window.clearTimeout(timeout);
       busy = false;
       submit.disabled = false;
       form.setAttribute('aria-busy', 'false');
-      submit.textContent = 'Enviar respuesta';
+      submitLabel.textContent = 'Confirmar por WhatsApp';
       for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = false;
       updateAttendance();
     }

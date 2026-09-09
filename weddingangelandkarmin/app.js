@@ -35,7 +35,7 @@
       button.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
     }
     musicToggle.classList.toggle('is-playing', playing);
-    songToggle.querySelector('span').textContent = playing ? 'Ⅱ' : '▶';
+    songToggle.classList.toggle('is-playing', playing);
     $('songStatus').textContent = playing ? 'Sonando: nuestra canción' : 'Dale play a nuestra historia';
   };
   const playMusic = () => music.play().catch(() => {
@@ -85,24 +85,54 @@
   const slideCount = track.children.length;
   let currentPhoto = 0;
   let scrollFrame;
+  let carouselTimer;
+  let carouselVisible = false;
+  let carouselTouching = false;
+  const stopCarousel = () => {
+    if (carouselTimer) window.clearInterval(carouselTimer);
+    carouselTimer = null;
+  };
+  const startCarousel = () => {
+    stopCarousel();
+    if (reducedMotion || !carouselVisible || carouselTouching || document.hidden) return;
+    carouselTimer = window.setInterval(() => showPhoto(currentPhoto + 1), 4000);
+  };
   const showPhoto = (index) => {
     currentPhoto = (index + slideCount) % slideCount;
     track.scrollTo({ left: currentPhoto * track.clientWidth, behavior: reducedMotion ? 'instant' : 'smooth' });
   };
-  $('previousPhoto').addEventListener('click', () => showPhoto(currentPhoto - 1));
-  $('nextPhoto').addEventListener('click', () => showPhoto(currentPhoto + 1));
   track.addEventListener('keydown', (event) => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
     showPhoto(event.key === 'Home' ? 0 : event.key === 'End' ? slideCount - 1 : currentPhoto + (event.key === 'ArrowLeft' ? -1 : 1));
+    startCarousel();
   });
   track.addEventListener('scroll', () => {
     cancelAnimationFrame(scrollFrame);
     scrollFrame = requestAnimationFrame(() => {
       currentPhoto = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
-      $('photoCounter').textContent = `${String(currentPhoto + 1).padStart(2, '0')} / 07`;
     });
   }, { passive: true });
+  const holdCarousel = () => {
+    carouselTouching = true;
+    track.classList.add('is-touching');
+    stopCarousel();
+  };
+  const releaseCarousel = () => {
+    carouselTouching = false;
+    track.classList.remove('is-touching');
+    startCarousel();
+  };
+  track.addEventListener('pointerdown', holdCarousel);
+  track.addEventListener('pointerup', releaseCarousel);
+  track.addEventListener('pointercancel', releaseCarousel);
+  track.addEventListener('touchstart', holdCarousel, { passive: true });
+  track.addEventListener('touchend', releaseCarousel, { passive: true });
+  document.addEventListener('visibilitychange', startCarousel);
+  new IntersectionObserver(([entry]) => {
+    carouselVisible = entry.isIntersecting;
+    if (carouselVisible) startCarousel(); else stopCarousel();
+  }, { threshold: .35 }).observe(track);
   new ResizeObserver(() => track.scrollTo({ left: currentPhoto * track.clientWidth, behavior: 'instant' })).observe(track);
 
   // RSVP submission and the Google Sheets receipt are handled in rsvp.js.
