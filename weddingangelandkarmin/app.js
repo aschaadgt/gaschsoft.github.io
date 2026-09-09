@@ -36,16 +36,14 @@
     }
     musicToggle.classList.toggle('is-playing', playing);
     songToggle.classList.toggle('is-playing', playing);
-    $('songStatus').textContent = playing ? 'Sonando: nuestra canción' : 'Dale play a nuestra historia';
   };
   const playMusic = () => music.play().catch(() => {
     updateMusic();
-    $('songStatus').textContent = 'Toca reproducir para escuchar';
   });
   music.volume = .48;
   music.addEventListener('playing', updateMusic);
   music.addEventListener('pause', updateMusic);
-  music.addEventListener('error', () => { updateMusic(); $('songStatus').textContent = 'No se pudo cargar la canción. Inténtalo de nuevo.'; });
+  music.addEventListener('error', updateMusic);
   for (const button of [musicToggle, songToggle]) {
     button.addEventListener('click', () => music.paused ? playMusic() : music.pause());
   }
@@ -60,7 +58,6 @@
       for (const id of ['invitation', 'siteHeader', 'musicToggle']) $(id).inert = false;
       opening.classList.add('is-leaving');
       opening.inert = true;
-      $('coupleNames').focus({ preventScroll: true });
       window.scrollTo({ top: 0, behavior: 'instant' });
       window.setTimeout(() => opening.remove(), reducedMotion ? 0 : 750);
     }, reducedMotion ? 0 : 2400);
@@ -83,11 +80,25 @@
 
   const track = $('carouselTrack');
   const slideCount = track.children.length;
+  const dots = $('carouselDots');
   let currentPhoto = 0;
   let scrollFrame;
   let carouselTimer;
   let carouselVisible = false;
   let carouselTouching = false;
+  const dotButtons = Array.from({ length: slideCount }, (_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel__dot';
+    dot.setAttribute('aria-label', `Mostrar foto ${index + 1}`);
+    return dot;
+  });
+  dots.replaceChildren(...dotButtons);
+  const updateDots = () => dotButtons.forEach((dot, index) => {
+    const active = index === currentPhoto;
+    dot.classList.toggle('is-active', active);
+    dot.setAttribute('aria-current', active ? 'true' : 'false');
+  });
   const stopCarousel = () => {
     if (carouselTimer) window.clearInterval(carouselTimer);
     carouselTimer = null;
@@ -99,8 +110,13 @@
   };
   const showPhoto = (index) => {
     currentPhoto = (index + slideCount) % slideCount;
+    updateDots();
     track.scrollTo({ left: currentPhoto * track.clientWidth, behavior: reducedMotion ? 'instant' : 'smooth' });
   };
+  dotButtons.forEach((dot, index) => dot.addEventListener('click', () => {
+    showPhoto(index);
+    startCarousel();
+  }));
   track.addEventListener('keydown', (event) => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
@@ -110,7 +126,8 @@
   track.addEventListener('scroll', () => {
     cancelAnimationFrame(scrollFrame);
     scrollFrame = requestAnimationFrame(() => {
-      currentPhoto = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+      currentPhoto = Math.min(slideCount - 1, Math.max(0, Math.round(track.scrollLeft / Math.max(1, track.clientWidth))));
+      updateDots();
     });
   }, { passive: true });
   const holdCarousel = () => {
@@ -134,6 +151,7 @@
     if (carouselVisible) startCarousel(); else stopCarousel();
   }, { threshold: .35 }).observe(track);
   new ResizeObserver(() => track.scrollTo({ left: currentPhoto * track.clientWidth, behavior: 'instant' })).observe(track);
+  updateDots();
 
   // RSVP submission and the Google Sheets receipt are handled in rsvp.js.
 })();

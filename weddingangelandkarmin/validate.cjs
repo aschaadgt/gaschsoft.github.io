@@ -19,7 +19,7 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
       setAttribute(name, value) { this.attributes[name] = value; },
       replaceChildren(...children) { this.children = children; this.value = children[0]?.value; },
       setCustomValidity(value) { this.invalid = value; },
-      focus() {}, remove() { this.removed = true; },
+      focus() { this.focused = true; }, remove() { this.removed = true; },
       play() { this.paused = false; this.events.playing?.(); return Promise.resolve(); },
       pause() { this.paused = true; this.events.pause?.(); },
       scrollTo({ left }) { this.scrollLeft = left; this.events.scroll?.(); },
@@ -63,6 +63,12 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
 }
 
 async function run() {
+for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html', '4/index.html', '5/index.html']) {
+  const html = fs.readFileSync(path.join(__dirname, route), 'utf8');
+  assert.equal((html.match(/id="carouselDots"/g) || []).length, 1, `${route} needs one carousel indicator row`);
+  assert.doesNotMatch(html, />Nuestra canción</, `${route} still shows the removed song title`);
+  assert.doesNotMatch(html, /id="songStatus"/, `${route} still contains the removed song status`);
+}
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window } = setup(`/weddingangelandkarmin/${guests}/`);
   assert.equal(get('attendeeCount').children.length, guests);
@@ -98,10 +104,12 @@ base.get('openInvitation').events.click();
 while (base.timers.length) base.timers.shift()();
 assert.equal(base.get('invitation').inert, false);
 assert.equal(base.get('opening').removed, true);
+assert.equal(Boolean(base.get('coupleNames').focused), false, 'The hero title should not receive a visible focus rectangle');
 assert.equal(base.get('musicToggle').attributes['aria-pressed'], 'true');
 base.get('songToggle').events.click();
 assert.equal(base.get('musicToggle').attributes['aria-pressed'], 'false');
 const track = base.get('carouselTrack');
+assert.equal(base.get('carouselDots').children.length, 7, 'Carousel should expose one indicator for each photo');
 assert.equal(base.intervals.size, 2, 'Countdown and visible carousel should be running');
 let carouselTick = [...base.intervals.values()][1];
 carouselTick();
@@ -115,6 +123,6 @@ for (let i = 0; i < 6; i++) carouselTick();
 assert.equal(track.scrollLeft, 0, 'Carousel should loop from the last photo to the first');
 track.events.keydown({ key: 'ArrowRight', preventDefault() {} });
 assert.equal(track.scrollLeft, 400, 'Keyboard navigation should remain available');
-console.log('PASS: 1–5 guest routes, WhatsApp recipient/encoding, validation, Guatemala countdown, opening, music controls, and automatic touch-paused gallery loop.');
+console.log('PASS: 1–5 guest routes, WhatsApp recipient/encoding, validation, opening without title focus box, music controls, and automatic gallery with synchronized indicators.');
 }
 run().catch(error => { console.error(error); process.exitCode = 1; });
