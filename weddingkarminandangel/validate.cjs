@@ -9,6 +9,7 @@ const appSource = fs.readFileSync(path.join(__dirname, 'app.js'), 'utf8');
 const rsvpSource = fs.readFileSync(path.join(__dirname, 'rsvp.js'), 'utf8');
 const rsvpStylesSource = fs.readFileSync(path.join(__dirname, 'rsvp.css'), 'utf8');
 const stylesSource = fs.readFileSync(path.join(__dirname, 'styles.css'), 'utf8');
+const indexSource = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
 
 function setup(pathname, search = '', now = '2026-11-06T22:30:00Z', userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)') {
   const elements = new Map();
@@ -124,9 +125,10 @@ assert.match(stylesSource, /\.album-section \{[^}]*background: var\(--terracotta
 assert.match(stylesSource, /--paper: #f8f3ea;/, 'The paper tone must be shifted seven percent toward beige');
 assert.doesNotMatch(stylesSource, /#faf6ef|#fffdf8|#fffaf5(?:4d)?/, 'Old cooler paper backgrounds must no longer be used');
 assert.doesNotMatch(rsvpSource, /whatsapp-popup|prepareWhatsAppTarget/, 'Typing feedback must remain inside the confirmation button');
-assert.match(rsvpSource, /Gracias por tu respuesta, hemos registrado tu respuesta\./, 'A successful RSVP must show the final thank-you message');
+assert.match(rsvpSource, /Hemos registrado tu respuesta\./, 'A successful RSVP must show the final confirmation message');
 assert.match(rsvpStylesSource, /\.rsvp-status \{[^}]*text-align: center;/, 'RSVP feedback must remain centered');
-assert.match(rsvpStylesSource, /\.rsvp-form\.is-complete > label,[\s\S]*display: none;/, 'A completed RSVP must hide its reset fields');
+assert.match(rsvpStylesSource, /\.rsvp-status\[data-state="success"\][^}]*background: #995c4610;/, 'The confirmation message must use a subtle on-palette treatment');
+assert.doesNotMatch(indexSource, /Al confirmar, guardaremos tu respuesta/, 'The old explanatory RSVP note must be removed');
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window, openedTabs } = setup(`/weddingkarminandangel/${guests}/`);
   assert.equal(get('attendeeCount').children.length, guests);
@@ -142,11 +144,11 @@ for (let guests = 1; guests <= 5; guests++) {
   const destination = new URL(openedTabs[0].location.href);
   assert.equal(destination.origin, 'https://api.whatsapp.com');
   assert.equal(destination.searchParams.get('phone'), '50255138916');
-  assert.equal(get('rsvpStatus').textContent, 'Gracias por tu respuesta, hemos registrado tu respuesta.');
+  assert.equal(get('rsvpStatus').textContent, 'Hemos registrado tu respuesta.');
   assert.equal(get('rsvpForm').resetCalled, true, 'A successful RSVP must reset the form');
-  assert.equal(get('rsvpForm').classList.contains('is-complete'), true, 'A successful RSVP must collapse the form fields');
-  assert.equal(get('rsvpSubmit').disabled, true, 'A successful RSVP must prevent a second confirmation');
-  assert.equal(get('rsvpSubmit').querySelector().textContent, 'Respuesta registrada');
+  assert.equal(get('rsvpForm').classList.contains('is-complete'), false, 'A successful RSVP must keep the form layout unchanged');
+  assert.equal(get('rsvpSubmit').disabled, false, 'The confirmation button must return to its original visual state');
+  assert.equal(get('rsvpSubmit').querySelector().textContent, 'Confirmar por WhatsApp');
   assert.match(destination.searchParams.get('text'), /Nombre\(s\): María & José/);
   assert.match(destination.searchParams.get('text'), /Karmín y Angel/);
   assert.match(destination.searchParams.get('text'), new RegExp(`Cupos de la invitación: ${guests}`));

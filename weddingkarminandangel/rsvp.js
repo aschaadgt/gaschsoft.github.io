@@ -96,7 +96,7 @@
       const result = await response.json();
       if (result.ok !== true || result.requestId !== receipt.requestId) throw new Error(result.code || 'SAVE_FAILED');
       status.dataset.state = 'success';
-      status.textContent = 'Gracias por tu respuesta, hemos registrado tu respuesta.';
+      status.textContent = 'Hemos registrado tu respuesta.';
       if (openWhatsApp(whatsappUrl)) {
         confirmationCompleted = true;
       } else {
@@ -114,20 +114,12 @@
       form.setAttribute('aria-busy', 'false');
       if (confirmationCompleted) {
         form.reset();
-        updateAttendance();
-        form.classList.add('is-complete');
-        submit.classList.add('is-complete');
-        submit.disabled = true;
-        submit.setAttribute('aria-label', 'Respuesta registrada');
-        submitLabel.textContent = 'Respuesta registrada';
-        for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = true;
-      } else {
-        submit.disabled = false;
-        submit.setAttribute('aria-label', 'Confirmar por WhatsApp');
-        submitLabel.textContent = 'Confirmar por WhatsApp';
-        for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = false;
-        updateAttendance();
       }
+      submit.disabled = false;
+      submit.setAttribute('aria-label', 'Confirmar por WhatsApp');
+      submitLabel.textContent = 'Confirmar por WhatsApp';
+      for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = false;
+      updateAttendance();
     }
   });
 })();

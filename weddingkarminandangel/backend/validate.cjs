@@ -179,11 +179,11 @@ async function frontendChecks() {
   assert.equal(openedTabs.length, openedTabCount, 'WhatsApp must not open until the spreadsheet save finishes');
   fetchResolve();
   await pending;
-  assert.equal(get('rsvpSubmit').disabled, true);
+  assert.equal(get('rsvpSubmit').disabled, false);
   assert.equal(get('rsvpSubmit').classList.contains('is-loading'), false, 'The WhatsApp typing indicator must stop after saving');
   assert.equal(openedTabs.length, openedTabCount + 1, 'WhatsApp must open directly after the spreadsheet save finishes');
   assert.equal(get('rsvpForm').resetCalled, true, 'A successful confirmation must reset the form');
-  assert.equal(get('rsvpForm').classList.contains('is-complete'), true, 'A successful confirmation must collapse and lock the form');
+  assert.equal(get('rsvpForm').classList.contains('is-complete'), false, 'A successful confirmation must keep the form layout unchanged');
   console.log('PASS: five-column writes, declines, limits, escaped formulas, retries, interrupted writes, locks, receipt verification, network failures and double clicks.');
 }
 frontendChecks().catch(error => { console.error(error); process.exitCode = 1; });
