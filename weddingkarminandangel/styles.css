@@ -137,6 +137,10 @@ main { max-width: 760px; margin: auto; background: var(--paper); box-shadow: 0 0
 .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; min-width: 0; background: #fffdf8; border: 1px solid var(--line); padding: .9rem; border-radius: 3px; color: var(--ink); font: 1rem/1.6 var(--sans); }.rsvp-form textarea { resize: vertical; }.rsvp-form .button { margin-top: 1.2rem; }.form-note { margin: 1rem auto 0; max-width: 360px; font-size: 1rem; }
 .album-section { padding: 4rem clamp(1.5rem, 7vw, 4.75rem); text-align: center; background: #edf0e7; }.album-section > img { margin: 0 auto 1.5rem; }.album-section h2 { font-size: clamp(2.5rem, 8vw, 3.6rem); }.album-section .button { margin-top: 1.75rem; }
 .closing { position: relative; height: 680px; text-align: center; color: #fffaf2; }.closing > img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }.closing::after { content: ''; inset: 0; position: absolute; background: linear-gradient(#21291d10 20%, #192318c9 95%); }.closing > div { position: absolute; bottom: 3.5rem; left: 1.25rem; right: 1.25rem; z-index: 1; }.closing__names { font: clamp(3.2rem, 11vw, 4.5rem)/1.4 var(--script); margin: 1rem 0 .25rem; }.closing__names span { font-size: .6em; }.closing .script { margin-top: 1rem; font-size: 2rem; }.noscript-note { padding: 2rem; background: white; }
+.site-footer { background: #faf6ef; border-top: 1px solid rgba(111,78,55,.2); color: #6f6258; font: 400 .54rem/1.55 var(--sans); letter-spacing: .035em; padding: .9rem 1rem calc(.9rem + env(safe-area-inset-bottom)); text-align: center; }
+.site-footer p { margin: 0; }
+.site-footer a { color: #6f4e37; font-weight: 600; text-decoration: none; }
+.site-footer a:hover, .site-footer a:focus-visible { text-decoration: underline; text-underline-offset: 2px; }
 @keyframes seal-release { to { opacity: 0; transform: translateY(3.2rem) rotate(18deg) scale(.7); } }
 @keyframes envelope-note-out { to { opacity: 0; transform: translateY(.8rem); } }
 @keyframes music-pulse { 50% { box-shadow: 0 0 0 .4rem #4a594625; } }
