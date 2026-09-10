@@ -100,7 +100,8 @@ for (const selector of ['date-section', 'moments', 'gift-section']) {
   assert.match(stylesSource, new RegExp(`\\.${selector} \\{[^}]*background: var\\(--terracotta\\);`), `${selector} must use the original terracotta background`);
 }
 assert.doesNotMatch(stylesSource, /terracotta-soft/, 'The softened terracotta must no longer be used');
-assert.match(stylesSource, /\.carousel__slide \{[^}]*background: var\(--terracotta\);/, 'Carousel slides must continue the original terracotta background');
+assert.match(stylesSource, /--terracotta-deep: #744638;/, 'The darker photo-stage terracotta must be defined');
+assert.match(stylesSource, /\.carousel__slide \{[^}]*background: var\(--terracotta-deep\);/, 'Vertical carousel photos must show the darker terracotta at their sides');
 assert.match(stylesSource, /\.love-note__quote--close \{[^}]*margin-left: -\.16em;/, 'The closing quote must sit directly after the period');
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window, openedTabs } = setup(`/weddingkarminandangel/${guests}/`);

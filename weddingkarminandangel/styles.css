@@ -6,6 +6,7 @@
   --forest: #4a5946;
   --forest-deep: #303e30;
   --terracotta: #995c46;
+  --terracotta-deep: #744638;
   --coffee: #6f4e37;
   --clay: #b77b61;
   --gold: #a76b4e;
@@ -123,7 +124,7 @@ main { max-width: 760px; margin: auto; background: var(--paper); box-shadow: 0 0
 .moments { padding: 3.5rem 0 2rem; color: var(--paper); background: var(--terracotta); text-align: center; }
 .moments__heading { padding: 0 1.5rem; }.moments h2 { color: var(--paper); }
 .carousel { margin-top: 2rem; }.carousel__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; }.carousel__track.is-touching { cursor: grabbing; scroll-snap-type: none; }.carousel__track::-webkit-scrollbar { display: none; }
-.carousel__slide { flex: 0 0 100%; min-width: 0; height: clamp(360px, 78vw, 570px); scroll-snap-align: start; scroll-snap-stop: always; background: var(--terracotta); overflow: hidden; }
+.carousel__slide { flex: 0 0 100%; min-width: 0; height: clamp(360px, 78vw, 570px); scroll-snap-align: start; scroll-snap-stop: always; background: var(--terracotta-deep); overflow: hidden; }
 .carousel__slide img { width: 100%; height: 100%; object-fit: contain; }
 .carousel__slide--landscape img { object-fit: cover; }
 .carousel__dots { min-height: 2.5rem; display: flex; align-items: center; justify-content: center; gap: .55rem; padding: .9rem 1rem .55rem; }
