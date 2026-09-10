@@ -33,11 +33,24 @@
     musicToggle.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
     musicToggle.classList.toggle('is-playing', playing);
   };
+  const introVolume = .7;
+  const introFadeSeconds = 10;
+  let introFadeComplete = false;
+  const updateIntroVolume = () => {
+    if (introFadeComplete) return;
+    const progress = Math.min(Math.max(music.currentTime || 0, 0) / introFadeSeconds, 1);
+    music.volume = introVolume + (1 - introVolume) * progress;
+    if (progress >= 1) introFadeComplete = true;
+  };
   const playMusic = () => music.play().catch(() => {
     updateMusic();
   });
-  music.volume = .48;
-  music.addEventListener('playing', updateMusic);
+  music.volume = introVolume;
+  music.addEventListener('playing', () => {
+    updateIntroVolume();
+    updateMusic();
+  });
+  music.addEventListener('timeupdate', updateIntroVolume);
   music.addEventListener('pause', updateMusic);
   music.addEventListener('error', updateMusic);
   musicToggle.addEventListener('click', () => music.paused ? playMusic() : music.pause());

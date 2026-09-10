@@ -15,7 +15,7 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z', userAgent = 
     return {
       value: '', textContent: '', children: [], events: {}, attributes: {}, dataset: {}, clientWidth: 400, scrollLeft: 0,
       get options() { return this.children; },
-      inert: true, paused: true, classList: { add() {}, remove() {}, toggle() {} },
+      inert: true, paused: true, currentTime: 0, volume: 1, classList: { add() {}, remove() {}, toggle() {} },
       addEventListener(name, callback) { this.events[name] = callback; },
       setAttribute(name, value) { this.attributes[name] = value; },
       replaceChildren(...children) { this.children = children; this.value = children[0]?.value; },
@@ -149,6 +149,16 @@ assert.equal(base.get('invitation').inert, false);
 assert.equal(base.get('opening').removed, true);
 assert.equal(Boolean(base.get('coupleNames').focused), false, 'The hero title should not receive a visible focus rectangle');
 assert.equal(base.get('musicToggle').attributes['aria-pressed'], 'true');
+assert.equal(base.get('backgroundMusic').volume, .7, 'Music must start at 70% internal volume');
+base.get('backgroundMusic').currentTime = 5;
+base.get('backgroundMusic').events.timeupdate();
+assert.ok(Math.abs(base.get('backgroundMusic').volume - .85) < Number.EPSILON, 'Music must reach 85% after five seconds');
+base.get('backgroundMusic').currentTime = 10;
+base.get('backgroundMusic').events.timeupdate();
+assert.equal(base.get('backgroundMusic').volume, 1, 'Music must reach 100% after ten seconds');
+base.get('backgroundMusic').currentTime = 0;
+base.get('backgroundMusic').events.timeupdate();
+assert.equal(base.get('backgroundMusic').volume, 1, 'The volume fade must run only once');
 base.get('musicToggle').events.click();
 assert.equal(base.get('musicToggle').attributes['aria-pressed'], 'false');
 const track = base.get('carouselTrack');
