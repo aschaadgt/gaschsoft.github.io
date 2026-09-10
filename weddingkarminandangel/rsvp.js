@@ -6,10 +6,15 @@
   const countInput = document.getElementById('attendeeCount');
   const namesInput = document.getElementById('attendeeNames');
   const noteInput = document.getElementById('guestMessage');
+  const recipientInput = document.getElementById('confirmationRecipient');
   const status = document.getElementById('rsvpStatus');
   const submit = document.getElementById('rsvpSubmit');
   const submitLabel = submit.querySelector('.rsvp-submit-label');
   const guestLimit = countInput.options.length;
+  const recipients = {
+    karmin: { name: 'Karmín', phone: config.whatsappPhones.karmin },
+    angel: { name: 'Angel', phone: config.whatsappPhones.angel }
+  };
   let busy = false;
   let receipt = null;
   try { receipt = JSON.parse(sessionStorage.getItem('angel-karmin-rsvp') || 'null'); } catch (_) {}
@@ -52,6 +57,8 @@
     if (!form.reportValidity()) return;
     const confirmed = attendance.value === 'no' ? 0 : Number(countInput.value);
     if (!['yes', 'no'].includes(attendance.value) || !Number.isInteger(confirmed) || confirmed < (attendance.value === 'yes' ? 1 : 0) || confirmed > guestLimit) return;
+    const recipient = recipients[recipientInput.value];
+    if (!recipient) return;
     const note = noteInput.value.trim();
     const message = [
       attendance.value === 'yes' ? '¡Hola! Confirmo asistencia a la boda de Karmín y Angel.' : '¡Hola! No podremos asistir a la boda de Karmín y Angel.',
@@ -60,7 +67,7 @@
       `Cupos de la invitación: ${guestLimit}.`,
       ...(note ? ['', `Mensaje: ${note}`] : [])
     ].join('\n');
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${config.whatsappPhone}&text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${recipient.phone}&text=${encodeURIComponent(message)}`;
     // Never report a successful Sheets write without a positive server receipt.
     if (!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(config.rsvpEndpoint || '')) {
       status.textContent = 'El registro automático no está disponible. Abriendo WhatsApp para confirmar directamente.';
@@ -68,7 +75,7 @@
       if (!openWhatsApp(whatsappUrl)) status.textContent = 'No se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
       return;
     }
-    const data = { event: 'weddingangelandkarmin', names, guests: String(guestLimit), confirmed: String(confirmed), attendance: attendance.value, message: note, website: form.elements.website.value };
+    const data = { event: 'weddingangelandkarmin', names, guests: String(guestLimit), confirmed: String(confirmed), attendance: attendance.value, message: note, recipient: recipientInput.value, website: form.elements.website.value };
     const signature = JSON.stringify(data);
     // Reuse the receipt for a retry, including after reloading the current tab.
     if (!receipt || receipt.signature !== signature || typeof receipt.requestId !== 'string') {
@@ -86,7 +93,7 @@
     status.dataset.state = 'pending';
     status.textContent = 'Guardando tu respuesta antes de abrir WhatsApp.';
     submitLabel.textContent = 'Guardando respuesta';
-    for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = true;
+    for (const input of [attendance, countInput, namesInput, noteInput, recipientInput]) input.disabled = true;
     try {
       const response = await fetch(config.rsvpEndpoint, {
         method: 'POST', body: new URLSearchParams({ ...data, requestId: receipt.requestId }),
@@ -118,7 +125,7 @@
       submit.disabled = false;
       submit.setAttribute('aria-label', 'Confirmar por WhatsApp');
       submitLabel.textContent = 'Confirmar por WhatsApp';
-      for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = false;
+      for (const input of [attendance, countInput, namesInput, noteInput, recipientInput]) input.disabled = false;
       updateAttendance();
     }
   });

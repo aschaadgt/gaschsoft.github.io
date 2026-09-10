@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const { randomUUID } = require('node:crypto');
-const headers = ['Nombres de los invitados', 'Cupos de la invitación', 'Personas confirmadas', 'Estado', 'Mensaje'];
+const headers = ['Nombres de los invitados', 'Cupos de la invitación', 'Personas confirmadas', 'Estado', 'Mensaje', 'Confirmación enviada a'];
 const values = [headers];
 const notes = new Map();
 let canLock = true;
@@ -40,22 +40,24 @@ const server = vm.createContext({
   LockService: { getScriptLock: () => ({ tryLock: () => (locked = canLock), hasLock: () => locked, releaseLock: () => { locked = false; } }) }
 });
 vm.runInContext(fs.readFileSync(path.join(__dirname, 'Code.gs'), 'utf8'), server);
-const valid = (override = {}) => ({ event: 'weddingangelandkarmin', requestId: randomUUID(), names: 'María & José', guests: '5', confirmed: '2', attendance: 'yes', message: '¡Nos vemos! ♥', website: '', ...override });
+const valid = (override = {}) => ({ event: 'weddingangelandkarmin', requestId: randomUUID(), names: 'María & José', guests: '5', confirmed: '2', attendance: 'yes', message: '¡Nos vemos! ♥', recipient: 'karmin', website: '', ...override });
 const post = data => server.doPost({ postData: { length: 500 }, parameter: data });
 assert.equal(server.doGet().service, 'weddingangelandkarmin-rsvp');
 assert.equal(Object.hasOwn(server.doGet(), 'guests'), false);
 const first = valid();
 assert.equal(post(first).ok, true);
-assert.deepEqual(values[1], ['María & José', 5, 2, 'Confirmado', '¡Nos vemos! ♥']);
+assert.deepEqual(values[1], ['María & José', 5, 2, 'Confirmado', '¡Nos vemos! ♥', 'Karmín']);
 assert.equal(post(first).duplicate, true);
 assert.equal(values.length, 2, 'Retry must not add a second row');
 const sameResponseFromAnotherSession = { ...first, requestId: randomUUID() };
 assert.equal(post(sameResponseFromAnotherSession).duplicate, true);
 assert.equal(values.length, 2, 'The same response from another browser session must not add a second row');
+assert.equal(post(valid({ recipient: 'angel' })).ok, true);
+assert.equal(values.at(-1)[5], 'Angel');
 assert.equal(post({ ...first, confirmed: '3' }).code, 'CONFLICT');
 assert.equal(post(valid({ attendance: 'no', confirmed: '0' })).ok, true);
-assert.equal(values[2][3], 'No asistirá');
-for (const override of [{ guests: '6' }, { confirmed: '6' }, { guests: '1', confirmed: '2' }, { confirmed: '0' }, { attendance: 'no', confirmed: '1' }, { names: ' ' }, { attendance: 'pending' }, { website: 'spam' }, { names: 'x'.repeat(401) }, { message: 'x'.repeat(1001) }, { requestId: 'invalid' }, { event: 'another-wedding' }]) {
+assert.equal(values.at(-1)[3], 'No asistirá');
+for (const override of [{ guests: '6' }, { confirmed: '6' }, { guests: '1', confirmed: '2' }, { confirmed: '0' }, { attendance: 'no', confirmed: '1' }, { names: ' ' }, { attendance: 'pending' }, { recipient: '' }, { recipient: 'otro' }, { website: 'spam' }, { names: 'x'.repeat(401) }, { message: 'x'.repeat(1001) }, { requestId: 'invalid' }, { event: 'another-wedding' }]) {
   const before = values.length;
   assert.equal(post(valid(override)).code, 'INVALID');
   assert.equal(values.length, before);
@@ -101,6 +103,7 @@ async function frontendChecks() {
   };
   get('rsvpForm').elements = { website: { value: '' } };
   get('attendance').value = 'yes';
+  get('confirmationRecipient').value = 'karmin';
   get('attendeeCount').value = '3';
   get('attendeeNames').value = 'Familia de prueba';
   get('guestMessage').value = 'Mensaje de prueba';
@@ -111,7 +114,7 @@ async function frontendChecks() {
   let networkMode = 'success';
   let fetchResolve;
   const browserWindow = {
-    WEDDING_CONFIG: { whatsappPhone: '50255138916', rsvpEndpoint: endpoint },
+    WEDDING_CONFIG: { whatsappPhones: { karmin: '50248373171', angel: '50255138916' }, rsvpEndpoint: endpoint },
     navigator: { userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
     location: { href: '' }, setTimeout, clearTimeout,
     open(url, target) {
@@ -141,7 +144,8 @@ async function frontendChecks() {
   assert.equal(browserWindow.location.href, '', 'Desktop must preserve the invitation tab');
   assert.equal(openedTabs.length, 1, 'Desktop must open WhatsApp in a new tab');
   const destination = new URL(openedTabs.at(-1).location.href);
-  assert.equal(destination.searchParams.get('phone'), '50255138916');
+  assert.equal(destination.searchParams.get('phone'), '50248373171');
+  assert.equal(requests.at(-1).recipient, 'karmin');
   assert.match(destination.searchParams.get('text'), /Personas confirmadas: 3/);
   const previous = values.length;
   await submit();
@@ -184,6 +188,6 @@ async function frontendChecks() {
   assert.equal(openedTabs.length, openedTabCount + 1, 'WhatsApp must open directly after the spreadsheet save finishes');
   assert.equal(get('rsvpForm').resetCalled, true, 'A successful confirmation must reset the form');
   assert.equal(get('rsvpForm').classList.contains('is-complete'), false, 'A successful confirmation must keep the form layout unchanged');
-  console.log('PASS: five-column writes, declines, limits, escaped formulas, retries, interrupted writes, locks, receipt verification, network failures and double clicks.');
+  console.log('PASS: six-column writes, recipients, declines, limits, escaped formulas, retries, interrupted writes, locks, receipt verification, network failures and double clicks.');
 }
 frontendChecks().catch(error => { console.error(error); process.exitCode = 1; });

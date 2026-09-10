@@ -42,6 +42,7 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z', userAgent = 
   function get(id) { if (!elements.has(id)) elements.set(id, element()); return elements.get(id); }
   get('carouselTrack').children = Array.from({ length: 7 }, element);
   get('attendance').value = 'yes';
+  get('confirmationRecipient').value = 'karmin';
   get('rsvpForm').elements = { website: { value: '' } };
   const timers = [];
   const intervals = new Map();
@@ -101,6 +102,7 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.match(html, /Blanco y tonos similares<\/strong><small>Reservados para la novia/, `${route} must clearly reserve white for the bride`);
   assert.doesNotMatch(html, />Rojo<\/|>Beige<\/|>Crema<\/|>Plateado<\/|>Café<\/|>Negro<\/|>Terracota<\//, `${route} still blocks colors other than white`);
   assert.equal((html.match(/class="whatsapp-typing"/g) || []).length, 1, `${route} needs one WhatsApp typing indicator`);
+  assert.match(html, /<label for="confirmationRecipient">¿A quién deseas confirmar\?<\/label><select id="confirmationRecipient"[^>]*required>[\s\S]*<option value="karmin">Karmín<\/option><option value="angel">Angel<\/option><\/select>[\s\S]*id="rsvpSubmit"/, `${route} needs the recipient selector immediately before the confirmation button`);
   assert.match(html, /Puedes subir aquí tus fotografías durante y después de la boda\./, `${route} must explain when guests can upload photos`);
   assert.match(html, /class="kicker location-intro">Nos vemos en<\/p><h2 class="venue">Tierra Linda<\/h2>/, `${route} needs the revised venue hierarchy`);
   assert.match(html, /Adoramos a los más pequeños de nuestras vidas/, `${route} needs the revised adults-only copy`);
@@ -129,8 +131,12 @@ assert.match(rsvpSource, /Hemos registrado tu respuesta\./, 'A successful RSVP m
 assert.match(rsvpStylesSource, /\.rsvp-status \{[^}]*text-align: center;/, 'RSVP feedback must remain centered');
 assert.match(rsvpStylesSource, /\.rsvp-status\[data-state="success"\][^}]*background: #995c4610;/, 'The confirmation message must use a subtle on-palette treatment');
 assert.doesNotMatch(indexSource, /Al confirmar, guardaremos tu respuesta/, 'The old explanatory RSVP note must be removed');
+assert.match(configSource, /karmin: '50248373171'/, 'Karmín must receive confirmations at her configured number');
+assert.match(configSource, /angel: '50255138916'/, 'Angel must receive confirmations at his configured number');
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window, openedTabs } = setup(`/weddingkarminandangel/${guests}/`);
+  const recipient = guests % 2 === 0 ? 'angel' : 'karmin';
+  get('confirmationRecipient').value = recipient;
   assert.equal(get('attendeeCount').children.length, guests);
   get('attendeeCount').value = String(guests);
   get('attendeeNames').value = '  María & José  ';
@@ -143,7 +149,7 @@ for (let guests = 1; guests <= 5; guests++) {
   assert.equal(openedTabs[0].document.body.innerHTML, '', 'Desktop must open WhatsApp directly without an intermediate loading page');
   const destination = new URL(openedTabs[0].location.href);
   assert.equal(destination.origin, 'https://api.whatsapp.com');
-  assert.equal(destination.searchParams.get('phone'), '50255138916');
+  assert.equal(destination.searchParams.get('phone'), recipient === 'karmin' ? '50248373171' : '50255138916');
   assert.equal(get('rsvpStatus').textContent, 'Hemos registrado tu respuesta.');
   assert.equal(get('rsvpForm').resetCalled, true, 'A successful RSVP must reset the form');
   assert.equal(get('rsvpForm').classList.contains('is-complete'), false, 'A successful RSVP must keep the form layout unchanged');
@@ -160,9 +166,11 @@ for (let guests = 1; guests <= 5; guests++) {
 }
 const mobile = setup('/weddingkarminandangel/1/', '', '2026-11-06T22:30:00Z', 'Mozilla/5.0 (Linux; Android 15; Mobile)');
 mobile.get('attendeeNames').value = 'Invitado móvil';
+mobile.get('confirmationRecipient').value = 'angel';
 await mobile.get('rsvpForm').events.submit({ preventDefault() {}, currentTarget: mobile.get('rsvpForm') });
 assert.equal(mobile.openedTabs.length, 0, 'Mobile must not open a browser tab');
 assert.equal(new URL(mobile.window.location.href).origin, 'https://api.whatsapp.com', 'Mobile must launch WhatsApp in the current context');
+assert.equal(new URL(mobile.window.location.href).searchParams.get('phone'), '50255138916', 'Mobile must use the selected recipient number');
 const base = setup('/weddingkarminandangel/');
 assert.equal(base.get('attendeeCount').children.length, 5);
 assert.equal(setup('/weddingkarminandangel/1/').get('openingGuests').textContent, 'Invitación para 1 persona');
