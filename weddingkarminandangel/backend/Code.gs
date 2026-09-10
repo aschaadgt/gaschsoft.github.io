@@ -74,6 +74,16 @@ function doPost(e) {
       }
       return jsonResponse_({ ok: true, requestId: data.requestId, duplicate: true });
     }
+    // A new browser session generates a new requestId. Compare the visible
+    // response as well so the same guest data cannot create a second row.
+    const expected = [data.names, data.guests, data.confirmed, data.status, data.message];
+    const existingRows = lastRow > 1 ? sheet.getRange(2, 1, lastRow - 1, 5).getValues() : [];
+    const duplicateResponse = existingRows.some(function (stored) {
+      return stored.every(function (value, i) { return String(value) === String(expected[i]); });
+    });
+    if (duplicateResponse) {
+      return jsonResponse_({ ok: true, requestId: data.requestId, duplicate: true });
+    }
     const lastReservedRow = notes.reduce(function (last, note, index) { return /^RSVP:/.test(note[0]) ? index + 2 : last; }, 1);
     const row = Math.max(2, lastRow + 1, lastReservedRow + 1);
     if (row > sheet.getMaxRows()) sheet.insertRowsAfter(sheet.getMaxRows(), 1);

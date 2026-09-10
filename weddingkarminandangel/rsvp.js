@@ -77,6 +77,7 @@
     }
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 25000);
+    let confirmationCompleted = false;
     busy = true;
     submit.disabled = true;
     submit.classList.add('is-loading');
@@ -96,7 +97,9 @@
       if (result.ok !== true || result.requestId !== receipt.requestId) throw new Error(result.code || 'SAVE_FAILED');
       status.dataset.state = 'success';
       status.textContent = 'Gracias por tu respuesta, hemos registrado tu respuesta.';
-      if (!openWhatsApp(whatsappUrl)) {
+      if (openWhatsApp(whatsappUrl)) {
+        confirmationCompleted = true;
+      } else {
         status.dataset.state = 'error';
         status.textContent = 'Respuesta registrada, pero no se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
       }
@@ -107,13 +110,24 @@
     } finally {
       window.clearTimeout(timeout);
       busy = false;
-      submit.disabled = false;
       submit.classList.remove('is-loading');
-      submit.setAttribute('aria-label', 'Confirmar por WhatsApp');
       form.setAttribute('aria-busy', 'false');
-      submitLabel.textContent = 'Confirmar por WhatsApp';
-      for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = false;
-      updateAttendance();
+      if (confirmationCompleted) {
+        form.reset();
+        updateAttendance();
+        form.classList.add('is-complete');
+        submit.classList.add('is-complete');
+        submit.disabled = true;
+        submit.setAttribute('aria-label', 'Respuesta registrada');
+        submitLabel.textContent = 'Respuesta registrada';
+        for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = true;
+      } else {
+        submit.disabled = false;
+        submit.setAttribute('aria-label', 'Confirmar por WhatsApp');
+        submitLabel.textContent = 'Confirmar por WhatsApp';
+        for (const input of [attendance, countInput, namesInput, noteInput]) input.disabled = false;
+        updateAttendance();
+      }
     }
   });
 })();

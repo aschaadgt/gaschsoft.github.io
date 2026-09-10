@@ -2,6 +2,15 @@
 .rsvp-form .rsvp-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .rsvp-form button:disabled { opacity: .65; cursor: wait; transform: none; }
 .rsvp-form button.is-loading:disabled { opacity: 1; }
+.rsvp-form.is-complete { gap: 0; }
+.rsvp-form.is-complete > label,
+.rsvp-form.is-complete > input,
+.rsvp-form.is-complete > select,
+.rsvp-form.is-complete > textarea,
+.rsvp-form.is-complete .rsvp-trap { display: none; }
+.rsvp-form.is-complete .button { margin-top: 0; }
+.rsvp-form button.is-complete:disabled { opacity: 1; cursor: default; }
+.rsvp-form button.is-complete .whatsapp-icon { display: none; }
 .whatsapp-typing { position: relative; display: none; align-items: center; gap: .25rem; min-width: 3rem; height: 1.65rem; padding: 0 .58rem; border-radius: .78rem .78rem .78rem .28rem; background: var(--terracotta-deep); }
 .whatsapp-typing::after { content: ''; position: absolute; left: -.28rem; bottom: .14rem; width: .52rem; height: .52rem; background: var(--terracotta-deep); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
 .whatsapp-typing > span { width: .34rem; height: .34rem; border-radius: 50%; background: #f6e4db; animation: whatsapp-typing-dot 1.15s ease-in-out infinite; }
