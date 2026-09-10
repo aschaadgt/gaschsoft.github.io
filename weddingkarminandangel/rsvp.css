@@ -11,7 +11,7 @@
 .rsvp-form button.is-loading .whatsapp-typing { display: inline-flex; }
 @keyframes whatsapp-typing-dot { 0%, 60%, 100% { opacity: .45; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-.22rem); } }
 @media (prefers-reduced-motion: reduce) { .whatsapp-typing > span { animation: none; opacity: .82; } }
-.rsvp-status { margin-top: 1rem; font-size: 1rem; line-height: 1.5; }
+.rsvp-status { margin-top: 1rem; font-size: 1rem; line-height: 1.5; text-align: center; }
 .rsvp-status:empty { display: none; }
 .rsvp-status[data-state="success"] { color: var(--forest-deep); }
 .rsvp-status[data-state="error"] { color: #853e2f; }

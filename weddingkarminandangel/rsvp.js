@@ -95,7 +95,7 @@
       const result = await response.json();
       if (result.ok !== true || result.requestId !== receipt.requestId) throw new Error(result.code || 'SAVE_FAILED');
       status.dataset.state = 'success';
-      status.textContent = 'Respuesta registrada. Abriendo WhatsApp.';
+      status.textContent = 'Gracias por tu respuesta, hemos registrado tu respuesta.';
       if (!openWhatsApp(whatsappUrl)) {
         status.dataset.state = 'error';
         status.textContent = 'Respuesta registrada, pero no se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
