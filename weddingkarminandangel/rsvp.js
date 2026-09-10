@@ -33,23 +33,14 @@
     return /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(userAgent);
   };
 
-  const prepareWhatsAppTarget = () => {
-    if (isMobileDevice()) return null;
-    const target = typeof window.open === 'function' ? window.open('', '_blank') : null;
-    if (!target) return null;
-    target.opener = null;
-    target.document.title = 'Abriendo WhatsApp';
-    target.document.body.innerHTML = '<style>body{margin:0;background:#faf6ef;color:#393c31;font-family:system-ui,sans-serif}.whatsapp-popup{min-height:100vh;display:grid;place-content:center;justify-items:center;gap:1rem;text-align:center}.whatsapp-popup__typing{position:relative;display:flex;align-items:center;gap:7px;padding:15px 18px;border-radius:18px 18px 18px 7px;background:#995c46;box-shadow:0 10px 30px #74463829}.whatsapp-popup__typing:after{content:"";position:absolute;left:-8px;bottom:4px;width:14px;height:14px;background:#995c46;clip-path:polygon(100% 0,100% 100%,0 100%)}.whatsapp-popup__typing span{width:8px;height:8px;border-radius:50%;background:#f6e4db;animation:wa-dot 1.15s ease-in-out infinite}.whatsapp-popup__typing span:nth-child(2){animation-delay:.16s}.whatsapp-popup__typing span:nth-child(3){animation-delay:.32s}.whatsapp-popup p{margin:0;font-size:15px}@keyframes wa-dot{0%,60%,100%{opacity:.45;transform:translateY(0)}30%{opacity:1;transform:translateY(-5px)}}@media(prefers-reduced-motion:reduce){.whatsapp-popup__typing span{animation:none;opacity:.82}}</style><main class="whatsapp-popup"><div class="whatsapp-popup__typing" aria-hidden="true"><span></span><span></span><span></span></div><p>Preparando tu confirmación para WhatsApp</p></main>';
-    return target;
-  };
-
-  const openWhatsApp = (url, desktopTarget) => {
+  const openWhatsApp = (url) => {
     if (isMobileDevice()) {
       window.location.href = url;
       return true;
     }
-    if (!desktopTarget || desktopTarget.closed) return false;
-    desktopTarget.location.href = url;
+    const desktopTarget = typeof window.open === 'function' ? window.open(url, '_blank') : null;
+    if (!desktopTarget) return false;
+    desktopTarget.opener = null;
     return true;
   };
 
@@ -70,13 +61,11 @@
       ...(note ? ['', `Mensaje: ${note}`] : [])
     ].join('\n');
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${config.whatsappPhone}&text=${encodeURIComponent(message)}`;
-    const whatsappTarget = prepareWhatsAppTarget();
-
     // Never report a successful Sheets write without a positive server receipt.
     if (!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(config.rsvpEndpoint || '')) {
       status.textContent = 'El registro automático no está disponible. Abriendo WhatsApp para confirmar directamente.';
       status.dataset.state = 'error';
-      if (!openWhatsApp(whatsappUrl, whatsappTarget)) status.textContent = 'No se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
+      if (!openWhatsApp(whatsappUrl)) status.textContent = 'No se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
       return;
     }
     const data = { event: 'weddingangelandkarmin', names, guests: String(guestLimit), confirmed: String(confirmed), attendance: attendance.value, message: note, website: form.elements.website.value };
@@ -107,14 +96,14 @@
       if (result.ok !== true || result.requestId !== receipt.requestId) throw new Error(result.code || 'SAVE_FAILED');
       status.dataset.state = 'success';
       status.textContent = 'Respuesta registrada. Abriendo WhatsApp.';
-      if (!openWhatsApp(whatsappUrl, whatsappTarget)) {
+      if (!openWhatsApp(whatsappUrl)) {
         status.dataset.state = 'error';
         status.textContent = 'Respuesta registrada, pero no se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
       }
     } catch (_) {
       status.dataset.state = 'error';
       status.textContent = 'No pudimos guardar la respuesta. Abriendo WhatsApp para confirmar directamente.';
-      if (!openWhatsApp(whatsappUrl, whatsappTarget)) status.textContent = 'No se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
+      if (!openWhatsApp(whatsappUrl)) status.textContent = 'No se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
     } finally {
       window.clearTimeout(timeout);
       busy = false;

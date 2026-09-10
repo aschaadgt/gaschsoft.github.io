@@ -91,6 +91,7 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.match(html, /Blanco y tonos similares<\/strong><small>Reservados para la novia/, `${route} must clearly reserve white for the bride`);
   assert.doesNotMatch(html, />Rojo<\/|>Beige<\/|>Crema<\/|>Plateado<\/|>Café<\/|>Negro<\/|>Terracota<\//, `${route} still blocks colors other than white`);
   assert.equal((html.match(/class="whatsapp-typing"/g) || []).length, 1, `${route} needs one WhatsApp typing indicator`);
+  assert.match(html, /Puedes subir aquí tus fotografías durante y después de la boda\./, `${route} must explain when guests can upload photos`);
   assert.match(html, /class="kicker location-intro">Nos vemos en<\/p><h2 class="venue">Tierra Linda<\/h2>/, `${route} needs the revised venue hierarchy`);
   assert.match(html, /Adoramos a los más pequeños de nuestras vidas/, `${route} needs the revised adults-only copy`);
   assert.match(html, /Su compañía en el momento de dar el 'sí'/, `${route} needs the revised gift copy`);
@@ -109,6 +110,9 @@ assert.match(stylesSource, /\.music-control \{[^}]*background: var\(--terracotta
 assert.match(stylesSource, /\.button--forest \{[^}]*background: var\(--terracotta\);/, 'The WhatsApp button must use the original terracotta');
 assert.match(stylesSource, /\.closing::after \{[^}]*linear-gradient\(#995c4610 20%, #995c46d0 95%\)/, 'The closing photo must use the terracotta gradient');
 assert.match(stylesSource, /\.swatch--reserved > span::after \{[^}]*rotate\(-45deg\)/, 'The white swatch must have a visible prohibition slash');
+assert.match(stylesSource, /\.photo-moment::after \{[^}]*linear-gradient\(transparent 30%, #995c46b3\)/, 'The photo moment must use a terracotta gradient');
+assert.match(stylesSource, /\.album-section \{[^}]*background: var\(--terracotta\);/, 'The shared memories section must use the original terracotta');
+assert.doesNotMatch(rsvpSource, /whatsapp-popup|prepareWhatsAppTarget/, 'Typing feedback must remain inside the confirmation button');
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window, openedTabs } = setup(`/weddingkarminandangel/${guests}/`);
   assert.equal(get('attendeeCount').children.length, guests);
@@ -120,7 +124,7 @@ for (let guests = 1; guests <= 5; guests++) {
   assert.equal(openedTabs.length, 1, 'Desktop must open one WhatsApp tab');
   assert.equal(openedTabs[0].target, '_blank');
   assert.equal(openedTabs[0].opener, null, 'Desktop WhatsApp tab must not retain an opener');
-  assert.match(openedTabs[0].document.body.innerHTML, /whatsapp-popup__typing/, 'Desktop must show typing feedback while preparing WhatsApp');
+  assert.equal(openedTabs[0].document.body.innerHTML, '', 'Desktop must open WhatsApp directly without an intermediate loading page');
   const destination = new URL(openedTabs[0].location.href);
   assert.equal(destination.origin, 'https://api.whatsapp.com');
   assert.equal(destination.searchParams.get('phone'), '50255138916');
