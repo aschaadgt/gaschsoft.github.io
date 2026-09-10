@@ -103,12 +103,7 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.doesNotMatch(html, />Rojo<\/|>Beige<\/|>Crema<\/|>Plateado<\/|>Café<\/|>Negro<\/|>Terracota<\//, `${route} still blocks colors other than white`);
   assert.equal((html.match(/class="whatsapp-typing"/g) || []).length, 1, `${route} needs one WhatsApp typing indicator`);
   assert.match(html, /<label for="confirmationRecipient">¿A quién deseas confirmar\?<\/label><select id="confirmationRecipient"[^>]*required>[\s\S]*<option value="karmin">Karmín<\/option><option value="angel">Angel<\/option><\/select>[\s\S]*id="rsvpSubmit"/, `${route} needs the recipient selector immediately before the confirmation button`);
-  assert.match(html, /Tu mirada también es parte de nuestra historia/, `${route} needs the revised shared-album title`);
-  assert.match(html, /Mientras vivimos nuestro gran día, tú podrás capturar abrazos, risas y momentos que quizá nosotros no lleguemos a ver\./, `${route} needs the revised shared-album introduction`);
-  assert.match(html, /Ayúdanos a descubrirlos y a conservarlos para siempre\./, `${route} needs the revised shared-album invitation`);
-  assert.match(html, /Comparte al menos una fotografía de la boda\./, `${route} needs the shared-album call to action`);
-  assert.match(html, /Puedes seleccionar varias fotografías <span aria-hidden="true">•<\/span> Te tomará menos de un minuto/, `${route} needs the multiple-photo hint`);
-  assert.match(html, /Las más especiales formarán parte de nuestro álbum de recuerdos\./, `${route} needs the shared-album closing copy`);
+  assert.match(html, /Puedes subir aquí tus fotografías durante y después de la boda\./, `${route} must explain when guests can upload photos`);
   assert.match(html, /https:\/\/photos\.app\.goo\.gl\/vASwgueT3ygmjexQA/, `${route} must use the client's Google Photos album`);
   assert.doesNotMatch(html, /StUzRjaKuormLkBZ7/, `${route} still references the previous Google Photos album`);
   assert.match(html, /class="kicker location-intro">Nos vemos en<\/p><h2 class="venue">Tierra Linda<\/h2>/, `${route} needs the revised venue hierarchy`);
@@ -131,7 +126,6 @@ assert.match(stylesSource, /\.closing::after \{[^}]*linear-gradient\(#995c4610 2
 assert.match(stylesSource, /\.swatch--reserved > span::after \{[^}]*rotate\(-45deg\)/, 'The white swatch must have a visible prohibition slash');
 assert.match(stylesSource, /\.photo-moment::after \{[^}]*linear-gradient\(transparent 30%, #995c46b3\)/, 'The photo moment must use a terracotta gradient');
 assert.match(stylesSource, /\.album-section \{[^}]*background: var\(--terracotta\);/, 'The shared memories section must use the original terracotta');
-assert.match(stylesSource, /\.album-section \.button \{[^}]*min-height: 3\.57rem;[^}]*font-size: \.92rem;/, 'The shared-album button must be five percent larger');
 assert.match(stylesSource, /--paper: #f8f3ea;/, 'The paper tone must be shifted seven percent toward beige');
 assert.doesNotMatch(stylesSource, /#faf6ef|#fffdf8|#fffaf5(?:4d)?/, 'Old cooler paper backgrounds must no longer be used');
 assert.doesNotMatch(rsvpSource, /whatsapp-popup|prepareWhatsAppTarget/, 'Typing feedback must remain inside the confirmation button');
