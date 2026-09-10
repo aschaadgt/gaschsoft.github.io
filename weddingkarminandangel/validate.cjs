@@ -98,7 +98,7 @@ for (let guests = 1; guests <= 5; guests++) {
   await get('rsvpForm').events.submit({ preventDefault() {}, currentTarget: get('rsvpForm') });
   const destination = new URL(window.location.href);
   assert.equal(destination.origin, 'https://api.whatsapp.com');
-  assert.equal(destination.searchParams.get('phone'), '50251232754');
+  assert.equal(destination.searchParams.get('phone'), '50255138916');
   assert.match(destination.searchParams.get('text'), /Nombre\(s\): María & José/);
   assert.match(destination.searchParams.get('text'), /Karmín y Angel/);
   assert.match(destination.searchParams.get('text'), new RegExp(`Cupos de la invitación: ${guests}`));

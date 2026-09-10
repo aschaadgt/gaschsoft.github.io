@@ -99,7 +99,7 @@ async function frontendChecks() {
   const storage = new Map();
   let networkMode = 'success';
   let fetchResolve;
-  const browserWindow = { WEDDING_CONFIG: { whatsappPhone: '50251232754', rsvpEndpoint: endpoint }, location: { href: '' }, setTimeout, clearTimeout };
+  const browserWindow = { WEDDING_CONFIG: { whatsappPhone: '50255138916', rsvpEndpoint: endpoint }, location: { href: '' }, setTimeout, clearTimeout };
   const context = vm.createContext({
     document: { getElementById: get },
     window: browserWindow,
@@ -119,7 +119,7 @@ async function frontendChecks() {
   await submit();
   assert.equal(get('rsvpStatus').dataset.state, 'success');
   const destination = new URL(browserWindow.location.href);
-  assert.equal(destination.searchParams.get('phone'), '50251232754');
+  assert.equal(destination.searchParams.get('phone'), '50255138916');
   assert.match(destination.searchParams.get('text'), /Personas confirmadas: 3/);
   browserWindow.location.href = '';
   const previous = values.length;
