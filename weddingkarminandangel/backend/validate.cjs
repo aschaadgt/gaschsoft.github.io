@@ -97,9 +97,19 @@ async function frontendChecks() {
   const requests = [];
   const endpoint = 'https://script.google.com/macros/s/TEST_DEPLOYMENT/exec';
   const storage = new Map();
+  const openedTabs = [];
   let networkMode = 'success';
   let fetchResolve;
-  const browserWindow = { WEDDING_CONFIG: { whatsappPhone: '50255138916', rsvpEndpoint: endpoint }, location: { href: '' }, setTimeout, clearTimeout };
+  const browserWindow = {
+    WEDDING_CONFIG: { whatsappPhone: '50255138916', rsvpEndpoint: endpoint },
+    navigator: { userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+    location: { href: '' }, setTimeout, clearTimeout,
+    open(url, target) {
+      const popup = { opener: browserWindow, closed: false, location: { href: url }, document: { title: '', body: { innerHTML: '' } }, target };
+      openedTabs.push(popup);
+      return popup;
+    }
+  };
   const context = vm.createContext({
     document: { getElementById: get },
     window: browserWindow,
@@ -118,10 +128,11 @@ async function frontendChecks() {
   const submit = () => get('rsvpForm').events.submit({ preventDefault() {} });
   await submit();
   assert.equal(get('rsvpStatus').dataset.state, 'success');
-  const destination = new URL(browserWindow.location.href);
+  assert.equal(browserWindow.location.href, '', 'Desktop must preserve the invitation tab');
+  assert.equal(openedTabs.length, 1, 'Desktop must open WhatsApp in a new tab');
+  const destination = new URL(openedTabs.at(-1).location.href);
   assert.equal(destination.searchParams.get('phone'), '50255138916');
   assert.match(destination.searchParams.get('text'), /Personas confirmadas: 3/);
-  browserWindow.location.href = '';
   const previous = values.length;
   await submit();
   assert.equal(requests[0].requestId, requests[1].requestId);
@@ -137,7 +148,8 @@ async function frontendChecks() {
   await submit();
   assert.equal(get('rsvpStatus').dataset.state, 'error');
   assert.equal(get('rsvpSubmit').disabled, false);
-  assert.equal(new URL(browserWindow.location.href).origin, 'https://api.whatsapp.com');
+  assert.equal(browserWindow.location.href, '', 'A desktop network failure must still preserve the invitation tab');
+  assert.equal(new URL(openedTabs.at(-1).location.href).origin, 'https://api.whatsapp.com');
   const retryId = requests.at(-1).requestId;
   networkMode = 'success';
   await submit();

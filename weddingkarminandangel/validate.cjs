@@ -9,7 +9,7 @@ const appSource = fs.readFileSync(path.join(__dirname, 'app.js'), 'utf8');
 const rsvpSource = fs.readFileSync(path.join(__dirname, 'rsvp.js'), 'utf8');
 const stylesSource = fs.readFileSync(path.join(__dirname, 'styles.css'), 'utf8');
 
-function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
+function setup(pathname, search = '', now = '2026-11-06T22:30:00Z', userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)') {
   const elements = new Map();
   function element() {
     return {
@@ -37,8 +37,14 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
   const intervals = new Map();
   let intervalId = 0;
   const storage = new Map();
+  const openedTabs = [];
   const window = {
     location: { pathname, search, href: '' }, history: {}, matchMedia: () => ({ matches: false }),
+    open(url, target) {
+      const popup = { opener: window, closed: false, location: { href: url }, document: { title: '', body: { innerHTML: '' } }, target };
+      openedTabs.push(popup);
+      return popup;
+    },
     setTimeout: callback => timers.push(callback), clearTimeout() {},
     setInterval: callback => { intervals.set(++intervalId, callback); return intervalId; },
     clearInterval: id => intervals.delete(id), scrollTo() {}
@@ -46,7 +52,7 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
   const document = { getElementById: get, createElement: element, body: element(), hidden: false, addEventListener() {} };
   class FakeDate extends Date { static now() { return new Date(now).getTime(); } }
   const context = vm.createContext({
-    window, document, Date: FakeDate, URLSearchParams, AbortController,
+    window, document, navigator: { userAgent }, Date: FakeDate, URLSearchParams, AbortController,
     crypto: { randomUUID },
     sessionStorage: { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value) },
     fetch: async (_url, options) => {
@@ -60,7 +66,7 @@ function setup(pathname, search = '', now = '2026-11-06T22:30:00Z') {
   vm.runInContext(configSource, context);
   vm.runInContext(appSource, context);
   vm.runInContext(rsvpSource, context);
-  return { get, window, timers, intervals };
+  return { get, window, timers, intervals, openedTabs };
 }
 
 async function run() {
@@ -96,23 +102,33 @@ for (const selector of ['date-section', 'moments', 'gift-section']) {
 }
 assert.match(stylesSource, /\.carousel__slide \{[^}]*background: var\(--terracotta-soft\);/, 'Carousel slides must continue the softened terracotta background');
 for (let guests = 1; guests <= 5; guests++) {
-  const { get, window } = setup(`/weddingkarminandangel/${guests}/`);
+  const { get, window, openedTabs } = setup(`/weddingkarminandangel/${guests}/`);
   assert.equal(get('attendeeCount').children.length, guests);
   get('attendeeCount').value = String(guests);
   get('attendeeNames').value = '  María & José  ';
   get('guestMessage').value = '¡Nos vemos! ♥';
   await get('rsvpForm').events.submit({ preventDefault() {}, currentTarget: get('rsvpForm') });
-  const destination = new URL(window.location.href);
+  assert.equal(window.location.href, '', 'Desktop must keep the invitation open');
+  assert.equal(openedTabs.length, 1, 'Desktop must open one WhatsApp tab');
+  assert.equal(openedTabs[0].target, '_blank');
+  assert.equal(openedTabs[0].opener, null, 'Desktop WhatsApp tab must not retain an opener');
+  const destination = new URL(openedTabs[0].location.href);
   assert.equal(destination.origin, 'https://api.whatsapp.com');
   assert.equal(destination.searchParams.get('phone'), '50255138916');
   assert.match(destination.searchParams.get('text'), /Nombre\(s\): María & José/);
   assert.match(destination.searchParams.get('text'), /Karmín y Angel/);
   assert.match(destination.searchParams.get('text'), new RegExp(`Cupos de la invitación: ${guests}`));
-  window.location.href = '';
+  openedTabs[0].location.href = '';
   get('attendeeCount').value = String(guests + 1);
   await get('rsvpForm').events.submit({ preventDefault() {}, currentTarget: get('rsvpForm') });
-  assert.equal(window.location.href, '', 'Over-limit RSVP must be rejected');
+  assert.equal(openedTabs.length, 1, 'Over-limit RSVP must not open another tab');
+  assert.equal(openedTabs[0].location.href, '', 'Over-limit RSVP must be rejected');
 }
+const mobile = setup('/weddingkarminandangel/1/', '', '2026-11-06T22:30:00Z', 'Mozilla/5.0 (Linux; Android 15; Mobile)');
+mobile.get('attendeeNames').value = 'Invitado móvil';
+await mobile.get('rsvpForm').events.submit({ preventDefault() {}, currentTarget: mobile.get('rsvpForm') });
+assert.equal(mobile.openedTabs.length, 0, 'Mobile must not open a browser tab');
+assert.equal(new URL(mobile.window.location.href).origin, 'https://api.whatsapp.com', 'Mobile must launch WhatsApp in the current context');
 const base = setup('/weddingkarminandangel/');
 assert.equal(base.get('attendeeCount').children.length, 5);
 assert.equal(setup('/weddingkarminandangel/1/').get('openingGuests').textContent, 'Invitación para 1 persona');

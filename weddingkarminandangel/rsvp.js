@@ -28,6 +28,31 @@
   namesInput.addEventListener('input', () => namesInput.setCustomValidity(''));
   form.addEventListener('input', () => { if (!busy) status.textContent = ''; });
 
+  const isMobileDevice = () => {
+    const userAgent = window.navigator?.userAgent || (typeof navigator !== 'undefined' ? navigator.userAgent : '');
+    return /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(userAgent);
+  };
+
+  const prepareWhatsAppTarget = () => {
+    if (isMobileDevice()) return null;
+    const target = typeof window.open === 'function' ? window.open('', '_blank') : null;
+    if (!target) return null;
+    target.opener = null;
+    target.document.title = 'Abriendo WhatsApp';
+    target.document.body.innerHTML = '<p style="font:16px Arial,sans-serif;padding:32px;text-align:center;color:#303e30">Preparando tu confirmación en WhatsApp…</p>';
+    return target;
+  };
+
+  const openWhatsApp = (url, desktopTarget) => {
+    if (isMobileDevice()) {
+      window.location.href = url;
+      return true;
+    }
+    if (!desktopTarget || desktopTarget.closed) return false;
+    desktopTarget.location.href = url;
+    return true;
+  };
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (busy) return;
@@ -45,12 +70,13 @@
       ...(note ? ['', `Mensaje: ${note}`] : [])
     ].join('\n');
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${config.whatsappPhone}&text=${encodeURIComponent(message)}`;
+    const whatsappTarget = prepareWhatsAppTarget();
 
     // Never report a successful Sheets write without a positive server receipt.
     if (!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(config.rsvpEndpoint || '')) {
       status.textContent = 'El registro automático no está disponible. Abriendo WhatsApp para confirmar directamente.';
       status.dataset.state = 'error';
-      window.location.href = whatsappUrl;
+      if (!openWhatsApp(whatsappUrl, whatsappTarget)) status.textContent = 'No se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
       return;
     }
     const data = { event: 'weddingangelandkarmin', names, guests: String(guestLimit), confirmed: String(confirmed), attendance: attendance.value, message: note, website: form.elements.website.value };
@@ -79,11 +105,14 @@
       if (result.ok !== true || result.requestId !== receipt.requestId) throw new Error(result.code || 'SAVE_FAILED');
       status.dataset.state = 'success';
       status.textContent = 'Respuesta registrada. Abriendo WhatsApp.';
-      window.location.href = whatsappUrl;
+      if (!openWhatsApp(whatsappUrl, whatsappTarget)) {
+        status.dataset.state = 'error';
+        status.textContent = 'Respuesta registrada, pero no se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
+      }
     } catch (_) {
       status.dataset.state = 'error';
       status.textContent = 'No pudimos guardar la respuesta. Abriendo WhatsApp para confirmar directamente.';
-      window.location.href = whatsappUrl;
+      if (!openWhatsApp(whatsappUrl, whatsappTarget)) status.textContent = 'No se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.';
     } finally {
       window.clearTimeout(timeout);
       busy = false;
