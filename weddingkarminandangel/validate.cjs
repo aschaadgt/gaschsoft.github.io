@@ -112,6 +112,8 @@ assert.match(stylesSource, /\.closing::after \{[^}]*linear-gradient\(#995c4610 2
 assert.match(stylesSource, /\.swatch--reserved > span::after \{[^}]*rotate\(-45deg\)/, 'The white swatch must have a visible prohibition slash');
 assert.match(stylesSource, /\.photo-moment::after \{[^}]*linear-gradient\(transparent 30%, #995c46b3\)/, 'The photo moment must use a terracotta gradient');
 assert.match(stylesSource, /\.album-section \{[^}]*background: var\(--terracotta\);/, 'The shared memories section must use the original terracotta');
+assert.match(stylesSource, /--paper: #f8f3ea;/, 'The paper tone must be shifted seven percent toward beige');
+assert.doesNotMatch(stylesSource, /#faf6ef|#fffdf8|#fffaf5(?:4d)?/, 'Old cooler paper backgrounds must no longer be used');
 assert.doesNotMatch(rsvpSource, /whatsapp-popup|prepareWhatsAppTarget/, 'Typing feedback must remain inside the confirmation button');
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window, openedTabs } = setup(`/weddingkarminandangel/${guests}/`);
