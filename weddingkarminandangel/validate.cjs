@@ -86,6 +86,7 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.match(html, /class="kicker location-intro">Nos vemos en<\/p><h2 class="venue">Tierra Linda<\/h2>/, `${route} needs the revised venue hierarchy`);
   assert.match(html, /Adoramos a los más pequeños de nuestras vidas/, `${route} needs the revised adults-only copy`);
   assert.match(html, /Su compañía en el momento de dar el 'sí'/, `${route} needs the revised gift copy`);
+  assert.match(html, /love-note__quote--open">“<\/span>De tu mano,<br \/><em>todos los caminos son hogar\.<span class="love-note__quote love-note__quote--close">”<\/span><\/em>/, `${route} needs the two-color quotation marks`);
   assert.equal((html.match(/class="site-footer"/g) || []).length, 1, `${route} needs one final credit footer`);
   assert.match(html, /© 2026 Diseñado y creado por <a href="https:\/\/gaschsoft\.com\/"[^>]*>GaschSoft<\/a>\. Todos los derechos reservados\./, `${route} needs the linked GaschSoft credit`);
 }
