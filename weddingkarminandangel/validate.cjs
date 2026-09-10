@@ -76,7 +76,7 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.match(html, /calendar\.google\.com\/calendar\/render/, `${route} needs the Google Calendar action`);
   assert.match(html, /Karmín <span>&amp;<\/span> Angel/, `${route} must show Karmín before Angel`);
   assert.doesNotMatch(html, /Ángel|>Karmin</, `${route} contains an obsolete name spelling`);
-  assert.match(html, /social-preview-karmin-angel\.jpg/, `${route} must use the refreshed social preview URL`);
+  assert.match(html, /social-preview-karmin-angel-v2\.jpg/, `${route} must use the exact-layout social preview URL`);
   assert.doesNotMatch(html, /weddingangelandkarmin/, `${route} still references the previous public route`);
   assert.doesNotMatch(html, /Reserva este día|Noviembre · 2026/, `${route} contains removed date copy`);
   assert.doesNotMatch(html, /schedule__number/, `${route} still shows schedule numbering`);
