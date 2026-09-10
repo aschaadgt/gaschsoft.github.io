@@ -104,6 +104,8 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.equal((html.match(/class="whatsapp-typing"/g) || []).length, 1, `${route} needs one WhatsApp typing indicator`);
   assert.match(html, /<label for="confirmationRecipient">¿A quién deseas confirmar\?<\/label><select id="confirmationRecipient"[^>]*required>[\s\S]*<option value="karmin">Karmín<\/option><option value="angel">Angel<\/option><\/select>[\s\S]*id="rsvpSubmit"/, `${route} needs the recipient selector immediately before the confirmation button`);
   assert.match(html, /Puedes subir aquí tus fotografías durante y después de la boda\./, `${route} must explain when guests can upload photos`);
+  assert.match(html, /https:\/\/photos\.app\.goo\.gl\/vASwgueT3ygmjexQA/, `${route} must use the client's Google Photos album`);
+  assert.doesNotMatch(html, /StUzRjaKuormLkBZ7/, `${route} still references the previous Google Photos album`);
   assert.match(html, /class="kicker location-intro">Nos vemos en<\/p><h2 class="venue">Tierra Linda<\/h2>/, `${route} needs the revised venue hierarchy`);
   assert.match(html, /Adoramos a los más pequeños de nuestras vidas/, `${route} needs the revised adults-only copy`);
   assert.match(html, /Su compañía en el momento de dar el 'sí'/, `${route} needs the revised gift copy`);
