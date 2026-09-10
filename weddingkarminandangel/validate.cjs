@@ -89,8 +89,11 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.equal((html.match(/class="site-footer"/g) || []).length, 1, `${route} needs one final credit footer`);
   assert.match(html, /© 2026 Diseñado y creado por <a href="https:\/\/gaschsoft\.com\/"[^>]*>GaschSoft<\/a>\. Todos los derechos reservados\./, `${route} needs the linked GaschSoft credit`);
 }
-assert.match(stylesSource, /\.moments \{[^}]*background: #faf6ef;/, 'Carousel section must use #faf6ef');
-assert.match(stylesSource, /\.carousel__slide \{[^}]*background: #faf6ef;/, 'Carousel slides must use #faf6ef');
+assert.match(stylesSource, /--terracotta-soft: #c4937d;/, 'The softened terracotta palette must be defined');
+for (const selector of ['date-section', 'moments', 'gift-section']) {
+  assert.match(stylesSource, new RegExp(`\\.${selector} \\{[^}]*background: var\\(--terracotta-soft\\);`), `${selector} must use the softened terracotta background`);
+}
+assert.match(stylesSource, /\.carousel__slide \{[^}]*background: var\(--terracotta-soft\);/, 'Carousel slides must continue the softened terracotta background');
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window } = setup(`/weddingkarminandangel/${guests}/`);
   assert.equal(get('attendeeCount').children.length, guests);
