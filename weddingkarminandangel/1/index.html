@@ -31,11 +31,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Great+Vibes&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="/weddingkarminandangel/assets/photo-7.webp" />
-  <link rel="stylesheet" href="/weddingkarminandangel/styles.css?v=15" />
-  <link rel="stylesheet" href="/weddingkarminandangel/rsvp.css?v=2" />
+  <link rel="stylesheet" href="/weddingkarminandangel/styles.css?v=16" />
+  <link rel="stylesheet" href="/weddingkarminandangel/rsvp.css?v=3" />
   <script defer src="/weddingkarminandangel/config.js?v=4"></script>
   <script defer src="/weddingkarminandangel/app.js?v=7"></script>
-  <script defer src="/weddingkarminandangel/rsvp.js?v=4"></script>
+  <script defer src="/weddingkarminandangel/rsvp.js?v=5"></script>
 </head>
 <body>
   <div class="opening" id="opening" role="dialog" aria-modal="true" aria-labelledby="openingTitle">
@@ -121,7 +121,7 @@
 
     <section class="paper-section details" id="detalles">
       <p class="kicker">Para disfrutar juntos</p><h2>Los detalles</h2>
-      <article class="detail dress"><img class="attire" src="/weddingkarminandangel/assets/attire-palette.png" alt="Vestido formal terracota y traje verde jardín con detalles botánicos" width="600" height="600" loading="lazy" /><h3>Código de vestimenta</h3><p class="script">Formal</p><p>Para todos nuestros invitados, agradecemos evitar los siguientes colores:</p><ul class="swatches" aria-label="Colores no permitidos"><li><span style="--swatch:#a32c33"></span>Rojo</li><li><span style="--swatch:#d9c6a6"></span>Beige</li><li><span style="--swatch:#fff"></span>Blanco</li><li><span style="--swatch:#f4e8c9"></span>Crema</li><li><span style="--swatch:#c0c0c0"></span>Plateado</li><li><span style="--swatch:#6f4e37"></span>Café</li></ul></article>
+      <article class="detail dress"><img class="attire" src="/weddingkarminandangel/assets/attire-palette.png" alt="Inspiración de vestimenta formal en tonos terracota y verde jardín" width="600" height="600" loading="lazy" /><h3>Código de vestimenta</h3><p class="script">Formal</p><p class="dress__guidance">En nuestro gran día, todos los colores están invitados... excepto el blanco y los tonos parecidos, que pertenecen exclusivamente a la novia. ¡Vístete con tu color favorito y ven a celebrar con nosotros!</p><ul class="swatches swatches--single" aria-label="Color reservado exclusivamente para la novia"><li class="swatch--reserved"><span style="--swatch:#fff" aria-hidden="true"></span><strong>Blanco y tonos similares</strong><small>Reservados para la novia</small></li></ul></article>
       <article class="detail adults"><svg class="detail__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40S7 30.5 7 17.8C7 11.8 11.2 8 16.3 8c3.2 0 6.1 1.8 7.7 4.5C25.6 9.8 28.5 8 31.7 8 36.8 8 41 11.8 41 17.8 41 30.5 24 40 24 40Z"/></svg><h3>Reservado para adultos</h3><p>Adoramos a los más pequeños de nuestras vidas, pero en esta ocasión tan especial hemos elegido compartir una noche solo para adultos. Agradecemos de corazón su comprensión.</p></article>
     </section>
 
@@ -137,7 +137,7 @@
         <label id="attendeeNamesLabel" for="attendeeNames">Nombres de los asistentes</label><input id="attendeeNames" name="attendeeNames" required autocomplete="name" maxlength="400" placeholder="Escribe los nombres completos" />
         <label for="guestMessage">Un mensaje para los novios <small>(opcional)</small></label><textarea id="guestMessage" name="guestMessage" rows="3" maxlength="1000" placeholder="Comparte tus buenos deseos"></textarea>
         <div class="rsvp-trap" aria-hidden="true"><label for="rsvpWebsite">Deja este campo vacío</label><input id="rsvpWebsite" name="website" tabindex="-1" autocomplete="off" /></div>
-        <button class="button button--forest" id="rsvpSubmit" type="submit"><img class="whatsapp-icon" src="/weddingkarminandangel/assets/whatsapp-logo.png" alt="" width="28" height="28" /><span class="rsvp-submit-label">Confirmar por WhatsApp</span></button>
+        <button class="button button--forest" id="rsvpSubmit" type="submit"><img class="whatsapp-icon" src="/weddingkarminandangel/assets/whatsapp-logo.png" alt="" width="28" height="28" /><span class="rsvp-submit-label">Confirmar por WhatsApp</span><span class="whatsapp-typing" aria-hidden="true"><span></span><span></span><span></span></span></button>
         <p class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></p>
       </form><p class="form-note">Al confirmar, guardaremos tu respuesta y abriremos WhatsApp con el mensaje listo para enviar.</p>
     </section>

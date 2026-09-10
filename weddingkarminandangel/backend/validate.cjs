@@ -85,6 +85,12 @@ async function frontendChecks() {
       value: '', dataset: {}, events: {}, disabled: false, hidden: false, options: Array(5),
       addEventListener(name, cb) { this.events[name] = cb; }, setCustomValidity(message) { this.invalid = message; },
       reportValidity() { return !get('attendeeNames').invalid; }, setAttribute() {}, focus() {},
+      classList: {
+        values: new Set(),
+        add(...names) { for (const name of names) this.values.add(name); },
+        remove(...names) { for (const name of names) this.values.delete(name); },
+        contains(name) { return this.values.has(name); }
+      },
       querySelector() { return this.label ??= { textContent: '' }; }
     });
     return elements.get(id);
@@ -164,9 +170,11 @@ async function frontendChecks() {
   await submit();
   assert.equal(requests.length, requestCount, 'Double clicks must not submit twice');
   assert.equal(get('rsvpSubmit').disabled, true);
+  assert.equal(get('rsvpSubmit').classList.contains('is-loading'), true, 'The WhatsApp typing indicator must be active while saving');
   fetchResolve();
   await pending;
   assert.equal(get('rsvpSubmit').disabled, false);
+  assert.equal(get('rsvpSubmit').classList.contains('is-loading'), false, 'The WhatsApp typing indicator must stop after saving');
   console.log('PASS: five-column writes, declines, limits, escaped formulas, retries, interrupted writes, locks, receipt verification, network failures and double clicks.');
 }
 frontendChecks().catch(error => { console.error(error); process.exitCode = 1; });

@@ -86,9 +86,11 @@ for (const route of ['index.html', '1/index.html', '2/index.html', '3/index.html
   assert.doesNotMatch(html, /weddingangelandkarmin/, `${route} still references the previous public route`);
   assert.doesNotMatch(html, /Reserva este día|Noviembre · 2026/, `${route} contains removed date copy`);
   assert.doesNotMatch(html, /schedule__number/, `${route} still shows schedule numbering`);
-  assert.match(html, />Plateado<\//, `${route} must block plateado`);
-  assert.match(html, />Café<\//, `${route} must block café`);
-  assert.doesNotMatch(html, />Negro<\/|>Terracota<\//, `${route} blocks a color that should now be available`);
+  assert.match(html, /En nuestro gran día, todos los colores están invitados\.\.\. excepto el blanco y los tonos parecidos, que pertenecen exclusivamente a la novia\./, `${route} needs the revised dress-code guidance`);
+  assert.equal((html.match(/class="swatch--reserved"/g) || []).length, 1, `${route} must show one reserved white swatch`);
+  assert.match(html, /Blanco y tonos similares<\/strong><small>Reservados para la novia/, `${route} must clearly reserve white for the bride`);
+  assert.doesNotMatch(html, />Rojo<\/|>Beige<\/|>Crema<\/|>Plateado<\/|>Café<\/|>Negro<\/|>Terracota<\//, `${route} still blocks colors other than white`);
+  assert.equal((html.match(/class="whatsapp-typing"/g) || []).length, 1, `${route} needs one WhatsApp typing indicator`);
   assert.match(html, /class="kicker location-intro">Nos vemos en<\/p><h2 class="venue">Tierra Linda<\/h2>/, `${route} needs the revised venue hierarchy`);
   assert.match(html, /Adoramos a los más pequeños de nuestras vidas/, `${route} needs the revised adults-only copy`);
   assert.match(html, /Su compañía en el momento de dar el 'sí'/, `${route} needs the revised gift copy`);
@@ -103,6 +105,10 @@ assert.doesNotMatch(stylesSource, /terracotta-soft/, 'The softened terracotta mu
 assert.match(stylesSource, /--terracotta-deep: #744638;/, 'The darker photo-stage terracotta must be defined');
 assert.match(stylesSource, /\.carousel__slide \{[^}]*background: var\(--terracotta-deep\);/, 'Vertical carousel photos must show the darker terracotta at their sides');
 assert.match(stylesSource, /\.love-note__quote--close \{[^}]*margin-left: -\.16em;/, 'The closing quote must sit directly after the period');
+assert.match(stylesSource, /\.music-control \{[^}]*background: var\(--terracotta\);/, 'The music control must use the original terracotta');
+assert.match(stylesSource, /\.button--forest \{[^}]*background: var\(--terracotta\);/, 'The WhatsApp button must use the original terracotta');
+assert.match(stylesSource, /\.closing::after \{[^}]*linear-gradient\(#995c4610 20%, #995c46d0 95%\)/, 'The closing photo must use the terracotta gradient');
+assert.match(stylesSource, /\.swatch--reserved > span::after \{[^}]*rotate\(-45deg\)/, 'The white swatch must have a visible prohibition slash');
 for (let guests = 1; guests <= 5; guests++) {
   const { get, window, openedTabs } = setup(`/weddingkarminandangel/${guests}/`);
   assert.equal(get('attendeeCount').children.length, guests);
@@ -114,6 +120,7 @@ for (let guests = 1; guests <= 5; guests++) {
   assert.equal(openedTabs.length, 1, 'Desktop must open one WhatsApp tab');
   assert.equal(openedTabs[0].target, '_blank');
   assert.equal(openedTabs[0].opener, null, 'Desktop WhatsApp tab must not retain an opener');
+  assert.match(openedTabs[0].document.body.innerHTML, /whatsapp-popup__typing/, 'Desktop must show typing feedback while preparing WhatsApp');
   const destination = new URL(openedTabs[0].location.href);
   assert.equal(destination.origin, 'https://api.whatsapp.com');
   assert.equal(destination.searchParams.get('phone'), '50255138916');

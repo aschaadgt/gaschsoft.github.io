@@ -1,6 +1,16 @@
 .rsvp-form [hidden] { display: none !important; }
 .rsvp-form .rsvp-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .rsvp-form button:disabled { opacity: .65; cursor: wait; transform: none; }
+.rsvp-form button.is-loading:disabled { opacity: 1; }
+.whatsapp-typing { position: relative; display: none; align-items: center; gap: .25rem; min-width: 3rem; height: 1.65rem; padding: 0 .58rem; border-radius: .78rem .78rem .78rem .28rem; background: var(--terracotta-deep); }
+.whatsapp-typing::after { content: ''; position: absolute; left: -.28rem; bottom: .14rem; width: .52rem; height: .52rem; background: var(--terracotta-deep); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.whatsapp-typing > span { width: .34rem; height: .34rem; border-radius: 50%; background: #f6e4db; animation: whatsapp-typing-dot 1.15s ease-in-out infinite; }
+.whatsapp-typing > span:nth-child(2) { animation-delay: .16s; }
+.whatsapp-typing > span:nth-child(3) { animation-delay: .32s; }
+.rsvp-form button.is-loading .rsvp-submit-label { display: none; }
+.rsvp-form button.is-loading .whatsapp-typing { display: inline-flex; }
+@keyframes whatsapp-typing-dot { 0%, 60%, 100% { opacity: .45; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-.22rem); } }
+@media (prefers-reduced-motion: reduce) { .whatsapp-typing > span { animation: none; opacity: .82; } }
 .rsvp-status { margin-top: 1rem; font-size: 1rem; line-height: 1.5; }
 .rsvp-status:empty { display: none; }
 .rsvp-status[data-state="success"] { color: var(--forest-deep); }
