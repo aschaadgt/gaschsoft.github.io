@@ -6,7 +6,6 @@
   --forest: #4a5946;
   --forest-deep: #303e30;
   --terracotta: #995c46;
-  --terracotta-soft: #c4937d;
   --coffee: #6f4e37;
   --clay: #b77b61;
   --gold: #a76b4e;
@@ -89,22 +88,22 @@ main { max-width: 760px; margin: auto; background: var(--paper); box-shadow: 0 0
 .love-note em { color: var(--terracotta); }
 .love-note__quote { display: inline-block; font: 2.35rem/.5 var(--script); vertical-align: -.18em; }
 .love-note__quote--open { color: var(--forest); margin-right: .1em; }
-.love-note__quote--close { color: var(--terracotta); margin-left: .08em; }
+.love-note__quote--close { color: var(--terracotta); margin-left: -.16em; }
 
-.date-section { background: var(--terracotta-soft); color: #4d382f; text-align: center; padding: 4.5rem clamp(1.25rem, 7vw, 4.75rem); }
+.date-section { background: var(--terracotta); color: var(--paper); text-align: center; padding: 4.5rem clamp(1.25rem, 7vw, 4.75rem); }
 .date-section h2 { color: inherit; }
 .date-line { display: flex; align-items: center; justify-content: center; gap: 1rem; font-size: 1.05rem; margin: 0 0 2rem; }
-.date-line strong { font: 4.5rem/1 var(--serif); font-style: italic; border-inline: 1px solid #69483852; padding: 0 1rem; }
+.date-line strong { font: 4.5rem/1 var(--serif); font-style: italic; border-inline: 1px solid #edc4ab65; padding: 0 1rem; }
 .calendar { width: 100%; max-width: 400px; margin: 0 auto 1.6rem; border-collapse: collapse; table-layout: fixed; }
 .calendar caption { font: 500 .875rem var(--sans); text-transform: uppercase; letter-spacing: .2em; margin-bottom: 1.5rem; }
 .calendar th { font: 500 .75rem var(--sans); padding: .5rem 0; }.calendar abbr { text-decoration: none; }
 .calendar td { height: 2.7rem; font-size: 1.1rem; }
 .wedding-day span { display: inline-grid; place-items: center; border: 1px solid #f6e8d2; border-radius: 50%; width: 2.6rem; height: 2.6rem; background: #fff4e9; color: #894b37; font-weight: 700; box-shadow: 0 0 0 4px #fff4e91a; }
 .text-link { font: .875rem/1.5 var(--serif); }
-.countdown-wrap { margin-top: 3.5rem; border-top: 1px solid #69483842; padding-top: 2rem; }
+.countdown-wrap { margin-top: 3.5rem; border-top: 1px solid #f6e8d24d; padding-top: 2rem; }
 .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; margin: 1rem auto 0; max-width: 470px; }
 .countdown strong { display: block; font: clamp(2rem, 7vw, 3.2rem)/1.2 var(--serif); font-variant-numeric: tabular-nums; }
-.countdown span { font: .75rem var(--sans); }.countdown > div + div { border-left: 1px solid #69483842; }
+.countdown span { font: .75rem var(--sans); }.countdown > div + div { border-left: 1px solid #f6e8d24d; }
 .location-intro { margin: .8rem 0 .45rem; }
 .venue { margin-top: 0; font: italic 500 clamp(2.6rem, 8vw, 3.6rem)/1.15 var(--serif); color: var(--coffee); }
 .fine-rule { width: 5rem; height: 1px; background: var(--clay); margin: 2rem auto; }
@@ -116,25 +115,25 @@ main { max-width: 760px; margin: auto; background: var(--paper); box-shadow: 0 0
 .button--outline:hover { background: #eadfcf; }.button--forest { background: var(--forest); color: #fffaf2; }.button--forest:hover { background: var(--forest-deep); }
 .calendar-intro { max-width: 25rem; margin: 1.6rem auto 0; font-size: 1.05rem; line-height: 1.45; }
 .calendar-buttons { display: flex; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: .8rem; margin: 1.2rem auto 0; max-width: 430px; }
-.calendar-buttons .button { flex: 1 1 0; min-width: 0; min-height: 4.15rem; padding: .7rem 1rem; background: #faf6ef35; border-color: #69483875; color: #4d382f; }
-.calendar-buttons .button:hover { background: #faf6ef73; }
+.calendar-buttons .button { flex: 1 1 0; min-width: 0; min-height: 4.15rem; padding: .7rem 1rem; background: transparent; border-color: #f6e8d2; color: #fffaf2; }
+.calendar-buttons .button:hover { background: #fffaf51a; }
 .calendar-buttons img { display: block; flex: 0 0 auto; width: 2rem; height: 2rem; margin: 0; border-radius: .42rem; object-fit: contain; object-position: center; }
 .map-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-top: 1.8rem; }.map-buttons .button { flex: 1; max-width: 210px; }.map-buttons img { height: 24px; width: 24px; object-fit: contain; }
 
-.moments { padding: 3.5rem 0 2rem; color: #4d382f; background: var(--terracotta-soft); text-align: center; }
-.moments__heading { padding: 0 1.5rem; }.moments h2 { color: var(--coffee); }
+.moments { padding: 3.5rem 0 2rem; color: var(--paper); background: var(--terracotta); text-align: center; }
+.moments__heading { padding: 0 1.5rem; }.moments h2 { color: var(--paper); }
 .carousel { margin-top: 2rem; }.carousel__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; }.carousel__track.is-touching { cursor: grabbing; scroll-snap-type: none; }.carousel__track::-webkit-scrollbar { display: none; }
-.carousel__slide { flex: 0 0 100%; min-width: 0; height: clamp(360px, 78vw, 570px); scroll-snap-align: start; scroll-snap-stop: always; background: var(--terracotta-soft); overflow: hidden; }
+.carousel__slide { flex: 0 0 100%; min-width: 0; height: clamp(360px, 78vw, 570px); scroll-snap-align: start; scroll-snap-stop: always; background: var(--terracotta); overflow: hidden; }
 .carousel__slide img { width: 100%; height: 100%; object-fit: contain; }
 .carousel__slide--landscape img { object-fit: cover; }
 .carousel__dots { min-height: 2.5rem; display: flex; align-items: center; justify-content: center; gap: .55rem; padding: .9rem 1rem .55rem; }
-.carousel__dot { width: .48rem; height: .48rem; padding: 0; border: 1px solid #6f4e37c7; border-radius: 999px; background: transparent; transition: width .35s ease, background .35s ease, opacity .35s ease; opacity: .65; }
-.carousel__dot.is-active { width: 1.5rem; background: var(--coffee); opacity: 1; }
+.carousel__dot { width: .48rem; height: .48rem; padding: 0; border: 1px solid #fffaf2c7; border-radius: 999px; background: transparent; transition: width .35s ease, background .35s ease, opacity .35s ease; opacity: .65; }
+.carousel__dot.is-active { width: 1.5rem; background: var(--paper); opacity: 1; }
 .carousel__dot:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; }
 .details { padding-bottom: 4rem; }.detail { max-width: 470px; margin: auto; padding: 1.7rem 0; }.detail + .detail { border-top: 1px solid var(--line); margin-top: 1.2rem; padding-top: 2.5rem; }
 .attire { margin: 0 auto 1.3rem; height: auto; width: min(270px, 72vw); object-fit: contain; }.detail h3 { font-size: 1.65rem; margin-bottom: .7rem; }.detail .script { color: var(--terracotta); margin: .7rem 0 1.3rem; }
 .swatches { list-style: none; padding: 0; margin: 1.7rem 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(.6rem, 3vw, 1.5rem); }.swatches li { font: .75rem var(--sans); }.swatches span { display: block; margin: 0 auto .6rem; width: 2rem; height: 2rem; border-radius: 50%; background: var(--swatch); border: 1px solid #b0a18e; }.detail__icon { width: 3rem; height: 3rem; margin: 0 auto 1rem; fill: none; stroke: var(--terracotta); stroke-width: 1.4; }
-.gift-section { text-align: center; background: var(--terracotta-soft); color: #4d382f; padding: 4rem clamp(1.5rem, 7vw, 4.75rem); }.gift-section h2 { color: var(--coffee); }.gift-icon { width: 3.4rem; height: 3.4rem; margin: 0 auto 1rem; fill: none; stroke: currentColor; stroke-width: 1.25; }.gift-section p:last-child { max-width: 450px; margin: auto; }
+.gift-section { text-align: center; background: var(--terracotta); color: var(--paper); padding: 4rem clamp(1.5rem, 7vw, 4.75rem); }.gift-section h2 { color: var(--paper); }.gift-icon { width: 3.4rem; height: 3.4rem; margin: 0 auto 1rem; fill: none; stroke: currentColor; stroke-width: 1.25; }.gift-section p:last-child { max-width: 450px; margin: auto; }
 .photo-moment { position: relative; height: 440px; }.photo-moment img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }.photo-moment::after { content: ''; inset: 0; position: absolute; background: linear-gradient(transparent 30%, #293026b3); }.photo-moment p { position: absolute; bottom: 2.5rem; left: 1.5rem; right: 1.5rem; text-align: center; color: #fffaf2; font-size: 1.9rem; line-height: 1.25; z-index: 1; }.photo-moment em { font-family: var(--script); font-size: 2.9rem; font-style: normal; }
 .guest-count { font-size: 1.4rem; color: var(--forest); }.rsvp__adults { font-style: italic; font-size: 1rem; margin-top: .5rem; }
 .rsvp-form { display: grid; text-align: left; gap: .5rem; max-width: 440px; margin: 2rem auto 0; }.rsvp-form label { font: 500 .875rem/1.6 var(--sans); margin-top: 1rem; }.rsvp-form small { font-size: .75rem; font-weight: 400; }
