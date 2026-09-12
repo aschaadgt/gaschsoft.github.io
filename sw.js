@@ -1,4 +1,4 @@
-const CACHE_NAME = "gaschsoft-shell-v7";
+const CACHE_NAME = "gaschsoft-shell-v8";
 const APP_SHELL = [
   "/", "/index.html", "/site.webmanifest",
   "/plataforma/", "/plataforma/desarrollo-web/", "/plataforma/automatizaciones/",

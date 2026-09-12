@@ -22,6 +22,8 @@
 /* Portada: Contacto forma parte del flujo continuo entre secciones. */
 .home-contact-section{
   position:relative;
+  z-index:0;
+  isolation:isolate;
   margin-top:0;
   border:0;
   border-radius:0;
@@ -33,21 +35,22 @@ html[data-theme="dark"] .home-contact-section{background:transparent}
 .home-contact-section::before{
   content:"";
   position:absolute;
-  top:-72px;
+  top:-1px;
   bottom:-48px;
   left:50%;
   width:100vw;
   transform:translateX(-50%);
   background:linear-gradient(
     180deg,
-    transparent 0%,
-    var(--section-alt-bg) 32%,
+    var(--pillars-bg) 0,
+    var(--section-alt-bg) 180px,
     var(--section-alt-bg) 72%,
     transparent 100%
   );
   pointer-events:none;
   z-index:-1;
 }
+.cases-inner::after{display:none}
 
 /* Portada: una sola geometría para todas las variantes del hero. */
 .hero{
