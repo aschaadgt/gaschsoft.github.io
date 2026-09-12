@@ -1,15 +1,15 @@
-const CACHE_NAME = "gaschsoft-shell-v9";
+const CACHE_NAME = "gaschsoft-shell-v10";
 const APP_SHELL = [
   "/", "/index.html", "/site.webmanifest",
   "/plataforma/", "/plataforma/desarrollo-web/", "/plataforma/automatizaciones/",
   "/plataforma/integraciones/", "/plataforma/infraestructura/", "/plataforma/invitaciones-web/",
   "/casos/", "/empresa/",
-  "/newgaschsoft/assets/gaschsoft.css", "/newgaschsoft/assets/gaschsoft.js",
-  "/newgaschsoft/assets/site-pages.css", "/newgaschsoft/assets/site-pages.js",
-  "/newgaschsoft/Logos/Ico%20GaschSoft.png",
-  "/newgaschsoft/Logos/Ico%20GaschSoft%20-%20dark.png",
-  "/newgaschsoft/android-chrome-192x192.png",
-  "/newgaschsoft/android-chrome-512x512.png"
+  "/assets/gaschsoft.css", "/assets/gaschsoft.js",
+  "/assets/site-pages.css", "/assets/site-pages.js",
+  "/Logos/Ico%20GaschSoft.png",
+  "/Logos/Ico%20GaschSoft%20-%20dark.png",
+  "/android-chrome-192x192.png",
+  "/android-chrome-512x512.png"
 ];
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));

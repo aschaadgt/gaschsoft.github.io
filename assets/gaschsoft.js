@@ -2,13 +2,13 @@
       const elHtml = document.documentElement;
 
       const ASSETS = {
-        brand: { light: "/newgaschsoft/Logos/Ico GaschSoft.png", dark: "/newgaschsoft/Logos/Ico GaschSoft - dark.png" },
-        langIcon: { light: "/newgaschsoft/Logos/idiomas.png", dark: "/newgaschsoft/Logos/idiomas - dark.png" },
-        demo: { light: "/newgaschsoft/Logos/agendar.png", dark: "/newgaschsoft/Logos/agendar - dark.png" },
+        brand: { light: "/Logos/Ico GaschSoft.png", dark: "/Logos/Ico GaschSoft - dark.png" },
+        langIcon: { light: "/Logos/idiomas.png", dark: "/Logos/idiomas - dark.png" },
+        demo: { light: "/Logos/agendar.png", dark: "/Logos/agendar - dark.png" },
         theme: {
-          system: { light: "/newgaschsoft/Logos/sistema.png", dark: "/newgaschsoft/Logos/sistema - dark.png" },
-          light:  { light: "/newgaschsoft/Logos/claro.png",   dark: "/newgaschsoft/Logos/claro - dark.png" },
-          dark:   { light: "/newgaschsoft/Logos/obscuro.png", dark: "/newgaschsoft/Logos/obscuro - dark.png" }
+          system: { light: "/Logos/sistema.png", dark: "/Logos/sistema - dark.png" },
+          light:  { light: "/Logos/claro.png",   dark: "/Logos/claro - dark.png" },
+          dark:   { light: "/Logos/obscuro.png", dark: "/Logos/obscuro - dark.png" }
         }
       };
 
