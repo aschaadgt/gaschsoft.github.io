@@ -1,4 +1,5 @@
 :root{
+      --font-sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
       /* Light */
       --bg: #F8FAFC;
       --card: #EEF2F7;
@@ -65,9 +66,13 @@
     *{ box-sizing: border-box; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      font-family: var(--font-sans);
       background: var(--bg);
       color: var(--text);
+    }
+
+    button, input, textarea, select{
+      font-family: var(--font-sans);
     }
 
     /* ===== Header ===== */
@@ -123,7 +128,7 @@
       font-weight: 600;
       letter-spacing: 0.4px;
       font-size: 30px;
-      font-family: "Open Sauce", "OpenSauce", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: var(--font-sans);
       display:flex;
       align-items:center;
       gap: 6px;

@@ -23,11 +23,12 @@
   <meta name="twitter:title" content="GaschSoft | Infraestructura digital para empresas">
   <meta name="twitter:description" content="Estrategia, desarrollo, automatización y continuidad para empresas que quieren crecer.">
   <meta name="twitter:image" content="https://gaschsoft.com/newgaschsoft/Logos/Ico%20GaschSoft.png">
-  <link rel="stylesheet" href="/newgaschsoft/assets/gaschsoft.css">
+  <link rel="stylesheet" href="/newgaschsoft/assets/gaschsoft.css?v=7">
+  <link rel="stylesheet" href="/newgaschsoft/assets/site-pages.css?v=7">
 </head>
 <body><header class="header" role="banner">
     <div class="header-inner">
-      <div class="brand" aria-label="GaschSoft">
+      <a class="brand site-brand-link" href="/" aria-label="GaschSoft">
         <img id="brandLogo" class="brand-logo" src="/newgaschsoft/Logos/Ico GaschSoft.png" alt="GaschSoft logo" />
         <div class="brand-text">
           <div class="brand-typing" aria-label="GaschSoft">
@@ -36,7 +37,7 @@
           </div>
           <div class="brand-sub" id="brandSub"></div>
         </div>
-      </div>
+      </a>
 
       <nav class="nav" aria-label="Navegación principal">
 <div class="nav-links" id="navLinks">
@@ -44,38 +45,38 @@
 
 
           <div class="dropdown services services-test" id="servicesTestDD">
-            <a class="nav-link nav-dd-link" href="#services-test" id="servicesTestBtn" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link nav-dd-link" href="/plataforma/" id="servicesTestBtn" aria-haspopup="true" aria-expanded="false">
               <span>Plataforma</span>
               <span class="chev" aria-hidden="true"></span>
             </a>
             <div class="menu" role="menu" aria-label="Plataforma">
-              <button class="menu-item" id="svcAuto" role="menuitem" type="button">Automatizaciones</button>
-              <button class="menu-item" id="svcWeb" role="menuitem" type="button">Web Apps</button>
-              <button class="menu-item" id="svcIT" role="menuitem" type="button">Integraciones</button>
-              <button class="menu-item" id="svcInfra" role="menuitem" type="button">Infraestructura</button>
-              <button class="menu-item" id="svcInv" role="menuitem" type="button">Invitaciones Web</button>
+              <a class="menu-item page-menu-link" id="svcAuto" role="menuitem" href="/plataforma/automatizaciones/">Automatizaciones</a>
+              <a class="menu-item page-menu-link" id="svcWeb" role="menuitem" href="/plataforma/desarrollo-web/">Desarrollo Web</a>
+              <a class="menu-item page-menu-link" id="svcIT" role="menuitem" href="/plataforma/integraciones/">Integraciones</a>
+              <a class="menu-item page-menu-link" id="svcInfra" role="menuitem" href="/plataforma/infraestructura/">Infraestructura</a>
+              <a class="menu-item page-menu-link" id="svcInv" role="menuitem" href="/plataforma/invitaciones-web/">Invitaciones Web</a>
             </div>
           </div>
 
           <div class="dropdown services services-test" id="casesDD">
-            <a class="nav-link nav-dd-link" href="#cases" id="navPortfolio" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link nav-dd-link" href="/casos/" id="navPortfolio" aria-haspopup="true" aria-expanded="false">
               <span id="navCasesLabel">Casos</span>
               <span class="chev" aria-hidden="true"></span>
             </a>
             <div class="menu" role="menu" aria-label="Casos">
-              <button class="menu-item" id="caseSME" role="menuitem" type="button">PYMEs</button>
-              <button class="menu-item" id="caseCorp" role="menuitem" type="button">Corporativo</button>
-              <button class="menu-item" id="caseStartup" role="menuitem" type="button">Startups</button>
+              <a class="menu-item page-menu-link" id="caseSME" role="menuitem" href="/casos/#pymes">PYMEs</a>
+              <a class="menu-item page-menu-link" id="caseCorp" role="menuitem" href="/casos/#corporativo">Corporativo</a>
+              <a class="menu-item page-menu-link" id="caseStartup" role="menuitem" href="/casos/#startups">Startups</a>
 </div>
           </div>
-<a class="nav-link" href="#about" id="navAbout">Empresa</a>
+<a class="nav-link" href="/empresa/" id="navAbout">Empresa</a>
           <a class="nav-link" href="#contact" id="navContact">Contacto</a>
         </div>
 
         <div class="icon-actions">
           <!-- Demo (desktop only; moves into drawer on mobile) -->
           <div id="demoWrap">
-            <a class="demo-btn" id="demoBtn" href="mailto:contacto@gaschsoft.com?subject=Solicitud%20de%20demo%20GaschSoft" aria-label="Demo">
+            <a class="demo-btn" id="demoBtn" href="/?motivo=demo#contact" aria-label="Demo">
               <img id="demoIcon" src="/newgaschsoft/Logos/agendar.png" alt="">
               <span>Demo</span>
             </a>
@@ -139,7 +140,7 @@
 
 
       <div class="drawer-body">
-        <a class="drawer-item with-icon" href="mailto:contacto@gaschsoft.com?subject=Solicitud%20de%20demo%20GaschSoft" id="drawerDemo">
+        <a class="drawer-item with-icon" href="/?motivo=demo#contact" id="drawerDemo">
           <span class="drawer-left">
             <img class="drawer-icon" id="drawerDemoIcon" src="/newgaschsoft/Logos/agendar.png" alt="">
             <span>Demo</span>
@@ -151,11 +152,11 @@
             <span class="chev drawer-chev" id="drawerServicesChev" aria-hidden="true"></span>
           </button>
           <div class="drawer-submenu open" id="drawerServicesMenu">
-            <a class="drawer-subitem" href="#plat-auto" id="drawerSvcAuto">Automatizaciones</a>
-            <a class="drawer-subitem" href="#plat-webapps" id="drawerSvcWeb">Web Apps</a>
-            <a class="drawer-subitem" href="#plat-int" id="drawerSvcIT">Integraciones</a>
-            <a class="drawer-subitem" href="#plat-infra" id="drawerSvcInfra">Infraestructura</a>
-            <a class="drawer-subitem" href="#plat-inv" id="drawerSvcInv">Invitaciones Web</a>
+            <a class="drawer-subitem" href="/plataforma/automatizaciones/" id="drawerSvcAuto">Automatizaciones</a>
+            <a class="drawer-subitem" href="/plataforma/desarrollo-web/" id="drawerSvcWeb">Desarrollo Web</a>
+            <a class="drawer-subitem" href="/plataforma/integraciones/" id="drawerSvcIT">Integraciones</a>
+            <a class="drawer-subitem" href="/plataforma/infraestructura/" id="drawerSvcInfra">Infraestructura</a>
+            <a class="drawer-subitem" href="/plataforma/invitaciones-web/" id="drawerSvcInv">Invitaciones Web</a>
           </div>
         </div>
 
@@ -165,13 +166,13 @@
             <span class="chev drawer-chev rot" id="drawerCasesChev" aria-hidden="true"></span>
           </button>
           <div class="drawer-submenu open" id="drawerCasesMenu">
-            <a class="drawer-subitem" href="#cases-sme" id="drawerCaseSME">PYMEs</a>
-            <a class="drawer-subitem" href="#cases-corp" id="drawerCaseCorp">Corporativo</a>
-            <a class="drawer-subitem" href="#cases-startups" id="drawerCaseStartup">Startups</a>
+            <a class="drawer-subitem" href="/casos/#pymes" id="drawerCaseSME">PYMEs</a>
+            <a class="drawer-subitem" href="/casos/#corporativo" id="drawerCaseCorp">Corporativo</a>
+            <a class="drawer-subitem" href="/casos/#startups" id="drawerCaseStartup">Startups</a>
           </div>
         </div>
 
-<a class="drawer-item" href="#about" id="drawerAbout">Empresa</a>
+<a class="drawer-item" href="/empresa/" id="drawerAbout">Empresa</a>
         <a class="drawer-item" href="#contact" id="drawerContact">Contacto</a>
 
       </div>
@@ -200,8 +201,8 @@
           </p>
 
           <div class="hero-ctas">
-            <a class="btn primary" id="heroCtaPrimary" href="#contact">Agendar diagnóstico</a>
-            <a class="btn ghost" id="heroCtaSecondary" href="#cases">Ver casos</a>
+            <a class="btn primary" id="heroCtaPrimary" href="/?motivo=diagnostico#contact">Agendar diagnóstico</a>
+            <a class="btn ghost" id="heroCtaSecondary" href="/casos/">Ver casos</a>
           </div>
 
           <div class="hero-proof" id="heroProof">Planeamos, no improvisamos • Implementación limpia • Sin rehacer todo en un año • Preparada para crecer</div>
@@ -330,7 +331,9 @@
             <div class="showcase-meta">
               <a class="showcase-link" data-idx="0" href="https://gaschsoft.com/mrpizzasgt/" target="_blank" rel="noopener">Mr Pizzas GT</a>
               <span class="showcase-sep" aria-hidden="true">•</span>
-              <a class="showcase-link" data-idx="1" href="https://gaschsoft.com/villacaninagt/" target="_blank" rel="noopener">Villa Canina</a>
+              <a class="showcase-link" data-idx="1" href="https://gaschsoft.com/hotellaunion/" target="_blank" rel="noopener">Hotel La Unión</a>
+              <span class="showcase-sep" aria-hidden="true">•</span>
+              <a class="showcase-link" data-idx="2" href="https://gaschsoft.com/villacaninagt/" target="_blank" rel="noopener">Villa Canina</a>
             </div>
           </div>
 
@@ -347,6 +350,14 @@
               </iframe>
 
               <iframe class="showcase-iframe" data-idx="1"
+                src="https://gaschsoft.com/hotellaunion/"
+                title="Hotel La Unión"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+              </iframe>
+
+              <iframe class="showcase-iframe" data-idx="2"
                 src="https://gaschsoft.com/villacaninagt/"
                 title="Villa Canina"
                 loading="lazy"
@@ -358,18 +369,100 @@
         </div>
 
 <div class="cases-cta">
-          <a class="btn ghost" id="casesCta" href="#contact">Agregar esto a mi proyecto</a>
+          <a class="btn ghost" id="casesCta" href="/?motivo=proyecto#contact">Agregar esto a mi proyecto</a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact" aria-label="Contacto">
-      <div class="section-inner">
-        <h2 class="section-title" id="contactTitle">Contacto</h2>
-        <p class="section-desc" id="contactDesc">Cuéntanos qué necesitas y te respondemos con una propuesta clara.</p>
+    <section class="section home-contact-section" id="contact" aria-label="Contacto">
+      <div class="home-contact-layout">
+        <form id="homeContactForm" class="contact-form-card home-contact-form" action="https://formspree.io/f/mldbenal" method="POST" novalidate aria-label="Formulario de contacto">
+          <div class="contact-grid">
+            <div class="contact-field-page">
+              <label id="homeContactNameLabel" for="home-contact-name">Nombre <span class="required-mark" aria-hidden="true">*</span></label>
+              <input class="contact-control" id="home-contact-name" name="name" type="text" autocomplete="name" required placeholder="Tu nombre">
+            </div>
+            <div class="contact-field-page">
+              <label id="homeContactEmailLabel" for="home-contact-email">Correo <span class="required-mark" aria-hidden="true">*</span></label>
+              <input class="contact-control" id="home-contact-email" name="email" type="email" autocomplete="email" required placeholder="tu@empresa.com">
+            </div>
+            <div class="contact-field-page">
+              <label id="homeContactCompanyLabel" for="home-contact-company">Empresa <span class="optional-label">(opcional)</span></label>
+              <input class="contact-control" id="home-contact-company" name="company" type="text" autocomplete="organization" placeholder="Nombre de tu empresa">
+            </div>
+            <div class="contact-field-page">
+              <label id="homeContactPhoneLabel" for="home-contact-phone">Teléfono / WhatsApp <span class="optional-label">(opcional)</span></label>
+              <input class="contact-control" id="home-contact-phone" name="phone" type="tel" autocomplete="tel" placeholder="+502 0000 0000">
+            </div>
+            <fieldset class="contact-field-page full interest-fieldset">
+              <legend class="interest-label" id="homeContactInterestsLabel">¿En qué podemos ayudarte?</legend>
+              <div class="interest-group" id="homeContactInterests">
+                <span class="interest-option"><input id="home-interest-web" name="interests" type="checkbox" value="web"><label for="home-interest-web" data-interest-label="web">Desarrollo Web</label></span>
+                <span class="interest-option"><input id="home-interest-automation" name="interests" type="checkbox" value="automation"><label for="home-interest-automation" data-interest-label="automation">Automatizaciones</label></span>
+                <span class="interest-option"><input id="home-interest-integration" name="interests" type="checkbox" value="integration"><label for="home-interest-integration" data-interest-label="integration">Integraciones</label></span>
+                <span class="interest-option"><input id="home-interest-infrastructure" name="interests" type="checkbox" value="infrastructure"><label for="home-interest-infrastructure" data-interest-label="infrastructure">Infraestructura</label></span>
+                <span class="interest-option"><input id="home-interest-invitations" name="interests" type="checkbox" value="invitations"><label for="home-interest-invitations" data-interest-label="invitations">Invitaciones Web</label></span>
+                <span class="interest-option"><input id="home-interest-guidance" name="interests" type="checkbox" value="guidance"><label for="home-interest-guidance" data-interest-label="guidance">Necesito orientación</label></span>
+              </div>
+            </fieldset>
+            <div class="contact-field-page full">
+              <label id="homeContactMessageLabel" for="home-contact-message">Mensaje <span class="required-mark" aria-hidden="true">*</span></label>
+              <textarea class="contact-control" id="home-contact-message" name="message" required placeholder="Cuéntanos qué quieres resolver."></textarea>
+            </div>
+          </div>
+          <div class="honeypot-field" aria-hidden="true"><label>Leave empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+          <input id="homeContactReason" type="hidden" name="reason" value="contacto">
+          <input id="homeContactLanguage" type="hidden" name="language" value="es">
+          <input id="homeContactSubject" type="hidden" name="_subject" value="GaschSoft | Nueva consulta">
+          <div class="contact-meta">
+            <button class="contact-submit" id="homeContactSubmit" type="submit"><span>Enviar consulta</span></button>
+            <span class="privacy-note" id="homeContactPrivacy">Usaremos tus datos únicamente para responder esta consulta.</span>
+          </div>
+          <p class="form-status" id="homeContactStatus" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="home-contact-copy">
+          <span class="section-kicker" id="homeContactKicker">Hablemos de tu proyecto</span>
+          <h2 class="section-title" id="contactTitle">Contacto</h2>
+          <p class="section-desc" id="contactDesc">Cuéntanos qué necesitas y te respondemos con un siguiente paso claro.</p>
+          <ol class="home-contact-steps">
+            <li><span>01</span><div><strong id="homeContactStep1Title">Selecciona tus intereses</strong><p id="homeContactStep1Text">Puedes marcar uno o varios servicios.</p></div></li>
+            <li><span>02</span><div><strong id="homeContactStep2Title">Describe lo que necesitas</strong><p id="homeContactStep2Text">El contexto nos ayuda a preparar una respuesta útil.</p></div></li>
+            <li><span>03</span><div><strong id="homeContactStep3Title">Revisamos tu solicitud</strong><p id="homeContactStep3Text">Recibiremos la información completa por Formspree.</p></div></li>
+          </ol>
+        </div>
       </div>
     </section>
   </main>
-  <script src="/newgaschsoft/assets/gaschsoft.js"></script>
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="footer-brand-row footer-home-link" href="/"><img class="footer-logo" src="/newgaschsoft/Logos/Ico GaschSoft.png" alt=""><span class="footer-brand-name">GaschSoft</span></a>
+          <p class="footer-brand-tagline" id="homeFooterTagline">Software y sistemas web con enfoque de producto para empresas que operan en serio.</p>
+        </div>
+        <div class="footer-col">
+          <h4 id="homeFooterPlatform">Plataforma</h4>
+          <ul class="footer-links">
+            <li><a id="homeFooterWeb" href="/plataforma/desarrollo-web/">Desarrollo Web</a></li>
+            <li><a id="homeFooterAuto" href="/plataforma/automatizaciones/">Automatizaciones</a></li>
+            <li><a id="homeFooterInt" href="/plataforma/integraciones/">Integraciones</a></li>
+            <li><a id="homeFooterInfra" href="/plataforma/infraestructura/">Infraestructura</a></li>
+            <li><a id="homeFooterInv" href="/plataforma/invitaciones-web/">Invitaciones Web</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 id="homeFooterCompany">Empresa</h4>
+          <ul class="footer-links">
+            <li><a id="homeFooterCases" href="/casos/">Casos</a></li>
+            <li><a id="homeFooterAbout" href="/empresa/">Empresa</a></li>
+            <li><a id="homeFooterContact" href="#contact">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom"><span id="homeFooterRights">© 2026 GaschSoft. Todos los derechos reservados.</span><span id="homeFooterMade">Hecho en Guatemala</span></div>
+    </div>
+  </footer>
+  <script src="/newgaschsoft/assets/gaschsoft.js?v=7"></script>
 </body>
 </html>

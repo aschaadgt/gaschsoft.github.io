@@ -302,6 +302,10 @@
 
         navContact.textContent = t.nav.contact;
         navAbout.textContent = t.nav.about;
+        const platformTriggerLabel = document.querySelector("#servicesTestBtn span:first-child");
+        if (platformTriggerLabel) platformTriggerLabel.textContent = t.nav.services;
+        const demoLabel = document.querySelector("#demoBtn span");
+        if (demoLabel) demoLabel.textContent = lang === "en" ? "Demo" : "Demo";
 
         // Drawer (mobile)
         document.getElementById("drawerServicesLabel").textContent = t.nav.services;
@@ -350,6 +354,31 @@ if (heroTitleA && heroTitleB) {
         if (contactTitle) contactTitle.textContent = t.hero.sections.contactTitle;
         if (contactDesc) contactDesc.textContent = t.hero.sections.contactDesc;
 
+        const homeFooterText = lang === "en" ? {
+          tagline: "Web systems and software built with product thinking for established businesses.",
+          platform: "Platform", company: "Company", cases: "Cases", about: "Company", contact: "Contact",
+          web: "Web Development", auto: "Automations", integration: "Integrations", infrastructure: "Infrastructure", invitations: "Web Invitations",
+          rights: "© 2026 GaschSoft. All rights reserved.", made: "Made in Guatemala"
+        } : {
+          tagline: "Software y sistemas web con enfoque de producto para empresas que operan en serio.",
+          platform: "Plataforma", company: "Empresa", cases: "Casos", about: "Empresa", contact: "Contacto",
+          web: "Desarrollo Web", auto: "Automatizaciones", integration: "Integraciones", infrastructure: "Infraestructura", invitations: "Invitaciones Web",
+          rights: "© 2026 GaschSoft. Todos los derechos reservados.", made: "Hecho en Guatemala"
+        };
+        const setFooterText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+        setFooterText("homeFooterTagline", homeFooterText.tagline);
+        setFooterText("homeFooterPlatform", homeFooterText.platform);
+        setFooterText("homeFooterCompany", homeFooterText.company);
+        setFooterText("homeFooterCases", homeFooterText.cases);
+        setFooterText("homeFooterAbout", homeFooterText.about);
+        setFooterText("homeFooterContact", homeFooterText.contact);
+        setFooterText("homeFooterWeb", homeFooterText.web);
+        setFooterText("homeFooterAuto", homeFooterText.auto);
+        setFooterText("homeFooterInt", homeFooterText.integration);
+        setFooterText("homeFooterInfra", homeFooterText.infrastructure);
+        setFooterText("homeFooterInv", homeFooterText.invitations);
+        setFooterText("homeFooterRights", homeFooterText.rights);
+        setFooterText("homeFooterMade", homeFooterText.made);
 
         // Qué utilizamos (v78)
         const whatuseTitle = document.getElementById("whatuseTitle");
@@ -901,6 +930,7 @@ setSelectedDot();
 
       [platTrigger, casesTrigger].forEach((el) => {
         if (!el) return;
+        if (!(el.getAttribute("href") || "").startsWith("#")) return;
         // Evita que el click deje foco (y por CSS abra/sticky)
         el.addEventListener("mousedown", (e) => {
           e.preventDefault();
@@ -1528,6 +1558,7 @@ setSelectedButtons();
         const mapBtn = (id, hash, segKey) => {
           const el = document.getElementById(id);
           if(!el) return;
+          if (!(el.getAttribute("href") || "").startsWith("#")) return;
           el.addEventListener("click", (ev) => {
             ev.preventDefault();
             try { closeLangMenu(); closeThemeMenu(); } catch(_) {}
@@ -1565,6 +1596,185 @@ setSelectedButtons();
 
 
     })();
+
+(function initHomeContactForm() {
+  "use strict";
+
+  const form = document.getElementById("homeContactForm");
+  if (!form) return;
+
+  const FORM_ENDPOINT = "https://formspree.io/f/mldbenal";
+  const INTERESTS_KEY = "gaschsoft_contact_interests";
+  const LANG_KEY = "gaschsoft_lang";
+  const allowedInterests = ["web", "automation", "integration", "infrastructure", "invitations", "guidance"];
+  let submitting = false;
+
+  const copy = {
+    es: {
+      formLabel: "Formulario de contacto",
+      kicker: "Hablemos de tu proyecto",
+      name: "Nombre",
+      email: "Correo",
+      company: "Empresa",
+      phone: "Teléfono / WhatsApp",
+      optional: "(opcional)",
+      interests: "¿En qué podemos ayudarte?",
+      message: "Mensaje",
+      namePh: "Tu nombre",
+      emailPh: "tu@empresa.com",
+      companyPh: "Nombre de tu empresa",
+      phonePh: "+502 0000 0000",
+      messagePh: "Cuéntanos qué quieres resolver.",
+      submit: "Enviar consulta",
+      sending: "Enviando…",
+      privacy: "Usaremos tus datos únicamente para responder esta consulta.",
+      invalid: "Revisa los campos obligatorios antes de enviar.",
+      success: "Recibimos tu mensaje. GaschSoft revisará la solicitud y responderá al correo indicado.",
+      error: "No pudimos enviar el mensaje. Tus datos siguen en el formulario; inténtalo nuevamente.",
+      labels: { web:"Desarrollo Web", automation:"Automatizaciones", integration:"Integraciones", infrastructure:"Infraestructura", invitations:"Invitaciones Web", guidance:"Necesito orientación" },
+      steps: [
+        ["Selecciona tus intereses", "Puedes marcar uno o varios servicios."],
+        ["Describe lo que necesitas", "El contexto nos ayuda a preparar una respuesta útil."],
+        ["Revisamos tu solicitud", "Recibiremos la información completa por Formspree."]
+      ],
+      subject: "GaschSoft | Nueva consulta"
+    },
+    en: {
+      formLabel: "Contact form",
+      kicker: "Tell us about your project",
+      name: "Name",
+      email: "Email",
+      company: "Company",
+      phone: "Phone / WhatsApp",
+      optional: "(optional)",
+      interests: "How can we help?",
+      message: "Message",
+      namePh: "Your name",
+      emailPh: "you@company.com",
+      companyPh: "Company name",
+      phonePh: "Number with country code",
+      messagePh: "Tell us what you want to solve.",
+      submit: "Send inquiry",
+      sending: "Sending…",
+      privacy: "We will use your details only to reply to this inquiry.",
+      invalid: "Review the required fields before sending.",
+      success: "We received your message. GaschSoft will review the request and reply to the email provided.",
+      error: "We could not send the message. Your details remain in the form; please try again.",
+      labels: { web:"Web Development", automation:"Automations", integration:"Integrations", infrastructure:"Infrastructure", invitations:"Web Invitations", guidance:"I need guidance" },
+      steps: [
+        ["Select your interests", "You can choose one or several services."],
+        ["Describe what you need", "Context helps us prepare a useful response."],
+        ["We review your request", "We will receive the complete information through Formspree."]
+      ],
+      subject: "GaschSoft | New inquiry"
+    }
+  };
+
+  const byId = id => document.getElementById(id);
+  const currentLang = () => localStorage.getItem(LANG_KEY) === "en" ? "en" : "es";
+  const labelHtml = (text, required) => `${text} ${required ? '<span class="required-mark" aria-hidden="true">*</span>' : `<span class="optional-label">${copy[currentLang()].optional}</span>`}`;
+
+  function applyLanguage() {
+    const lang = currentLang();
+    const t = copy[lang];
+    form.setAttribute("aria-label", t.formLabel);
+    byId("homeContactKicker").textContent = t.kicker;
+    byId("homeContactNameLabel").innerHTML = labelHtml(t.name, true);
+    byId("homeContactEmailLabel").innerHTML = labelHtml(t.email, true);
+    byId("homeContactCompanyLabel").innerHTML = labelHtml(t.company, false);
+    byId("homeContactPhoneLabel").innerHTML = labelHtml(t.phone, false);
+    byId("homeContactInterestsLabel").textContent = t.interests;
+    byId("homeContactMessageLabel").innerHTML = labelHtml(t.message, true);
+    byId("home-contact-name").placeholder = t.namePh;
+    byId("home-contact-email").placeholder = t.emailPh;
+    byId("home-contact-company").placeholder = t.companyPh;
+    byId("home-contact-phone").placeholder = t.phonePh;
+    byId("home-contact-message").placeholder = t.messagePh;
+    document.querySelectorAll("[data-interest-label]").forEach(label => { label.textContent = t.labels[label.dataset.interestLabel]; });
+    byId("homeContactSubmit").querySelector("span").textContent = submitting ? t.sending : t.submit;
+    byId("homeContactPrivacy").textContent = t.privacy;
+    byId("homeContactLanguage").value = lang;
+    byId("homeContactSubject").value = t.subject;
+    t.steps.forEach((step, index) => {
+      byId(`homeContactStep${index + 1}Title`).textContent = step[0];
+      byId(`homeContactStep${index + 1}Text`).textContent = step[1];
+    });
+  }
+
+  function readInterests() {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(INTERESTS_KEY) || "[]");
+      return Array.isArray(saved) ? saved.filter(value => allowedInterests.includes(value)) : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function saveInterests() {
+    const selected = Array.from(form.querySelectorAll('[name="interests"]:checked')).map(input => input.value);
+    sessionStorage.setItem(INTERESTS_KEY, JSON.stringify(selected));
+  }
+
+  const selected = new Set(readInterests());
+  const query = new URLSearchParams(location.search);
+  const incomingInterest = query.get("interes");
+  if (allowedInterests.includes(incomingInterest)) selected.add(incomingInterest);
+  form.querySelectorAll('[name="interests"]').forEach(input => {
+    input.checked = selected.has(input.value);
+    input.addEventListener("change", saveInterests);
+  });
+  saveInterests();
+
+  const reason = query.get("motivo") || "contacto";
+  byId("homeContactReason").value = reason;
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (submitting) return;
+
+    const lang = currentLang();
+    const t = copy[lang];
+    const status = byId("homeContactStatus");
+    const button = byId("homeContactSubmit");
+    status.className = "form-status";
+    status.textContent = "";
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      status.classList.add("error");
+      status.textContent = t.invalid;
+      return;
+    }
+
+    submitting = true;
+    button.disabled = true;
+    button.querySelector("span").textContent = t.sending;
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      });
+      if (!response.ok) throw new Error(`Formspree returned ${response.status}`);
+      form.reset();
+      sessionStorage.removeItem(INTERESTS_KEY);
+      status.classList.add("success");
+      status.textContent = t.success;
+    } catch (error) {
+      console.error(error);
+      status.classList.add("error");
+      status.textContent = t.error;
+    } finally {
+      submitting = false;
+      button.disabled = false;
+      button.querySelector("span").textContent = copy[currentLang()].submit;
+    }
+  });
+
+  window.addEventListener("gs:langChanged", applyLanguage, { passive: true });
+  applyLanguage();
+})();
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

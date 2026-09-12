@@ -1,7 +1,11 @@
-const CACHE_NAME = "gaschsoft-shell-v1";
+const CACHE_NAME = "gaschsoft-shell-v7";
 const APP_SHELL = [
   "/", "/index.html", "/site.webmanifest",
+  "/plataforma/", "/plataforma/desarrollo-web/", "/plataforma/automatizaciones/",
+  "/plataforma/integraciones/", "/plataforma/infraestructura/", "/plataforma/invitaciones-web/",
+  "/casos/", "/empresa/",
   "/newgaschsoft/assets/gaschsoft.css", "/newgaschsoft/assets/gaschsoft.js",
+  "/newgaschsoft/assets/site-pages.css", "/newgaschsoft/assets/site-pages.js",
   "/newgaschsoft/Logos/Ico%20GaschSoft.png",
   "/newgaschsoft/Logos/Ico%20GaschSoft%20-%20dark.png",
   "/newgaschsoft/android-chrome-192x192.png",
