@@ -3,4 +3,4 @@
 :HL["/ihotellaunion/assets/solo-logo-transparente.jpg","image"]
 :HL["/ihotellaunion/assets/whatsapp-logo.svg","image"]
 :HL["/ihotellaunion/assets/logo-con-slogan.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"terminos","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"U-wuucBvjZ12d5oK_kWzS"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"terminos","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"1M3kJx43Y0SmbWich1ycX"}

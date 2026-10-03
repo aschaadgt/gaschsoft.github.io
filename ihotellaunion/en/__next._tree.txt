@@ -12,4 +12,4 @@
 :HL["/ihotellaunion/assets/historia-hotel.webp","image"]
 :HL["/ihotellaunion/assets/atardecer-terraza.webp","image"]
 :HL["/ihotellaunion/assets/logo-con-slogan.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"en","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"U-wuucBvjZ12d5oK_kWzS"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"en","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"1M3kJx43Y0SmbWich1ycX"}
