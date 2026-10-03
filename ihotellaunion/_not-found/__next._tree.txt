@@ -1,2 +1,2 @@
-:HL["/ihotellaunion/_next/static/chunks/2unfr8lly6cqv.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"4_IJacvvAljT3Y2ke4d3P"}
+:HL["/ihotellaunion/_next/static/chunks/1q1g_jyb37hxf.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"Wc_d2g1SNpMzjV8t1GnM8"}
