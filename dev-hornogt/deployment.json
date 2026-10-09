@@ -1,0 +1,6 @@
+{
+  "branch": "DEV",
+  "base": "/dev-hornogt/",
+  "commit": "eeb450dd60384b98dd837d2706418cee7a110ca9",
+  "backend": "local-only"
+}
