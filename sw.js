@@ -1,4 +1,6 @@
-const CACHE_NAME = "gaschsoft-shell-v10";
+// Incremented after updating the Hotel La Unión public route so installed
+// visitors discard the previous cached homepage and load the current links.
+const CACHE_NAME = "gaschsoft-shell-v11";
 const APP_SHELL = [
   "/", "/index.html", "/site.webmanifest",
   "/plataforma/", "/plataforma/desarrollo-web/", "/plataforma/automatizaciones/",
